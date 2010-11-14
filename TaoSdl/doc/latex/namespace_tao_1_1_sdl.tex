@@ -1,0 +1,3058 @@
+\hypertarget{namespace_tao_1_1_sdl}{
+\section{Package Tao.Sdl}
+\label{namespace_tao_1_1_sdl}\index{Tao.Sdl@{Tao.Sdl}}
+}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries Sdl}
+\begin{DoxyCompactList}\small\item\em Simple DirectMedia Layer binding for .NET, implementing SDL 1.2.13. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_sdl_1_1_s_d_l___sys_w_m_event}{SDL\_\-SysWMEvent}
+\item 
+struct \hyperlink{struct_tao_1_1_sdl_1_1_s_d_l___event}{SDL\_\-Event}
+\begin{DoxyCompactList}\small\item\em General event structure. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_sdl_1_1_s_d_l__keysym}{SDL\_\-keysym}
+\begin{DoxyCompactList}\small\item\em The \hyperlink{struct_tao_1_1_sdl_1_1_s_d_l__keysym}{SDL\_\-keysym} structure describes a key press or a key release. \item\end{DoxyCompactList}\item 
+class {\bfseries SdlGfx}
+\begin{DoxyCompactList}\small\item\em SDL graphics drawing primitives and other support functions The SDL\_\-gfx library evolved out of the SDL\_\-gfxPrimitives code which provided basic drawing routines such as lines, circles or polygons and SDL\_\-rotozoom which implemented a interpolating rotozoomer for SDL surfaces. \item\end{DoxyCompactList}\item 
+class {\bfseries SdlImage}
+\begin{DoxyCompactList}\small\item\em SDL\_\-Image bindings for .NET. \item\end{DoxyCompactList}\item 
+class {\bfseries SdlMixer}
+\item 
+struct \hyperlink{struct_tao_1_1_sdl_1_1_mix___chunk}{Mix\_\-Chunk}
+\item 
+class {\bfseries SdlNet}
+\begin{DoxyCompactList}\small\item\em SDL\_\-net is a portable network library for use with SDL. \item\end{DoxyCompactList}\item 
+class {\bfseries SdlTtf}
+\begin{DoxyCompactList}\small\item\em This library supports Sdl\_\-ttf 2.0.8. This library is a wrapper around the excellent \hyperlink{namespace_tao_1_1_free_type}{FreeType} 1.2 library, available at: \href{http://www.freetype.org.}{\tt http://www.freetype.org.} \item\end{DoxyCompactList}\item 
+class {\bfseries Smpeg}
+\begin{DoxyCompactList}\small\item\em SMPEG bindings for .NET. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+delegate void \hyperlink{namespace_tao_1_1_sdl_a77c07156c43c45bdb25a74fc5afcc8b4}{MusicFinishedDelegate} ()
+\item 
+delegate void \hyperlink{namespace_tao_1_1_sdl_ab83026a016aa99a8271f3f01f9422a33}{MixFunctionDelegate} (IntPtr udata,\mbox{[}Out, MarshalAs(UnmanagedType.LPArray, SizeParamIndex=2)\mbox{]} byte\mbox{[}$\,$\mbox{]} stream, int len)
+\item 
+delegate void \hyperlink{namespace_tao_1_1_sdl_ab155f99d4b8836b2d89472492ca12921}{ChannelFinishedDelegate} (int channel)
+\item 
+delegate void \hyperlink{namespace_tao_1_1_sdl_a58e54c03e60d80609b443c76e184f6bf}{MixEffectFunctionDelegate} (int chan, IntPtr stream, int len, IntPtr udata)
+\begin{DoxyCompactList}\small\item\em Special effect callback function pointer. \item\end{DoxyCompactList}\item 
+delegate void \hyperlink{namespace_tao_1_1_sdl_a94ad2f6c0c4bd02bcac225d34ca540e6}{MixEffectDoneDelegate} (int chan, IntPtr udata)
+\begin{DoxyCompactList}\small\item\em Special effect done callback function pointer. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a71bc62050441b9475497ee931e557fd5}{Mix\_\-OpenAudio} (int frequency, short format, int channels, int chunksize)
+\begin{DoxyCompactList}\small\item\em Open the mixer with a certain audio format. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_adf6a87a08d3da36a6700c817c578badf}{Mix\_\-AllocateChannels} (int numchans)
+\begin{DoxyCompactList}\small\item\em Dynamically change the number of channels managed by the mixer. If decreasing the number of channels, the upper channels are stopped. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_ab493fab00390986c858d5441fa7e3aa6}{Mix\_\-QuerySpec} (out int frequency, out short format, out int channels)
+\begin{DoxyCompactList}\small\item\em Get output format. \item\end{DoxyCompactList}\item 
+static IntPtr \hyperlink{namespace_tao_1_1_sdl_acca6b94c1e8a3ff545f110838532fba9}{Mix\_\-LoadWAV\_\-RW} (IntPtr src, int freesrc)
+\begin{DoxyCompactList}\small\item\em Load a wave file or a music (.mod .s3m .it .xm) file. \item\end{DoxyCompactList}\item 
+static IntPtr \hyperlink{namespace_tao_1_1_sdl_ad6c75b94200b928986e8761beab8d85d}{Mix\_\-LoadMUS} (string file)
+\begin{DoxyCompactList}\small\item\em Load a music file into a Mix\_\-Music. \item\end{DoxyCompactList}\item 
+static IntPtr \hyperlink{namespace_tao_1_1_sdl_a704960ed3bb8745e7233751ae3e3fc3f}{Mix\_\-LoadMUS\_\-RW} (IntPtr rw)
+\begin{DoxyCompactList}\small\item\em Load a music file from an SDL\_\-RWop object (Ogg and MikMod specific currently). \item\end{DoxyCompactList}\item 
+static IntPtr \hyperlink{namespace_tao_1_1_sdl_a40245bd40987284be35aa5b48b838bae}{Mix\_\-QuickLoad\_\-WAV} (IntPtr mem)
+\begin{DoxyCompactList}\small\item\em Load a wave file of the mixer format from a memory buffer. \item\end{DoxyCompactList}\item 
+static IntPtr \hyperlink{namespace_tao_1_1_sdl_ab61ffe3d06eba56825d8798ffa9ac013}{Mix\_\-QuickLoad\_\-RAW} (IntPtr mem, int len)
+\begin{DoxyCompactList}\small\item\em Load raw audio data of the mixer format from a memory buffer. \item\end{DoxyCompactList}\item 
+static void \hyperlink{namespace_tao_1_1_sdl_acb89d8e0973042e20753f347932f23a7}{Mix\_\-FreeChunk} (IntPtr chunk)
+\begin{DoxyCompactList}\small\item\em Free an audio chunk previously loaded. \item\end{DoxyCompactList}\item 
+static void \hyperlink{namespace_tao_1_1_sdl_a0afcccc309e6b24b697083403acddef6}{Mix\_\-FreeMusic} (IntPtr music)
+\begin{DoxyCompactList}\small\item\em Free a Mix\_\-Music. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a0957a6b61a81f557f92c694f97684eac}{Mix\_\-GetMusicType} (IntPtr music)
+\begin{DoxyCompactList}\small\item\em Find out the music format of a mixer music, or the currently playing music, if 'music' is NULL. \item\end{DoxyCompactList}\item 
+static void \hyperlink{namespace_tao_1_1_sdl_a7b8112ec561db2dcc794323f798a7851}{Mix\_\-SetPostMix} (MixFunctionDelegate mix\_\-func, IntPtr arg)
+\begin{DoxyCompactList}\small\item\em Hook in a postmix processor. \item\end{DoxyCompactList}\item 
+static void \hyperlink{namespace_tao_1_1_sdl_a3ceda7fbd60c8eeed0719440d19d935e}{Mix\_\-HookMusic} (MixFunctionDelegate mix\_\-func, IntPtr arg)
+\begin{DoxyCompactList}\small\item\em Hook for a custom music player. \item\end{DoxyCompactList}\item 
+static void \hyperlink{namespace_tao_1_1_sdl_adacfc77044e70b36c6be7b0b74f96b29}{Mix\_\-HookMusicFinished} (MusicFinishedDelegate music\_\-finished)
+\begin{DoxyCompactList}\small\item\em Add your own callback when the music has finished playing. This callback is only called if the music finishes naturally. \item\end{DoxyCompactList}\item 
+static IntPtr \hyperlink{namespace_tao_1_1_sdl_ac7bebe18135733e318ef215389944542}{Mix\_\-GetMusicHookData} ()
+\begin{DoxyCompactList}\small\item\em Get a pointer to the user data for the current music hook. \item\end{DoxyCompactList}\item 
+static void \hyperlink{namespace_tao_1_1_sdl_a9ee8b67a7db7e1ec9f18b348497d24a2}{Mix\_\-ChannelFinished} (ChannelFinishedDelegate channel\_\-finished)
+\begin{DoxyCompactList}\small\item\em Set callback for when channel finishes playing. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a8d657c91edac10d18f474d27fc88fbb5}{Mix\_\-RegisterEffect} (int chan, MixEffectFunctionDelegate f, MixEffectDoneDelegate d, IntPtr arg)
+\begin{DoxyCompactList}\small\item\em Hook a processor to a channel. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_ab5415c4259b9c044b48a59d0a4548f26}{Mix\_\-UnregisterEffect} (int chan, MixEffectFunctionDelegate f)
+\begin{DoxyCompactList}\small\item\em Unhook a processor from a channel. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a68ba0a9948d37fa891d61b1ed2c50af9}{Mix\_\-UnregisterAllEffects} (int channel)
+\begin{DoxyCompactList}\small\item\em Unhook all processors from a channel. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_ad00800cc3f606ac7ef9bec6b7413ad85}{Mix\_\-SetPanning} (int channel, byte left, byte right)
+\begin{DoxyCompactList}\small\item\em Stereo panning. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_ad33cd3ef7af676c3717a45839d65ab82}{Mix\_\-SetPosition} (int channel, short angle, byte distance)
+\begin{DoxyCompactList}\small\item\em Panning(angular) and distance. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_af7b38a64044260e39136c6a3ef8b9732}{Mix\_\-SetDistance} (int channel, byte distance)
+\begin{DoxyCompactList}\small\item\em Distance attenuation (volume). \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a7b7b48bbbe4007bd060cc01bb26c28d1}{Mix\_\-SetReverseStereo} (int channel, int flip)
+\begin{DoxyCompactList}\small\item\em Swap stereo left and right. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_af107df0b0036f5cfebf1cb2a361cd949}{Mix\_\-ReserveChannels} (int num)
+\begin{DoxyCompactList}\small\item\em Prevent channels from being used in default group. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a31ad438a2a71cffaa8fccefa74158dac}{Mix\_\-GroupChannel} (int which, int tag)
+\begin{DoxyCompactList}\small\item\em Add/remove channel to/from group. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a7ec52e3afc27080a9396a7ed012a40f4}{Mix\_\-GroupChannels} (int from, int to, int tag)
+\begin{DoxyCompactList}\small\item\em Assign several consecutive channels to a group. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a67e7ccad21a7ad337e1d8292b1f041d2}{Mix\_\-GroupAvailable} (int tag)
+\begin{DoxyCompactList}\small\item\em Get first inactive channel in group. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a1fc24e0dafaca9516fd3333180eafdc3}{Mix\_\-GroupCount} (int tag)
+\begin{DoxyCompactList}\small\item\em Get number of channels in group. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a7463f2901ab6cb6f772f740b05be3773}{Mix\_\-GroupOldest} (int tag)
+\begin{DoxyCompactList}\small\item\em Get oldest busy channel in group. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a0410718cb0a5036507a4e873cdf5f936}{Mix\_\-GroupNewer} (int tag)
+\begin{DoxyCompactList}\small\item\em Get youngest busy channel in group. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a3158db8e72b34c092d51b0ba70ebfccf}{Mix\_\-PlayChannelTimed} (int channel, IntPtr chunk, int loops, int ticks)
+\begin{DoxyCompactList}\small\item\em Play loop and limit by time. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_aebe0f1bba92653f0f1dea238300619fb}{Mix\_\-PlayMusic} (IntPtr music, int loops)
+\begin{DoxyCompactList}\small\item\em Play music, with looping. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a67b90a673af55a36597265d2720f9ef5}{Mix\_\-FadeInMusic} (IntPtr music, int loops, int ms)
+\begin{DoxyCompactList}\small\item\em Play music, with looping, and fade in. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a45909046f32da6098114b07ce9bc0737}{Mix\_\-FadeInMusicPos} (IntPtr music, int loops, int ms, double position)
+\begin{DoxyCompactList}\small\item\em Play music from a start point, with looping, and fade in. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a14f4c9f0bd2530ecade88aa16efb5176}{Mix\_\-FadeInChannelTimed} (int channel, IntPtr chunk, int loops, int ms, int ticks)
+\begin{DoxyCompactList}\small\item\em Play loop with fade in and limit by time. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_ae0b5954941c3c2d6deba7d27e0b67f6f}{Mix\_\-Volume} (int channel, int volume)
+\begin{DoxyCompactList}\small\item\em Set the mix volume of a channel. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a2ae08cb0b9b859fc334245918efd4bf6}{Mix\_\-VolumeChunk} (IntPtr chunk, int volume)
+\begin{DoxyCompactList}\small\item\em Set mix volume. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a0f37be729516417cc01f98fb63f0b426}{Mix\_\-VolumeMusic} (int volume)
+\begin{DoxyCompactList}\small\item\em Set music volume. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_af54a9841ce1683918d040509fc214d78}{Mix\_\-HaltChannel} (int channel)
+\begin{DoxyCompactList}\small\item\em Stop playing on a channel. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a4258ef0d85b4386a9d14beafbdf27097}{Mix\_\-HaltGroup} (int tag)
+\begin{DoxyCompactList}\small\item\em Stop a group. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_ad6b1e382668e4df2c1aee4f1cabb7b38}{Mix\_\-HaltMusic} ()
+\begin{DoxyCompactList}\small\item\em Stop music playback. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_ae3cabd61d01191a69148822346ec8b6b}{Mix\_\-ExpireChannel} (int channel, int ticks)
+\begin{DoxyCompactList}\small\item\em Change the timed stoppage of a channel. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_afb3c1e03f7f07d16f5827c80ba01f4fa}{Mix\_\-FadeOutChannel} (int which, int ms)
+\begin{DoxyCompactList}\small\item\em Stop playing channel after timed fade out. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a11fb89c0edcfbb1131a77d1e12030123}{Mix\_\-FadeOutGroup} (int tag, int ms)
+\begin{DoxyCompactList}\small\item\em Fade out a group over time. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a6be5427391343f79e29eaab89c44137d}{Mix\_\-FadeOutMusic} (int ms)
+\begin{DoxyCompactList}\small\item\em Stop music, with fade out. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a78d03bb3f36bc9f89e98a2dd8248a613}{Mix\_\-FadingMusic} ()
+\begin{DoxyCompactList}\small\item\em Get status of current music fade activity. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a663eea2c0185c74a52c6ecba515210eb}{Mix\_\-FadingChannel} (int which)
+\begin{DoxyCompactList}\small\item\em Get the fade status of a channel. \item\end{DoxyCompactList}\item 
+static void \hyperlink{namespace_tao_1_1_sdl_abb714bc1510170e6495190e8bd128ad4}{Mix\_\-Pause} (int channel)
+\begin{DoxyCompactList}\small\item\em Pause a particular channel. \item\end{DoxyCompactList}\item 
+static void \hyperlink{namespace_tao_1_1_sdl_a9cefd15470fff5ab827caa2d3a0c086a}{Mix\_\-Resume} (int channel)
+\begin{DoxyCompactList}\small\item\em Resume a paused channel. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a7b542472ed1556bff8713216e4002499}{Mix\_\-Paused} (int channel)
+\begin{DoxyCompactList}\small\item\em Get the pause status of a channel. \item\end{DoxyCompactList}\item 
+static void \hyperlink{namespace_tao_1_1_sdl_aa0ef4670631ec6e222b47dd33e0036c6}{Mix\_\-PauseMusic} ()
+\begin{DoxyCompactList}\small\item\em Pause music. \item\end{DoxyCompactList}\item 
+static void \hyperlink{namespace_tao_1_1_sdl_a6a3adc0492d35aa660d1318a03fb3f6c}{Mix\_\-ResumeMusic} ()
+\begin{DoxyCompactList}\small\item\em Resume paused music. \item\end{DoxyCompactList}\item 
+static void \hyperlink{namespace_tao_1_1_sdl_ae1b8819a96e0ed61bca173b030667355}{Mix\_\-RewindMusic} ()
+\begin{DoxyCompactList}\small\item\em Rewind music to beginning. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a8a0635529536c080ac993ded5a114b02}{Mix\_\-PausedMusic} ()
+\begin{DoxyCompactList}\small\item\em Test whether music is paused. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_abc899fd78a4798973d00f88ec6a31ab6}{Mix\_\-SetMusicPosition} (double position)
+\begin{DoxyCompactList}\small\item\em Set position of playback in stream. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a54b7a201ae1d44a66389848fdd2110c8}{Mix\_\-Playing} (int channel)
+\begin{DoxyCompactList}\small\item\em Get the active playing status of a channel. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_ac811cacdff8d9eeb9ca1745f56b78b30}{Mix\_\-PlayingMusic} ()
+\begin{DoxyCompactList}\small\item\em Test whether music is playing. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_aea359916fe9090b1e8c154e7704138d1}{Mix\_\-SetMusicCMD} (string command)
+\begin{DoxyCompactList}\small\item\em Use external program for music playback. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a19ab0f73e68a6e96ce16fcc040331f46}{Mix\_\-SetSynchroValue} (int value)
+\begin{DoxyCompactList}\small\item\em Synchro value is set by MikMod from modules while playing. \item\end{DoxyCompactList}\item 
+static int \hyperlink{namespace_tao_1_1_sdl_a57d18f7c6158ed3aa5c0f142fe1b5a89}{Mix\_\-GetSynchroValue} ()
+\begin{DoxyCompactList}\small\item\em Synchro value is set by MikMod from modules while playing. \item\end{DoxyCompactList}\item 
+static IntPtr \hyperlink{namespace_tao_1_1_sdl_adc0cdaa130e049d17e52983ddddfbdae}{Mix\_\-GetChunk} (int channel)
+\begin{DoxyCompactList}\small\item\em Get the sample playing on a channel. \item\end{DoxyCompactList}\item 
+static void \hyperlink{namespace_tao_1_1_sdl_abec029152bd4c06ac9dd3ac6ca0efd21}{Mix\_\-CloseAudio} ()
+\begin{DoxyCompactList}\small\item\em Close sound mixer. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespace_tao_1_1_sdl_a316da039bbc7edf809d85badeaab6f23}{SDL\_\-SysWMEvent}
+\item 
+\hyperlink{namespace_tao_1_1_sdl_a9667e574282e6f26aa5247c7c93e1a77}{Mix\_\-Chunk}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespace_tao_1_1_sdl_ab155f99d4b8836b2d89472492ca12921}{
+\index{Tao::Sdl@{Tao::Sdl}!ChannelFinishedDelegate@{ChannelFinishedDelegate}}
+\index{ChannelFinishedDelegate@{ChannelFinishedDelegate}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{ChannelFinishedDelegate}]{\setlength{\rightskip}{0pt plus 5cm}delegate void Tao.Sdl.ChannelFinishedDelegate (
+\begin{DoxyParamCaption}
+\item[{int}]{ channel}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_ab155f99d4b8836b2d89472492ca12921}
+\hypertarget{namespace_tao_1_1_sdl_adf6a87a08d3da36a6700c817c578badf}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-AllocateChannels@{Mix\_\-AllocateChannels}}
+\index{Mix\_\-AllocateChannels@{Mix\_\-AllocateChannels}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-AllocateChannels}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-AllocateChannels (
+\begin{DoxyParamCaption}
+\item[{int}]{ numchans}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_adf6a87a08d3da36a6700c817c578badf}
+
+
+Dynamically change the number of channels managed by the mixer. If decreasing the number of channels, the upper channels are stopped. 
+
+This function returns the new number of allocated channels.
+
+Set the number of channels being mixed. This can be called multiple times, even with sounds playing. If numchans is less than the current number of channels, then the higher channels will be stopped, freed, and therefore not mixed any longer. It's probably not a good idea to change the size 1000 times a second though. If any channels are deallocated, any callback set by Mix\_\-ChannelFinished will be called when each channel is halted to be freed. Note: passing in zero WILL free all mixing channels, however music will still play.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em numchans}]Number of channels to allocate for mixing. A negative number will not do anything, it will tell you how many channels are currently allocated. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of channels allocated. Never fails...but a high number of channels can segfault if you run out of memory. We're talking REALLY high! 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // allocate 16 mixing channels
+                    Mix_AllocateChannels(16);
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a71bc62050441b9475497ee931e557fd5}{Mix\_\-OpenAudio}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a9ee8b67a7db7e1ec9f18b348497d24a2}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-ChannelFinished@{Mix\_\-ChannelFinished}}
+\index{Mix\_\-ChannelFinished@{Mix\_\-ChannelFinished}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-ChannelFinished}]{\setlength{\rightskip}{0pt plus 5cm}static void Tao.Sdl.Mix\_\-ChannelFinished (
+\begin{DoxyParamCaption}
+\item[{ChannelFinishedDelegate}]{ channel\_\-finished}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a9ee8b67a7db7e1ec9f18b348497d24a2}
+
+
+Set callback for when channel finishes playing. 
+
+When channel playback is halted, then the specified channel\_\-finished function is called. The channel parameter will contain the channel number that has finished. 
+
+NOTE: NEVER call SDL\_\-Mixer functions, nor SDL\_\-LockAudio, from a callback function. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+void Mix_ChannelFinished(void (*channel_finished)(int channel))
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyCode}
+                    // a simple channel_finished function
+                                void channelDone(int channel) 
+                                {
+                                        printf("channel %d finished playback.\n",
+      channel);
+                                }
+
+                                // make a channelDone function
+                                void channelDone(int channel)
+                                {
+                                        printf("channel %d finished playing.\n", 
+      channel);
+                                }
+                                ...
+                                // set the callback for when a channel stops play
+      ing
+                                Mix_ChannelFinished(channelDone);
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em channel\_\-finished}]Function to call when any channel finishes playback. \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_af54a9841ce1683918d040509fc214d78}{Mix\_\-HaltChannel}, \hyperlink{namespace_tao_1_1_sdl_ae3cabd61d01191a69148822346ec8b6b}{Mix\_\-ExpireChannel}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_abec029152bd4c06ac9dd3ac6ca0efd21}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-CloseAudio@{Mix\_\-CloseAudio}}
+\index{Mix\_\-CloseAudio@{Mix\_\-CloseAudio}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-CloseAudio}]{\setlength{\rightskip}{0pt plus 5cm}static void Tao.Sdl.Mix\_\-CloseAudio (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_abec029152bd4c06ac9dd3ac6ca0efd21}
+
+
+Close sound mixer. 
+
+Shutdown and cleanup the mixer API. After calling this all audio is stopped, the device is closed, and the SDL\_\-mixer functions should not be used. You may, of course, use Mix\_\-OpenAudio to start the functionality again. 
+
+Note: This function doesn't do anything until you have called it the same number of times that you called \hyperlink{namespace_tao_1_1_sdl_a71bc62050441b9475497ee931e557fd5}{Mix\_\-OpenAudio}. You may use \hyperlink{namespace_tao_1_1_sdl_ab493fab00390986c858d5441fa7e3aa6}{Mix\_\-QuerySpec} to find out how many times Mix\_\-CloseAudio needs to be called before the device is actually closed. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+void Mix_CloseAudio()
+\end{DoxyCode}
+ 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    Mix_CloseAudio();
+                    // you could SDL_Quit(); here...or not.
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a71bc62050441b9475497ee931e557fd5}{Mix\_\-OpenAudio}, \hyperlink{namespace_tao_1_1_sdl_ab493fab00390986c858d5441fa7e3aa6}{Mix\_\-QuerySpec}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_ae3cabd61d01191a69148822346ec8b6b}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-ExpireChannel@{Mix\_\-ExpireChannel}}
+\index{Mix\_\-ExpireChannel@{Mix\_\-ExpireChannel}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-ExpireChannel}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-ExpireChannel (
+\begin{DoxyParamCaption}
+\item[{int}]{ channel, }
+\item[{int}]{ ticks}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_ae3cabd61d01191a69148822346ec8b6b}
+
+
+Change the timed stoppage of a channel. 
+
+Halt channel playback, or all channels if -\/1 is passed in, after ticks milliseconds. Any callback set by \hyperlink{namespace_tao_1_1_sdl_a9ee8b67a7db7e1ec9f18b348497d24a2}{Mix\_\-ChannelFinished} will be called when the channel expires. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_ExpireChannel(int channel, int ticks)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em channel}]Channel to stop playing, or -\/1 for all channels. \item[{\em ticks}]Milliseconds until channel(s) halt playback. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of channels set to expire. Whether or not they are active. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // halt playback on all channels in 2 seconds
+                    Mix_ExpireChannel(-1, 2000);
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_af54a9841ce1683918d040509fc214d78}{Mix\_\-HaltChannel}, \hyperlink{namespace_tao_1_1_sdl_afb3c1e03f7f07d16f5827c80ba01f4fa}{Mix\_\-FadeOutChannel}, \hyperlink{namespace_tao_1_1_sdl_a9ee8b67a7db7e1ec9f18b348497d24a2}{Mix\_\-ChannelFinished}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a14f4c9f0bd2530ecade88aa16efb5176}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-FadeInChannelTimed@{Mix\_\-FadeInChannelTimed}}
+\index{Mix\_\-FadeInChannelTimed@{Mix\_\-FadeInChannelTimed}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-FadeInChannelTimed}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-FadeInChannelTimed (
+\begin{DoxyParamCaption}
+\item[{int}]{ channel, }
+\item[{IntPtr}]{ chunk, }
+\item[{int}]{ loops, }
+\item[{int}]{ ms, }
+\item[{int}]{ ticks}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a14f4c9f0bd2530ecade88aa16efb5176}
+
+
+Play loop with fade in and limit by time. 
+
+If the sample is long enough and has enough loops then the sample will stop after ticks milliseconds. Otherwise this function is the same as Mix\_\-FadeInChannel. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_FadeInChannelTimed(int channel, Mix_Chunk *chunk, int loops, int ms, int 
+      ticks)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em channel}]Channel to play on, or -\/1 for the first free unreserved channel. \item[{\em chunk}]Sample to play. \item[{\em loops}]Number of loops, -\/1 is infinite loops. \item[{\em ms}]Milliseconds of time that the fade-\/in effect should take to go from silence to full volume. \item[{\em ticks}]Millisecond limit to play sample, at most. If not enough loops or the sample chunk is not long enough, then the sample may stop before this timeout occurs. -\/1 means play forever.\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the channel the sample is played on. On any errors, -\/1 is returned. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // play sample on first free unreserved channel
+                                // play it for half a second
+                                // Mix_Chunk *sample; //previously loaded
+                                if(Mix_PlayChannelTimed(-1, sample, -1 , 500)==-1
+      ) 
+                        {
+                                printf("Mix_PlayChannel: %s\n",Mix_GetError());
+                                // may be critical error, or maybe just no channe
+      ls were free.
+                                // you could allocated another channel in that ca
+      se...
+                        }
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a3158db8e72b34c092d51b0ba70ebfccf}{Mix\_\-PlayChannelTimed}, Mix\_\-FadeInChannel, \hyperlink{namespace_tao_1_1_sdl_af54a9841ce1683918d040509fc214d78}{Mix\_\-HaltChannel}, \hyperlink{namespace_tao_1_1_sdl_a663eea2c0185c74a52c6ecba515210eb}{Mix\_\-FadingChannel}, \hyperlink{namespace_tao_1_1_sdl_af107df0b0036f5cfebf1cb2a361cd949}{Mix\_\-ReserveChannels}, \hyperlink{namespace_tao_1_1_sdl_ae3cabd61d01191a69148822346ec8b6b}{Mix\_\-ExpireChannel}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a67b90a673af55a36597265d2720f9ef5}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-FadeInMusic@{Mix\_\-FadeInMusic}}
+\index{Mix\_\-FadeInMusic@{Mix\_\-FadeInMusic}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-FadeInMusic}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-FadeInMusic (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ music, }
+\item[{int}]{ loops, }
+\item[{int}]{ ms}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a67b90a673af55a36597265d2720f9ef5}
+
+
+Play music, with looping, and fade in. 
+
+Fade in over ms milliseconds of time, the loaded music, playing it loop times through from start to finish. The fade in effect only applies to the first loop. Any previous music will be halted, or if it is fading out i t will wait (blocking) for the fade to complete. This function is the same as Mix\_\-FadeInMusicPos(music, loops, ms, 0). 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_FadeInMusic(Mix_Music *music, int loops, int ms)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em music}]Pointer to Mix\_\-Music to play. \item[{\em loops}]number of times to play through the music. \par
+ 0 plays the music zero times...  \par
+ -\/1 plays the music forever (or as close as it can get to that)  \item[{\em ms}]Milliseconds for the fade-\/in effect to complete. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, or -\/1 on errors. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // play music forever, fading in over 2 seconds
+                                // Mix_Music *music; // I assume this has been lo
+      aded already
+                                if(Mix_FadeInMusic(music, -1, 2000)==-1) 
+                        {
+                                printf("Mix_FadeInMusic: %s\n", Mix_GetError());
+                                // well, there's no music, but most games don't b
+      reak without music...
+                        }
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_aebe0f1bba92653f0f1dea238300619fb}{Mix\_\-PlayMusic}, \hyperlink{namespace_tao_1_1_sdl_a45909046f32da6098114b07ce9bc0737}{Mix\_\-FadeInMusicPos}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a45909046f32da6098114b07ce9bc0737}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-FadeInMusicPos@{Mix\_\-FadeInMusicPos}}
+\index{Mix\_\-FadeInMusicPos@{Mix\_\-FadeInMusicPos}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-FadeInMusicPos}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-FadeInMusicPos (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ music, }
+\item[{int}]{ loops, }
+\item[{int}]{ ms, }
+\item[{double}]{ position}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a45909046f32da6098114b07ce9bc0737}
+
+
+Play music from a start point, with looping, and fade in. 
+
+Fade in over ms milliseconds of time, the loaded music, playing it loop times through from start to finish. The fade in effect only applies to the first loop. The first time the music is played, it posistion will be set to position, which means different things for different types of music files, see Mix\_\-SetMusicPosition for more info on that. Any previous music will be halted, or if it is fading out it will wait (blocking) for the fade to complete. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_FadeInMusicPos(Mix_Music *music, int loops, int ms, double position)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em music}]Pointer to Mix\_\-Music to play. \item[{\em loops}]number of times to play through the music. \par
+ 0 plays the music zero times...  \par
+ -\/1 plays the music forever (or as close as it can get to that)  \item[{\em ms}]Milliseconds for the fade-\/in effect to complete. \item[{\em position}]Position to play from, see \hyperlink{namespace_tao_1_1_sdl_abc899fd78a4798973d00f88ec6a31ab6}{Mix\_\-SetMusicPosition} for meaning. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, or -\/1 on errors. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // play music forever, fading in over 2 seconds
+                                // Mix_Music *music; // I assume this has been lo
+      aded already
+                                if(Mix_FadeInMusicPos(music, -1, 2000)==-1) 
+                        {
+                                printf("Mix_FadeInMusic: %s\n", Mix_GetError());
+                                // well, there's no music, but most games don't b
+      reak without music...
+                        }
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_aebe0f1bba92653f0f1dea238300619fb}{Mix\_\-PlayMusic}, \hyperlink{namespace_tao_1_1_sdl_a67b90a673af55a36597265d2720f9ef5}{Mix\_\-FadeInMusic}, \hyperlink{namespace_tao_1_1_sdl_abc899fd78a4798973d00f88ec6a31ab6}{Mix\_\-SetMusicPosition}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_afb3c1e03f7f07d16f5827c80ba01f4fa}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-FadeOutChannel@{Mix\_\-FadeOutChannel}}
+\index{Mix\_\-FadeOutChannel@{Mix\_\-FadeOutChannel}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-FadeOutChannel}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-FadeOutChannel (
+\begin{DoxyParamCaption}
+\item[{int}]{ which, }
+\item[{int}]{ ms}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_afb3c1e03f7f07d16f5827c80ba01f4fa}
+
+
+Stop playing channel after timed fade out. 
+
+Gradually fade out which channel over ms milliseconds starting from now. The channel will be halted after the fade out is completed. Only channels that are playing are set to fade out, including paused channels. Any callback set by \hyperlink{namespace_tao_1_1_sdl_a9ee8b67a7db7e1ec9f18b348497d24a2}{Mix\_\-ChannelFinished} will be called when the channel finishes fading out. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_FadeOutChannel(int which, int ms)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em which}]Channel to fade out, or -\/1 to fade all channels out. \item[{\em ms}]Milliseconds of time that the fade-\/out effect should take to go to silence, starting now. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of channels set to fade out. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // fade out all channels to finish 3 seconds from now
+                    printf("starting fade out of %d channels\n", 
+      Mix_FadeOutChannel(-1, 3000));
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+Mix\_\-FadeInChannel, \hyperlink{namespace_tao_1_1_sdl_a14f4c9f0bd2530ecade88aa16efb5176}{Mix\_\-FadeInChannelTimed}, \hyperlink{namespace_tao_1_1_sdl_a663eea2c0185c74a52c6ecba515210eb}{Mix\_\-FadingChannel}, \hyperlink{namespace_tao_1_1_sdl_a9ee8b67a7db7e1ec9f18b348497d24a2}{Mix\_\-ChannelFinished}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a11fb89c0edcfbb1131a77d1e12030123}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-FadeOutGroup@{Mix\_\-FadeOutGroup}}
+\index{Mix\_\-FadeOutGroup@{Mix\_\-FadeOutGroup}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-FadeOutGroup}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-FadeOutGroup (
+\begin{DoxyParamCaption}
+\item[{int}]{ tag, }
+\item[{int}]{ ms}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a11fb89c0edcfbb1131a77d1e12030123}
+
+
+Fade out a group over time. 
+
+Gradually fade out channels in group tag over ms milliseconds starting from now. The channels will be halted after the fade out is completed. Only channels that are playing are set to fade out, including paused channels. Any callback set by \hyperlink{namespace_tao_1_1_sdl_a9ee8b67a7db7e1ec9f18b348497d24a2}{Mix\_\-ChannelFinished} will be called when each channel finishes fading out. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_FadeOutGroup(int tag, int ms)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em tag}]Group to fade out. NOTE: -\/1 will NOT fade all channels out. Use Mix\_\-FadeOutChannel(-\/1) for that instead. \item[{\em ms}]Milliseconds of time that the fade-\/out effect should take to go to silence, starting now. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of channels set to fade out. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // fade out all channels in group 1 to finish 3 seconds from 
+      now
+                    printf("starting fade out of %d channels\n", 
+      Mix_FadeOutGroup(1, 3000));
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a4258ef0d85b4386a9d14beafbdf27097}{Mix\_\-HaltGroup}, \hyperlink{namespace_tao_1_1_sdl_afb3c1e03f7f07d16f5827c80ba01f4fa}{Mix\_\-FadeOutChannel}, \hyperlink{namespace_tao_1_1_sdl_a663eea2c0185c74a52c6ecba515210eb}{Mix\_\-FadingChannel}, \hyperlink{namespace_tao_1_1_sdl_a9ee8b67a7db7e1ec9f18b348497d24a2}{Mix\_\-ChannelFinished}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a6be5427391343f79e29eaab89c44137d}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-FadeOutMusic@{Mix\_\-FadeOutMusic}}
+\index{Mix\_\-FadeOutMusic@{Mix\_\-FadeOutMusic}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-FadeOutMusic}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-FadeOutMusic (
+\begin{DoxyParamCaption}
+\item[{int}]{ ms}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a6be5427391343f79e29eaab89c44137d}
+
+
+Stop music, with fade out. 
+
+Gradually fade out the music over ms milliseconds starting from now. The music will be halted after the fade out is completed. Only when music is playing and not fading already are set to fade out, including paused channels. Any callback set by \hyperlink{namespace_tao_1_1_sdl_adacfc77044e70b36c6be7b0b74f96b29}{Mix\_\-HookMusicFinished} will be called when the music finishes fading out. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_FadeOutMusic(int ms)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em ms}]Milliseconds of time that the fade-\/out effect should take to go to silence, starting now. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success, 0 on failure.
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // fade out music to finish 3 seconds from now
+                                while(!Mix_FadeOutMusic(3000) &amp;&amp; 
+      Mix_PlayingMusic()) 
+                        {
+                                // wait for any fades to complete
+                                SDL_Delay(100);
+                        }
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_ad6b1e382668e4df2c1aee4f1cabb7b38}{Mix\_\-HaltMusic}, \hyperlink{namespace_tao_1_1_sdl_a78d03bb3f36bc9f89e98a2dd8248a613}{Mix\_\-FadingMusic}, \hyperlink{namespace_tao_1_1_sdl_ac811cacdff8d9eeb9ca1745f56b78b30}{Mix\_\-PlayingMusic}, \hyperlink{namespace_tao_1_1_sdl_adacfc77044e70b36c6be7b0b74f96b29}{Mix\_\-HookMusicFinished}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a663eea2c0185c74a52c6ecba515210eb}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-FadingChannel@{Mix\_\-FadingChannel}}
+\index{Mix\_\-FadingChannel@{Mix\_\-FadingChannel}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-FadingChannel}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-FadingChannel (
+\begin{DoxyParamCaption}
+\item[{int}]{ which}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a663eea2c0185c74a52c6ecba515210eb}
+
+
+Get the fade status of a channel. 
+
+Tells you if which channel is fading in, out, or not. Does not tell you if the channel is playing anything, or paused, so you'd need to test that separately. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+Mix_Fading Mix_FadingChannel(int which)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em which}]Channel to get the fade activity status from. -\/1 is not valid, and will probably crash the program. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the fading status. Never returns an error. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // check the fade status on channel 0
+                                switch(Mix_FadingChannel(0)) 
+                        {
+                        case MIX_NO_FADING:
+                                printf("Not fading.\n");
+                                break;
+                                case MIX_FADING_OUT:
+                                printf("Fading out.\n");
+                                break;
+                                case MIX_FADING_IN:
+                                printf("Fading in.\n");
+                                break;
+                        }
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a7b542472ed1556bff8713216e4002499}{Mix\_\-Paused}, \hyperlink{namespace_tao_1_1_sdl_a54b7a201ae1d44a66389848fdd2110c8}{Mix\_\-Playing}, Mix\_\-FadeInChannel, \hyperlink{namespace_tao_1_1_sdl_a14f4c9f0bd2530ecade88aa16efb5176}{Mix\_\-FadeInChannelTimed}, \hyperlink{namespace_tao_1_1_sdl_afb3c1e03f7f07d16f5827c80ba01f4fa}{Mix\_\-FadeOutChannel}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a78d03bb3f36bc9f89e98a2dd8248a613}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-FadingMusic@{Mix\_\-FadingMusic}}
+\index{Mix\_\-FadingMusic@{Mix\_\-FadingMusic}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-FadingMusic}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-FadingMusic (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a78d03bb3f36bc9f89e98a2dd8248a613}
+
+
+Get status of current music fade activity. 
+
+Tells you if music is fading in, out, or not at all. Does not tell you if the channel is playing anything, or paused, so you'd need to test that separately. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+Mix_Fading Mix_FadingMusic() 
+\end{DoxyCode}
+ 
+
+\begin{DoxyReturn}{Returns}
+the fading status. Never returns an error. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // check the music fade status
+                                switch(Mix_FadingMusic()) 
+                        {
+                                case MIX_NO_FADING:
+                                printf("Not fading music.\n");
+                                break;
+                                case MIX_FADING_OUT:
+                                printf("Fading out music.\n");
+                                break;
+                                case MIX_FADING_IN:
+                                printf("Fading in music.\n");
+                                break;
+                        }
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a8a0635529536c080ac993ded5a114b02}{Mix\_\-PausedMusic}, \hyperlink{namespace_tao_1_1_sdl_ac811cacdff8d9eeb9ca1745f56b78b30}{Mix\_\-PlayingMusic}, \hyperlink{namespace_tao_1_1_sdl_a45909046f32da6098114b07ce9bc0737}{Mix\_\-FadeInMusicPos}, \hyperlink{namespace_tao_1_1_sdl_a6be5427391343f79e29eaab89c44137d}{Mix\_\-FadeOutMusic}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_acb89d8e0973042e20753f347932f23a7}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-FreeChunk@{Mix\_\-FreeChunk}}
+\index{Mix\_\-FreeChunk@{Mix\_\-FreeChunk}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-FreeChunk}]{\setlength{\rightskip}{0pt plus 5cm}static void Tao.Sdl.Mix\_\-FreeChunk (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ chunk}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_acb89d8e0973042e20753f347932f23a7}
+
+
+Free an audio chunk previously loaded. 
+
+Free the memory used in chunk, and free chunk itself as well. Do not use chunk after this without loading a new sample to it. Note: It's a bad idea to free a chunk that is still being played... 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+void Mix_FreeChunk(Mix_Chunk *chunk)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em chunk}]Pointer to the \hyperlink{struct_tao_1_1_sdl_1_1_mix___chunk}{Mix\_\-Chunk} to free. \end{DoxyParams}
+
+\begin{DoxyCode}
+                    // free the sample
+                                // Mix_Chunk *sample;
+                                Mix_FreeChunk(sample);
+                                sample=NULL; // to be safe...
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+Mix\_\-LoadWAV, \hyperlink{namespace_tao_1_1_sdl_a40245bd40987284be35aa5b48b838bae}{Mix\_\-QuickLoad\_\-WAV}, \hyperlink{namespace_tao_1_1_sdl_acca6b94c1e8a3ff545f110838532fba9}{Mix\_\-LoadWAV\_\-RW}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a0afcccc309e6b24b697083403acddef6}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-FreeMusic@{Mix\_\-FreeMusic}}
+\index{Mix\_\-FreeMusic@{Mix\_\-FreeMusic}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-FreeMusic}]{\setlength{\rightskip}{0pt plus 5cm}static void Tao.Sdl.Mix\_\-FreeMusic (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ music}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a0afcccc309e6b24b697083403acddef6}
+
+
+Free a Mix\_\-Music. 
+
+Free the loaded music. If music is playing it will be halted. If music is fading out, then this function will wait (blocking) until the fade out is complete. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+void Mix_FreeMusic(Mix_Music *music)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyCode}
+                    // free music
+                                Mix_Music *music;
+                                Mix_FreeMusic(music);
+                                music=NULL; // so we know we freed it...
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em music}]Pointer to Mix\_\-Music to free.\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_ad6c75b94200b928986e8761beab8d85d}{Mix\_\-LoadMUS}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_adc0cdaa130e049d17e52983ddddfbdae}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-GetChunk@{Mix\_\-GetChunk}}
+\index{Mix\_\-GetChunk@{Mix\_\-GetChunk}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-GetChunk}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr Tao.Sdl.Mix\_\-GetChunk (
+\begin{DoxyParamCaption}
+\item[{int}]{ channel}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_adc0cdaa130e049d17e52983ddddfbdae}
+
+
+Get the sample playing on a channel. 
+
+Get the most recent sample chunk pointer played on channel. This pointer may be currently playing, or just the last used. Note: The actual chunk may have been freed, so this pointer may not be valid anymore. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+Mix_Chunk *Mix_GetChunk(int channel)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em channel}]Channel to get the current \hyperlink{struct_tao_1_1_sdl_1_1_mix___chunk}{Mix\_\-Chunk} playing. -\/1 is not valid, but will not crash the program. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the \hyperlink{struct_tao_1_1_sdl_1_1_mix___chunk}{Mix\_\-Chunk}. NULL is returned if the channel is not allocated, or if the channel has not played any samples yet. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // get the last chunk used by channel 0
+                    printf("Mix_Chunk* last in use on channel 0 was: %08p\n", 
+      Mix_GetChunk(0));
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{struct_tao_1_1_sdl_1_1_mix___chunk}{Mix\_\-Chunk}, \hyperlink{namespace_tao_1_1_sdl_a54b7a201ae1d44a66389848fdd2110c8}{Mix\_\-Playing}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_ac7bebe18135733e318ef215389944542}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-GetMusicHookData@{Mix\_\-GetMusicHookData}}
+\index{Mix\_\-GetMusicHookData@{Mix\_\-GetMusicHookData}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-GetMusicHookData}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr Tao.Sdl.Mix\_\-GetMusicHookData (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_ac7bebe18135733e318ef215389944542}
+
+
+Get a pointer to the user data for the current music hook. 
+
+Get the arg passed into Mix\_\-HookMusic. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+void *Mix_GetMusicHookData()
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyCode}
+                    // retrieve the music hook data pointer
+                    void *data;
+                    data=Mix_GetMusicHookData();
+\end{DoxyCode}
+
+
+\begin{DoxyReturn}{Returns}
+the arg pointer.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a3ceda7fbd60c8eeed0719440d19d935e}{Mix\_\-HookMusic}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a0957a6b61a81f557f92c694f97684eac}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-GetMusicType@{Mix\_\-GetMusicType}}
+\index{Mix\_\-GetMusicType@{Mix\_\-GetMusicType}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-GetMusicType}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-GetMusicType (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ music}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a0957a6b61a81f557f92c694f97684eac}
+
+
+Find out the music format of a mixer music, or the currently playing music, if 'music' is NULL. 
+
+Tells you the file format encoding of the music. This may be handy when used with Mix\_\-SetMusicPosition, and other music functions that vary based on the type of music being played. If you want to know the type of music currently being played, pass in NULL to music. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+Mix_MusicType Mix_GetMusicType(const Mix_Music *music)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em music}]The music to get the type of. NULL will get the currently playing music type. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The type of music or if music is NULL then the currently playing music type, otherwise MUS\_\-NONE if no music is playing.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_ad33cd3ef7af676c3717a45839d65ab82}{Mix\_\-SetPosition}
+
+
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+                     // print the type of music currently playing
+                                switch(Mix_GetMusicType(NULL))
+                        {
+                                case MUS_NONE:
+                                MUS_CMD:
+                                printf("Command based music is playing.\n");
+                                break;
+                                MUS_WAV:
+                                printf("WAVE/RIFF music is playing.\n");
+                                break;
+                                MUS_MOD:
+                                printf("MOD music is playing.\n");
+                                break;
+                                MUS_MID:
+                                printf("MIDI music is playing.\n");
+                                break;
+                                MUS_OGG:
+                                printf("OGG music is playing.\n");
+                                break;
+                                MUS_MP3:
+                                printf("MP3 music is playing.\n");
+                                break;
+                                default:
+                                printf("Unknown music is playing.\n");
+                                break;
+                        }
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_ad33cd3ef7af676c3717a45839d65ab82}{Mix\_\-SetPosition}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a57d18f7c6158ed3aa5c0f142fe1b5a89}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-GetSynchroValue@{Mix\_\-GetSynchroValue}}
+\index{Mix\_\-GetSynchroValue@{Mix\_\-GetSynchroValue}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-GetSynchroValue}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-GetSynchroValue (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a57d18f7c6158ed3aa5c0f142fe1b5a89}
+
+
+Synchro value is set by MikMod from modules while playing. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_GetSynchroValue(void)
+\end{DoxyCode}
+ 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a19ab0f73e68a6e96ce16fcc040331f46}{Mix\_\-SetSynchroValue}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a67e7ccad21a7ad337e1d8292b1f041d2}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-GroupAvailable@{Mix\_\-GroupAvailable}}
+\index{Mix\_\-GroupAvailable@{Mix\_\-GroupAvailable}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-GroupAvailable}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-GroupAvailable (
+\begin{DoxyParamCaption}
+\item[{int}]{ tag}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a67e7ccad21a7ad337e1d8292b1f041d2}
+
+
+Get first inactive channel in group. 
+
+Find the first available (not playing) channel in group tag. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_GroupAvailable(int tag)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em tag}]A group number Any positive numbers (including zero). -\/1 will search ALL channels. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The channel found on success. -\/1 is returned when no channels in the group are available. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // find the first available channel in group 1
+                                int channel;
+                                channel=Mix_GroupAvailable(1);
+                                if (channel==-1) 
+                        {
+                                // no channel available...
+                                // perhaps search for oldest or newest channel in
+       use...
+                        }
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a7463f2901ab6cb6f772f740b05be3773}{Mix\_\-GroupOldest}, \hyperlink{namespace_tao_1_1_sdl_a0410718cb0a5036507a4e873cdf5f936}{Mix\_\-GroupNewer}, \hyperlink{namespace_tao_1_1_sdl_a31ad438a2a71cffaa8fccefa74158dac}{Mix\_\-GroupChannel}, \hyperlink{namespace_tao_1_1_sdl_a7ec52e3afc27080a9396a7ed012a40f4}{Mix\_\-GroupChannels}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a31ad438a2a71cffaa8fccefa74158dac}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-GroupChannel@{Mix\_\-GroupChannel}}
+\index{Mix\_\-GroupChannel@{Mix\_\-GroupChannel}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-GroupChannel}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-GroupChannel (
+\begin{DoxyParamCaption}
+\item[{int}]{ which, }
+\item[{int}]{ tag}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a31ad438a2a71cffaa8fccefa74158dac}
+
+
+Add/remove channel to/from group. 
+
+Add which channel to group tag, or reset it's group to the default group tag (-\/1). 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_GroupChannel(int which, int tag)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em which}]Channel number of channels to assign tag to. \item[{\em tag}]A group number Any positive numbers (including zero). -\/1 is the default group. Use -\/1 to remove a group tag essentially. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True(1) on success. False(0) is returned when the channel specified is invalid. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // add channel 0 to group 1
+                                if(!Mix_GroupChannel(0,1)) 
+                        {
+                                // bad channel, apparently channel 1 isn't alloca
+      ted
+                        }
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a7ec52e3afc27080a9396a7ed012a40f4}{Mix\_\-GroupChannels}, \hyperlink{namespace_tao_1_1_sdl_adf6a87a08d3da36a6700c817c578badf}{Mix\_\-AllocateChannels}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a7ec52e3afc27080a9396a7ed012a40f4}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-GroupChannels@{Mix\_\-GroupChannels}}
+\index{Mix\_\-GroupChannels@{Mix\_\-GroupChannels}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-GroupChannels}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-GroupChannels (
+\begin{DoxyParamCaption}
+\item[{int}]{ from, }
+\item[{int}]{ to, }
+\item[{int}]{ tag}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a7ec52e3afc27080a9396a7ed012a40f4}
+
+
+Assign several consecutive channels to a group. 
+
+Add channels starting at from up through to to group tag, or reset it's group to the default group tag (-\/1). 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_GroupChannels(int from, int to, int tag)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em from}]First Channel number of channels to assign tag to. Must be less or equal to to. \item[{\em to}]Last Channel number of channels to assign tag to. Must be greater or equal to from. \item[{\em tag}]A group number. Any positive numbers (including zero). -\/1 is the default group. Use -\/1 to remove a group tag essentially. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of tagged channels on success. If that number is less than to-\/from+1 then some channels were no tagged because they didn't exist. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // add channels 0 through 7 to group 1
+                                if(Mix_GroupChannels(0,7,1)!=8) 
+                        {
+                                // some bad channels, apparently some channels ar
+      en't allocated
+                        }
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a31ad438a2a71cffaa8fccefa74158dac}{Mix\_\-GroupChannel}, \hyperlink{namespace_tao_1_1_sdl_adf6a87a08d3da36a6700c817c578badf}{Mix\_\-AllocateChannels}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a1fc24e0dafaca9516fd3333180eafdc3}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-GroupCount@{Mix\_\-GroupCount}}
+\index{Mix\_\-GroupCount@{Mix\_\-GroupCount}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-GroupCount}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-GroupCount (
+\begin{DoxyParamCaption}
+\item[{int}]{ tag}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a1fc24e0dafaca9516fd3333180eafdc3}
+
+
+Get number of channels in group. 
+
+Count the number of channels in group tag. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_GroupCount(int tag)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em tag}]A group number Any positive numbers (including zero). -\/1 will count ALL channels. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of channels found in the group. This function never fails. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // count the number of channels in group 1
+                    printf("There are %d channels in group 1\n", Mix_GroupCount(1
+      ));
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a31ad438a2a71cffaa8fccefa74158dac}{Mix\_\-GroupChannel}, \hyperlink{namespace_tao_1_1_sdl_a7ec52e3afc27080a9396a7ed012a40f4}{Mix\_\-GroupChannels}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a0410718cb0a5036507a4e873cdf5f936}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-GroupNewer@{Mix\_\-GroupNewer}}
+\index{Mix\_\-GroupNewer@{Mix\_\-GroupNewer}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-GroupNewer}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-GroupNewer (
+\begin{DoxyParamCaption}
+\item[{int}]{ tag}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a0410718cb0a5036507a4e873cdf5f936}
+
+
+Get youngest busy channel in group. 
+
+Find the newest, most recently started, actively playing channel in group tag. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_GroupNewer(int tag)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em tag}]A group number Any positive numbers (including zero). -\/1 will search ALL channels. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The channel found on success. -\/1 is returned when no channels in the group are playing or the group is empty. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // find the newest playing channel in group 1
+                                int channel;
+                                channel=Mix_GroupNewer(1);
+                                if (channel==-1) 
+                        {
+                                // no channel playing or allocated...
+                                // perhaps just search for an available channel..
+      .
+                        }
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a7463f2901ab6cb6f772f740b05be3773}{Mix\_\-GroupOldest}, \hyperlink{namespace_tao_1_1_sdl_a67e7ccad21a7ad337e1d8292b1f041d2}{Mix\_\-GroupAvailable}, \hyperlink{namespace_tao_1_1_sdl_a31ad438a2a71cffaa8fccefa74158dac}{Mix\_\-GroupChannel}, \hyperlink{namespace_tao_1_1_sdl_a7ec52e3afc27080a9396a7ed012a40f4}{Mix\_\-GroupChannels}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a7463f2901ab6cb6f772f740b05be3773}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-GroupOldest@{Mix\_\-GroupOldest}}
+\index{Mix\_\-GroupOldest@{Mix\_\-GroupOldest}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-GroupOldest}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-GroupOldest (
+\begin{DoxyParamCaption}
+\item[{int}]{ tag}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a7463f2901ab6cb6f772f740b05be3773}
+
+
+Get oldest busy channel in group. 
+
+Find the oldest actively playing channel in group tag. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_GroupOldest(int tag)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em tag}]A group number Any positive numbers (including zero). -\/1 will search ALL channels. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The channel found on success. -\/1 is returned when no channels in the group are playing or the group is empty. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // find the oldest playing channel in group 1
+                                int channel;
+                                channel=Mix_GroupOldest(1);
+                                if (channel==-1) 
+                        {
+                                // no channel playing or allocated...
+                                // perhaps just search for an available channel..
+      .
+                        }
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a0410718cb0a5036507a4e873cdf5f936}{Mix\_\-GroupNewer}, \hyperlink{namespace_tao_1_1_sdl_a67e7ccad21a7ad337e1d8292b1f041d2}{Mix\_\-GroupAvailable}, \hyperlink{namespace_tao_1_1_sdl_a31ad438a2a71cffaa8fccefa74158dac}{Mix\_\-GroupChannel}, \hyperlink{namespace_tao_1_1_sdl_a7ec52e3afc27080a9396a7ed012a40f4}{Mix\_\-GroupChannels}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_af54a9841ce1683918d040509fc214d78}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-HaltChannel@{Mix\_\-HaltChannel}}
+\index{Mix\_\-HaltChannel@{Mix\_\-HaltChannel}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-HaltChannel}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-HaltChannel (
+\begin{DoxyParamCaption}
+\item[{int}]{ channel}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_af54a9841ce1683918d040509fc214d78}
+
+
+Stop playing on a channel. 
+
+Halt channel playback, or all channels if -\/1 is passed in. Any callback set by Mix\_\-ChannelFinished will be called. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_HaltChannel(int channel)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em channel}]Channel to stop playing, or -\/1 for all channels. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+always returns zero. (kinda silly) 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // halt playback on all channels
+                    Mix_HaltChannel(-1);
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_ae3cabd61d01191a69148822346ec8b6b}{Mix\_\-ExpireChannel}, \hyperlink{namespace_tao_1_1_sdl_afb3c1e03f7f07d16f5827c80ba01f4fa}{Mix\_\-FadeOutChannel}, \hyperlink{namespace_tao_1_1_sdl_a9ee8b67a7db7e1ec9f18b348497d24a2}{Mix\_\-ChannelFinished}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a4258ef0d85b4386a9d14beafbdf27097}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-HaltGroup@{Mix\_\-HaltGroup}}
+\index{Mix\_\-HaltGroup@{Mix\_\-HaltGroup}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-HaltGroup}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-HaltGroup (
+\begin{DoxyParamCaption}
+\item[{int}]{ tag}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a4258ef0d85b4386a9d14beafbdf27097}
+
+
+Stop a group. 
+
+Halt playback on all channels in group tag. Any callback set by Mix\_\-ChannelFinished will be called once for each channel that stops. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_HaltGroup(int tag)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em tag}]Group to fade out. NOTE: -\/1 will NOT halt all channels. Use Mix\_\-HaltChannel(-\/1) for that instead. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+always returns zero. (more silly than \hyperlink{namespace_tao_1_1_sdl_af54a9841ce1683918d040509fc214d78}{Mix\_\-HaltChannel}) 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // halt playback on all channels in group 1
+                    Mix_HaltGroup(1);
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a11fb89c0edcfbb1131a77d1e12030123}{Mix\_\-FadeOutGroup}, \hyperlink{namespace_tao_1_1_sdl_af54a9841ce1683918d040509fc214d78}{Mix\_\-HaltChannel}, \hyperlink{namespace_tao_1_1_sdl_a9ee8b67a7db7e1ec9f18b348497d24a2}{Mix\_\-ChannelFinished}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_ad6b1e382668e4df2c1aee4f1cabb7b38}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-HaltMusic@{Mix\_\-HaltMusic}}
+\index{Mix\_\-HaltMusic@{Mix\_\-HaltMusic}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-HaltMusic}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-HaltMusic (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_ad6b1e382668e4df2c1aee4f1cabb7b38}
+
+
+Stop music playback. 
+
+Halt playback of music. This interrupts music fader effects. Any callback set by Mix\_\-HookMusicFinished will be called when the music stops. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_HaltMusic()
+\end{DoxyCode}
+ 
+
+\begin{DoxyReturn}{Returns}
+always returns zero. (even more silly than Mix\_\-HaltGroup) 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // halt music playback
+                    Mix_HaltMusic();
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a6be5427391343f79e29eaab89c44137d}{Mix\_\-FadeOutMusic}, \hyperlink{namespace_tao_1_1_sdl_adacfc77044e70b36c6be7b0b74f96b29}{Mix\_\-HookMusicFinished}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a3ceda7fbd60c8eeed0719440d19d935e}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-HookMusic@{Mix\_\-HookMusic}}
+\index{Mix\_\-HookMusic@{Mix\_\-HookMusic}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-HookMusic}]{\setlength{\rightskip}{0pt plus 5cm}static void Tao.Sdl.Mix\_\-HookMusic (
+\begin{DoxyParamCaption}
+\item[{MixFunctionDelegate}]{ mix\_\-func, }
+\item[{IntPtr}]{ arg}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a3ceda7fbd60c8eeed0719440d19d935e}
+
+
+Hook for a custom music player. 
+
+This sets up a custom music player function. The function will be called with arg passed into the udata parameter when the mix\_\-func is called. The stream parameter passes in the audio stream buffer to be filled with len bytes of music. The music player will then be called automatically when the mixer needs it. Music playing will start as soon as this is called. All the music playing and stopping functions have no effect on music after this. Pause and resume will work. Using a custom music player and the internal music player is not possible, the custom music player takes priority. To stop the custom music player call Mix\_\-HookMusic(NULL, NULL). 
+
+NOTE: NEVER call SDL\_\-Mixer functions, nor SDL\_\-LockAudio, from a callback function. 
+
+
+\begin{DoxyCode}
+void Mix_HookMusic(void (*mix_func)(void *udata, Uint8 *stream, int len), void *a
+      rg)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyCode}
+                    // make a music play function
+                                // it expects udata to be a pointer to an int
+                                void myMusicPlayer(void *udata, Uint8 *stream, in
+      t len)
+                                {
+                                        int i, pos=*(int*)udata;
+
+                                        // fill buffer with...uh...music...
+                                        for(i=0; i&lt;len; i++)
+                                                stream[i]=(i+pos)&amp;ff;
+
+                                        // set udata for next time
+                                        pos+=len;
+                                        *(int*)udata=pos;
+                                }
+                                ...
+                                // use myMusicPlayer for playing...uh...music
+                                int music_pos=0;
+                                Mix_HookMusic(myMusicPlayer, &amp;music_pos);
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em mix\_\-func}]Function pointer to a music player mixer function. NULL will stop the use of the music player, returning the mixer to using the internal music players like usual.\item[{\em arg}]This is passed to the mix\_\-func's udata parameter when it is called. \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_aea359916fe9090b1e8c154e7704138d1}{Mix\_\-SetMusicCMD}, \hyperlink{namespace_tao_1_1_sdl_ac7bebe18135733e318ef215389944542}{Mix\_\-GetMusicHookData}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_adacfc77044e70b36c6be7b0b74f96b29}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-HookMusicFinished@{Mix\_\-HookMusicFinished}}
+\index{Mix\_\-HookMusicFinished@{Mix\_\-HookMusicFinished}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-HookMusicFinished}]{\setlength{\rightskip}{0pt plus 5cm}static void Tao.Sdl.Mix\_\-HookMusicFinished (
+\begin{DoxyParamCaption}
+\item[{MusicFinishedDelegate}]{ music\_\-finished}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_adacfc77044e70b36c6be7b0b74f96b29}
+
+
+Add your own callback when the music has finished playing. This callback is only called if the music finishes naturally. 
+
+This sets up a function to be called when music playback is halted. Any time music stops, the music\_\-finished function will be called. Call with NULL to remove the callback. 
+
+NOTE: NEVER call SDL\_\-Mixer functions, nor SDL\_\-LockAudio, from a callback function. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+void Mix_HookMusicFinished(void (*music_finished)())
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em music\_\-finished}]Function pointer to a void function(). NULL will remove the hook. \end{DoxyParams}
+
+\begin{DoxyCode}
+                    // make a music finished function
+                                void musicFinished()
+                                {
+                                        printf("Music stopped.\n");
+                                }
+                                ...
+                                // use musicFinished for when music stops
+                                Mix_HookMusicFinished(musicFinished);
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_ad6b1e382668e4df2c1aee4f1cabb7b38}{Mix\_\-HaltMusic}, \hyperlink{namespace_tao_1_1_sdl_a6be5427391343f79e29eaab89c44137d}{Mix\_\-FadeOutMusic}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_ad6c75b94200b928986e8761beab8d85d}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-LoadMUS@{Mix\_\-LoadMUS}}
+\index{Mix\_\-LoadMUS@{Mix\_\-LoadMUS}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-LoadMUS}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr Tao.Sdl.Mix\_\-LoadMUS (
+\begin{DoxyParamCaption}
+\item[{string}]{ file}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_ad6c75b94200b928986e8761beab8d85d}
+
+
+Load a music file into a Mix\_\-Music. 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em file}]Name of music file to use. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to a Mix\_\-Music. NULL is returned on errors. 
+\end{DoxyReturn}
+
+
+Load music file to use. This can load WAVE, MOD, MIDI, OGG, MP3, and any file that you use a command to play with. 
+
+If you are using an external command to play the music, you must call Mix\_\-SetMusicCMD before this, otherwise the internal players will be used. Alternatively, if you have set an external command up and don't want to use it, you must call Mix\_\-SetMusicCMD(NULL) to use the built-\/in players again. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+Mix_Music *Mix_LoadMUS(const char *file)
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}
+                    // load the MP3 file "music.mp3" to play as music
+                                Mix_Music *music;
+                                music=Mix_LoadMUS("music.mp3");
+                                if(!music) 
+                        {
+                                printf("Mix_LoadMUS(\"music.mp3\"): %s\n", Mix_Ge
+      tError());
+                                // this might be a critical error...
+                        }
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_aea359916fe9090b1e8c154e7704138d1}{Mix\_\-SetMusicCMD}, \hyperlink{namespace_tao_1_1_sdl_aebe0f1bba92653f0f1dea238300619fb}{Mix\_\-PlayMusic}, \hyperlink{namespace_tao_1_1_sdl_a67b90a673af55a36597265d2720f9ef5}{Mix\_\-FadeInMusic}, \hyperlink{namespace_tao_1_1_sdl_a45909046f32da6098114b07ce9bc0737}{Mix\_\-FadeInMusicPos}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a704960ed3bb8745e7233751ae3e3fc3f}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-LoadMUS\_\-RW@{Mix\_\-LoadMUS\_\-RW}}
+\index{Mix\_\-LoadMUS\_\-RW@{Mix\_\-LoadMUS\_\-RW}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-LoadMUS\_\-RW}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr Tao.Sdl.Mix\_\-LoadMUS\_\-RW (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ rw}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a704960ed3bb8745e7233751ae3e3fc3f}
+
+
+Load a music file from an SDL\_\-RWop object (Ogg and MikMod specific currently). 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+Mix_Music *Mix_LoadMUS_RW(SDL_RWops *rw)
+\end{DoxyCode}
+ \hypertarget{namespace_tao_1_1_sdl_acca6b94c1e8a3ff545f110838532fba9}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-LoadWAV\_\-RW@{Mix\_\-LoadWAV\_\-RW}}
+\index{Mix\_\-LoadWAV\_\-RW@{Mix\_\-LoadWAV\_\-RW}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-LoadWAV\_\-RW}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr Tao.Sdl.Mix\_\-LoadWAV\_\-RW (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ src, }
+\item[{int}]{ freesrc}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_acca6b94c1e8a3ff545f110838532fba9}
+
+
+Load a wave file or a music (.mod .s3m .it .xm) file. 
+
+Load src for use as a sample. This can load WAVE, AIFF, RIFF, OGG, and VOC formats. Using SDL\_\-RWops is not covered here, but they enable you to load from almost any source. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+Mix_Chunk *Mix_LoadWAV_RW(SDL_RWops *src, int freesrc)
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em src}]The source SDL\_\-RWops as a pointer. The sample is loaded from this. \item[{\em freesrc}]A non-\/zero value mean is will automatically close/free the src for you. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the sample as a \hyperlink{struct_tao_1_1_sdl_1_1_mix___chunk}{Mix\_\-Chunk}. NULL is returned on errors. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // load sample.wav in to sample
+                                Mix_Chunk *sample;
+                                sample=Mix_LoadWAV_RW(SDL_RWFromFile("sample.wav"
+      , "rb"), 1);
+                                if(!sample) 
+                        {
+                                printf("Mix_LoadWAV_RW: %s\n", Mix_GetError());
+                                // handle error
+                        }
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+Mix\_\-LoadWAV, \hyperlink{namespace_tao_1_1_sdl_a40245bd40987284be35aa5b48b838bae}{Mix\_\-QuickLoad\_\-WAV}, \hyperlink{namespace_tao_1_1_sdl_acb89d8e0973042e20753f347932f23a7}{Mix\_\-FreeChunk}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a71bc62050441b9475497ee931e557fd5}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-OpenAudio@{Mix\_\-OpenAudio}}
+\index{Mix\_\-OpenAudio@{Mix\_\-OpenAudio}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-OpenAudio}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-OpenAudio (
+\begin{DoxyParamCaption}
+\item[{int}]{ frequency, }
+\item[{short}]{ format, }
+\item[{int}]{ channels, }
+\item[{int}]{ chunksize}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a71bc62050441b9475497ee931e557fd5}
+
+
+Open the mixer with a certain audio format. 
+
+Initialize the mixer API. 
+
+This must be called before using other functions in this library. SDL must be initialized with SDL\_\-INIT\_\-AUDIO before this call. frequency would be 44100 for 44.1KHz, which is CD audio rate. Most games use 22050, because 44100 requires too much CPU power on older computers. chunksize is the size of each mixed sample. The smaller this is the more your hooks will be called. If make this too small on a slow system, sound may skip. If made to large, sound effects will lag behind the action more. You want a happy medium for your target computer. You also may make this 4096, or larger, if you are just playing music. MIX\_\-CHANNELS(8) mixing channels will be allocated by default. You may call this function multiple times, however you will have to call Mix\_\-CloseAudio just as many times for the device to actually close. The format will not changed on subsequent calls. So you will have to close all the way before trying to open with different format parameters.
+
+format is based on SDL audio support, see SDL\_\-audio.h. Here are the values listed there:
+
+
+\begin{DoxyCode}
+                    AUDIO_U8
+                    Unsigned 8-bit samples
+
+                    AUDIO_S8
+                    Signed 8-bit samples
+
+                    AUDIO_U16LSB
+                    Unsigned 16-bit samples, in little-endian byte order
+
+                    AUDIO_S16LSB
+                    Signed 16-bit samples, in little-endian byte order
+
+                    AUDIO_U16MSB
+                    Unsigned 16-bit samples, in big-endian byte order
+
+                    AUDIO_S16MSB
+                    Signed 16-bit samples, in big-endian byte order
+
+                    AUDIO_U16
+                    same as AUDIO_U16LSB (for backwards compatability probably)
+
+                    AUDIO_S16
+                    same as AUDIO_S16LSB (for backwards compatability probably)
+
+                    AUDIO_U16SYS
+                    Unsigned 16-bit samples, in system byte order
+
+                    AUDIO_S16SYS
+                    Signed 16-bit samples, in system byte order
+\end{DoxyCode}
+
+
+MIX\_\-DEFAULT\_\-FORMAT is the same as AUDIO\_\-S16SYS. 
+
+Binds to C-\/funtion in SDL\_\-mixer.h 
+\begin{DoxyCode}
+                    int Mix_OpenAudio(int frequency, Uint16 format, int channels,
+       int chunksize)
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em frequency}]Output sampling frequency in samples per second (Hz). you might use MIX\_\-DEFAULT\_\-FREQUENCY(22050) since that is a good value for most games. \item[{\em format}]Output sample format. \item[{\em channels}]Number of sound channels in output. Set to 2 for stereo, 1 for mono. This has nothing to do with mixing channels. \item[{\em chunksize}]Bytes used per output sample. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on errors 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // start SDL with audio support
+                                if(SDL_Init(SDL_INIT_AUDIO)==-1) 
+                        {
+                                printf("SDL_Init: %s\n", SDL_GetError());
+                                exit(1);
+                        }
+                        // open 44.1KHz, signed 16bit, system byte order,
+                        //      stereo audio, using 1024 byte chunks
+                        if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024)==-1)
+       
+                   {
+                        printf("Mix_OpenAudio: %s\n", Mix_GetError());
+                        exit(2);
+                   }
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_abec029152bd4c06ac9dd3ac6ca0efd21}{Mix\_\-CloseAudio}, \hyperlink{namespace_tao_1_1_sdl_ab493fab00390986c858d5441fa7e3aa6}{Mix\_\-QuerySpec}, \hyperlink{namespace_tao_1_1_sdl_adf6a87a08d3da36a6700c817c578badf}{Mix\_\-AllocateChannels}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_abb714bc1510170e6495190e8bd128ad4}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-Pause@{Mix\_\-Pause}}
+\index{Mix\_\-Pause@{Mix\_\-Pause}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-Pause}]{\setlength{\rightskip}{0pt plus 5cm}static void Tao.Sdl.Mix\_\-Pause (
+\begin{DoxyParamCaption}
+\item[{int}]{ channel}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_abb714bc1510170e6495190e8bd128ad4}
+
+
+Pause a particular channel. 
+
+Pause channel, or all playing channels if -\/1 is passed in. You may still halt a paused channel. Note: Only channels which are actively playing will be paused. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+void Mix_Pause(int channel)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em channel}]Channel to pause on, or -\/1 for all channels. \end{DoxyParams}
+
+\begin{DoxyCode}
+                    // pause all sample playback
+                    Mix_Pause(-1);
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a9cefd15470fff5ab827caa2d3a0c086a}{Mix\_\-Resume}, \hyperlink{namespace_tao_1_1_sdl_a7b542472ed1556bff8713216e4002499}{Mix\_\-Paused}, \hyperlink{namespace_tao_1_1_sdl_af54a9841ce1683918d040509fc214d78}{Mix\_\-HaltChannel}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a7b542472ed1556bff8713216e4002499}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-Paused@{Mix\_\-Paused}}
+\index{Mix\_\-Paused@{Mix\_\-Paused}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-Paused}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-Paused (
+\begin{DoxyParamCaption}
+\item[{int}]{ channel}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a7b542472ed1556bff8713216e4002499}
+
+
+Get the pause status of a channel. 
+
+Tells you if channel is paused, or not. Note: Does not check if the channel has been halted after it was paused, which may seem a little weird. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_Paused(int channel)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em channel}]Channel to test whether it is paused or not. -\/1 will tell you how many channels are paused. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Zero if the channel is not paused. Otherwise if you passed in -\/1, the number of paused channels is returned. If you passed in a specific channel, then 1 is returned if it is paused. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // check the pause status on all channels
+                    printf("%d channels are paused\n", Mix_Paused(-1));
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a54b7a201ae1d44a66389848fdd2110c8}{Mix\_\-Playing}, \hyperlink{namespace_tao_1_1_sdl_abb714bc1510170e6495190e8bd128ad4}{Mix\_\-Pause}, \hyperlink{namespace_tao_1_1_sdl_a9cefd15470fff5ab827caa2d3a0c086a}{Mix\_\-Resume}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a8a0635529536c080ac993ded5a114b02}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-PausedMusic@{Mix\_\-PausedMusic}}
+\index{Mix\_\-PausedMusic@{Mix\_\-PausedMusic}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-PausedMusic}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-PausedMusic (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a8a0635529536c080ac993ded5a114b02}
+
+
+Test whether music is paused. 
+
+Tells you if music is paused, or not. Note: Does not check if the music was been halted after it was paused, which may seem a little weird. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_PausedMusic()
+\end{DoxyCode}
+ 
+
+\begin{DoxyReturn}{Returns}
+Zero if music is not paused. 1 if it is paused. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // check the music pause status
+                    printf("music is%s paused\n", Mix_PausedMusic()?"":" not");
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_ac811cacdff8d9eeb9ca1745f56b78b30}{Mix\_\-PlayingMusic}, \hyperlink{namespace_tao_1_1_sdl_aa0ef4670631ec6e222b47dd33e0036c6}{Mix\_\-PauseMusic}, \hyperlink{namespace_tao_1_1_sdl_a6a3adc0492d35aa660d1318a03fb3f6c}{Mix\_\-ResumeMusic}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_aa0ef4670631ec6e222b47dd33e0036c6}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-PauseMusic@{Mix\_\-PauseMusic}}
+\index{Mix\_\-PauseMusic@{Mix\_\-PauseMusic}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-PauseMusic}]{\setlength{\rightskip}{0pt plus 5cm}static void Tao.Sdl.Mix\_\-PauseMusic (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_aa0ef4670631ec6e222b47dd33e0036c6}
+
+
+Pause music. 
+
+Pause the music playback. You may halt paused music. Note: Music can only be paused if it is actively playing. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+void Mix_PauseMusic()
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyCode}
+                    // pause music playback
+                    Mix_PauseMusic();
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a6a3adc0492d35aa660d1318a03fb3f6c}{Mix\_\-ResumeMusic}, \hyperlink{namespace_tao_1_1_sdl_a8a0635529536c080ac993ded5a114b02}{Mix\_\-PausedMusic}, \hyperlink{namespace_tao_1_1_sdl_ad6b1e382668e4df2c1aee4f1cabb7b38}{Mix\_\-HaltMusic}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a3158db8e72b34c092d51b0ba70ebfccf}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-PlayChannelTimed@{Mix\_\-PlayChannelTimed}}
+\index{Mix\_\-PlayChannelTimed@{Mix\_\-PlayChannelTimed}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-PlayChannelTimed}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-PlayChannelTimed (
+\begin{DoxyParamCaption}
+\item[{int}]{ channel, }
+\item[{IntPtr}]{ chunk, }
+\item[{int}]{ loops, }
+\item[{int}]{ ticks}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a3158db8e72b34c092d51b0ba70ebfccf}
+
+
+Play loop and limit by time. 
+
+If the sample is long enough and has enough loops then the sample will stop after ticks milliseconds. Otherwise this function is the same as Mix\_\-PlayChannel. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_PlayChannelTimed(int channel, Mix_Chunk *chunk, int loops, int ticks)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em channel}]Channel to play on, or -\/1 for the first free unreserved channel. \item[{\em chunk}]Sample to play. \item[{\em loops}]Number of loops, -\/1 is infinite loops. Passing one here plays the sample twice (1 loop). \item[{\em ticks}]Millisecond limit to play sample, at most. If not enough loops or the sample chunk is not long enough, then the sample may stop before this timeout occurs. -\/1 means play forever. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the channel the sample is played on. On any errors, -\/1 is returned. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // play sample on first free unreserved channel
+                                // play it for half a second
+                                // Mix_Chunk *sample; //previously loaded
+                                if(Mix_PlayChannelTimed(-1, sample, -1 , 500)==-1
+      ) 
+                        {
+                                printf("Mix_PlayChannel: %s\n",Mix_GetError());
+                                // may be critical error, or maybe just no channe
+      ls were free.
+                                // you could allocated another channel in that ca
+      se...
+                        }
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+Mix\_\-PlayChannel, \hyperlink{namespace_tao_1_1_sdl_a14f4c9f0bd2530ecade88aa16efb5176}{Mix\_\-FadeInChannelTimed}, \hyperlink{namespace_tao_1_1_sdl_afb3c1e03f7f07d16f5827c80ba01f4fa}{Mix\_\-FadeOutChannel}, \hyperlink{namespace_tao_1_1_sdl_af107df0b0036f5cfebf1cb2a361cd949}{Mix\_\-ReserveChannels}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a54b7a201ae1d44a66389848fdd2110c8}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-Playing@{Mix\_\-Playing}}
+\index{Mix\_\-Playing@{Mix\_\-Playing}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-Playing}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-Playing (
+\begin{DoxyParamCaption}
+\item[{int}]{ channel}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a54b7a201ae1d44a66389848fdd2110c8}
+
+
+Get the active playing status of a channel. 
+
+Tells you if channel is playing, or not. Note: Does not check if the channel has been paused. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_Playing(int channel)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em channel}]Channel to test whether it is playing or not. -\/1 will tell you how many channels are playing. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Zero if the channel is not playing. Otherwise if you passed in -\/1, the number of channels playing is returned. If you passed in a specific channel, then 1 is returned if it is playing.
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // check how many channels are playing samples
+                    printf("%d channels are playing\n", Mix_Playing(-1));
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a7b542472ed1556bff8713216e4002499}{Mix\_\-Paused}, Mix\_\-PlayChannel, \hyperlink{namespace_tao_1_1_sdl_abb714bc1510170e6495190e8bd128ad4}{Mix\_\-Pause}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_ac811cacdff8d9eeb9ca1745f56b78b30}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-PlayingMusic@{Mix\_\-PlayingMusic}}
+\index{Mix\_\-PlayingMusic@{Mix\_\-PlayingMusic}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-PlayingMusic}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-PlayingMusic (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_ac811cacdff8d9eeb9ca1745f56b78b30}
+
+
+Test whether music is playing. 
+
+Tells you if music is actively playing, or not. Note: Does not check if the channel has been paused. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_PlayingMusic() 
+\end{DoxyCode}
+ 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // check if music is playing
+                    printf("music is%s playing.\n", Mix_PlayingMusic()?"":" not")
+      ;
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a8a0635529536c080ac993ded5a114b02}{Mix\_\-PausedMusic}, \hyperlink{namespace_tao_1_1_sdl_a78d03bb3f36bc9f89e98a2dd8248a613}{Mix\_\-FadingMusic}, \hyperlink{namespace_tao_1_1_sdl_aebe0f1bba92653f0f1dea238300619fb}{Mix\_\-PlayMusic}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_aebe0f1bba92653f0f1dea238300619fb}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-PlayMusic@{Mix\_\-PlayMusic}}
+\index{Mix\_\-PlayMusic@{Mix\_\-PlayMusic}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-PlayMusic}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-PlayMusic (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ music, }
+\item[{int}]{ loops}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_aebe0f1bba92653f0f1dea238300619fb}
+
+
+Play music, with looping. 
+
+Play the loaded music loop times through from start to finish. The previous music will be halted, or if fading out it waits (blocking) for that to finish. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_PlayMusic(Mix_Music *music, int loops)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em music}]Pointer to Mix\_\-Music to play. \item[{\em loops}]number of times to play through the music. \par
+0 plays the music zero times... \par
+-\/1 plays the music forever (or as close as it can get to that) \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, or -\/1 on errors. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // play music forever
+                                // Mix_Music *music; // I assume this has been lo
+      aded already
+                                if(Mix_PlayMusic(music, -1)==-1) 
+                        {
+                                printf("Mix_PlayMusic: %s\n", Mix_GetError());
+                                // well, there's no music, but most games don't b
+      reak without music...
+                        }
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a67b90a673af55a36597265d2720f9ef5}{Mix\_\-FadeInMusic}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_ab493fab00390986c858d5441fa7e3aa6}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-QuerySpec@{Mix\_\-QuerySpec}}
+\index{Mix\_\-QuerySpec@{Mix\_\-QuerySpec}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-QuerySpec}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-QuerySpec (
+\begin{DoxyParamCaption}
+\item[{out int}]{ frequency, }
+\item[{out short}]{ format, }
+\item[{out int}]{ channels}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_ab493fab00390986c858d5441fa7e3aa6}
+
+
+Get output format. 
+
+Get the actual audio format in use by the opened audio device. This may or may not match the parameters you passed to Mix\_\-OpenAudio. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_QuerySpec(int *frequency, Uint16 *format, int *channels)
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em channels}]A pointer to an int where the number of audio channels will be stored. 2 will mean stereo, 1 will mean mono. \item[{\em format}]A pointer to a short where the output format actually being used by the audio device will be stored. \item[{\em frequency}]A pointer to an int where the frequency actually used by the opened audio device will be stored. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on error. If the device was open the number of times it was opened will be returned. The values of the arguments variables are not set on an error. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // get and print the audio format in use
+                                int numtimesopened, frequency, channels;
+                                Uint16 format;
+                                numtimesopened=Mix_QuerySpec(&amp;frequency, &amp
+      ;format, &amp;channels);
+                                if(!numtimesopened) 
+                        {
+                                printf("Mix_QuerySpec: %s\n",Mix_GetError());
+                        }
+                        else 
+                   {
+                        char *format_str="Unknown";
+                        switch(format) 
+                   {
+                        case AUDIO_U8: format_str="U8"; break;
+                        case AUDIO_S8: format_str="S8"; break;
+                        case AUDIO_U16LSB: format_str="U16LSB"; break;
+                        case AUDIO_S16LSB: format_str="S16LSB"; break;
+                        case AUDIO_U16MSB: format_str="U16MSB"; break;
+                        case AUDIO_S16MSB: format_str="S16MSB"; break;
+                   }
+                        printf("opened=%d times  frequency=%dHz  format=%s  chann
+      els=%d",
+                        numtimesopened, frequency, format, channels);
+                   }
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a71bc62050441b9475497ee931e557fd5}{Mix\_\-OpenAudio}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_ab61ffe3d06eba56825d8798ffa9ac013}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-QuickLoad\_\-RAW@{Mix\_\-QuickLoad\_\-RAW}}
+\index{Mix\_\-QuickLoad\_\-RAW@{Mix\_\-QuickLoad\_\-RAW}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-QuickLoad\_\-RAW}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr Tao.Sdl.Mix\_\-QuickLoad\_\-RAW (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ mem, }
+\item[{int}]{ len}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_ab61ffe3d06eba56825d8798ffa9ac013}
+
+
+Load raw audio data of the mixer format from a memory buffer. 
+
+Load mem as a raw sample. The data in mem must be already in the output format. If you aren't sure what you are doing, this is not a good function for you! 
+
+Note: This function does very little checking. If the format mismatches the output format it will not return an error. This is probably a dangerous function to use. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+Mix_Chunk *Mix_QuickLoad_RAW(Uint8 *mem)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em len}]\item[{\em mem}]Memory buffer containing a WAVE file in output format. Load mem as a raw sample. The data in mem must be already in the output format. If you aren't sure what you are doing, this is not a good function for you! \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the sample as a \hyperlink{struct_tao_1_1_sdl_1_1_mix___chunk}{Mix\_\-Chunk}. NULL is returned on errors, such as when out of memory. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // quick-load a raw sample from memory
+                                // Uint8 *raw; // I assume you have the raw data 
+      here,
+                                // or compiled in the program...
+                                Mix_Chunk *raw_chunk;
+                                if(!(raw_chunk=Mix_QuickLoad_RAW(raw))) 
+                        {
+                                printf("Mix_QuickLoad_RAW: %s\n", Mix_GetError())
+      ;
+                                // handle error
+                        }
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+Mix\_\-LoadWAV, \hyperlink{namespace_tao_1_1_sdl_a40245bd40987284be35aa5b48b838bae}{Mix\_\-QuickLoad\_\-WAV}, \hyperlink{namespace_tao_1_1_sdl_acb89d8e0973042e20753f347932f23a7}{Mix\_\-FreeChunk}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a40245bd40987284be35aa5b48b838bae}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-QuickLoad\_\-WAV@{Mix\_\-QuickLoad\_\-WAV}}
+\index{Mix\_\-QuickLoad\_\-WAV@{Mix\_\-QuickLoad\_\-WAV}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-QuickLoad\_\-WAV}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr Tao.Sdl.Mix\_\-QuickLoad\_\-WAV (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ mem}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a40245bd40987284be35aa5b48b838bae}
+
+
+Load a wave file of the mixer format from a memory buffer. 
+
+Load mem as a WAVE/RIFF file into a new sample. The WAVE in mem must be already in the output format. It would be better to use Mix\_\-LoadWAV\_\-RW if you aren't sure. Note: This function does very little checking. If the format mismatches the output format, or if the buffer is not a WAVE, it will not return an error. This is probably a dangerous function to use. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+Mix_Chunk *Mix_QuickLoad_WAV(Uint8 *mem)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em mem}]Memory buffer containing a WAVE file in output format. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the sample as a \hyperlink{struct_tao_1_1_sdl_1_1_mix___chunk}{Mix\_\-Chunk}. NULL is returned on errors. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // quick-load a wave from memory
+                                // Uint8 *wave; // I assume you have the wave loa
+      ded raw,
+                                // or compiled in the program...
+                                Mix_Chunk *wave_chunk;
+                                if(!(wave_chunk=Mix_QuickLoad_WAV(wave))) 
+                        {
+                                printf("Mix_QuickLoad_WAV: %s\n", Mix_GetError())
+      ;
+                                // handle error
+                        }
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+Mix\_\-LoadWAV, \hyperlink{namespace_tao_1_1_sdl_ab61ffe3d06eba56825d8798ffa9ac013}{Mix\_\-QuickLoad\_\-RAW}, \hyperlink{namespace_tao_1_1_sdl_acb89d8e0973042e20753f347932f23a7}{Mix\_\-FreeChunk}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a8d657c91edac10d18f474d27fc88fbb5}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-RegisterEffect@{Mix\_\-RegisterEffect}}
+\index{Mix\_\-RegisterEffect@{Mix\_\-RegisterEffect}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-RegisterEffect}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-RegisterEffect (
+\begin{DoxyParamCaption}
+\item[{int}]{ chan, }
+\item[{MixEffectFunctionDelegate}]{ f, }
+\item[{MixEffectDoneDelegate}]{ d, }
+\item[{IntPtr}]{ arg}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a8d657c91edac10d18f474d27fc88fbb5}
+
+
+Hook a processor to a channel. 
+
+Hook a processor function f into a channel for post processing effects. You may just be reading the data and displaying it, or you may be altering the stream to add an echo. Most processors also have state data that they allocate as they are in use, this would be stored in the arg pointer data space. When a processor is finished being used, any function passed into d will be called, which is when your processor should clean up the data in the arg data space. 
+
+The effects are put into a linked list, and always appended to the end, meaning they always work on previously registered effects output. Effects may be added multiple times in a row. Effects are cumulative this way. 
+
+
+\begin{DoxyCode}
+int Mix_RegisterEffect(int chan, Mix_EffectFunc_t f, Mix_EffectDone_t d, void *ar
+      g)
+\end{DoxyCode}
+ 
+\begin{DoxyParams}{Parameters}
+\item[{\em f}]The function pointer for the effects processor. \item[{\em arg}]\item[{\em chan}]channel number to register f and d on. Use MIX\_\-CHANNEL\_\-POST to process the postmix stream.\item[{\em d}]The function pointer for any cleanup routine to be called when the channel is done playing a sample. This may be NULL for any processors that don't need to clean up any memory or other dynamic data. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Zero on errors, such as a nonexisting channel 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // make a passthru processor function that does nothing...
+                                void noEffect(int chan, void *stream, int len, vo
+      id *udata)
+                                {
+                                        // you could work with stream here...
+                                }
+                                ...
+                                // register noEffect as a postmix processor
+                                if(!Mix_RegisterEffect(MIX_CHANNEL_POST, noEffect
+      , NULL, NULL)) 
+                        {
+                                printf("Mix_RegisterEffect: %s\n", Mix_GetError()
+      );
+                        }
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_ab5415c4259b9c044b48a59d0a4548f26}{Mix\_\-UnregisterEffect}, \hyperlink{namespace_tao_1_1_sdl_a68ba0a9948d37fa891d61b1ed2c50af9}{Mix\_\-UnregisterAllEffects}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_af107df0b0036f5cfebf1cb2a361cd949}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-ReserveChannels@{Mix\_\-ReserveChannels}}
+\index{Mix\_\-ReserveChannels@{Mix\_\-ReserveChannels}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-ReserveChannels}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-ReserveChannels (
+\begin{DoxyParamCaption}
+\item[{int}]{ num}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_af107df0b0036f5cfebf1cb2a361cd949}
+
+
+Prevent channels from being used in default group. 
+
+Reserve num channels from being used when playing samples when passing in -\/1 as a channel number to playback functions. The channels are reserved starting from channel 0 to num-\/1. Passing in zero will unreserve all channels. Normally SDL\_\-mixer starts without any channels reserved. 
+
+The following functions are affected by this setting: \par
+Mix\_\-PlayChannel \par
+\hyperlink{namespace_tao_1_1_sdl_a3158db8e72b34c092d51b0ba70ebfccf}{Mix\_\-PlayChannelTimed} \par
+Mix\_\-FadeInChannel \par
+\hyperlink{namespace_tao_1_1_sdl_a14f4c9f0bd2530ecade88aa16efb5176}{Mix\_\-FadeInChannelTimed}  
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_ReserveChannels(int num)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em num}]Number of channels to reserve from default mixing. Zero removes all reservations. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of channels reserved. Never fails, but may return less channels than you ask for, depending on the number of channels previously allocated. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                     // reserve the first 8 mixing channels
+                                int reserved_count;
+                                reserved_count=Mix_ReserveChannels(8);
+                                if(reserved_count!=8) 
+                        {
+                                printf("reserved %d channels from default mixing.
+      \n",reserved_count);
+                                printf("8 channels were not reserved!\n");
+                                // this might be a critical error...
+                        }
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_adf6a87a08d3da36a6700c817c578badf}{Mix\_\-AllocateChannels}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a9cefd15470fff5ab827caa2d3a0c086a}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-Resume@{Mix\_\-Resume}}
+\index{Mix\_\-Resume@{Mix\_\-Resume}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-Resume}]{\setlength{\rightskip}{0pt plus 5cm}static void Tao.Sdl.Mix\_\-Resume (
+\begin{DoxyParamCaption}
+\item[{int}]{ channel}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a9cefd15470fff5ab827caa2d3a0c086a}
+
+
+Resume a paused channel. 
+
+Unpause channel, or all playing and paused channels if -\/1 is passed in. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+void Mix_Resume(int channel)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em channel}]Channel to resume playing, or -\/1 for all channels. \end{DoxyParams}
+
+\begin{DoxyCode}
+                    // resume playback on all previously active channels
+                    Mix_Resume(-1);
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_abb714bc1510170e6495190e8bd128ad4}{Mix\_\-Pause}, \hyperlink{namespace_tao_1_1_sdl_a7b542472ed1556bff8713216e4002499}{Mix\_\-Paused}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a6a3adc0492d35aa660d1318a03fb3f6c}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-ResumeMusic@{Mix\_\-ResumeMusic}}
+\index{Mix\_\-ResumeMusic@{Mix\_\-ResumeMusic}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-ResumeMusic}]{\setlength{\rightskip}{0pt plus 5cm}static void Tao.Sdl.Mix\_\-ResumeMusic (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a6a3adc0492d35aa660d1318a03fb3f6c}
+
+
+Resume paused music. 
+
+Unpause the music. This is safe to use on halted, paused, and already playing music. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+void Mix_ResumeMusic() 
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyCode}
+                    // resume music playback
+                    Mix_ResumeMusic();
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_aa0ef4670631ec6e222b47dd33e0036c6}{Mix\_\-PauseMusic}, \hyperlink{namespace_tao_1_1_sdl_a8a0635529536c080ac993ded5a114b02}{Mix\_\-PausedMusic}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_ae1b8819a96e0ed61bca173b030667355}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-RewindMusic@{Mix\_\-RewindMusic}}
+\index{Mix\_\-RewindMusic@{Mix\_\-RewindMusic}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-RewindMusic}]{\setlength{\rightskip}{0pt plus 5cm}static void Tao.Sdl.Mix\_\-RewindMusic (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_ae1b8819a96e0ed61bca173b030667355}
+
+
+Rewind music to beginning. 
+
+Rewind the music to the start. This is safe to use on halted, paused, and already playing music. It is not useful to rewind the music immediately after starting playback, because it starts at the beginning by default. 
+
+This function only works for these streams: MOD, OGG, MP3, Native MIDI. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+void Mix_RewindMusic() 
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyCode}
+                    // rewind music playback to the start
+                    Mix_RewindMusic();
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_aebe0f1bba92653f0f1dea238300619fb}{Mix\_\-PlayMusic}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_af7b38a64044260e39136c6a3ef8b9732}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-SetDistance@{Mix\_\-SetDistance}}
+\index{Mix\_\-SetDistance@{Mix\_\-SetDistance}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-SetDistance}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-SetDistance (
+\begin{DoxyParamCaption}
+\item[{int}]{ channel, }
+\item[{byte}]{ distance}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_af7b38a64044260e39136c6a3ef8b9732}
+
+
+Distance attenuation (volume). 
+
+This effect simulates a simple attenuation of volume due to distance. The volume never quite reaches silence, even at max distance. NOTE: Using a distance of 0 will cause the effect to unregister itself from channel. You cannot unregister it any other way, unless you use Mix\_\-UnregisterAllEffects on the channel. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_SetDistance(int channel, Uint8 distance)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em channel}]Channel number to register this effect on. Use MIX\_\-CHANNEL\_\-POST to process the postmix stream. \item[{\em distance}]Specify the distance from the listener, from 0(close/loud) to 255(far/quiet). \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Zero on errors, such as an invalid channel, or if Mix\_\-RegisterEffect failed. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // distance channel 1 to be farthest away
+                                if(!Mix_SetDistance(1, 255)) 
+                        {
+                                printf("Mix_SetDistance: %s\n", Mix_GetError());
+                                // no distance, is it ok?
+                        }
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_ad33cd3ef7af676c3717a45839d65ab82}{Mix\_\-SetPosition}, \hyperlink{namespace_tao_1_1_sdl_a68ba0a9948d37fa891d61b1ed2c50af9}{Mix\_\-UnregisterAllEffects}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_aea359916fe9090b1e8c154e7704138d1}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-SetMusicCMD@{Mix\_\-SetMusicCMD}}
+\index{Mix\_\-SetMusicCMD@{Mix\_\-SetMusicCMD}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-SetMusicCMD}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-SetMusicCMD (
+\begin{DoxyParamCaption}
+\item[{string}]{ command}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_aea359916fe9090b1e8c154e7704138d1}
+
+
+Use external program for music playback. 
+
+Setup a command line music player to use to play music. Any music playing will be halted. The music file to play is set by calling \hyperlink{namespace_tao_1_1_sdl_ad6c75b94200b928986e8761beab8d85d}{Mix\_\-LoadMUS}(filename), and the filename is appended as the last argument on the commandline. This allows you to reuse the music command to play multiple files. The command will be sent signals SIGTERM to halt, SIGSTOP to pause, and SIGCONT to resume. The command program should react correctly to those signals for it to function properly with SDL\_\-Mixer. \hyperlink{namespace_tao_1_1_sdl_a0f37be729516417cc01f98fb63f0b426}{Mix\_\-VolumeMusic} has no effect when using an external music player, and Mix\_\-GetError will have an error code set. You should set the music volume in the music player's command if the music player supports that. Looping music works, by calling the command again when the previous music player process has ended. Playing music through a command uses a forked process to execute the music command. 
+
+To use the internal music players set the command to NULL. 
+
+NOTE: External music is not mixed by SDL\_\-mixer, so no post-\/processing hooks will be for music. 
+
+NOTE: Playing music through an external command may not work if the sound driver does not support multiple openings of the audio device, since SDL\_\-Mixer already has the audio device open for playing samples through channels. 
+
+NOTE: Commands are not totally portable, so be careful. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_SetMusicCMD(const char *command)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em command}]System command to play the music. Should be a complete command, as if typed in to the command line, but it should expect the filename to be added as the last argument. NULL will turn off using an external command for music, returning to the internal music playing functionality. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, or -\/1 on any errors, such as running out of memory. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // use mpg123 to play music
+                                Mix_Music *music=NULL;
+                                if(Mix_SetMusicCMD("mpg123 -q")==-1) 
+                        {
+                                perror("Mix_SetMusicCMD");
+                        } 
+                        else 
+                   {
+                        // play some mp3 file
+                        music=Mix_LoadMUS("music.mp3");
+                        if(music) 
+                   {
+                        Mix_PlayMusic(music,1);
+                   }
+                   }
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_aebe0f1bba92653f0f1dea238300619fb}{Mix\_\-PlayMusic}, \hyperlink{namespace_tao_1_1_sdl_a0f37be729516417cc01f98fb63f0b426}{Mix\_\-VolumeMusic}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_abc899fd78a4798973d00f88ec6a31ab6}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-SetMusicPosition@{Mix\_\-SetMusicPosition}}
+\index{Mix\_\-SetMusicPosition@{Mix\_\-SetMusicPosition}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-SetMusicPosition}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-SetMusicPosition (
+\begin{DoxyParamCaption}
+\item[{double}]{ position}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_abc899fd78a4798973d00f88ec6a31ab6}
+
+
+Set position of playback in stream. 
+
+Set the position of the currently playing music. The position takes different meanings for different music sources. It only works on the music sources listed below. 
+\begin{DoxyCode}
+                    MOD 
+                    The double is cast to Uint16 and used for a pattern number in
+       the module.
+                    Passing zero is similar to rewinding the song. 
+                    OGG 
+                    Jumps to position seconds from the beginning of the song. 
+                    MP3 
+                    Jumps to position seconds from the current position in the st
+      ream.
+\end{DoxyCode}
+ So you may want to call Mix\_\-RewindMusic before this. Does not go in reverse...negative values do nothing. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_SetMusicPosition(double position)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em position}]Position to play from.\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, or -\/1 if the codec doesn't support this function. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // skip one minute into the song, from the start
+                    // this assumes you are playing an MP3
+                                Mix_RewindMusic();
+                                if(Mix_SetMusicPosition(60.0)==-1) 
+                        {
+                                printf("Mix_SetMusicPosition: %s\n", Mix_GetError
+      ());
+                        }
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a45909046f32da6098114b07ce9bc0737}{Mix\_\-FadeInMusicPos}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_ad00800cc3f606ac7ef9bec6b7413ad85}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-SetPanning@{Mix\_\-SetPanning}}
+\index{Mix\_\-SetPanning@{Mix\_\-SetPanning}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-SetPanning}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-SetPanning (
+\begin{DoxyParamCaption}
+\item[{int}]{ channel, }
+\item[{byte}]{ left, }
+\item[{byte}]{ right}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_ad00800cc3f606ac7ef9bec6b7413ad85}
+
+
+Stereo panning. 
+
+This effect will only work on stereo audio. Meaning you called Mix\_\-OpenAudio with 2 channels (MIX\_\-DEFAULT\_\-CHANNELS). The easiest way to do true panning is to call Mix\_\-SetPanning(channel, left, 254 -\/ left); so that the total volume is correct, if you consider the maximum volume to be 127 per channel for center, or 254 max for left, this works, but about halves the effective volume. 
+
+This Function registers the effect for you, so don't try to Mix\_\-RegisterEffect it yourself. 
+
+NOTE: Setting both left and right to 255 will unregister the effect from channel. You cannot unregister it any other way, unless you use Mix\_\-UnregisterAllEffects on the channel. 
+
+NOTE: Using this function on a mono audio device will not register the effect, nor will it return an error status. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_SetPanning(int channel, Uint8 left, Uint8 right)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em channel}]Channel number to register this effect on. Use MIX\_\-CHANNEL\_\-POST to process the postmix stream. \item[{\em left}]Volume for the left channel, range is 0(silence) to 255(loud) \item[{\em right}]Volume for the left channel, range is 0(silence) to 255(loud) \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Zero on errors, such as bad channel, or if Mix\_\-RegisterEffect failed. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // pan channel 1 halfway to the left
+                                if(!Mix_SetPanning(1, 255, 127)) 
+                        {
+                                printf("Mix_SetPanning: %s\n", Mix_GetError());
+                                // no panning, is it ok?
+                        }
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_ad33cd3ef7af676c3717a45839d65ab82}{Mix\_\-SetPosition}, \hyperlink{namespace_tao_1_1_sdl_a68ba0a9948d37fa891d61b1ed2c50af9}{Mix\_\-UnregisterAllEffects}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_ad33cd3ef7af676c3717a45839d65ab82}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-SetPosition@{Mix\_\-SetPosition}}
+\index{Mix\_\-SetPosition@{Mix\_\-SetPosition}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-SetPosition}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-SetPosition (
+\begin{DoxyParamCaption}
+\item[{int}]{ channel, }
+\item[{short}]{ angle, }
+\item[{byte}]{ distance}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_ad33cd3ef7af676c3717a45839d65ab82}
+
+
+Panning(angular) and distance. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_SetPosition(int channel, Sint16 angle, Uint8 distance)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em channel}]Channel number to register this effect on. Use MIX\_\-CHANNEL\_\-POST to process the postmix stream. \item[{\em angle}]Direction in relation to forward from 0 to 360 degrees. Larger angles will be reduced to this range using angles \% 360. 0 = directly in front. 90 = directly to the right. 180 = directly behind. 270 = directly to the left. So you can see it goes clockwise starting at directly in front. This ends up being similar in effect to Mix\_\-SetPanning. \item[{\em distance}]The distance from the listener, from 0(near/loud) to 255(far/quiet). This is the same as the Mix\_\-SetDistance effect. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Zero on errors, such as an invalid channel, or if Mix\_\-RegisterEffect failed. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // set channel 2 to be behind and right, and 100 units away
+                                if(!Mix_SetPosition(2, 135, 100)) 
+                        {
+                                printf("Mix_SetPosition: %s\n", Mix_GetError());
+                                // no position effect, is it ok?
+                        }
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_ad00800cc3f606ac7ef9bec6b7413ad85}{Mix\_\-SetPanning}, \hyperlink{namespace_tao_1_1_sdl_af7b38a64044260e39136c6a3ef8b9732}{Mix\_\-SetDistance}, \hyperlink{namespace_tao_1_1_sdl_a68ba0a9948d37fa891d61b1ed2c50af9}{Mix\_\-UnregisterAllEffects}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a7b8112ec561db2dcc794323f798a7851}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-SetPostMix@{Mix\_\-SetPostMix}}
+\index{Mix\_\-SetPostMix@{Mix\_\-SetPostMix}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-SetPostMix}]{\setlength{\rightskip}{0pt plus 5cm}static void Tao.Sdl.Mix\_\-SetPostMix (
+\begin{DoxyParamCaption}
+\item[{MixFunctionDelegate}]{ mix\_\-func, }
+\item[{IntPtr}]{ arg}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a7b8112ec561db2dcc794323f798a7851}
+
+
+Hook in a postmix processor. 
+
+Hook a processor function mix\_\-func to the postmix stream for post processing effects. You may just be reading the data and displaying it, or you may be altering the stream to add an echo. Most processors also have state data that they allocate as they are in use, this would be stored in the arg pointer data space. This processor is never really finished, until the audio device is closed, or you pass NULL as the mix\_\-func. 
+
+There can only be one postmix function used at a time through this method. Use Mix\_\-RegisterEffect(MIX\_\-CHANNEL\_\-POST, mix\_\-func, NULL, arg) to use multiple postmix processors. 
+
+This postmix processor is run AFTER all the registered postmixers set up by Mix\_\-RegisterEffect. 
+
+
+\begin{DoxyCode}
+void Mix_SetPostMix(void (*mix_func)(void *udata, Uint8 *stream, int len), void *
+      arg)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyCode}
+                    // make a passthru processor function that does nothing...
+                                void noEffect(void *udata, Uint8 *stream, int len
+      )
+                                {
+                                        // you could work with stream here...
+                                }
+                                ...
+                                // register noEffect as a postmix processor
+                                Mix_SetPostMix(noEffect, NULL);
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em mix\_\-func}]The function pointer for the postmix processor. NULL unregisters the current postmixer.\item[{\em arg}]A pointer to data to pass into the mix\_\-func's udata parameter. It is a good place to keep the state data for the processor, especially if the processor is made to handle multiple channels at the same time. This may be NULL, depending on the processor.\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a8d657c91edac10d18f474d27fc88fbb5}{Mix\_\-RegisterEffect}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a7b7b48bbbe4007bd060cc01bb26c28d1}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-SetReverseStereo@{Mix\_\-SetReverseStereo}}
+\index{Mix\_\-SetReverseStereo@{Mix\_\-SetReverseStereo}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-SetReverseStereo}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-SetReverseStereo (
+\begin{DoxyParamCaption}
+\item[{int}]{ channel, }
+\item[{int}]{ flip}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a7b7b48bbbe4007bd060cc01bb26c28d1}
+
+
+Swap stereo left and right. 
+
+Simple reverse stereo, swaps left and right channel sound. 
+
+NOTE: Using a flip of 0, will cause the effect to unregister itself from channel. You cannot unregister it any other way, unless you use Mix\_\-UnregisterAllEffects on the channel. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_SetReverseStereo(int channel, int flip)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em channel}]Channel number to register this effect on. Use MIX\_\-CHANNEL\_\-POST to process the postmix stream. \item[{\em flip}]Must be non-\/zero to work, means nothing to the effect processor itself. set to zero to unregister the effect from channel. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Zero on errors, such as an invalid channel, or if Mix\_\-RegisterEffect failed. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // set the total mixer output to be reverse stereo
+                                if(!Mix_SetReverseStereo(MIX_CHANNEL_POST, 1)) 
+                        {
+                                printf("Mix_SetReverseStereo: %s\n", Mix_GetError
+      ());
+                                // no reverse stereo, is it ok?
+                        }
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a68ba0a9948d37fa891d61b1ed2c50af9}{Mix\_\-UnregisterAllEffects}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a19ab0f73e68a6e96ce16fcc040331f46}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-SetSynchroValue@{Mix\_\-SetSynchroValue}}
+\index{Mix\_\-SetSynchroValue@{Mix\_\-SetSynchroValue}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-SetSynchroValue}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-SetSynchroValue (
+\begin{DoxyParamCaption}
+\item[{int}]{ value}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a19ab0f73e68a6e96ce16fcc040331f46}
+
+
+Synchro value is set by MikMod from modules while playing. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_SetSynchroValue(int value)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em value}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a57d18f7c6158ed3aa5c0f142fe1b5a89}{Mix\_\-GetSynchroValue}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a68ba0a9948d37fa891d61b1ed2c50af9}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-UnregisterAllEffects@{Mix\_\-UnregisterAllEffects}}
+\index{Mix\_\-UnregisterAllEffects@{Mix\_\-UnregisterAllEffects}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-UnregisterAllEffects}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-UnregisterAllEffects (
+\begin{DoxyParamCaption}
+\item[{int}]{ channel}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a68ba0a9948d37fa891d61b1ed2c50af9}
+
+
+Unhook all processors from a channel. 
+
+This removes all effects registered to channel. If the channel is active all the registered effects will have their Mix\_\-EffectDone\_\-t functions called, if they were specified in Mix\_\-RegisterEffect. 
+
+
+\begin{DoxyCode}
+int Mix_UnregisterAllEffects(int channel)
+\end{DoxyCode}
+ 
+\begin{DoxyParams}{Parameters}
+\item[{\em channel}]Channel to remove all effects from. Use MIX\_\-CHANNEL\_\-POST for the postmix stream. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Zero on errors, such as channel not existing. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // remove all effects from channel 0
+                                if(!Mix_UnregisterAllEffects(0)) 
+                        {
+                                printf("Mix_UnregisterAllEffects: %s\n", Mix_GetE
+      rror());
+                        }
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_ab5415c4259b9c044b48a59d0a4548f26}{Mix\_\-UnregisterEffect}, \hyperlink{namespace_tao_1_1_sdl_a8d657c91edac10d18f474d27fc88fbb5}{Mix\_\-RegisterEffect}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_ab5415c4259b9c044b48a59d0a4548f26}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-UnregisterEffect@{Mix\_\-UnregisterEffect}}
+\index{Mix\_\-UnregisterEffect@{Mix\_\-UnregisterEffect}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-UnregisterEffect}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-UnregisterEffect (
+\begin{DoxyParamCaption}
+\item[{int}]{ chan, }
+\item[{MixEffectFunctionDelegate}]{ f}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_ab5415c4259b9c044b48a59d0a4548f26}
+
+
+Unhook a processor from a channel. 
+
+Remove the oldest (first found) registered effect function f from the effect list for channel. This only removes the first found occurance of that function, so it may need to be called multiple times if you added the same function multiple times, just stop removing when Mix\_\-UnregisterEffect returns an error, to remove all occurances of f from a channel. 
+
+If the channel is active the registered effect will have its Mix\_\-EffectDone\_\-t function called, if it was specified in Mix\_\-RegisterEffect. 
+
+
+\begin{DoxyCode}
+int Mix_UnregisterEffect(int channel, Mix_EffectFunc_t f)
+\end{DoxyCode}
+ 
+\begin{DoxyParams}{Parameters}
+\item[{\em f}]The function to remove from channel.\item[{\em chan}]Channel number to remove f from as a post processor. \end{DoxyParams}
+Use MIX\_\-CHANNEL\_\-POST for the postmix stream.
+
+\begin{DoxyReturn}{Returns}
+Zero on errors, such as invalid channel, or effect function not registered on channel. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // unregister the noEffect from the postmix effects
+                    // this removes all occurances of noEffect registered to the 
+      postmix
+                    while(Mix_UnregisterEffect(MIX_CHANNEL_POST, noEffect));
+                    // you may print Mix_GetError() if you want to check it.
+                    // it should say "No such effect registered" after this loop.
+      
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a8d657c91edac10d18f474d27fc88fbb5}{Mix\_\-RegisterEffect}, \hyperlink{namespace_tao_1_1_sdl_a68ba0a9948d37fa891d61b1ed2c50af9}{Mix\_\-UnregisterAllEffects}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_ae0b5954941c3c2d6deba7d27e0b67f6f}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-Volume@{Mix\_\-Volume}}
+\index{Mix\_\-Volume@{Mix\_\-Volume}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-Volume}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-Volume (
+\begin{DoxyParamCaption}
+\item[{int}]{ channel, }
+\item[{int}]{ volume}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_ae0b5954941c3c2d6deba7d27e0b67f6f}
+
+
+Set the mix volume of a channel. 
+
+Set the volume for any allocated channel. If channel is -\/1 then all channels at are set at once. The volume is applied during the final mix, along with the sample volume. So setting this volume to 64 will halve the output of all samples played on the specified channel. All channels default to a volume of 128, which is the max. Newly allocated channels will have the max volume set, so setting all channels volumes does not affect subsequent channel allocations. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_Volume(int channel, int volume)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em channel}]Channel to set mix volume for. -\/1 will set the volume for all allocated channels. \item[{\em volume}]The volume to use from 0 to MIX\_\-MAX\_\-VOLUME(128). If greater than MIX\_\-MAX\_\-VOLUME, then it will be set to MIX\_\-MAX\_\-VOLUME. If less than 0 then the volume will not be set. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+current volume of the channel. If channel is -\/1, the average volume is returned. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // set channel 1 to half volume
+                                Mix_Volume(1,MIX_MAX_VOLUME/2);
+
+                                // print the average volume
+                                printf("Average volume is %d\n",Mix_Volume(-1,-1)
+      );
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a2ae08cb0b9b859fc334245918efd4bf6}{Mix\_\-VolumeChunk}, \hyperlink{namespace_tao_1_1_sdl_a0f37be729516417cc01f98fb63f0b426}{Mix\_\-VolumeMusic}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a2ae08cb0b9b859fc334245918efd4bf6}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-VolumeChunk@{Mix\_\-VolumeChunk}}
+\index{Mix\_\-VolumeChunk@{Mix\_\-VolumeChunk}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-VolumeChunk}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-VolumeChunk (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ chunk, }
+\item[{int}]{ volume}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a2ae08cb0b9b859fc334245918efd4bf6}
+
+
+Set mix volume. 
+
+Set chunk-\/$>$volume to volume. The volume setting will take effect when the chunk is used on a channel, being mixed into the output. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_VolumeChunk(Mix_Chunk *chunk, int volume)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em chunk}]Pointer to the \hyperlink{struct_tao_1_1_sdl_1_1_mix___chunk}{Mix\_\-Chunk} to set the volume in. \item[{\em volume}]The volume to use from 0 to MIX\_\-MAX\_\-VOLUME(128). If greater than MIX\_\-MAX\_\-VOLUME, then it will be set to MIX\_\-MAX\_\-VOLUME. If less than 0 then chunk-\/$>$volume will not be set. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+previous chunk-\/$>$volume setting. if you passed a negative value for volume then this volume is still the current volume for the chunk. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // set the sample's volume to 1/2
+                                // Mix_Chunk *sample;
+                                int previous_volume;
+                                previous_volume=Mix_VolumeChunk(sample, MIX_MAX_V
+      OLUME/2);
+                        printf("previous_volume: %d\n", previous_volume);
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{struct_tao_1_1_sdl_1_1_mix___chunk}{Mix\_\-Chunk}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a0f37be729516417cc01f98fb63f0b426}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-VolumeMusic@{Mix\_\-VolumeMusic}}
+\index{Mix\_\-VolumeMusic@{Mix\_\-VolumeMusic}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-VolumeMusic}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Sdl.Mix\_\-VolumeMusic (
+\begin{DoxyParamCaption}
+\item[{int}]{ volume}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a0f37be729516417cc01f98fb63f0b426}
+
+
+Set music volume. 
+
+Set the volume to volume, if it is 0 or greater, and return the previous volume setting. Setting the volume during a fade will not work, the faders use this function to perform their effect! Setting volume while using an external music player set by \hyperlink{namespace_tao_1_1_sdl_aea359916fe9090b1e8c154e7704138d1}{Mix\_\-SetMusicCMD} will have no effect, and Mix\_\-GetError will show the reason why not. 
+
+Binds to C-\/function in SDL\_\-mixer.h 
+\begin{DoxyCode}
+int Mix_VolumeMusic(int volume)
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em volume}]Music volume, from 0 to MIX\_\-MAX\_\-VOLUME(128). Values greater than MIX\_\-MAX\_\-VOLUME will use MIX\_\-MAX\_\-VOLUME. -\/1 does not set the volume, but does return the current volume setting. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The previous volume setting. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+                    // set the music volume to 1/2 maximum, and then check it
+                                printf("volume was    : %d\n", Mix_VolumeMusic(MI
+      X_MAX_VOLUME/2));
+                                printf("volume is now : %d\n", Mix_VolumeMusic(-1
+      ));
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a67b90a673af55a36597265d2720f9ef5}{Mix\_\-FadeInMusic}, \hyperlink{namespace_tao_1_1_sdl_a6be5427391343f79e29eaab89c44137d}{Mix\_\-FadeOutMusic}, \hyperlink{namespace_tao_1_1_sdl_aea359916fe9090b1e8c154e7704138d1}{Mix\_\-SetMusicCMD}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a94ad2f6c0c4bd02bcac225d34ca540e6}{
+\index{Tao::Sdl@{Tao::Sdl}!MixEffectDoneDelegate@{MixEffectDoneDelegate}}
+\index{MixEffectDoneDelegate@{MixEffectDoneDelegate}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{MixEffectDoneDelegate}]{\setlength{\rightskip}{0pt plus 5cm}delegate void Tao.Sdl.MixEffectDoneDelegate (
+\begin{DoxyParamCaption}
+\item[{int}]{ chan, }
+\item[{IntPtr}]{ udata}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a94ad2f6c0c4bd02bcac225d34ca540e6}
+
+
+Special effect done callback function pointer. 
+
+This is the prototype for effect processing functions. This is called when a channel has finished playing, or halted, or is deallocated. This is also called when a processor is unregistered while processing is active. At that time the effects processing function may want to reset some internal variables or free some memory. It should free memory at least, because the processor could be freed after this call. 
+
+
+\begin{DoxyCode}
+void (*Mix_EffectDone_t)(int chan, void *udata)
+\end{DoxyCode}
+ 
+\begin{DoxyParams}{Parameters}
+\item[{\em chan}]The channel number that this effect is effecting now. MIX\_\-CHANNEL\_\-POST is passed in for post processing effects over the final mix. \item[{\em udata}]User data pointer that was passed in to Mix\_\-RegisterEffect when registering this effect processor function. \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a8d657c91edac10d18f474d27fc88fbb5}{Mix\_\-RegisterEffect}, \hyperlink{namespace_tao_1_1_sdl_ab5415c4259b9c044b48a59d0a4548f26}{Mix\_\-UnregisterEffect}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_a58e54c03e60d80609b443c76e184f6bf}{
+\index{Tao::Sdl@{Tao::Sdl}!MixEffectFunctionDelegate@{MixEffectFunctionDelegate}}
+\index{MixEffectFunctionDelegate@{MixEffectFunctionDelegate}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{MixEffectFunctionDelegate}]{\setlength{\rightskip}{0pt plus 5cm}delegate void Tao.Sdl.MixEffectFunctionDelegate (
+\begin{DoxyParamCaption}
+\item[{int}]{ chan, }
+\item[{IntPtr}]{ stream, }
+\item[{int}]{ len, }
+\item[{IntPtr}]{ udata}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a58e54c03e60d80609b443c76e184f6bf}
+
+
+Special effect callback function pointer. 
+
+This is the prototype for effect processing functions. These functions are used to apply effects processing on a sample chunk. As a channel plays a sample, the registered effect functions are called. Each effect would then read and perhaps alter the len bytes of stream. It may also be advantageous to keep the effect state in the udata, with would be setup when registering the effect function on a channel. 
+
+
+\begin{DoxyCode}
+                    void (*Mix_EffectFunc_t)(int chan, void *stream, int len, voi
+      d *udata)
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em chan}]The channel number that this effect is effecting now. MIX\_\-CHANNEL\_\-POST is passed in for post processing effects over the final mix. \item[{\em stream}]The buffer containing the current sample to process. \item[{\em len}]The length of stream in bytes. \item[{\em udata}]User data pointer that was passed in to Mix\_\-RegisterEffect when registering this effect processor function. \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespace_tao_1_1_sdl_a8d657c91edac10d18f474d27fc88fbb5}{Mix\_\-RegisterEffect}, \hyperlink{namespace_tao_1_1_sdl_ab5415c4259b9c044b48a59d0a4548f26}{Mix\_\-UnregisterEffect}
+
+
+\end{DoxySeeAlso}
+\hypertarget{namespace_tao_1_1_sdl_ab83026a016aa99a8271f3f01f9422a33}{
+\index{Tao::Sdl@{Tao::Sdl}!MixFunctionDelegate@{MixFunctionDelegate}}
+\index{MixFunctionDelegate@{MixFunctionDelegate}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{MixFunctionDelegate}]{\setlength{\rightskip}{0pt plus 5cm}delegate void Tao.Sdl.MixFunctionDelegate (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ udata, }
+\item[{\mbox{[}Out, MarshalAs(UnmanagedType.LPArray, SizeParamIndex=2)\mbox{]} byte\mbox{[}$\,$\mbox{]}}]{ stream, }
+\item[{int}]{ len}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_ab83026a016aa99a8271f3f01f9422a33}
+\hypertarget{namespace_tao_1_1_sdl_a77c07156c43c45bdb25a74fc5afcc8b4}{
+\index{Tao::Sdl@{Tao::Sdl}!MusicFinishedDelegate@{MusicFinishedDelegate}}
+\index{MusicFinishedDelegate@{MusicFinishedDelegate}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{MusicFinishedDelegate}]{\setlength{\rightskip}{0pt plus 5cm}delegate void Tao.Sdl.MusicFinishedDelegate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespace_tao_1_1_sdl_a77c07156c43c45bdb25a74fc5afcc8b4}
+
+
+\subsection{Variable Documentation}
+\hypertarget{namespace_tao_1_1_sdl_a9667e574282e6f26aa5247c7c93e1a77}{
+\index{Tao::Sdl@{Tao::Sdl}!Mix\_\-Chunk@{Mix\_\-Chunk}}
+\index{Mix\_\-Chunk@{Mix\_\-Chunk}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{Mix\_\-Chunk}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tao::Sdl.Mix\_\-Chunk}}}
+\label{namespace_tao_1_1_sdl_a9667e574282e6f26aa5247c7c93e1a77}
+\hypertarget{namespace_tao_1_1_sdl_a316da039bbc7edf809d85badeaab6f23}{
+\index{Tao::Sdl@{Tao::Sdl}!SDL\_\-SysWMEvent@{SDL\_\-SysWMEvent}}
+\index{SDL\_\-SysWMEvent@{SDL\_\-SysWMEvent}!Tao::Sdl@{Tao::Sdl}}
+\subsubsection[{SDL\_\-SysWMEvent}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tao::Sdl.SDL\_\-SysWMEvent}}}
+\label{namespace_tao_1_1_sdl_a316da039bbc7edf809d85badeaab6f23}

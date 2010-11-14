@@ -1,0 +1,47 @@
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_net_1_1_s_d_l_net___generic_socket}{
+\section{Tao.Sdl.SdlNet.SDLNet\_\-GenericSocket Struct Reference}
+\label{struct_tao_1_1_sdl_1_1_sdl_net_1_1_s_d_l_net___generic_socket}\index{Tao::Sdl::SdlNet::SDLNet\_\-GenericSocket@{Tao::Sdl::SdlNet::SDLNet\_\-GenericSocket}}
+}
+
+
+A generic type for UDP and TCP sockets.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{struct_tao_1_1_sdl_1_1_sdl_net_1_1_s_d_l_net___generic_socket_afa92dfcd76cd5e28410d90f6ed6514ea}{ready}
+\begin{DoxyCompactList}\small\item\em Non-\/zero when data is ready to be read, or a server socket has a connection attempt ready to be accepted. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A generic type for UDP and TCP sockets. This data type is able to be used for both \hyperlink{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_psocket}{UDPsocket} and \hyperlink{struct_tao_1_1_sdl_1_1_sdl_net_1_1_t_c_psocket}{TCPsocket} types. After calling SDLNet\_\-CheckSockets, if this socket is in \hyperlink{struct_tao_1_1_sdl_1_1_sdl_net_1_1_s_d_l_net___socket_set}{SDLNet\_\-SocketSet} used, the ready will be set according to activity on the socket. This is the only real use for this type, as it doesn't help you know what type of socket it is. 
+\begin{DoxyCode}
+                    typedef struct {
+                        int ready;
+                    } *SDLNet_GenericSocket;
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{struct_tao_1_1_sdl_1_1_sdl_net_1_1_t_c_psocket}{TCPsocket}, \hyperlink{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_psocket}{UDPsocket}
+
+
+\end{DoxySeeAlso}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_net_1_1_s_d_l_net___generic_socket_afa92dfcd76cd5e28410d90f6ed6514ea}{
+\index{Tao::Sdl::SdlNet::SDLNet\_\-GenericSocket@{Tao::Sdl::SdlNet::SDLNet\_\-GenericSocket}!ready@{ready}}
+\index{ready@{ready}!Tao::Sdl::SdlNet::SDLNet_GenericSocket@{Tao::Sdl::SdlNet::SDLNet\_\-GenericSocket}}
+\subsubsection[{ready}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Sdl.SdlNet.SDLNet\_\-GenericSocket.ready}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_net_1_1_s_d_l_net___generic_socket_afa92dfcd76cd5e28410d90f6ed6514ea}
+
+
+Non-\/zero when data is ready to be read, or a server socket has a connection attempt ready to be accepted. 
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Sdl/\hyperlink{_sdl_net_8cs}{SdlNet.cs}\end{DoxyCompactItemize}

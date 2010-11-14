@@ -1,0 +1,72 @@
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___resize_event}{
+\section{Tao.Sdl.Sdl.SDL\_\-ResizeEvent Struct Reference}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___resize_event}\index{Tao::Sdl::Sdl::SDL\_\-ResizeEvent@{Tao::Sdl::Sdl::SDL\_\-ResizeEvent}}
+}
+
+
+Window resized event.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___resize_event_a7fa36da4af0c8c0cff8c2cdbfb95deae}{type}
+\begin{DoxyCompactList}\small\item\em SDL\_\-VIDEORESIZE. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___resize_event_a8f6f20c5400a87f876c1bfb86142e449}{w}
+\begin{DoxyCompactList}\small\item\em New width of the window. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___resize_event_a70a07c2d10124122f44f28d4fb83e4b7}{h}
+\begin{DoxyCompactList}\small\item\em New height of the window. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Window resized event. \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___resize_event}{SDL\_\-ResizeEvent} is a member of the \hyperlink{struct_tao_1_1_sdl_1_1_s_d_l___event}{SDL\_\-Event} union and is used when an event of type SDL\_\-VIDEORESIZE is reported. 
+
+When SDL\_\-RESIZABLE is passed as a flag to \hyperlink{_sdl_8cs_a961f7efdc2a7ec3860e93140853092f7}{SDL\_\-SetVideoMode(int, int, int, int)} the user is allowed to resize the applications window. When the window is resized an SDL\_\-VIDEORESIZE is report, with the new window width and height values stored in w and h, respectively. When an SDL\_\-VIDEORESIZE is recieved the window should be resized to the new dimensions using \hyperlink{_sdl_8cs_a961f7efdc2a7ec3860e93140853092f7}{SDL\_\-SetVideoMode(int, int, int, int)}. 
+
+Struct in SDL\_\-events.h 
+\begin{DoxyCode}
+            typedef struct{
+                        Uint8 type;
+                        int w, h;
+                } SDL_ResizeEvent;
+\end{DoxyCode}
+ \begin{DoxySeeAlso}{See also}
+\hyperlink{struct_tao_1_1_sdl_1_1_s_d_l___event}{SDL\_\-Event}, \hyperlink{_sdl_8cs_a961f7efdc2a7ec3860e93140853092f7}{SDL\_\-SetVideoMode(int, int, int, int)}
+
+
+\end{DoxySeeAlso}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___resize_event_a70a07c2d10124122f44f28d4fb83e4b7}{
+\index{Tao::Sdl::Sdl::SDL\_\-ResizeEvent@{Tao::Sdl::Sdl::SDL\_\-ResizeEvent}!h@{h}}
+\index{h@{h}!Tao::Sdl::Sdl::SDL_ResizeEvent@{Tao::Sdl::Sdl::SDL\_\-ResizeEvent}}
+\subsubsection[{h}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Sdl.Sdl.SDL\_\-ResizeEvent.h}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___resize_event_a70a07c2d10124122f44f28d4fb83e4b7}
+
+
+New height of the window. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___resize_event_a7fa36da4af0c8c0cff8c2cdbfb95deae}{
+\index{Tao::Sdl::Sdl::SDL\_\-ResizeEvent@{Tao::Sdl::Sdl::SDL\_\-ResizeEvent}!type@{type}}
+\index{type@{type}!Tao::Sdl::Sdl::SDL_ResizeEvent@{Tao::Sdl::Sdl::SDL\_\-ResizeEvent}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-ResizeEvent.type}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___resize_event_a7fa36da4af0c8c0cff8c2cdbfb95deae}
+
+
+SDL\_\-VIDEORESIZE. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___resize_event_a8f6f20c5400a87f876c1bfb86142e449}{
+\index{Tao::Sdl::Sdl::SDL\_\-ResizeEvent@{Tao::Sdl::Sdl::SDL\_\-ResizeEvent}!w@{w}}
+\index{w@{w}!Tao::Sdl::Sdl::SDL_ResizeEvent@{Tao::Sdl::Sdl::SDL\_\-ResizeEvent}}
+\subsubsection[{w}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Sdl.Sdl.SDL\_\-ResizeEvent.w}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___resize_event_a8f6f20c5400a87f876c1bfb86142e449}
+
+
+New width of the window. 
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Sdl/\hyperlink{_sdl_8cs}{Sdl.cs}\end{DoxyCompactItemize}

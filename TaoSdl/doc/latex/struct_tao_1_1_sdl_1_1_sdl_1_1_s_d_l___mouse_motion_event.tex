@@ -1,0 +1,123 @@
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event}{
+\section{Tao.Sdl.Sdl.SDL\_\-MouseMotionEvent Struct Reference}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event}\index{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent@{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent}}
+}
+
+
+Mouse motion event structure.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event_a8e2b9add20b3993257ea3017d2dde4f4}{type}
+\begin{DoxyCompactList}\small\item\em SDL\_\-MOUSEMOTION. \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event_a6a09cb83bd7d41bf90c3655efdbe9033}{which}
+\begin{DoxyCompactList}\small\item\em The mouse device index. \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event_a127c27891c775cd2318ba70f09d0c82c}{state}
+\begin{DoxyCompactList}\small\item\em The current button state. \item\end{DoxyCompactList}\item 
+short \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event_ab187d711c2cb67bd63e14fb9031f0bf4}{x}
+\begin{DoxyCompactList}\small\item\em The X coordinate of the mouse. \item\end{DoxyCompactList}\item 
+short \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event_a774d079f176855431e1c9f255048ce1d}{y}
+\begin{DoxyCompactList}\small\item\em The Y coordinate of the mouse. \item\end{DoxyCompactList}\item 
+short \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event_ab8dbb38820da1b901feeda37d501b0c4}{xrel}
+\begin{DoxyCompactList}\small\item\em The relative motion in the X direction. \item\end{DoxyCompactList}\item 
+short \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event_ac5098052e2663cc8ce48dd8f309ca28f}{yrel}
+\begin{DoxyCompactList}\small\item\em The relative motion in the Y direction. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Mouse motion event structure. \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event}{SDL\_\-MouseMotionEvent} is a member of the \hyperlink{struct_tao_1_1_sdl_1_1_s_d_l___event}{SDL\_\-Event} union and is used when an event of type SDL\_\-MOUSEMOTION is reported. 
+
+Simply put, a SDL\_\-MOUSEMOTION type event occurs when a user moves the mouse within the application window or when \hyperlink{_sdl_8cs_a1f870df2b13fdb36e3ea8a10aab057ca}{SDL\_\-WarpMouse(short, short)} is called. Both the absolute (x and y) and relative (xrel and yrel ) coordinates are reported along with the current button states (state). The button state can be interpreted using the SDL\_\-BUTTON macro (see \hyperlink{_sdl_8cs_a5f331fd789dbcc61437a6fe406b4454f}{SDL\_\-GetMouseState}). 
+
+If the cursor is hidden (\hyperlink{_sdl_8cs_a4e85211428ccac72ba71d06b2391ab06}{SDL\_\-ShowCursor}(0)) and the input is grabbed (\hyperlink{_sdl_8cs_ad70ae8fd84dc3156a6d670ae8532da28}{SDL\_\-WM\_\-GrabInput}(SDL\_\-GRAB\_\-ON)), then the mouse will give relative motion events even when the cursor reaches the edge fo the screen. This is currently only implemented on Windows and Linux/Unix-\/a-\/likes. 
+
+Struct in SDL\_\-events.h 
+\begin{DoxyCode}
+            typedef struct{
+                        Uint8 type;
+                        Uint8 which;
+                        Uint8 state;
+                        Uint16 x, y;
+                        Sint16 xrel, yrel;
+                } SDL_MouseMotionEvent;
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{struct_tao_1_1_sdl_1_1_s_d_l___event}{SDL\_\-Event}, \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_button_event}{SDL\_\-MouseButtonEvent}
+
+
+\end{DoxySeeAlso}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event_a127c27891c775cd2318ba70f09d0c82c}{
+\index{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent@{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent}!state@{state}}
+\index{state@{state}!Tao::Sdl::Sdl::SDL_MouseMotionEvent@{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent}}
+\subsubsection[{state}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-MouseMotionEvent.state}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event_a127c27891c775cd2318ba70f09d0c82c}
+
+
+The current button state. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event_a8e2b9add20b3993257ea3017d2dde4f4}{
+\index{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent@{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent}!type@{type}}
+\index{type@{type}!Tao::Sdl::Sdl::SDL_MouseMotionEvent@{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-MouseMotionEvent.type}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event_a8e2b9add20b3993257ea3017d2dde4f4}
+
+
+SDL\_\-MOUSEMOTION. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event_a6a09cb83bd7d41bf90c3655efdbe9033}{
+\index{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent@{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent}!which@{which}}
+\index{which@{which}!Tao::Sdl::Sdl::SDL_MouseMotionEvent@{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent}}
+\subsubsection[{which}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-MouseMotionEvent.which}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event_a6a09cb83bd7d41bf90c3655efdbe9033}
+
+
+The mouse device index. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event_ab187d711c2cb67bd63e14fb9031f0bf4}{
+\index{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent@{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent}!x@{x}}
+\index{x@{x}!Tao::Sdl::Sdl::SDL_MouseMotionEvent@{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent}}
+\subsubsection[{x}]{\setlength{\rightskip}{0pt plus 5cm}short {\bf Tao.Sdl.Sdl.SDL\_\-MouseMotionEvent.x}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event_ab187d711c2cb67bd63e14fb9031f0bf4}
+
+
+The X coordinate of the mouse. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event_ab8dbb38820da1b901feeda37d501b0c4}{
+\index{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent@{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent}!xrel@{xrel}}
+\index{xrel@{xrel}!Tao::Sdl::Sdl::SDL_MouseMotionEvent@{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent}}
+\subsubsection[{xrel}]{\setlength{\rightskip}{0pt plus 5cm}short {\bf Tao.Sdl.Sdl.SDL\_\-MouseMotionEvent.xrel}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event_ab8dbb38820da1b901feeda37d501b0c4}
+
+
+The relative motion in the X direction. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event_a774d079f176855431e1c9f255048ce1d}{
+\index{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent@{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent}!y@{y}}
+\index{y@{y}!Tao::Sdl::Sdl::SDL_MouseMotionEvent@{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent}}
+\subsubsection[{y}]{\setlength{\rightskip}{0pt plus 5cm}short {\bf Tao.Sdl.Sdl.SDL\_\-MouseMotionEvent.y}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event_a774d079f176855431e1c9f255048ce1d}
+
+
+The Y coordinate of the mouse. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event_ac5098052e2663cc8ce48dd8f309ca28f}{
+\index{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent@{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent}!yrel@{yrel}}
+\index{yrel@{yrel}!Tao::Sdl::Sdl::SDL_MouseMotionEvent@{Tao::Sdl::Sdl::SDL\_\-MouseMotionEvent}}
+\subsubsection[{yrel}]{\setlength{\rightskip}{0pt plus 5cm}short {\bf Tao.Sdl.Sdl.SDL\_\-MouseMotionEvent.yrel}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event_ac5098052e2663cc8ce48dd8f309ca28f}
+
+
+The relative motion in the Y direction. 
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Sdl/\hyperlink{_sdl_8cs}{Sdl.cs}\end{DoxyCompactItemize}

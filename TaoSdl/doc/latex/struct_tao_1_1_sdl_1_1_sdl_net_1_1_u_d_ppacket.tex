@@ -1,0 +1,109 @@
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_ppacket}{
+\section{Tao.Sdl.SdlNet.UDPpacket Struct Reference}
+\label{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_ppacket}\index{Tao::Sdl::SdlNet::UDPpacket@{Tao::Sdl::SdlNet::UDPpacket}}
+}
+
+
+UDP packet data encapsulation.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_ppacket_ae1e8e37eafd7a1cf8519099cf3aa24f9}{channel}
+\begin{DoxyCompactList}\small\item\em The (software) channel number for this packet. This can also be used as a priority value for the packet. If no channel is assigned, the value is -\/1. \item\end{DoxyCompactList}\item 
+IntPtr \hyperlink{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_ppacket_a98fa7fe74e6b6e9eee3aa91c56151734}{data}
+\begin{DoxyCompactList}\small\item\em The data contained in this packet, this is the meat. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_ppacket_a7d19809b30a730a41a02c0e31d49df23}{len}
+\begin{DoxyCompactList}\small\item\em This is the meaningful length of the data in bytes. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_ppacket_a619c5482778530ded5a3415c57a692ec}{maxlen}
+\begin{DoxyCompactList}\small\item\em This is size of the data buffer, which may be larger than the meaningful length. This is only used for packet creation on the senders side. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_ppacket_af69fefcaf40ff9f6d00a13558c014c6b}{status}
+\begin{DoxyCompactList}\small\item\em This contains the number of bytes sent, or a -\/1 on errors, after sending. This is useless for a received packet. \item\end{DoxyCompactList}\item 
+\hyperlink{struct_tao_1_1_sdl_1_1_sdl_net_1_1_i_paddress}{IPaddress} \hyperlink{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_ppacket_ad8f7cf3905cad9fafa81c9137cf4b813}{address}
+\begin{DoxyCompactList}\small\item\em This is the resolved \hyperlink{struct_tao_1_1_sdl_1_1_sdl_net_1_1_i_paddress}{IPaddress} to be used when sending, or it is the remote source of a received packet. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+UDP packet data encapsulation. This struct is used with UDPsockets to send and receive data. It also helps keep track of a packets sending/receiving settings and status. The channels concept helps prioritize, or segregate differring types of data packets. 
+
+Binds to C-\/function call in SDL\_\-net.h: 
+\begin{DoxyCode}
+                    typedef struct {
+                        int channel;
+                        Uint8 *data;
+                        int len;
+                        int maxlen;
+                        int status;
+                        IPaddress address;
+                    } UDPpacket;
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_psocket}{UDPsocket}, \hyperlink{struct_tao_1_1_sdl_1_1_sdl_net_1_1_i_paddress}{IPaddress}, SDLNet\_\-AllocPacket, SDLNet\_\-ResizePacket, SDLNet\_\-FreePacket, SDLNet\_\-AllocPacketV, SDLNet\_\-FreePacketV
+
+
+\end{DoxySeeAlso}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_ppacket_ad8f7cf3905cad9fafa81c9137cf4b813}{
+\index{Tao::Sdl::SdlNet::UDPpacket@{Tao::Sdl::SdlNet::UDPpacket}!address@{address}}
+\index{address@{address}!Tao::Sdl::SdlNet::UDPpacket@{Tao::Sdl::SdlNet::UDPpacket}}
+\subsubsection[{address}]{\setlength{\rightskip}{0pt plus 5cm}{\bf IPaddress} {\bf Tao.Sdl.SdlNet.UDPpacket.address}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_ppacket_ad8f7cf3905cad9fafa81c9137cf4b813}
+
+
+This is the resolved \hyperlink{struct_tao_1_1_sdl_1_1_sdl_net_1_1_i_paddress}{IPaddress} to be used when sending, or it is the remote source of a received packet. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_ppacket_ae1e8e37eafd7a1cf8519099cf3aa24f9}{
+\index{Tao::Sdl::SdlNet::UDPpacket@{Tao::Sdl::SdlNet::UDPpacket}!channel@{channel}}
+\index{channel@{channel}!Tao::Sdl::SdlNet::UDPpacket@{Tao::Sdl::SdlNet::UDPpacket}}
+\subsubsection[{channel}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Sdl.SdlNet.UDPpacket.channel}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_ppacket_ae1e8e37eafd7a1cf8519099cf3aa24f9}
+
+
+The (software) channel number for this packet. This can also be used as a priority value for the packet. If no channel is assigned, the value is -\/1. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_ppacket_a98fa7fe74e6b6e9eee3aa91c56151734}{
+\index{Tao::Sdl::SdlNet::UDPpacket@{Tao::Sdl::SdlNet::UDPpacket}!data@{data}}
+\index{data@{data}!Tao::Sdl::SdlNet::UDPpacket@{Tao::Sdl::SdlNet::UDPpacket}}
+\subsubsection[{data}]{\setlength{\rightskip}{0pt plus 5cm}IntPtr {\bf Tao.Sdl.SdlNet.UDPpacket.data}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_ppacket_a98fa7fe74e6b6e9eee3aa91c56151734}
+
+
+The data contained in this packet, this is the meat. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_ppacket_a7d19809b30a730a41a02c0e31d49df23}{
+\index{Tao::Sdl::SdlNet::UDPpacket@{Tao::Sdl::SdlNet::UDPpacket}!len@{len}}
+\index{len@{len}!Tao::Sdl::SdlNet::UDPpacket@{Tao::Sdl::SdlNet::UDPpacket}}
+\subsubsection[{len}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Sdl.SdlNet.UDPpacket.len}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_ppacket_a7d19809b30a730a41a02c0e31d49df23}
+
+
+This is the meaningful length of the data in bytes. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_ppacket_a619c5482778530ded5a3415c57a692ec}{
+\index{Tao::Sdl::SdlNet::UDPpacket@{Tao::Sdl::SdlNet::UDPpacket}!maxlen@{maxlen}}
+\index{maxlen@{maxlen}!Tao::Sdl::SdlNet::UDPpacket@{Tao::Sdl::SdlNet::UDPpacket}}
+\subsubsection[{maxlen}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Sdl.SdlNet.UDPpacket.maxlen}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_ppacket_a619c5482778530ded5a3415c57a692ec}
+
+
+This is size of the data buffer, which may be larger than the meaningful length. This is only used for packet creation on the senders side. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_ppacket_af69fefcaf40ff9f6d00a13558c014c6b}{
+\index{Tao::Sdl::SdlNet::UDPpacket@{Tao::Sdl::SdlNet::UDPpacket}!status@{status}}
+\index{status@{status}!Tao::Sdl::SdlNet::UDPpacket@{Tao::Sdl::SdlNet::UDPpacket}}
+\subsubsection[{status}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Sdl.SdlNet.UDPpacket.status}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_net_1_1_u_d_ppacket_af69fefcaf40ff9f6d00a13558c014c6b}
+
+
+This contains the number of bytes sent, or a -\/1 on errors, after sending. This is useless for a received packet. 
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Sdl/\hyperlink{_sdl_net_8cs}{SdlNet.cs}\end{DoxyCompactItemize}

@@ -1,0 +1,238 @@
+\hypertarget{struct_s_d_l___pixel_format}{
+\section{SDL\_\-PixelFormat Struct Reference}
+\label{struct_s_d_l___pixel_format}\index{SDL\_\-PixelFormat@{SDL\_\-PixelFormat}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_s_d_l___pixel_format_a88632b1c1d6e3272a6ba65e96daa1539}{SDL\_\-PixelFormat} (IntPtr \hyperlink{struct_s_d_l___pixel_format_a5578b72f8e6c6b8f4feb8e9d67d7af04}{palette}, byte \hyperlink{struct_s_d_l___pixel_format_a28aabdce8eba3259ddea6b43a8703387}{BitsPerPixel}, byte \hyperlink{struct_s_d_l___pixel_format_ad504a9f390e02c8e508419d1a85202f8}{BytesPerPixel}, byte \hyperlink{struct_s_d_l___pixel_format_a1e19f6685404bb72ce971d1f7483c8af}{Rloss}, byte \hyperlink{struct_s_d_l___pixel_format_aa54c85bb3f6868c7c66e7dc58ad6be26}{Gloss}, byte \hyperlink{struct_s_d_l___pixel_format_a8fc149bdf59ec68f4d7c1e11a1bf36d7}{Bloss}, byte \hyperlink{struct_s_d_l___pixel_format_af56c52509223f7ba9a9e3424622f64eb}{Aloss}, byte \hyperlink{struct_s_d_l___pixel_format_a260fab59a09c90b1a4ee2a581a88c1c9}{Rshift}, byte \hyperlink{struct_s_d_l___pixel_format_afa974003c44cf2ce7bd5321cd337508f}{Gshift}, byte \hyperlink{struct_s_d_l___pixel_format_a1997c5cc46cd8e25fc2d231bfc704bed}{Bshift}, byte \hyperlink{struct_s_d_l___pixel_format_a2040187299e831186e04ac50c5dfba33}{Ashift}, int \hyperlink{struct_s_d_l___pixel_format_a10124e3f1900188b3dac9dd618bdefc6}{Rmask}, int \hyperlink{struct_s_d_l___pixel_format_a4a058dff33543ce36cfcf3f2771b40c4}{Gmask}, int \hyperlink{struct_s_d_l___pixel_format_a491f4f2d29b60b352ab7a4ce3b8e14de}{Bmask}, int \hyperlink{struct_s_d_l___pixel_format_a8016d769695a8ce1deee3f44aeb96fa6}{Amask}, int \hyperlink{struct_s_d_l___pixel_format_ab4cf7cddc2293f9b6bb61bb60d06ad5d}{colorkey}, byte \hyperlink{struct_s_d_l___pixel_format_ac0061b3c0c1a204355fb51aba66ff830}{alpha})
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+IntPtr \hyperlink{struct_s_d_l___pixel_format_a5578b72f8e6c6b8f4feb8e9d67d7af04}{palette}
+\begin{DoxyCompactList}\small\item\em Pointer to the palette, or NULL if the BitsPerPixel$>$8 Pointer to \hyperlink{struct_s_d_l___palette}{SDL\_\-Palette} \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_s_d_l___pixel_format_a28aabdce8eba3259ddea6b43a8703387}{BitsPerPixel}
+\begin{DoxyCompactList}\small\item\em The number of bits used to represent each pixel in a surface. Usually 8, 16, 24 or 32. \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_s_d_l___pixel_format_ad504a9f390e02c8e508419d1a85202f8}{BytesPerPixel}
+\begin{DoxyCompactList}\small\item\em The number of bytes used to represent each pixel in a surface. Usually one to four. \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_s_d_l___pixel_format_a1e19f6685404bb72ce971d1f7483c8af}{Rloss}
+\begin{DoxyCompactList}\small\item\em Precision loss of each color component (2\mbox{[}RGBA\mbox{]}loss). \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_s_d_l___pixel_format_aa54c85bb3f6868c7c66e7dc58ad6be26}{Gloss}
+\begin{DoxyCompactList}\small\item\em Precision loss of each color component (2\mbox{[}RGBA\mbox{]}loss). \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_s_d_l___pixel_format_a8fc149bdf59ec68f4d7c1e11a1bf36d7}{Bloss}
+\begin{DoxyCompactList}\small\item\em Precision loss of each color component (2\mbox{[}RGBA\mbox{]}loss). \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_s_d_l___pixel_format_af56c52509223f7ba9a9e3424622f64eb}{Aloss}
+\begin{DoxyCompactList}\small\item\em Precision loss of each color component (2\mbox{[}RGBA\mbox{]}loss). \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_s_d_l___pixel_format_a260fab59a09c90b1a4ee2a581a88c1c9}{Rshift}
+\begin{DoxyCompactList}\small\item\em Binary left shift of each color component in the pixel value. \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_s_d_l___pixel_format_afa974003c44cf2ce7bd5321cd337508f}{Gshift}
+\begin{DoxyCompactList}\small\item\em Binary left shift of each color component in the pixel value. \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_s_d_l___pixel_format_a1997c5cc46cd8e25fc2d231bfc704bed}{Bshift}
+\begin{DoxyCompactList}\small\item\em Binary left shift of each color component in the pixel value. \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_s_d_l___pixel_format_a2040187299e831186e04ac50c5dfba33}{Ashift}
+\begin{DoxyCompactList}\small\item\em Binary left shift of each color component in the pixel value. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_s_d_l___pixel_format_a10124e3f1900188b3dac9dd618bdefc6}{Rmask}
+\begin{DoxyCompactList}\small\item\em Binary mask used to retrieve individual color values. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_s_d_l___pixel_format_a4a058dff33543ce36cfcf3f2771b40c4}{Gmask}
+\begin{DoxyCompactList}\small\item\em Binary mask used to retrieve individual color values. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_s_d_l___pixel_format_a491f4f2d29b60b352ab7a4ce3b8e14de}{Bmask}
+\begin{DoxyCompactList}\small\item\em Binary mask used to retrieve individual color values. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_s_d_l___pixel_format_a8016d769695a8ce1deee3f44aeb96fa6}{Amask}
+\begin{DoxyCompactList}\small\item\em Binary mask used to retrieve individual color values. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_s_d_l___pixel_format_ab4cf7cddc2293f9b6bb61bb60d06ad5d}{colorkey}
+\begin{DoxyCompactList}\small\item\em Pixel value of transparent pixels. \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_s_d_l___pixel_format_ac0061b3c0c1a204355fb51aba66ff830}{alpha}
+\begin{DoxyCompactList}\small\item\em Overall surface alpha value. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{struct_s_d_l___pixel_format_a88632b1c1d6e3272a6ba65e96daa1539}{
+\index{SDL\_\-PixelFormat@{SDL\_\-PixelFormat}!SDL\_\-PixelFormat@{SDL\_\-PixelFormat}}
+\index{SDL\_\-PixelFormat@{SDL\_\-PixelFormat}!SDL_PixelFormat@{SDL\_\-PixelFormat}}
+\subsubsection[{SDL\_\-PixelFormat}]{\setlength{\rightskip}{0pt plus 5cm}SDL\_\-PixelFormat.SDL\_\-PixelFormat (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ palette, }
+\item[{byte}]{ BitsPerPixel, }
+\item[{byte}]{ BytesPerPixel, }
+\item[{byte}]{ Rloss, }
+\item[{byte}]{ Gloss, }
+\item[{byte}]{ Bloss, }
+\item[{byte}]{ Aloss, }
+\item[{byte}]{ Rshift, }
+\item[{byte}]{ Gshift, }
+\item[{byte}]{ Bshift, }
+\item[{byte}]{ Ashift, }
+\item[{int}]{ Rmask, }
+\item[{int}]{ Gmask, }
+\item[{int}]{ Bmask, }
+\item[{int}]{ Amask, }
+\item[{int}]{ colorkey, }
+\item[{byte}]{ alpha}
+\end{DoxyParamCaption}
+)}}
+\label{struct_s_d_l___pixel_format_a88632b1c1d6e3272a6ba65e96daa1539}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em palette}]\item[{\em BitsPerPixel}]\item[{\em BytesPerPixel}]\item[{\em Rloss}]\item[{\em Gloss}]\item[{\em Bloss}]\item[{\em Aloss}]\item[{\em Rshift}]\item[{\em Gshift}]\item[{\em Bshift}]\item[{\em Ashift}]\item[{\em Rmask}]\item[{\em Gmask}]\item[{\em Bmask}]\item[{\em Amask}]\item[{\em colorkey}]\item[{\em alpha}]\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_s_d_l___pixel_format_af56c52509223f7ba9a9e3424622f64eb}{
+\index{SDL\_\-PixelFormat@{SDL\_\-PixelFormat}!Aloss@{Aloss}}
+\index{Aloss@{Aloss}!SDL_PixelFormat@{SDL\_\-PixelFormat}}
+\subsubsection[{Aloss}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf SDL\_\-PixelFormat.Aloss}}}
+\label{struct_s_d_l___pixel_format_af56c52509223f7ba9a9e3424622f64eb}
+
+
+Precision loss of each color component (2\mbox{[}RGBA\mbox{]}loss). 
+
+\hypertarget{struct_s_d_l___pixel_format_ac0061b3c0c1a204355fb51aba66ff830}{
+\index{SDL\_\-PixelFormat@{SDL\_\-PixelFormat}!alpha@{alpha}}
+\index{alpha@{alpha}!SDL_PixelFormat@{SDL\_\-PixelFormat}}
+\subsubsection[{alpha}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf SDL\_\-PixelFormat.alpha}}}
+\label{struct_s_d_l___pixel_format_ac0061b3c0c1a204355fb51aba66ff830}
+
+
+Overall surface alpha value. 
+
+\hypertarget{struct_s_d_l___pixel_format_a8016d769695a8ce1deee3f44aeb96fa6}{
+\index{SDL\_\-PixelFormat@{SDL\_\-PixelFormat}!Amask@{Amask}}
+\index{Amask@{Amask}!SDL_PixelFormat@{SDL\_\-PixelFormat}}
+\subsubsection[{Amask}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf SDL\_\-PixelFormat.Amask}}}
+\label{struct_s_d_l___pixel_format_a8016d769695a8ce1deee3f44aeb96fa6}
+
+
+Binary mask used to retrieve individual color values. 
+
+\hypertarget{struct_s_d_l___pixel_format_a2040187299e831186e04ac50c5dfba33}{
+\index{SDL\_\-PixelFormat@{SDL\_\-PixelFormat}!Ashift@{Ashift}}
+\index{Ashift@{Ashift}!SDL_PixelFormat@{SDL\_\-PixelFormat}}
+\subsubsection[{Ashift}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf SDL\_\-PixelFormat.Ashift}}}
+\label{struct_s_d_l___pixel_format_a2040187299e831186e04ac50c5dfba33}
+
+
+Binary left shift of each color component in the pixel value. 
+
+\hypertarget{struct_s_d_l___pixel_format_a28aabdce8eba3259ddea6b43a8703387}{
+\index{SDL\_\-PixelFormat@{SDL\_\-PixelFormat}!BitsPerPixel@{BitsPerPixel}}
+\index{BitsPerPixel@{BitsPerPixel}!SDL_PixelFormat@{SDL\_\-PixelFormat}}
+\subsubsection[{BitsPerPixel}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf SDL\_\-PixelFormat.BitsPerPixel}}}
+\label{struct_s_d_l___pixel_format_a28aabdce8eba3259ddea6b43a8703387}
+
+
+The number of bits used to represent each pixel in a surface. Usually 8, 16, 24 or 32. 
+
+\hypertarget{struct_s_d_l___pixel_format_a8fc149bdf59ec68f4d7c1e11a1bf36d7}{
+\index{SDL\_\-PixelFormat@{SDL\_\-PixelFormat}!Bloss@{Bloss}}
+\index{Bloss@{Bloss}!SDL_PixelFormat@{SDL\_\-PixelFormat}}
+\subsubsection[{Bloss}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf SDL\_\-PixelFormat.Bloss}}}
+\label{struct_s_d_l___pixel_format_a8fc149bdf59ec68f4d7c1e11a1bf36d7}
+
+
+Precision loss of each color component (2\mbox{[}RGBA\mbox{]}loss). 
+
+\hypertarget{struct_s_d_l___pixel_format_a491f4f2d29b60b352ab7a4ce3b8e14de}{
+\index{SDL\_\-PixelFormat@{SDL\_\-PixelFormat}!Bmask@{Bmask}}
+\index{Bmask@{Bmask}!SDL_PixelFormat@{SDL\_\-PixelFormat}}
+\subsubsection[{Bmask}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf SDL\_\-PixelFormat.Bmask}}}
+\label{struct_s_d_l___pixel_format_a491f4f2d29b60b352ab7a4ce3b8e14de}
+
+
+Binary mask used to retrieve individual color values. 
+
+\hypertarget{struct_s_d_l___pixel_format_a1997c5cc46cd8e25fc2d231bfc704bed}{
+\index{SDL\_\-PixelFormat@{SDL\_\-PixelFormat}!Bshift@{Bshift}}
+\index{Bshift@{Bshift}!SDL_PixelFormat@{SDL\_\-PixelFormat}}
+\subsubsection[{Bshift}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf SDL\_\-PixelFormat.Bshift}}}
+\label{struct_s_d_l___pixel_format_a1997c5cc46cd8e25fc2d231bfc704bed}
+
+
+Binary left shift of each color component in the pixel value. 
+
+\hypertarget{struct_s_d_l___pixel_format_ad504a9f390e02c8e508419d1a85202f8}{
+\index{SDL\_\-PixelFormat@{SDL\_\-PixelFormat}!BytesPerPixel@{BytesPerPixel}}
+\index{BytesPerPixel@{BytesPerPixel}!SDL_PixelFormat@{SDL\_\-PixelFormat}}
+\subsubsection[{BytesPerPixel}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf SDL\_\-PixelFormat.BytesPerPixel}}}
+\label{struct_s_d_l___pixel_format_ad504a9f390e02c8e508419d1a85202f8}
+
+
+The number of bytes used to represent each pixel in a surface. Usually one to four. 
+
+\hypertarget{struct_s_d_l___pixel_format_ab4cf7cddc2293f9b6bb61bb60d06ad5d}{
+\index{SDL\_\-PixelFormat@{SDL\_\-PixelFormat}!colorkey@{colorkey}}
+\index{colorkey@{colorkey}!SDL_PixelFormat@{SDL\_\-PixelFormat}}
+\subsubsection[{colorkey}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf SDL\_\-PixelFormat.colorkey}}}
+\label{struct_s_d_l___pixel_format_ab4cf7cddc2293f9b6bb61bb60d06ad5d}
+
+
+Pixel value of transparent pixels. 
+
+\hypertarget{struct_s_d_l___pixel_format_aa54c85bb3f6868c7c66e7dc58ad6be26}{
+\index{SDL\_\-PixelFormat@{SDL\_\-PixelFormat}!Gloss@{Gloss}}
+\index{Gloss@{Gloss}!SDL_PixelFormat@{SDL\_\-PixelFormat}}
+\subsubsection[{Gloss}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf SDL\_\-PixelFormat.Gloss}}}
+\label{struct_s_d_l___pixel_format_aa54c85bb3f6868c7c66e7dc58ad6be26}
+
+
+Precision loss of each color component (2\mbox{[}RGBA\mbox{]}loss). 
+
+\hypertarget{struct_s_d_l___pixel_format_a4a058dff33543ce36cfcf3f2771b40c4}{
+\index{SDL\_\-PixelFormat@{SDL\_\-PixelFormat}!Gmask@{Gmask}}
+\index{Gmask@{Gmask}!SDL_PixelFormat@{SDL\_\-PixelFormat}}
+\subsubsection[{Gmask}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf SDL\_\-PixelFormat.Gmask}}}
+\label{struct_s_d_l___pixel_format_a4a058dff33543ce36cfcf3f2771b40c4}
+
+
+Binary mask used to retrieve individual color values. 
+
+\hypertarget{struct_s_d_l___pixel_format_afa974003c44cf2ce7bd5321cd337508f}{
+\index{SDL\_\-PixelFormat@{SDL\_\-PixelFormat}!Gshift@{Gshift}}
+\index{Gshift@{Gshift}!SDL_PixelFormat@{SDL\_\-PixelFormat}}
+\subsubsection[{Gshift}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf SDL\_\-PixelFormat.Gshift}}}
+\label{struct_s_d_l___pixel_format_afa974003c44cf2ce7bd5321cd337508f}
+
+
+Binary left shift of each color component in the pixel value. 
+
+\hypertarget{struct_s_d_l___pixel_format_a5578b72f8e6c6b8f4feb8e9d67d7af04}{
+\index{SDL\_\-PixelFormat@{SDL\_\-PixelFormat}!palette@{palette}}
+\index{palette@{palette}!SDL_PixelFormat@{SDL\_\-PixelFormat}}
+\subsubsection[{palette}]{\setlength{\rightskip}{0pt plus 5cm}IntPtr {\bf SDL\_\-PixelFormat.palette}}}
+\label{struct_s_d_l___pixel_format_a5578b72f8e6c6b8f4feb8e9d67d7af04}
+
+
+Pointer to the palette, or NULL if the BitsPerPixel$>$8 Pointer to \hyperlink{struct_s_d_l___palette}{SDL\_\-Palette} 
+
+\hypertarget{struct_s_d_l___pixel_format_a1e19f6685404bb72ce971d1f7483c8af}{
+\index{SDL\_\-PixelFormat@{SDL\_\-PixelFormat}!Rloss@{Rloss}}
+\index{Rloss@{Rloss}!SDL_PixelFormat@{SDL\_\-PixelFormat}}
+\subsubsection[{Rloss}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf SDL\_\-PixelFormat.Rloss}}}
+\label{struct_s_d_l___pixel_format_a1e19f6685404bb72ce971d1f7483c8af}
+
+
+Precision loss of each color component (2\mbox{[}RGBA\mbox{]}loss). 
+
+\hypertarget{struct_s_d_l___pixel_format_a10124e3f1900188b3dac9dd618bdefc6}{
+\index{SDL\_\-PixelFormat@{SDL\_\-PixelFormat}!Rmask@{Rmask}}
+\index{Rmask@{Rmask}!SDL_PixelFormat@{SDL\_\-PixelFormat}}
+\subsubsection[{Rmask}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf SDL\_\-PixelFormat.Rmask}}}
+\label{struct_s_d_l___pixel_format_a10124e3f1900188b3dac9dd618bdefc6}
+
+
+Binary mask used to retrieve individual color values. 
+
+\hypertarget{struct_s_d_l___pixel_format_a260fab59a09c90b1a4ee2a581a88c1c9}{
+\index{SDL\_\-PixelFormat@{SDL\_\-PixelFormat}!Rshift@{Rshift}}
+\index{Rshift@{Rshift}!SDL_PixelFormat@{SDL\_\-PixelFormat}}
+\subsubsection[{Rshift}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf SDL\_\-PixelFormat.Rshift}}}
+\label{struct_s_d_l___pixel_format_a260fab59a09c90b1a4ee2a581a88c1c9}
+
+
+Binary left shift of each color component in the pixel value. 
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Sdl/\hyperlink{_sdl_8cs}{Sdl.cs}\end{DoxyCompactItemize}

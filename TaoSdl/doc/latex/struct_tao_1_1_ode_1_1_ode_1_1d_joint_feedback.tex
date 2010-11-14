@@ -1,0 +1,99 @@
+\hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_joint_feedback}{
+\section{Tao.Ode.Ode.dJointFeedback Struct Reference}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_joint_feedback}\index{Tao::Ode::Ode::dJointFeedback@{Tao::Ode::Ode::dJointFeedback}}
+}
+
+
+During the world time step, the forces that are applied by each joint are computed. These forces are added directly to the joined bodies, and the user normally has no way of telling which joint contributed how much force.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_joint_feedback_a9d0c7a7b0c2f1ce2bf02754db28aeae0}{dJointFeedback} (\hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_vector3}{dVector3} \_\-f1, \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_vector3}{dVector3} \_\-t1, \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_vector3}{dVector3} \_\-f2, \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_vector3}{dVector3} \_\-t2)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_vector3}{dVector3} \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_joint_feedback_a1fc32210a58b84d0c68517f9c0e9eee6}{f1}
+\begin{DoxyCompactList}\small\item\em Force applied to body 1. \item\end{DoxyCompactList}\item 
+\hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_vector3}{dVector3} \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_joint_feedback_a236449e03d589b755fcdda3226ae4be4}{t1}
+\begin{DoxyCompactList}\small\item\em Torque applied to body 1. \item\end{DoxyCompactList}\item 
+\hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_vector3}{dVector3} \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_joint_feedback_a829e9eda7ba3d160157ff263cb93ae99}{f2}
+\begin{DoxyCompactList}\small\item\em Force applied to body 2. \item\end{DoxyCompactList}\item 
+\hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_vector3}{dVector3} \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_joint_feedback_a95e30994f5104b0ab440305e91db0b96}{t2}
+\begin{DoxyCompactList}\small\item\em Torque applied to body 2. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+During the world time step, the forces that are applied by each joint are computed. These forces are added directly to the joined bodies, and the user normally has no way of telling which joint contributed how much force. If this information is desired then the user can allocate a \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_joint_feedback}{dJointFeedback} structure and pass its pointer to the dJointSetFeedback() function.
+
+The feedback information structure is defined as follows:
+
+typedef struct \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_joint_feedback}{dJointFeedback} \{ \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_vector3}{dVector3} f1; // force that joint applies to body 1 \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_vector3}{dVector3} t1; // torque that joint applies to body 1 \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_vector3}{dVector3} f2; // force that joint applies to body 2 \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_vector3}{dVector3} t2; // torque that joint applies to body 2 \} \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_joint_feedback}{dJointFeedback};
+
+During the time step any feedback structures that are attached to joints will be filled in with the joint's force and torque information. The \hyperlink{namespace_tao_1_1_ode_acb665b0ad53713bdc6095725a790aa80}{dJointGetFeedback()} function returns the current feedback structure pointer, or 0 if none is used (this is the default). dJointSetFeedback() can be passed 0 to disable feedback for that joint.
+
+Now for some API design notes. It might seem strange to require that users perform the allocation of these structures. Why not just store the data statically in each joint? The reason is that not all users will use the feedback information, and even when it is used not all joints will need it. It will waste memory to store it statically, especially as this structure could grow to store a lot of extra information in the future.
+
+Why not have ODE allocate the structure itself, at the user's request? The reason is that contact joints (which are created and destroyed every time step) would require a lot of time to be spent in memory allocation if feedback is required. Letting the user do the allocation means that a better allocation strategy can be provided, e.g simply allocating them out of a fixed array.
+
+The alternative to this API is to have a joint-\/force callback. This would work of course, but it has a few problems. First, callbacks tend to pollute APIs and sometimes require the user to go through unnatural contortions to get the data to the right place. Second, this would expose ODE to being changed in the middle of a step (which would have bad consequences), and there would have to be some kind of guard against this or a debugging check for it -\/ which would complicate things. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_joint_feedback_a9d0c7a7b0c2f1ce2bf02754db28aeae0}{
+\index{Tao::Ode::Ode::dJointFeedback@{Tao::Ode::Ode::dJointFeedback}!dJointFeedback@{dJointFeedback}}
+\index{dJointFeedback@{dJointFeedback}!Tao::Ode::Ode::dJointFeedback@{Tao::Ode::Ode::dJointFeedback}}
+\subsubsection[{dJointFeedback}]{\setlength{\rightskip}{0pt plus 5cm}Tao.Ode.Ode.dJointFeedback.dJointFeedback (
+\begin{DoxyParamCaption}
+\item[{{\bf dVector3}}]{ \_\-f1, }
+\item[{{\bf dVector3}}]{ \_\-t1, }
+\item[{{\bf dVector3}}]{ \_\-f2, }
+\item[{{\bf dVector3}}]{ \_\-t2}
+\end{DoxyParamCaption}
+)}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_joint_feedback_a9d0c7a7b0c2f1ce2bf02754db28aeae0}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_joint_feedback_a1fc32210a58b84d0c68517f9c0e9eee6}{
+\index{Tao::Ode::Ode::dJointFeedback@{Tao::Ode::Ode::dJointFeedback}!f1@{f1}}
+\index{f1@{f1}!Tao::Ode::Ode::dJointFeedback@{Tao::Ode::Ode::dJointFeedback}}
+\subsubsection[{f1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dVector3} {\bf Tao.Ode.Ode.dJointFeedback.f1}}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_joint_feedback_a1fc32210a58b84d0c68517f9c0e9eee6}
+
+
+Force applied to body 1. 
+
+\hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_joint_feedback_a829e9eda7ba3d160157ff263cb93ae99}{
+\index{Tao::Ode::Ode::dJointFeedback@{Tao::Ode::Ode::dJointFeedback}!f2@{f2}}
+\index{f2@{f2}!Tao::Ode::Ode::dJointFeedback@{Tao::Ode::Ode::dJointFeedback}}
+\subsubsection[{f2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dVector3} {\bf Tao.Ode.Ode.dJointFeedback.f2}}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_joint_feedback_a829e9eda7ba3d160157ff263cb93ae99}
+
+
+Force applied to body 2. 
+
+\hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_joint_feedback_a236449e03d589b755fcdda3226ae4be4}{
+\index{Tao::Ode::Ode::dJointFeedback@{Tao::Ode::Ode::dJointFeedback}!t1@{t1}}
+\index{t1@{t1}!Tao::Ode::Ode::dJointFeedback@{Tao::Ode::Ode::dJointFeedback}}
+\subsubsection[{t1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dVector3} {\bf Tao.Ode.Ode.dJointFeedback.t1}}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_joint_feedback_a236449e03d589b755fcdda3226ae4be4}
+
+
+Torque applied to body 1. 
+
+\hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_joint_feedback_a95e30994f5104b0ab440305e91db0b96}{
+\index{Tao::Ode::Ode::dJointFeedback@{Tao::Ode::Ode::dJointFeedback}!t2@{t2}}
+\index{t2@{t2}!Tao::Ode::Ode::dJointFeedback@{Tao::Ode::Ode::dJointFeedback}}
+\subsubsection[{t2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dVector3} {\bf Tao.Ode.Ode.dJointFeedback.t2}}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_joint_feedback_a95e30994f5104b0ab440305e91db0b96}
+
+
+Torque applied to body 2. 
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Ode/\hyperlink{_ode_8cs}{Ode.cs}\end{DoxyCompactItemize}

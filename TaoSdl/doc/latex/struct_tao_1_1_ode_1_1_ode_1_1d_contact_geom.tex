@@ -1,0 +1,92 @@
+\hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom}{
+\section{Tao.Ode.Ode.dContactGeom Struct Reference}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom}\index{Tao::Ode::Ode::dContactGeom@{Tao::Ode::Ode::dContactGeom}}
+}
+
+
+Contact info set by collision functions.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_vector3}{dVector3} \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom_a6f79e3710102eb50d4842c2aba79d273}{pos}
+\begin{DoxyCompactList}\small\item\em The contact position in global coordinates. \item\end{DoxyCompactList}\item 
+\hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_vector3}{dVector3} \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom_af23489b991bf82f1e11363be14432f36}{normal}
+\begin{DoxyCompactList}\small\item\em A unit length vector that is, generally speaking, perpendicular to the contact surface. \item\end{DoxyCompactList}\item 
+dReal \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom_a648470146986b79fb8bab8d7de045436}{depth}
+\begin{DoxyCompactList}\small\item\em The depth to which the two bodies inter-\/penetrate each other. If the depth is zero then the two bodies have a grazing contact, i.e. they \char`\"{}only just\char`\"{} touch. However, this is rare -\/ the simulation is not perfectly accurate and will often step the bodies too far so that the depth is nonzero. \item\end{DoxyCompactList}\item 
+dGeomID \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom_a819c1e7e70bb41e8e70eff2c78e0fde2}{g1}
+\begin{DoxyCompactList}\small\item\em The geometry objects that collided. \item\end{DoxyCompactList}\item 
+dGeomID \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom_aebc005fe750eff2bb88c1614c174b661}{g2}
+\item 
+int \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom_aaad9bfffdc405228cff24dd2758dbb6a}{side1}
+\begin{DoxyCompactList}\small\item\em (to be documented) -\/ verbatim from the ODE source. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom_aac6ad362745afd88a6408a4565bd4c7a}{side2}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contact info set by collision functions. 
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom_a648470146986b79fb8bab8d7de045436}{
+\index{Tao::Ode::Ode::dContactGeom@{Tao::Ode::Ode::dContactGeom}!depth@{depth}}
+\index{depth@{depth}!Tao::Ode::Ode::dContactGeom@{Tao::Ode::Ode::dContactGeom}}
+\subsubsection[{depth}]{\setlength{\rightskip}{0pt plus 5cm}dReal {\bf Tao.Ode.Ode.dContactGeom.depth}}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom_a648470146986b79fb8bab8d7de045436}
+
+
+The depth to which the two bodies inter-\/penetrate each other. If the depth is zero then the two bodies have a grazing contact, i.e. they \char`\"{}only just\char`\"{} touch. However, this is rare -\/ the simulation is not perfectly accurate and will often step the bodies too far so that the depth is nonzero. 
+
+\hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom_a819c1e7e70bb41e8e70eff2c78e0fde2}{
+\index{Tao::Ode::Ode::dContactGeom@{Tao::Ode::Ode::dContactGeom}!g1@{g1}}
+\index{g1@{g1}!Tao::Ode::Ode::dContactGeom@{Tao::Ode::Ode::dContactGeom}}
+\subsubsection[{g1}]{\setlength{\rightskip}{0pt plus 5cm}dGeomID {\bf Tao.Ode.Ode.dContactGeom.g1}}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom_a819c1e7e70bb41e8e70eff2c78e0fde2}
+
+
+The geometry objects that collided. 
+
+\hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom_aebc005fe750eff2bb88c1614c174b661}{
+\index{Tao::Ode::Ode::dContactGeom@{Tao::Ode::Ode::dContactGeom}!g2@{g2}}
+\index{g2@{g2}!Tao::Ode::Ode::dContactGeom@{Tao::Ode::Ode::dContactGeom}}
+\subsubsection[{g2}]{\setlength{\rightskip}{0pt plus 5cm}dGeomID {\bf Tao.Ode.Ode.dContactGeom.g2}}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom_aebc005fe750eff2bb88c1614c174b661}
+\hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom_af23489b991bf82f1e11363be14432f36}{
+\index{Tao::Ode::Ode::dContactGeom@{Tao::Ode::Ode::dContactGeom}!normal@{normal}}
+\index{normal@{normal}!Tao::Ode::Ode::dContactGeom@{Tao::Ode::Ode::dContactGeom}}
+\subsubsection[{normal}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dVector3} {\bf Tao.Ode.Ode.dContactGeom.normal}}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom_af23489b991bf82f1e11363be14432f36}
+
+
+A unit length vector that is, generally speaking, perpendicular to the contact surface. 
+
+\hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom_a6f79e3710102eb50d4842c2aba79d273}{
+\index{Tao::Ode::Ode::dContactGeom@{Tao::Ode::Ode::dContactGeom}!pos@{pos}}
+\index{pos@{pos}!Tao::Ode::Ode::dContactGeom@{Tao::Ode::Ode::dContactGeom}}
+\subsubsection[{pos}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dVector3} {\bf Tao.Ode.Ode.dContactGeom.pos}}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom_a6f79e3710102eb50d4842c2aba79d273}
+
+
+The contact position in global coordinates. 
+
+\hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom_aaad9bfffdc405228cff24dd2758dbb6a}{
+\index{Tao::Ode::Ode::dContactGeom@{Tao::Ode::Ode::dContactGeom}!side1@{side1}}
+\index{side1@{side1}!Tao::Ode::Ode::dContactGeom@{Tao::Ode::Ode::dContactGeom}}
+\subsubsection[{side1}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Ode.Ode.dContactGeom.side1}}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom_aaad9bfffdc405228cff24dd2758dbb6a}
+
+
+(to be documented) -\/ verbatim from the ODE source. 
+
+\hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom_aac6ad362745afd88a6408a4565bd4c7a}{
+\index{Tao::Ode::Ode::dContactGeom@{Tao::Ode::Ode::dContactGeom}!side2@{side2}}
+\index{side2@{side2}!Tao::Ode::Ode::dContactGeom@{Tao::Ode::Ode::dContactGeom}}
+\subsubsection[{side2}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Ode.Ode.dContactGeom.side2}}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom_aac6ad362745afd88a6408a4565bd4c7a}
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Ode/\hyperlink{_ode_8cs}{Ode.cs}\end{DoxyCompactItemize}

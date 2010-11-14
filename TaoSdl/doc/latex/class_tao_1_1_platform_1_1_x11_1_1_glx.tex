@@ -1,0 +1,2088 @@
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx}{
+\section{Tao.Platform.X11.Glx Class Reference}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx}\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+}
+
+
+GLX (OpenGL XWindow Extensions) binding for .NET, implementing GLX 1.4.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a866efd6595cec1d6127d9bdd891f57b4}{glXChooseVisual} (IntPtr dpy, int \hyperlink{_sdl_8cs_a968bba55c7ad32b326939fefd1bbb017}{screen}, IntPtr attriblist)
+\item 
+static void \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a40c1d19d7e8b05a560ab41f148ecf928}{glXCopyContext} (IntPtr dpy, IntPtr src, IntPtr dst, ulong mask)
+\item 
+static IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_aa057757b63daa01aeb450d2c3d1458dd}{glXCreateContext} (IntPtr dpy, IntPtr vis, IntPtr shareList, bool direct)
+\item 
+static IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a8dc0806e8e855c024c2193b85e5869da}{glXCreateGLXPixmap} (IntPtr dpy, IntPtr vis, IntPtr pixmap)
+\item 
+static void \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a9ca23bfc04afdc00940e5c33cb003b54}{glXDestroyContext} (IntPtr dpy, IntPtr context)
+\item 
+static unsafe void \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ae82176a8a1995e2829dab558a476dfcb}{glXDestroyGLXPixmap} (IntPtr dpy, IntPtr pix)
+\item 
+static int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a209064099f2f4816ca3ef36c17fd728a}{glXGetConfig} (IntPtr dpy, IntPtr vis, int attrib, IntPtr value)
+\item 
+static IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_aa499032eba5073b40cec5af8655bd2d1}{glXGetCurrentContext} ()
+\item 
+static IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a36dfb26a77ebbcf9c3245ef28320e48a}{glXGetCurrentDrawable} ()
+\item 
+static bool \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ad048aba54f7eab58a584b1dcea688166}{glXIsDirect} (IntPtr dpy, IntPtr ctx)
+\item 
+static bool \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_aac8abadf42dd4d47edc8fc00e286a06c}{glXMakeCurrent} (IntPtr display, IntPtr drawable, IntPtr context)
+\item 
+static bool \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a5f3b0189ebcda5badb7172dd832ba1cd}{glXQueryExtension} (IntPtr dpy, IntPtr errorBase, IntPtr eventBase)
+\item 
+static unsafe bool \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ab218343c5a769c9b9d8ed92770af2f89}{glXQueryExtension} (IntPtr dpy, int $\ast$errorBase, int $\ast$eventBase)
+\item 
+static bool \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a5d314de192c640752c8902453d5edb9f}{glXQueryVersion} (IntPtr dpy, IntPtr major, IntPtr minor)
+\item 
+static unsafe bool \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ad4514586f97c9ecf1aba8f370942cef0}{glXQueryVersion} (IntPtr dpy, int $\ast$major, int $\ast$minor)
+\item 
+static void \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a8813c95f25acc9a880a3189e50b73595}{glXSwapBuffers} (IntPtr display, IntPtr drawable)
+\item 
+static void \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a1851177ab07d3055a646959d4a26bde2}{glXUseXFont} (IntPtr font, int first, int count, int listBase)
+\item 
+static void \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_af011969364e383e4fc44fcd6dbe0f324}{glXWaitGL} ()
+\item 
+static void \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a6846e09cc30e96bce8b578189a0e9f53}{glXWaitX} ()
+\item 
+static string \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_aeec9d8d402521cfe898d869684d165a9}{glXGetClientString} (IntPtr dpy, int name)
+\item 
+static string \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_aa0544c28d81c9c5d721f2e5793a84fbc}{glXQueryServerString} (IntPtr dpy, int \hyperlink{_sdl_8cs_a968bba55c7ad32b326939fefd1bbb017}{screen}, int name)
+\item 
+static string \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ad8eee6410dde2ad7ecf4b91e08b9acf5}{glXQueryExtensionsString} (IntPtr dpy, int \hyperlink{_sdl_8cs_a968bba55c7ad32b326939fefd1bbb017}{screen})
+\item 
+static unsafe IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_acf569b64c3d09b981d207acde0ec995f}{glXGetFBConfigs} (IntPtr dpy, int \hyperlink{_sdl_8cs_a968bba55c7ad32b326939fefd1bbb017}{screen}, int $\ast$nelements)
+\item 
+static IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a97ac43d639ad3179313a2f7ca53bc6c3}{glXGetFBConfigs} (IntPtr dpy, int \hyperlink{_sdl_8cs_a968bba55c7ad32b326939fefd1bbb017}{screen}, int element)
+\item 
+static IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a86ceef49838885b76b0ca087d1834e3f}{glXGetFBConfigs} (IntPtr dpy, int \hyperlink{_sdl_8cs_a968bba55c7ad32b326939fefd1bbb017}{screen}, int\mbox{[}$\,$\mbox{]} nelements)
+\item 
+static unsafe IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_aa94f75195806917a0b3697e3dc3dd942}{glXChooseFBConfig} (IntPtr dpy, int \hyperlink{_sdl_8cs_a968bba55c7ad32b326939fefd1bbb017}{screen}, int $\ast$attrib\_\-list, int $\ast$nelements)
+\item 
+static IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a653db4c1f31f17527a1acd515f467e4b}{glXChooseFBConfig} (IntPtr dpy, int \hyperlink{_sdl_8cs_a968bba55c7ad32b326939fefd1bbb017}{screen}, int attrib\_\-list, int nelements)
+\item 
+static IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a81c1ef09ac39a0052f1387c97016ed0f}{glXChooseFBConfig} (IntPtr dpy, int \hyperlink{_sdl_8cs_a968bba55c7ad32b326939fefd1bbb017}{screen}, int\mbox{[}$\,$\mbox{]} attrib\_\-list, int\mbox{[}$\,$\mbox{]} nelements)
+\item 
+static unsafe int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a828cca50b0aa387c293c93732f09c753}{glXGetFBConfigAttrib} (IntPtr dpy, IntPtr config, int attribute, int $\ast$value)
+\item 
+static int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a9b7e0157fd74b4f857a413c08f994660}{glXGetFBConfigAttrib} (IntPtr dpy, IntPtr config, int attribute, int value)
+\item 
+static int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a6d8ce25ff4b2136b29090b813cd76b6e}{glXGetFBConfigAttrib} (IntPtr dpy, IntPtr config, int attribute, int\mbox{[}$\,$\mbox{]} value)
+\item 
+static unsafe IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a7433453f8a6b150d6376f99e28741499}{glXGetVisualFromFBConfig} (IntPtr dpy, IntPtr config)
+\item 
+static unsafe int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a22cf8dc8ea380742183535b07252d52c}{glXCreateWindow} (IntPtr dpy, IntPtr config, int win, int $\ast$attrib\_\-list)
+\item 
+static int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ac4860fdf8d2fd867b65a7216f3589d63}{glXCreateWindow} (IntPtr dpy, IntPtr config, int win, int\mbox{[}$\,$\mbox{]} attrib\_\-list)
+\item 
+static unsafe void \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_aacbfa56df3389a3414d7eecce81df181}{glXDestroyWindow} (IntPtr dpy, int win)
+\item 
+static unsafe int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_aa03a5d88950c4d8d4837927ff514af3d}{glXCreatePixmap} (IntPtr dpy, IntPtr config, IntPtr pixmap, int $\ast$attrib\_\-list)
+\item 
+static int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a9d9e47364becb69b8873217786ae00e6}{glXCreatePixmap} (IntPtr dpy, IntPtr config, IntPtr pixmap, int\mbox{[}$\,$\mbox{]} attrib\_\-list)
+\item 
+static unsafe void \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ab59bdb381d7d64dc7e5c7349af0315c9}{glXDestroyPixmap} (IntPtr dpy, int pixmap)
+\item 
+static unsafe IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a3e2410de2473fb8bd52e05ef8438ff02}{glXCreatePbuffer} (IntPtr dpy, IntPtr config, int $\ast$attrib\_\-list)
+\item 
+static IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a9b816b91c1d5d1d6e59cb9ae48270121}{glXCreatePbuffer} (IntPtr dpy, IntPtr config, int\mbox{[}$\,$\mbox{]} attrib\_\-list)
+\item 
+static unsafe void \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ab980de7be47dedc68d86987d206a4f9b}{glXDestroyPbuffer} (IntPtr dpy, IntPtr pbuf)
+\item 
+static unsafe void \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a76284c388170b2c62e2df7385973fe00}{glXQueryDrawable} (IntPtr dpy, IntPtr draw, int attribute, uint $\ast$value)
+\item 
+static void \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a3154050a136e4a3debf46f7951c89f90}{glXQueryDrawable} (IntPtr dpy, IntPtr draw, int attribute, uint\mbox{[}$\,$\mbox{]} value)
+\item 
+static unsafe IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a3c90fae6c360f7982bff94f151a0e128}{glXCreateNewContext} (IntPtr dpy, IntPtr config, int render\_\-type, IntPtr share\_\-list, bool direct)
+\item 
+static unsafe bool \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a6a51e367d9bbeecd9bd6b8162ac4967f}{glXMakeContextCurrent} (IntPtr display, IntPtr draw, IntPtr read, IntPtr ctx)
+\item 
+static unsafe IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_afc6b6a351d8e158cf16a03fe07c5463c}{glXGetCurrentReadDrawable} ()
+\item 
+static unsafe IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a83e8d6bfcc89e1ff06b86425368d3a9c}{glXGetCurrentDisplay} ()
+\item 
+static unsafe int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_af74af1bfbd00bc7dc377531788e2af0c}{glXQueryContext} (IntPtr dpy, IntPtr ctx, int attribute, int $\ast$value)
+\item 
+static int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a94ccb13e2eebc082e2a7707e050b4785}{glXQueryContext} (IntPtr dpy, IntPtr ctx, int attribute, int value)
+\item 
+static int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ab715ccebc3ccefc92ce00e18c9c36dd9}{glXQueryContext} (IntPtr dpy, IntPtr ctx, int attribute, int\mbox{[}$\,$\mbox{]} value)
+\item 
+static unsafe void \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_aa03daf6f550238f29f5036208859a240}{glXSelectEvent} (IntPtr dpy, IntPtr draw, ulong event\_\-mask)
+\item 
+static unsafe void \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ada88d89b581e193cfd6af56d5ecca8cd}{glXGetSelectedEvent} (IntPtr dpy, IntPtr draw, ulong $\ast$event\_\-mask)
+\item 
+static unsafe void \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a370c2626d6446a467674b91e047e25da}{glXGetSelectedEvent} (IntPtr dpy, IntPtr draw, ulong event\_\-mask)
+\item 
+static IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a323d57dc78e4862e88042e2c8b926ff6}{glxGetProcAddress} (\mbox{[}MarshalAs(UnmanagedType.LPTStr)\mbox{]} string procName)
+\item 
+static unsafe int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a5e038b6c0ed8284bd8512cfee58c4e86}{glXGetContextIDEXT} (IntPtr ctx)
+\item 
+static unsafe IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a97fbe540985c5bed7488ecfe2f0cdb56}{glXImportContextEXT} (IntPtr dpy, int contextID)
+\item 
+static unsafe void \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a719fe5c1d11571765f5b9c1373a08d94}{glXFreeContextEXT} (IntPtr dpy, IntPtr ctx)
+\item 
+static unsafe int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ab41c548e80e5b611d2cb2cf574447384}{glXQueryContextInfoEXT} (IntPtr dpy, IntPtr ctx, int attribute, int $\ast$value)
+\item 
+static unsafe int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ab04a24929cd277bb67038a2908732831}{glXQueryContextInfoEXT} (IntPtr dpy, IntPtr ctx, int attribute, int value)
+\item 
+static unsafe IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a82ebe03bd0af65b1f9578d4386410757}{glXGetCurrentDisplayEXT} ()
+\item 
+static IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a4b0a79dfa8b18016eb5c75e6b5d45ffb}{glXGetProcAddressARB} (\mbox{[}MarshalAs(UnmanagedType.LPTStr)\mbox{]} string procName)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_af7dffb5839e4388cebb097f39757bd01}{glXChooseVisual} (IntPtr dpy, int \hyperlink{_sdl_8cs_a968bba55c7ad32b326939fefd1bbb017}{screen}, int attrib)
+\item 
+static IntPtr \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ae4180f969acf816b2d834e579703a393}{glXChooseVisual} (IntPtr dpy, int \hyperlink{_sdl_8cs_a968bba55c7ad32b326939fefd1bbb017}{screen}, int\mbox{[}$\,$\mbox{]} attriblist)
+\item 
+static int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a68ae6615063a4c46a44b2a5269161c01}{glXGetConfig} (IntPtr dpy, IntPtr vis, int attrib, int val)
+\item 
+static int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a6f4c241561c9837d7fe96a61b5205d2a}{glXGetConfig} (IntPtr dpy, IntPtr vis, int attrib, int\mbox{[}$\,$\mbox{]} val)
+\item 
+static unsafe bool \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a3cfc40650ed7ff135d4a3a8c9267843b}{glXQueryExtension} (IntPtr dpy, int errorBase, int eventBase)
+\item 
+static unsafe bool \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a7b469f34db6f8a6df0a4424b723df753}{glXQueryExtension} (IntPtr dpy, int\mbox{[}$\,$\mbox{]} errorBase, int\mbox{[}$\,$\mbox{]} eventBase)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const bool \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a27c592286dce935d5c444c7d961cf901}{GLX\_\-VERSION\_\-1\_\-1} = true
+\item 
+const bool \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_aa86a895296cc69c0989e87378e7ea4c7}{GLX\_\-VERSION\_\-1\_\-2} = true
+\item 
+const bool \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a48ad50734126818cdcb41a659aead31c}{GLX\_\-VERSION\_\-1\_\-3} = true
+\item 
+const bool \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a772129eb8346c477e9cdc01efa76e24e}{GLX\_\-VERSION\_\-1\_\-4} = true
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_aa9b8db15184e106df8fede97d26c1cc6}{GLX\_\-USE\_\-GL} = 1
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a1d668eba3b5a2ae6f75cdddbfba5020f}{GLX\_\-BUFFER\_\-SIZE} = 2
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a9413f7ed62658e17be5cfec7fa63f08d}{GLX\_\-LEVEL} = 3
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ac7d84613555c5152e3ce4f4999a5d8e5}{GLX\_\-RGBA} = 4
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a76cfa4610aa8f6c72e50aa96b9d2ba38}{GLX\_\-DOUBLEBUFFER} = 5
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a15dffacce94171d23e8941ce8c7128b1}{GLX\_\-STEREO} = 6
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a0147fc8ab93b951f8d7f463bac372e0a}{GLX\_\-AUX\_\-BUFFERS} = 7
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a033dbf660bd6df8f09dba42972b69a0b}{GLX\_\-RED\_\-SIZE} = 8
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a4ea44baa5ca696ca9e15ca33a006f574}{GLX\_\-GREEN\_\-SIZE} = 9
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a9dedfd5e84ea2d6e12e45ffb451bf5c4}{GLX\_\-BLUE\_\-SIZE} = 10
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a60b9bf01361cb10bda18c677fa76b549}{GLX\_\-ALPHA\_\-SIZE} = 11
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a1810eb0afa5700e1e72b6bba71647ce6}{GLX\_\-DEPTH\_\-SIZE} = 12
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a64b2809c8935d9a5e6cd2fd81ae7273a}{GLX\_\-STENCIL\_\-SIZE} = 13
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_af539ffb0cf59b67d9cd59de3c7badeae}{GLX\_\-ACCUM\_\-RED\_\-SIZE} = 14
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a18384deeeed23b36efad9c2e843377a3}{GLX\_\-ACCUM\_\-GREEN\_\-SIZE} = 15
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_aa3fc9fd7ced74f8f222a0f39b1c5983e}{GLX\_\-ACCUM\_\-BLUE\_\-SIZE} = 16
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a11689c37d75bdeb3e22db03566409f7a}{GLX\_\-ACCUM\_\-ALPHA\_\-SIZE} = 17
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a0b25c68a108b2b1e3fd9a45a758e16f5}{GLX\_\-X\_\-VISUAL\_\-TYPE} = 0x22
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ac819c74afaae71b2a3ac8b12ca407974}{GLX\_\-CONFIG\_\-CAVEAT} = 0x20
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a63935700d84aed4d00078363b042ba6d}{GLX\_\-TRANSPARENT\_\-TYPE} = 0x23
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a4c9c3cb131d742722f69aaf0ad814943}{GLX\_\-TRANSPARENT\_\-INDEX\_\-VALUE} = 0x24
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a460b7d08f1fbc6d9bd8b925b1a709e3b}{GLX\_\-TRANSPARENT\_\-RED\_\-VALUE} = 0x25
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ade187253eb5b8a9f770c317f403eefc1}{GLX\_\-TRANSPARENT\_\-GREEN\_\-VALUE} = 0x26
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ac14d4b887ee1ff38d42538e2dd4f2a91}{GLX\_\-TRANSPARENT\_\-BLUE\_\-VALUE} = 0x27
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_af7cef16f92ad62258a38868572d21ae3}{GLX\_\-TRANSPARENT\_\-ALPHA\_\-VALUE} = 0x28
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_abd580356fe0bc30ae3eb7d3fd85b66a0}{GLX\_\-DRAWABLE\_\-TYPE} = 0x8010
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a34fd97e1e32bc93a6fb58867f3d14879}{GLX\_\-RENDER\_\-TYPE} = 0x8011
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_af839e96ef74a4a68ba5f6b93012f804c}{GLX\_\-X\_\-RENDERABLE} = 0x8012
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a9058319d3f2837e9c43e7822f0ce1f53}{GLX\_\-FBCONFIG\_\-ID} = 0x8013
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a94799aa9360ef6848752dc1cffbf2e09}{GLX\_\-MAX\_\-PBUFFER\_\-WIDTH} = 0x8016
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_aace265087d8b7559282f6b773c747b75}{GLX\_\-MAX\_\-PBUFFER\_\-HEIGHT} = 0x8017
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a9824a3a00017f01c9afc95553a295504}{GLX\_\-MAX\_\-PBUFFER\_\-PIXELS} = 0x8018
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a6e069356f6070485b2c4d0d8224aa167}{GLX\_\-VISUAL\_\-ID} = 0x800B
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ab87b4beadb6382fd25ce4f4f320055a9}{GLX\_\-OPTIMAL\_\-PBUFFER\_\-WIDTH\_\-SGIX} = 0x8019
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_af47ec9964a832b5f77fb66616d845771}{GLX\_\-OPTIMAL\_\-PBUFFER\_\-HEIGHT\_\-SGIX} = 0x801A
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a4c3bdd23294091a4dc4462822a496b18}{GLX\_\-BAD\_\-SCREEN} = 1
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a514b1a15b854a85a00604567fe0cb57d}{GLX\_\-BAD\_\-ATTRIBUTE} = 2
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a4964628e8c7c0a05fa0c8cf3739770b7}{GLX\_\-NO\_\-EXTENSION} = 3
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a884e10d10c755a6a3e17018169cf9117}{GLX\_\-BAD\_\-VISUAL} = 4
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a85f4c8fd7b882705d0a2ab33842385b6}{GLX\_\-BAD\_\-CONTEXT} = 5
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_abf751a9967b1a5fb0d1f672a363e21b6}{GLX\_\-BAD\_\-VALUE} = 6
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a78b528f44c6912a84341530622a4285e}{GLX\_\-BAD\_\-ENUM} = 7
+\item 
+const uint \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a11cda7d73face7eabc20e12fb7d990a1}{GLX\_\-DONT\_\-CARE} = 0xFFFFFFFF
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a46959909212bb7c1157ce812e621f2f6}{GLX\_\-RGBA\_\-BIT} = 0x00000001
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a056beffa48c29bc3c7fa561438a7958d}{GLX\_\-COLOR\_\-INDEX\_\-BIT} = 0x00000002
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a276a399a7aaf0d9b0d1c627ec02860b3}{GLX\_\-WINDOW\_\-BIT} = 0x00000001
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_abb8f9b7e88bfa3589924a83107ba014d}{GLX\_\-PIXMAP\_\-BIT} = 0x00000002
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a64b5d49bef52b11f4ad5bd1ef90e84ca}{GLX\_\-PBUFFER\_\-BIT} = 0x00000004
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a51737dacb361ecb25c36db057d0646d1}{GLX\_\-NONE} = 0x8000
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ae00dd5da604664ab67feebfd716fae89}{GLX\_\-SLOW\_\-CONFIG} = 0x8001
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a1e338432449cbc213a3a4c2673123ca0}{GLX\_\-NON\_\-CONFORMANT\_\-CONFIG} = 0x800D
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a4df6c260ab08a6d229d3d407e2ba1dc2}{GLX\_\-TRUE\_\-COLOR} = 0x8002
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ae7c06440f69e30d7f700e19c41c30a96}{GLX\_\-DIRECT\_\-COLOR} = 0x8003
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a98cc081d53938af1a9ed0512a1b8ed98}{GLX\_\-PSEUDO\_\-COLOR} = 0x8004
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a1303f2e0f2f13f0a1e5ffa33a22ea888}{GLX\_\-STATIC\_\-COLOR} = 0x8005
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a5ba311a88aac071d258bcc41575e771c}{GLX\_\-GRAY\_\-SCALE} = 0x8006
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a9eaa0fc788ced88feee6d0cbfc083c86}{GLX\_\-STATIC\_\-GRAY} = 0x8007
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a327c03a517966cea8af701bc311ddc85}{GLX\_\-TRANSPARENT\_\-RGB} = 0x8008
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a4d22273f56dbecae8152d8db2e95000e}{GLX\_\-TRANSPARENT\_\-INDEX} = 0x8009
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a33545f2488ed80af9bce684fe52d0215}{GLX\_\-PRESERVED\_\-CONTENTS} = 0x801B
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a19dcd43808f2415373c4f1369ac0b881}{GLX\_\-LARGEST\_\-PBUFFER} = 0x801C
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a2caba72e0d68ed8925433140b69cae1f}{GLX\_\-PBUFFER\_\-HEIGHT} = 0x8040
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a3befe7327e4d27a9361056283a741b3a}{GLX\_\-PBUFFER\_\-WIDTH} = 0x8041
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a20f2b47a4e7d251d68992f8af2250b30}{GLX\_\-WIDTH} = 0x801D
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_acd3e11028d125afbbf1e8a34b156e44a}{GLX\_\-HEIGHT} = 0x801E
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a1a6cc2a5122e3ab70b2af77556b04c5a}{GLX\_\-EVENT\_\-MASK} = 0x801F
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a9d98f89beff5043030c657aa94352647}{GLX\_\-RGBA\_\-TYPE} = 0x8014
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_aca5ff459ff309805a054eb5af32d091c}{GLX\_\-COLOR\_\-INDEX\_\-TYPE} = 0x8015
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a0b9ae4d32b7263fa6c4a8c8fa35030c9}{GLX\_\-SCREEN} = 0x800C
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a8a9f936a285b35c0aa0a3054c135b4cc}{GLX\_\-PBUFFER\_\-CLOBBER\_\-MASK} = 0x08000000
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a3fa5e550a34663b1153f8fbd643366d1}{GLX\_\-DAMAGED} = 0x8020
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ae496c91203442a990a7c9d65e68d437a}{GLX\_\-SAVED} = 0x8021
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a6f88ad44e0889a5ad2156f84a70bb493}{GLX\_\-WINDOW} = 0x8022
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a2fc2a28bd00b531b96e0041cbdeef3c3}{GLX\_\-PBUFFER} = 0x8023
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ab5e6633688255a2b3c1c2936c49b163e}{GLX\_\-FRONT\_\-LEFT\_\-BUFFER\_\-BIT} = 0x00000001
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_adc5d0545c96bfb8b1bdd0de0ef29cb0e}{GLX\_\-FRONT\_\-RIGHT\_\-BUFFER\_\-BIT} = 0x00000002
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a40dba5844dd72194aed1435029abd44d}{GLX\_\-BACK\_\-LEFT\_\-BUFFER\_\-BIT} = 0x00000004
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ae28309df04eee65baa036636d1e59459}{GLX\_\-BACK\_\-RIGHT\_\-BUFFER\_\-BIT} = 0x00000008
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a05b8a5094b02f9360c52f2aec0437d2d}{GLX\_\-AUX\_\-BUFFERS\_\-BIT} = 0x00000010
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a2edb4c4f6cb3c8aaecba060d252374bb}{GLX\_\-DEPTH\_\-BUFFER\_\-BIT} = 0x00000020
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_abe1d839f1268a0a69d7754360a86a539}{GLX\_\-STENCIL\_\-BUFFER\_\-BIT} = 0x00000040
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a8522671492da2b591a4b4c8733dfbc97}{GLX\_\-ACCUM\_\-BUFFER\_\-BIT} = 0x00000080
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a2daf7c1f9d1e7abca98e0365a6d6adc5}{GLX\_\-X\_\-VISUAL\_\-TYPE\_\-EXT} = 0x22
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a593a81b432a1d5ec6e300ad2f57438e3}{GLX\_\-TRANSPARENT\_\-TYPE\_\-EXT} = 0x23
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a1e8f3f9cf583863da934aadd55f7cc7c}{GLX\_\-TRANSPARENT\_\-INDEX\_\-VALUE\_\-EXT} = 0x24
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a8c0d163ec64d715d5ee60da7c9b008bc}{GLX\_\-TRANSPARENT\_\-RED\_\-VALUE\_\-EXT} = 0x25
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a687072d3336a0824a63a3204b5d0cd37}{GLX\_\-TRANSPARENT\_\-GREEN\_\-VALUE\_\-EXT} = 0x26
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a333ee7b32c4683b67f35a39b058c33bd}{GLX\_\-TRANSPARENT\_\-BLUE\_\-VALUE\_\-EXT} = 0x27
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ab4ac1b85364d8ebc68fc131daeacaa14}{GLX\_\-TRANSPARENT\_\-ALPHA\_\-VALUE\_\-EXT} = 0x28
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a9ccebdda70318edcdb01ec9040546701}{GLX\_\-TRUE\_\-COLOR\_\-EXT} = 0x8002
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ab31b0c872736b40dc162d5f05f171147}{GLX\_\-DIRECT\_\-COLOR\_\-EXT} = 0x8003
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a7e15ee0e44da343b4ea0eff6b8137a56}{GLX\_\-PSEUDO\_\-COLOR\_\-EXT} = 0x8004
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a1eab7def5d1f9ca7f7ca4ce75108a68e}{GLX\_\-STATIC\_\-COLOR\_\-EXT} = 0x8005
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a1c8bf824a1ae02d7bae31010865313f2}{GLX\_\-GRAY\_\-SCALE\_\-EXT} = 0x8006
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_aba49bcbbff3a03176c368da11db5aaae}{GLX\_\-STATIC\_\-GRAY\_\-EXT} = 0x8007
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ab4845c9111062972b88a73f6115539a8}{GLX\_\-NONE\_\-EXT} = 0x8000
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a5afa705a44c8f37c53f84ae1ca0fdd2b}{GLX\_\-TRANSPARENT\_\-RGB\_\-EXT} = 0x8008
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a36d6c7ce71b4e1bb5695d4dea2cd393b}{GLX\_\-TRANSPARENT\_\-INDEX\_\-EXT} = 0x8009
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a115fc61ebf65a9448a116a74944299f3}{GLX\_\-VISUAL\_\-CAVEAT\_\-EXT} = 0x20
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a6ace1cdea8ca8d0277262bbbdab3208e}{GLX\_\-SLOW\_\-VISUAL\_\-EXT} = 0x8001
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_af52ed35e6d62a6b15c0b1c8146f39325}{GLX\_\-NON\_\-CONFORMANT\_\-VISUAL\_\-EXT} = 0x800D
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_aa3a152fce38aec49cf836f6cea9ad5d6}{GLX\_\-SWAP\_\-METHOD\_\-OML} = 0x8060
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a7867fdb981fbefbb0f4cc4ec47d5451b}{GLX\_\-SWAP\_\-EXCHANGE\_\-OML} = 0x8061
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a70d4f7954350861ad0d71ed03e300b33}{GLX\_\-SWAP\_\-COPY\_\-OML} = 0x8062
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ac0b3ee6aa931dd05a099b72bd433d664}{GLX\_\-SWAP\_\-UNDEFINED\_\-OML} = 0x8063
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a2893e772610e2ca4b80c46216137bef2}{GLX\_\-VISUAL\_\-SELECT\_\-GROUP\_\-SGIX} = 0x8028
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a1a8d04f2c9ed80340eb6ddae62962c65}{GLX\_\-VENDOR} = 0x1
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ae1c13229f4b03607ede1ec39f5fdfade}{GLX\_\-VERSION} = 0x2
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_aa98e7ad8e8c05de7ed45f2578b86b280}{GLX\_\-EXTENSIONS} = 0x3
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a1d7d422f83455ebe81d6d69f850d5033}{GLX\_\-SHARE\_\-CONTEXT\_\-EXT} = 0x800A
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a50a7a17fed6da4d8691aec98b882ad16}{GLX\_\-VISUAL\_\-ID\_\-EXT} = 0x800B
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_a7f97f97f95eddfb79e1ae39032c98a7f}{GLX\_\-SCREEN\_\-EXT} = 0x800C
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_aa93523144cfdbd8382aa99383205c17d}{GLX\_\-SAMPLE\_\-BUFFERS\_\-SGIS} = 100000
+\item 
+const int \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_acbb6099d7e93d979f469e8f4e74d908f}{GLX\_\-SAMPLES\_\-SGIS} = 100001
+\item 
+const bool \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_abec2a3b7c5910903cdfca72d15e02d22}{GLX\_\-EXT\_\-import\_\-context} = true
+\item 
+const bool \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_af37f74af4723886fda0cbc536bb75f8c}{GLX\_\-EXT\_\-visual\_\-info} = true
+\item 
+const bool \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_ae700b9e1b0c2d6641015ff34403ee28f}{GLX\_\-EXT\_\-visual\_\-rating} = true
+\item 
+const bool \hyperlink{class_tao_1_1_platform_1_1_x11_1_1_glx_adb5a151af7d9da78988c566d4000dac3}{GLX\_\-ARB\_\-get\_\-proc\_\-address} = true
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+GLX (OpenGL XWindow Extensions) binding for .NET, implementing GLX 1.4. Binds functions and definitions in libGL.so. 
+
+The OpenGL XWindow Extensions (GLX) library contains several groups of functions that complement the core OpenGL interface by providing integration with XWindows. 
+
+These utility functions make use of core OpenGL functions, so any OpenGL implementation is guaranteed to support the utility functions. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_aa94f75195806917a0b3697e3dc3dd942}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXChooseFBConfig@{glXChooseFBConfig}}
+\index{glXChooseFBConfig@{glXChooseFBConfig}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXChooseFBConfig}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe IntPtr Tao.Platform.X11.Glx.glXChooseFBConfig (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{int}]{ screen, }
+\item[{int $\ast$}]{ attrib\_\-list, }
+\item[{int $\ast$}]{ nelements}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_aa94f75195806917a0b3697e3dc3dd942}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em screen}]\item[{\em attrib\_\-list}]\item[{\em nelements}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a653db4c1f31f17527a1acd515f467e4b}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXChooseFBConfig@{glXChooseFBConfig}}
+\index{glXChooseFBConfig@{glXChooseFBConfig}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXChooseFBConfig}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr Tao.Platform.X11.Glx.glXChooseFBConfig (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{int}]{ screen, }
+\item[{int}]{ attrib\_\-list, }
+\item[{int}]{ nelements}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a653db4c1f31f17527a1acd515f467e4b}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em screen}]\item[{\em attrib\_\-list}]\item[{\em nelements}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a81c1ef09ac39a0052f1387c97016ed0f}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXChooseFBConfig@{glXChooseFBConfig}}
+\index{glXChooseFBConfig@{glXChooseFBConfig}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXChooseFBConfig}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr Tao.Platform.X11.Glx.glXChooseFBConfig (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{int}]{ screen, }
+\item[{int\mbox{[}$\,$\mbox{]}}]{ attrib\_\-list, }
+\item[{int\mbox{[}$\,$\mbox{]}}]{ nelements}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a81c1ef09ac39a0052f1387c97016ed0f}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em screen}]\item[{\em attrib\_\-list}]\item[{\em nelements}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a866efd6595cec1d6127d9bdd891f57b4}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXChooseVisual@{glXChooseVisual}}
+\index{glXChooseVisual@{glXChooseVisual}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXChooseVisual}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr Tao.Platform.X11.Glx.glXChooseVisual (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{int}]{ screen, }
+\item[{IntPtr}]{ attriblist}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a866efd6595cec1d6127d9bdd891f57b4}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em screen}]\item[{\em attriblist}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_af7dffb5839e4388cebb097f39757bd01}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXChooseVisual@{glXChooseVisual}}
+\index{glXChooseVisual@{glXChooseVisual}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXChooseVisual}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr Tao.Platform.X11.Glx.glXChooseVisual (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{int}]{ screen, }
+\item[{int}]{ attrib}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_af7dffb5839e4388cebb097f39757bd01}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em screen}]\item[{\em attrib}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ae4180f969acf816b2d834e579703a393}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXChooseVisual@{glXChooseVisual}}
+\index{glXChooseVisual@{glXChooseVisual}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXChooseVisual}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr Tao.Platform.X11.Glx.glXChooseVisual (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{int}]{ screen, }
+\item[{int\mbox{[}$\,$\mbox{]}}]{ attriblist}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ae4180f969acf816b2d834e579703a393}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em screen}]\item[{\em attriblist}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a40c1d19d7e8b05a560ab41f148ecf928}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXCopyContext@{glXCopyContext}}
+\index{glXCopyContext@{glXCopyContext}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXCopyContext}]{\setlength{\rightskip}{0pt plus 5cm}static void Tao.Platform.X11.Glx.glXCopyContext (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ src, }
+\item[{IntPtr}]{ dst, }
+\item[{ulong}]{ mask}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a40c1d19d7e8b05a560ab41f148ecf928}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em src}]\item[{\em dst}]\item[{\em mask}]\end{DoxyParams}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_aa057757b63daa01aeb450d2c3d1458dd}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXCreateContext@{glXCreateContext}}
+\index{glXCreateContext@{glXCreateContext}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXCreateContext}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr Tao.Platform.X11.Glx.glXCreateContext (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ vis, }
+\item[{IntPtr}]{ shareList, }
+\item[{bool}]{ direct}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_aa057757b63daa01aeb450d2c3d1458dd}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em vis}]\item[{\em shareList}]\item[{\em direct}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a8dc0806e8e855c024c2193b85e5869da}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXCreateGLXPixmap@{glXCreateGLXPixmap}}
+\index{glXCreateGLXPixmap@{glXCreateGLXPixmap}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXCreateGLXPixmap}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr Tao.Platform.X11.Glx.glXCreateGLXPixmap (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ vis, }
+\item[{IntPtr}]{ pixmap}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a8dc0806e8e855c024c2193b85e5869da}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em vis}]\item[{\em pixmap}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a3c90fae6c360f7982bff94f151a0e128}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXCreateNewContext@{glXCreateNewContext}}
+\index{glXCreateNewContext@{glXCreateNewContext}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXCreateNewContext}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe IntPtr Tao.Platform.X11.Glx.glXCreateNewContext (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ config, }
+\item[{int}]{ render\_\-type, }
+\item[{IntPtr}]{ share\_\-list, }
+\item[{bool}]{ direct}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a3c90fae6c360f7982bff94f151a0e128}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em config}]\item[{\em render\_\-type}]\item[{\em share\_\-list}]\item[{\em direct}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a3e2410de2473fb8bd52e05ef8438ff02}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXCreatePbuffer@{glXCreatePbuffer}}
+\index{glXCreatePbuffer@{glXCreatePbuffer}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXCreatePbuffer}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe IntPtr Tao.Platform.X11.Glx.glXCreatePbuffer (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ config, }
+\item[{int $\ast$}]{ attrib\_\-list}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a3e2410de2473fb8bd52e05ef8438ff02}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em config}]\item[{\em attrib\_\-list}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a9b816b91c1d5d1d6e59cb9ae48270121}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXCreatePbuffer@{glXCreatePbuffer}}
+\index{glXCreatePbuffer@{glXCreatePbuffer}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXCreatePbuffer}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr Tao.Platform.X11.Glx.glXCreatePbuffer (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ config, }
+\item[{int\mbox{[}$\,$\mbox{]}}]{ attrib\_\-list}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a9b816b91c1d5d1d6e59cb9ae48270121}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em config}]\item[{\em attrib\_\-list}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_aa03a5d88950c4d8d4837927ff514af3d}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXCreatePixmap@{glXCreatePixmap}}
+\index{glXCreatePixmap@{glXCreatePixmap}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXCreatePixmap}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe int Tao.Platform.X11.Glx.glXCreatePixmap (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ config, }
+\item[{IntPtr}]{ pixmap, }
+\item[{int $\ast$}]{ attrib\_\-list}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_aa03a5d88950c4d8d4837927ff514af3d}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em config}]\item[{\em pixmap}]\item[{\em attrib\_\-list}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a9d9e47364becb69b8873217786ae00e6}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXCreatePixmap@{glXCreatePixmap}}
+\index{glXCreatePixmap@{glXCreatePixmap}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXCreatePixmap}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Platform.X11.Glx.glXCreatePixmap (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ config, }
+\item[{IntPtr}]{ pixmap, }
+\item[{int\mbox{[}$\,$\mbox{]}}]{ attrib\_\-list}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a9d9e47364becb69b8873217786ae00e6}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em config}]\item[{\em pixmap}]\item[{\em attrib\_\-list}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a22cf8dc8ea380742183535b07252d52c}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXCreateWindow@{glXCreateWindow}}
+\index{glXCreateWindow@{glXCreateWindow}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXCreateWindow}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe int Tao.Platform.X11.Glx.glXCreateWindow (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ config, }
+\item[{int}]{ win, }
+\item[{int $\ast$}]{ attrib\_\-list}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a22cf8dc8ea380742183535b07252d52c}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em config}]\item[{\em win}]\item[{\em attrib\_\-list}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ac4860fdf8d2fd867b65a7216f3589d63}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXCreateWindow@{glXCreateWindow}}
+\index{glXCreateWindow@{glXCreateWindow}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXCreateWindow}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Platform.X11.Glx.glXCreateWindow (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ config, }
+\item[{int}]{ win, }
+\item[{int\mbox{[}$\,$\mbox{]}}]{ attrib\_\-list}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ac4860fdf8d2fd867b65a7216f3589d63}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em config}]\item[{\em win}]\item[{\em attrib\_\-list}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a9ca23bfc04afdc00940e5c33cb003b54}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXDestroyContext@{glXDestroyContext}}
+\index{glXDestroyContext@{glXDestroyContext}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXDestroyContext}]{\setlength{\rightskip}{0pt plus 5cm}static void Tao.Platform.X11.Glx.glXDestroyContext (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ context}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a9ca23bfc04afdc00940e5c33cb003b54}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em context}]\end{DoxyParams}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ae82176a8a1995e2829dab558a476dfcb}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXDestroyGLXPixmap@{glXDestroyGLXPixmap}}
+\index{glXDestroyGLXPixmap@{glXDestroyGLXPixmap}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXDestroyGLXPixmap}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe void Tao.Platform.X11.Glx.glXDestroyGLXPixmap (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ pix}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ae82176a8a1995e2829dab558a476dfcb}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em pix}]\end{DoxyParams}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ab980de7be47dedc68d86987d206a4f9b}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXDestroyPbuffer@{glXDestroyPbuffer}}
+\index{glXDestroyPbuffer@{glXDestroyPbuffer}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXDestroyPbuffer}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe void Tao.Platform.X11.Glx.glXDestroyPbuffer (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ pbuf}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ab980de7be47dedc68d86987d206a4f9b}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em pbuf}]\end{DoxyParams}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ab59bdb381d7d64dc7e5c7349af0315c9}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXDestroyPixmap@{glXDestroyPixmap}}
+\index{glXDestroyPixmap@{glXDestroyPixmap}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXDestroyPixmap}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe void Tao.Platform.X11.Glx.glXDestroyPixmap (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{int}]{ pixmap}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ab59bdb381d7d64dc7e5c7349af0315c9}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em pixmap}]\end{DoxyParams}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_aacbfa56df3389a3414d7eecce81df181}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXDestroyWindow@{glXDestroyWindow}}
+\index{glXDestroyWindow@{glXDestroyWindow}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXDestroyWindow}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe void Tao.Platform.X11.Glx.glXDestroyWindow (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{int}]{ win}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_aacbfa56df3389a3414d7eecce81df181}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em win}]\end{DoxyParams}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a719fe5c1d11571765f5b9c1373a08d94}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXFreeContextEXT@{glXFreeContextEXT}}
+\index{glXFreeContextEXT@{glXFreeContextEXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXFreeContextEXT}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe void Tao.Platform.X11.Glx.glXFreeContextEXT (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ ctx}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a719fe5c1d11571765f5b9c1373a08d94}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em ctx}]\end{DoxyParams}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_aeec9d8d402521cfe898d869684d165a9}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXGetClientString@{glXGetClientString}}
+\index{glXGetClientString@{glXGetClientString}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXGetClientString}]{\setlength{\rightskip}{0pt plus 5cm}static string Tao.Platform.X11.Glx.glXGetClientString (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{int}]{ name}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_aeec9d8d402521cfe898d869684d165a9}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em name}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a209064099f2f4816ca3ef36c17fd728a}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXGetConfig@{glXGetConfig}}
+\index{glXGetConfig@{glXGetConfig}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXGetConfig}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Platform.X11.Glx.glXGetConfig (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ vis, }
+\item[{int}]{ attrib, }
+\item[{IntPtr}]{ value}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a209064099f2f4816ca3ef36c17fd728a}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em vis}]\item[{\em attrib}]\item[{\em value}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a68ae6615063a4c46a44b2a5269161c01}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXGetConfig@{glXGetConfig}}
+\index{glXGetConfig@{glXGetConfig}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXGetConfig}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Platform.X11.Glx.glXGetConfig (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ vis, }
+\item[{int}]{ attrib, }
+\item[{int}]{ val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a68ae6615063a4c46a44b2a5269161c01}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em vis}]\item[{\em attrib}]\item[{\em val}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a6f4c241561c9837d7fe96a61b5205d2a}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXGetConfig@{glXGetConfig}}
+\index{glXGetConfig@{glXGetConfig}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXGetConfig}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Platform.X11.Glx.glXGetConfig (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ vis, }
+\item[{int}]{ attrib, }
+\item[{int\mbox{[}$\,$\mbox{]}}]{ val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a6f4c241561c9837d7fe96a61b5205d2a}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em vis}]\item[{\em attrib}]\item[{\em val}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a5e038b6c0ed8284bd8512cfee58c4e86}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXGetContextIDEXT@{glXGetContextIDEXT}}
+\index{glXGetContextIDEXT@{glXGetContextIDEXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXGetContextIDEXT}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe int Tao.Platform.X11.Glx.glXGetContextIDEXT (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ ctx}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a5e038b6c0ed8284bd8512cfee58c4e86}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em ctx}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_aa499032eba5073b40cec5af8655bd2d1}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXGetCurrentContext@{glXGetCurrentContext}}
+\index{glXGetCurrentContext@{glXGetCurrentContext}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXGetCurrentContext}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr Tao.Platform.X11.Glx.glXGetCurrentContext (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_aa499032eba5073b40cec5af8655bd2d1}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a83e8d6bfcc89e1ff06b86425368d3a9c}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXGetCurrentDisplay@{glXGetCurrentDisplay}}
+\index{glXGetCurrentDisplay@{glXGetCurrentDisplay}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXGetCurrentDisplay}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe IntPtr Tao.Platform.X11.Glx.glXGetCurrentDisplay (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a83e8d6bfcc89e1ff06b86425368d3a9c}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a82ebe03bd0af65b1f9578d4386410757}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXGetCurrentDisplayEXT@{glXGetCurrentDisplayEXT}}
+\index{glXGetCurrentDisplayEXT@{glXGetCurrentDisplayEXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXGetCurrentDisplayEXT}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe IntPtr Tao.Platform.X11.Glx.glXGetCurrentDisplayEXT (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a82ebe03bd0af65b1f9578d4386410757}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a36dfb26a77ebbcf9c3245ef28320e48a}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXGetCurrentDrawable@{glXGetCurrentDrawable}}
+\index{glXGetCurrentDrawable@{glXGetCurrentDrawable}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXGetCurrentDrawable}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr Tao.Platform.X11.Glx.glXGetCurrentDrawable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a36dfb26a77ebbcf9c3245ef28320e48a}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_afc6b6a351d8e158cf16a03fe07c5463c}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXGetCurrentReadDrawable@{glXGetCurrentReadDrawable}}
+\index{glXGetCurrentReadDrawable@{glXGetCurrentReadDrawable}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXGetCurrentReadDrawable}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe IntPtr Tao.Platform.X11.Glx.glXGetCurrentReadDrawable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_afc6b6a351d8e158cf16a03fe07c5463c}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a828cca50b0aa387c293c93732f09c753}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXGetFBConfigAttrib@{glXGetFBConfigAttrib}}
+\index{glXGetFBConfigAttrib@{glXGetFBConfigAttrib}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXGetFBConfigAttrib}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe int Tao.Platform.X11.Glx.glXGetFBConfigAttrib (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ config, }
+\item[{int}]{ attribute, }
+\item[{int $\ast$}]{ value}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a828cca50b0aa387c293c93732f09c753}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em config}]\item[{\em attribute}]\item[{\em value}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a9b7e0157fd74b4f857a413c08f994660}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXGetFBConfigAttrib@{glXGetFBConfigAttrib}}
+\index{glXGetFBConfigAttrib@{glXGetFBConfigAttrib}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXGetFBConfigAttrib}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Platform.X11.Glx.glXGetFBConfigAttrib (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ config, }
+\item[{int}]{ attribute, }
+\item[{int}]{ value}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a9b7e0157fd74b4f857a413c08f994660}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em config}]\item[{\em attribute}]\item[{\em value}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a6d8ce25ff4b2136b29090b813cd76b6e}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXGetFBConfigAttrib@{glXGetFBConfigAttrib}}
+\index{glXGetFBConfigAttrib@{glXGetFBConfigAttrib}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXGetFBConfigAttrib}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Platform.X11.Glx.glXGetFBConfigAttrib (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ config, }
+\item[{int}]{ attribute, }
+\item[{int\mbox{[}$\,$\mbox{]}}]{ value}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a6d8ce25ff4b2136b29090b813cd76b6e}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em config}]\item[{\em attribute}]\item[{\em value}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a86ceef49838885b76b0ca087d1834e3f}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXGetFBConfigs@{glXGetFBConfigs}}
+\index{glXGetFBConfigs@{glXGetFBConfigs}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXGetFBConfigs}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr Tao.Platform.X11.Glx.glXGetFBConfigs (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{int}]{ screen, }
+\item[{int\mbox{[}$\,$\mbox{]}}]{ nelements}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a86ceef49838885b76b0ca087d1834e3f}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em screen}]\item[{\em nelements}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_acf569b64c3d09b981d207acde0ec995f}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXGetFBConfigs@{glXGetFBConfigs}}
+\index{glXGetFBConfigs@{glXGetFBConfigs}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXGetFBConfigs}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe IntPtr Tao.Platform.X11.Glx.glXGetFBConfigs (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{int}]{ screen, }
+\item[{int $\ast$}]{ nelements}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_acf569b64c3d09b981d207acde0ec995f}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em screen}]\item[{\em nelements}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a97ac43d639ad3179313a2f7ca53bc6c3}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXGetFBConfigs@{glXGetFBConfigs}}
+\index{glXGetFBConfigs@{glXGetFBConfigs}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXGetFBConfigs}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr Tao.Platform.X11.Glx.glXGetFBConfigs (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{int}]{ screen, }
+\item[{int}]{ element}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a97ac43d639ad3179313a2f7ca53bc6c3}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em screen}]\item[{\em element}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a323d57dc78e4862e88042e2c8b926ff6}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glxGetProcAddress@{glxGetProcAddress}}
+\index{glxGetProcAddress@{glxGetProcAddress}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glxGetProcAddress}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr Tao.Platform.X11.Glx.glxGetProcAddress (
+\begin{DoxyParamCaption}
+\item[{\mbox{[}MarshalAs(UnmanagedType.LPTStr)\mbox{]} string}]{ procName}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a323d57dc78e4862e88042e2c8b926ff6}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em procName}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a4b0a79dfa8b18016eb5c75e6b5d45ffb}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXGetProcAddressARB@{glXGetProcAddressARB}}
+\index{glXGetProcAddressARB@{glXGetProcAddressARB}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXGetProcAddressARB}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr Tao.Platform.X11.Glx.glXGetProcAddressARB (
+\begin{DoxyParamCaption}
+\item[{\mbox{[}MarshalAs(UnmanagedType.LPTStr)\mbox{]} string}]{ procName}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a4b0a79dfa8b18016eb5c75e6b5d45ffb}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em procName}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ada88d89b581e193cfd6af56d5ecca8cd}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXGetSelectedEvent@{glXGetSelectedEvent}}
+\index{glXGetSelectedEvent@{glXGetSelectedEvent}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXGetSelectedEvent}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe void Tao.Platform.X11.Glx.glXGetSelectedEvent (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ draw, }
+\item[{ulong $\ast$}]{ event\_\-mask}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ada88d89b581e193cfd6af56d5ecca8cd}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em draw}]\item[{\em event\_\-mask}]\end{DoxyParams}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a370c2626d6446a467674b91e047e25da}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXGetSelectedEvent@{glXGetSelectedEvent}}
+\index{glXGetSelectedEvent@{glXGetSelectedEvent}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXGetSelectedEvent}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe void Tao.Platform.X11.Glx.glXGetSelectedEvent (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ draw, }
+\item[{ulong}]{ event\_\-mask}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a370c2626d6446a467674b91e047e25da}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em draw}]\item[{\em event\_\-mask}]\end{DoxyParams}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a7433453f8a6b150d6376f99e28741499}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXGetVisualFromFBConfig@{glXGetVisualFromFBConfig}}
+\index{glXGetVisualFromFBConfig@{glXGetVisualFromFBConfig}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXGetVisualFromFBConfig}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe IntPtr Tao.Platform.X11.Glx.glXGetVisualFromFBConfig (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ config}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a7433453f8a6b150d6376f99e28741499}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em config}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a97fbe540985c5bed7488ecfe2f0cdb56}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXImportContextEXT@{glXImportContextEXT}}
+\index{glXImportContextEXT@{glXImportContextEXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXImportContextEXT}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe IntPtr Tao.Platform.X11.Glx.glXImportContextEXT (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{int}]{ contextID}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a97fbe540985c5bed7488ecfe2f0cdb56}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em contextID}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ad048aba54f7eab58a584b1dcea688166}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXIsDirect@{glXIsDirect}}
+\index{glXIsDirect@{glXIsDirect}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXIsDirect}]{\setlength{\rightskip}{0pt plus 5cm}static bool Tao.Platform.X11.Glx.glXIsDirect (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ ctx}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ad048aba54f7eab58a584b1dcea688166}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em ctx}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a6a51e367d9bbeecd9bd6b8162ac4967f}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXMakeContextCurrent@{glXMakeContextCurrent}}
+\index{glXMakeContextCurrent@{glXMakeContextCurrent}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXMakeContextCurrent}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe bool Tao.Platform.X11.Glx.glXMakeContextCurrent (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ display, }
+\item[{IntPtr}]{ draw, }
+\item[{IntPtr}]{ read, }
+\item[{IntPtr}]{ ctx}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a6a51e367d9bbeecd9bd6b8162ac4967f}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em display}]\item[{\em draw}]\item[{\em read}]\item[{\em ctx}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_aac8abadf42dd4d47edc8fc00e286a06c}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXMakeCurrent@{glXMakeCurrent}}
+\index{glXMakeCurrent@{glXMakeCurrent}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXMakeCurrent}]{\setlength{\rightskip}{0pt plus 5cm}static bool Tao.Platform.X11.Glx.glXMakeCurrent (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ display, }
+\item[{IntPtr}]{ drawable, }
+\item[{IntPtr}]{ context}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_aac8abadf42dd4d47edc8fc00e286a06c}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em display}]\item[{\em drawable}]\item[{\em context}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a94ccb13e2eebc082e2a7707e050b4785}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXQueryContext@{glXQueryContext}}
+\index{glXQueryContext@{glXQueryContext}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXQueryContext}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Platform.X11.Glx.glXQueryContext (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ ctx, }
+\item[{int}]{ attribute, }
+\item[{int}]{ value}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a94ccb13e2eebc082e2a7707e050b4785}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em ctx}]\item[{\em attribute}]\item[{\em value}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_af74af1bfbd00bc7dc377531788e2af0c}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXQueryContext@{glXQueryContext}}
+\index{glXQueryContext@{glXQueryContext}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXQueryContext}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe int Tao.Platform.X11.Glx.glXQueryContext (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ ctx, }
+\item[{int}]{ attribute, }
+\item[{int $\ast$}]{ value}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_af74af1bfbd00bc7dc377531788e2af0c}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em ctx}]\item[{\em attribute}]\item[{\em value}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ab715ccebc3ccefc92ce00e18c9c36dd9}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXQueryContext@{glXQueryContext}}
+\index{glXQueryContext@{glXQueryContext}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXQueryContext}]{\setlength{\rightskip}{0pt plus 5cm}static int Tao.Platform.X11.Glx.glXQueryContext (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ ctx, }
+\item[{int}]{ attribute, }
+\item[{int\mbox{[}$\,$\mbox{]}}]{ value}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ab715ccebc3ccefc92ce00e18c9c36dd9}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em ctx}]\item[{\em attribute}]\item[{\em value}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ab41c548e80e5b611d2cb2cf574447384}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXQueryContextInfoEXT@{glXQueryContextInfoEXT}}
+\index{glXQueryContextInfoEXT@{glXQueryContextInfoEXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXQueryContextInfoEXT}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe int Tao.Platform.X11.Glx.glXQueryContextInfoEXT (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ ctx, }
+\item[{int}]{ attribute, }
+\item[{int $\ast$}]{ value}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ab41c548e80e5b611d2cb2cf574447384}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em ctx}]\item[{\em attribute}]\item[{\em value}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ab04a24929cd277bb67038a2908732831}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXQueryContextInfoEXT@{glXQueryContextInfoEXT}}
+\index{glXQueryContextInfoEXT@{glXQueryContextInfoEXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXQueryContextInfoEXT}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe int Tao.Platform.X11.Glx.glXQueryContextInfoEXT (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ ctx, }
+\item[{int}]{ attribute, }
+\item[{int}]{ value}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ab04a24929cd277bb67038a2908732831}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em ctx}]\item[{\em attribute}]\item[{\em value}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a3154050a136e4a3debf46f7951c89f90}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXQueryDrawable@{glXQueryDrawable}}
+\index{glXQueryDrawable@{glXQueryDrawable}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXQueryDrawable}]{\setlength{\rightskip}{0pt plus 5cm}static void Tao.Platform.X11.Glx.glXQueryDrawable (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ draw, }
+\item[{int}]{ attribute, }
+\item[{uint\mbox{[}$\,$\mbox{]}}]{ value}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a3154050a136e4a3debf46f7951c89f90}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em draw}]\item[{\em attribute}]\item[{\em value}]\end{DoxyParams}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a76284c388170b2c62e2df7385973fe00}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXQueryDrawable@{glXQueryDrawable}}
+\index{glXQueryDrawable@{glXQueryDrawable}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXQueryDrawable}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe void Tao.Platform.X11.Glx.glXQueryDrawable (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ draw, }
+\item[{int}]{ attribute, }
+\item[{uint $\ast$}]{ value}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a76284c388170b2c62e2df7385973fe00}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em draw}]\item[{\em attribute}]\item[{\em value}]\end{DoxyParams}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ab218343c5a769c9b9d8ed92770af2f89}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXQueryExtension@{glXQueryExtension}}
+\index{glXQueryExtension@{glXQueryExtension}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXQueryExtension}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe bool Tao.Platform.X11.Glx.glXQueryExtension (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{int $\ast$}]{ errorBase, }
+\item[{int $\ast$}]{ eventBase}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ab218343c5a769c9b9d8ed92770af2f89}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em errorBase}]\item[{\em eventBase}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a7b469f34db6f8a6df0a4424b723df753}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXQueryExtension@{glXQueryExtension}}
+\index{glXQueryExtension@{glXQueryExtension}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXQueryExtension}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe bool Tao.Platform.X11.Glx.glXQueryExtension (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{int\mbox{[}$\,$\mbox{]}}]{ errorBase, }
+\item[{int\mbox{[}$\,$\mbox{]}}]{ eventBase}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a7b469f34db6f8a6df0a4424b723df753}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em errorBase}]\item[{\em eventBase}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a5f3b0189ebcda5badb7172dd832ba1cd}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXQueryExtension@{glXQueryExtension}}
+\index{glXQueryExtension@{glXQueryExtension}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXQueryExtension}]{\setlength{\rightskip}{0pt plus 5cm}static bool Tao.Platform.X11.Glx.glXQueryExtension (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ errorBase, }
+\item[{IntPtr}]{ eventBase}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a5f3b0189ebcda5badb7172dd832ba1cd}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em errorBase}]\item[{\em eventBase}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a3cfc40650ed7ff135d4a3a8c9267843b}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXQueryExtension@{glXQueryExtension}}
+\index{glXQueryExtension@{glXQueryExtension}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXQueryExtension}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe bool Tao.Platform.X11.Glx.glXQueryExtension (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{int}]{ errorBase, }
+\item[{int}]{ eventBase}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a3cfc40650ed7ff135d4a3a8c9267843b}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em errorBase}]\item[{\em eventBase}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ad8eee6410dde2ad7ecf4b91e08b9acf5}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXQueryExtensionsString@{glXQueryExtensionsString}}
+\index{glXQueryExtensionsString@{glXQueryExtensionsString}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXQueryExtensionsString}]{\setlength{\rightskip}{0pt plus 5cm}static string Tao.Platform.X11.Glx.glXQueryExtensionsString (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{int}]{ screen}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ad8eee6410dde2ad7ecf4b91e08b9acf5}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em screen}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_aa0544c28d81c9c5d721f2e5793a84fbc}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXQueryServerString@{glXQueryServerString}}
+\index{glXQueryServerString@{glXQueryServerString}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXQueryServerString}]{\setlength{\rightskip}{0pt plus 5cm}static string Tao.Platform.X11.Glx.glXQueryServerString (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{int}]{ screen, }
+\item[{int}]{ name}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_aa0544c28d81c9c5d721f2e5793a84fbc}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em screen}]\item[{\em name}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ad4514586f97c9ecf1aba8f370942cef0}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXQueryVersion@{glXQueryVersion}}
+\index{glXQueryVersion@{glXQueryVersion}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXQueryVersion}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe bool Tao.Platform.X11.Glx.glXQueryVersion (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{int $\ast$}]{ major, }
+\item[{int $\ast$}]{ minor}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ad4514586f97c9ecf1aba8f370942cef0}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em major}]\item[{\em minor}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a5d314de192c640752c8902453d5edb9f}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXQueryVersion@{glXQueryVersion}}
+\index{glXQueryVersion@{glXQueryVersion}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXQueryVersion}]{\setlength{\rightskip}{0pt plus 5cm}static bool Tao.Platform.X11.Glx.glXQueryVersion (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ major, }
+\item[{IntPtr}]{ minor}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a5d314de192c640752c8902453d5edb9f}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em major}]\item[{\em minor}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_aa03daf6f550238f29f5036208859a240}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXSelectEvent@{glXSelectEvent}}
+\index{glXSelectEvent@{glXSelectEvent}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXSelectEvent}]{\setlength{\rightskip}{0pt plus 5cm}static unsafe void Tao.Platform.X11.Glx.glXSelectEvent (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ dpy, }
+\item[{IntPtr}]{ draw, }
+\item[{ulong}]{ event\_\-mask}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_aa03daf6f550238f29f5036208859a240}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dpy}]\item[{\em draw}]\item[{\em event\_\-mask}]\end{DoxyParams}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a8813c95f25acc9a880a3189e50b73595}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXSwapBuffers@{glXSwapBuffers}}
+\index{glXSwapBuffers@{glXSwapBuffers}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXSwapBuffers}]{\setlength{\rightskip}{0pt plus 5cm}static void Tao.Platform.X11.Glx.glXSwapBuffers (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ display, }
+\item[{IntPtr}]{ drawable}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a8813c95f25acc9a880a3189e50b73595}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em display}]\item[{\em drawable}]\end{DoxyParams}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a1851177ab07d3055a646959d4a26bde2}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXUseXFont@{glXUseXFont}}
+\index{glXUseXFont@{glXUseXFont}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXUseXFont}]{\setlength{\rightskip}{0pt plus 5cm}static void Tao.Platform.X11.Glx.glXUseXFont (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ font, }
+\item[{int}]{ first, }
+\item[{int}]{ count, }
+\item[{int}]{ listBase}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a1851177ab07d3055a646959d4a26bde2}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em font}]\item[{\em first}]\item[{\em count}]\item[{\em listBase}]\end{DoxyParams}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_af011969364e383e4fc44fcd6dbe0f324}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXWaitGL@{glXWaitGL}}
+\index{glXWaitGL@{glXWaitGL}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXWaitGL}]{\setlength{\rightskip}{0pt plus 5cm}static void Tao.Platform.X11.Glx.glXWaitGL (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_af011969364e383e4fc44fcd6dbe0f324}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a6846e09cc30e96bce8b578189a0e9f53}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!glXWaitX@{glXWaitX}}
+\index{glXWaitX@{glXWaitX}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{glXWaitX}]{\setlength{\rightskip}{0pt plus 5cm}static void Tao.Platform.X11.Glx.glXWaitX (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a6846e09cc30e96bce8b578189a0e9f53}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a11689c37d75bdeb3e22db03566409f7a}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-ACCUM\_\-ALPHA\_\-SIZE@{GLX\_\-ACCUM\_\-ALPHA\_\-SIZE}}
+\index{GLX\_\-ACCUM\_\-ALPHA\_\-SIZE@{GLX\_\-ACCUM\_\-ALPHA\_\-SIZE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-ACCUM\_\-ALPHA\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-ACCUM\_\-ALPHA\_\-SIZE} = 17}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a11689c37d75bdeb3e22db03566409f7a}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_aa3fc9fd7ced74f8f222a0f39b1c5983e}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-ACCUM\_\-BLUE\_\-SIZE@{GLX\_\-ACCUM\_\-BLUE\_\-SIZE}}
+\index{GLX\_\-ACCUM\_\-BLUE\_\-SIZE@{GLX\_\-ACCUM\_\-BLUE\_\-SIZE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-ACCUM\_\-BLUE\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-ACCUM\_\-BLUE\_\-SIZE} = 16}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_aa3fc9fd7ced74f8f222a0f39b1c5983e}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a8522671492da2b591a4b4c8733dfbc97}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-ACCUM\_\-BUFFER\_\-BIT@{GLX\_\-ACCUM\_\-BUFFER\_\-BIT}}
+\index{GLX\_\-ACCUM\_\-BUFFER\_\-BIT@{GLX\_\-ACCUM\_\-BUFFER\_\-BIT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-ACCUM\_\-BUFFER\_\-BIT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-ACCUM\_\-BUFFER\_\-BIT} = 0x00000080}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a8522671492da2b591a4b4c8733dfbc97}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a18384deeeed23b36efad9c2e843377a3}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-ACCUM\_\-GREEN\_\-SIZE@{GLX\_\-ACCUM\_\-GREEN\_\-SIZE}}
+\index{GLX\_\-ACCUM\_\-GREEN\_\-SIZE@{GLX\_\-ACCUM\_\-GREEN\_\-SIZE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-ACCUM\_\-GREEN\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-ACCUM\_\-GREEN\_\-SIZE} = 15}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a18384deeeed23b36efad9c2e843377a3}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_af539ffb0cf59b67d9cd59de3c7badeae}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-ACCUM\_\-RED\_\-SIZE@{GLX\_\-ACCUM\_\-RED\_\-SIZE}}
+\index{GLX\_\-ACCUM\_\-RED\_\-SIZE@{GLX\_\-ACCUM\_\-RED\_\-SIZE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-ACCUM\_\-RED\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-ACCUM\_\-RED\_\-SIZE} = 14}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_af539ffb0cf59b67d9cd59de3c7badeae}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a60b9bf01361cb10bda18c677fa76b549}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-ALPHA\_\-SIZE@{GLX\_\-ALPHA\_\-SIZE}}
+\index{GLX\_\-ALPHA\_\-SIZE@{GLX\_\-ALPHA\_\-SIZE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-ALPHA\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-ALPHA\_\-SIZE} = 11}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a60b9bf01361cb10bda18c677fa76b549}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_adb5a151af7d9da78988c566d4000dac3}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-ARB\_\-get\_\-proc\_\-address@{GLX\_\-ARB\_\-get\_\-proc\_\-address}}
+\index{GLX\_\-ARB\_\-get\_\-proc\_\-address@{GLX\_\-ARB\_\-get\_\-proc\_\-address}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-ARB\_\-get\_\-proc\_\-address}]{\setlength{\rightskip}{0pt plus 5cm}const bool {\bf Tao.Platform.X11.Glx.GLX\_\-ARB\_\-get\_\-proc\_\-address} = true}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_adb5a151af7d9da78988c566d4000dac3}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a0147fc8ab93b951f8d7f463bac372e0a}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-AUX\_\-BUFFERS@{GLX\_\-AUX\_\-BUFFERS}}
+\index{GLX\_\-AUX\_\-BUFFERS@{GLX\_\-AUX\_\-BUFFERS}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-AUX\_\-BUFFERS}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-AUX\_\-BUFFERS} = 7}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a0147fc8ab93b951f8d7f463bac372e0a}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a05b8a5094b02f9360c52f2aec0437d2d}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-AUX\_\-BUFFERS\_\-BIT@{GLX\_\-AUX\_\-BUFFERS\_\-BIT}}
+\index{GLX\_\-AUX\_\-BUFFERS\_\-BIT@{GLX\_\-AUX\_\-BUFFERS\_\-BIT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-AUX\_\-BUFFERS\_\-BIT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-AUX\_\-BUFFERS\_\-BIT} = 0x00000010}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a05b8a5094b02f9360c52f2aec0437d2d}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a40dba5844dd72194aed1435029abd44d}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-BACK\_\-LEFT\_\-BUFFER\_\-BIT@{GLX\_\-BACK\_\-LEFT\_\-BUFFER\_\-BIT}}
+\index{GLX\_\-BACK\_\-LEFT\_\-BUFFER\_\-BIT@{GLX\_\-BACK\_\-LEFT\_\-BUFFER\_\-BIT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-BACK\_\-LEFT\_\-BUFFER\_\-BIT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-BACK\_\-LEFT\_\-BUFFER\_\-BIT} = 0x00000004}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a40dba5844dd72194aed1435029abd44d}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ae28309df04eee65baa036636d1e59459}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-BACK\_\-RIGHT\_\-BUFFER\_\-BIT@{GLX\_\-BACK\_\-RIGHT\_\-BUFFER\_\-BIT}}
+\index{GLX\_\-BACK\_\-RIGHT\_\-BUFFER\_\-BIT@{GLX\_\-BACK\_\-RIGHT\_\-BUFFER\_\-BIT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-BACK\_\-RIGHT\_\-BUFFER\_\-BIT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-BACK\_\-RIGHT\_\-BUFFER\_\-BIT} = 0x00000008}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ae28309df04eee65baa036636d1e59459}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a514b1a15b854a85a00604567fe0cb57d}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-BAD\_\-ATTRIBUTE@{GLX\_\-BAD\_\-ATTRIBUTE}}
+\index{GLX\_\-BAD\_\-ATTRIBUTE@{GLX\_\-BAD\_\-ATTRIBUTE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-BAD\_\-ATTRIBUTE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-BAD\_\-ATTRIBUTE} = 2}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a514b1a15b854a85a00604567fe0cb57d}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a85f4c8fd7b882705d0a2ab33842385b6}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-BAD\_\-CONTEXT@{GLX\_\-BAD\_\-CONTEXT}}
+\index{GLX\_\-BAD\_\-CONTEXT@{GLX\_\-BAD\_\-CONTEXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-BAD\_\-CONTEXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-BAD\_\-CONTEXT} = 5}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a85f4c8fd7b882705d0a2ab33842385b6}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a78b528f44c6912a84341530622a4285e}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-BAD\_\-ENUM@{GLX\_\-BAD\_\-ENUM}}
+\index{GLX\_\-BAD\_\-ENUM@{GLX\_\-BAD\_\-ENUM}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-BAD\_\-ENUM}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-BAD\_\-ENUM} = 7}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a78b528f44c6912a84341530622a4285e}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a4c3bdd23294091a4dc4462822a496b18}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-BAD\_\-SCREEN@{GLX\_\-BAD\_\-SCREEN}}
+\index{GLX\_\-BAD\_\-SCREEN@{GLX\_\-BAD\_\-SCREEN}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-BAD\_\-SCREEN}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-BAD\_\-SCREEN} = 1}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a4c3bdd23294091a4dc4462822a496b18}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_abf751a9967b1a5fb0d1f672a363e21b6}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-BAD\_\-VALUE@{GLX\_\-BAD\_\-VALUE}}
+\index{GLX\_\-BAD\_\-VALUE@{GLX\_\-BAD\_\-VALUE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-BAD\_\-VALUE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-BAD\_\-VALUE} = 6}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_abf751a9967b1a5fb0d1f672a363e21b6}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a884e10d10c755a6a3e17018169cf9117}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-BAD\_\-VISUAL@{GLX\_\-BAD\_\-VISUAL}}
+\index{GLX\_\-BAD\_\-VISUAL@{GLX\_\-BAD\_\-VISUAL}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-BAD\_\-VISUAL}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-BAD\_\-VISUAL} = 4}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a884e10d10c755a6a3e17018169cf9117}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a9dedfd5e84ea2d6e12e45ffb451bf5c4}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-BLUE\_\-SIZE@{GLX\_\-BLUE\_\-SIZE}}
+\index{GLX\_\-BLUE\_\-SIZE@{GLX\_\-BLUE\_\-SIZE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-BLUE\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-BLUE\_\-SIZE} = 10}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a9dedfd5e84ea2d6e12e45ffb451bf5c4}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a1d668eba3b5a2ae6f75cdddbfba5020f}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-BUFFER\_\-SIZE@{GLX\_\-BUFFER\_\-SIZE}}
+\index{GLX\_\-BUFFER\_\-SIZE@{GLX\_\-BUFFER\_\-SIZE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-BUFFER\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-BUFFER\_\-SIZE} = 2}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a1d668eba3b5a2ae6f75cdddbfba5020f}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a056beffa48c29bc3c7fa561438a7958d}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-COLOR\_\-INDEX\_\-BIT@{GLX\_\-COLOR\_\-INDEX\_\-BIT}}
+\index{GLX\_\-COLOR\_\-INDEX\_\-BIT@{GLX\_\-COLOR\_\-INDEX\_\-BIT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-COLOR\_\-INDEX\_\-BIT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-COLOR\_\-INDEX\_\-BIT} = 0x00000002}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a056beffa48c29bc3c7fa561438a7958d}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_aca5ff459ff309805a054eb5af32d091c}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-COLOR\_\-INDEX\_\-TYPE@{GLX\_\-COLOR\_\-INDEX\_\-TYPE}}
+\index{GLX\_\-COLOR\_\-INDEX\_\-TYPE@{GLX\_\-COLOR\_\-INDEX\_\-TYPE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-COLOR\_\-INDEX\_\-TYPE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-COLOR\_\-INDEX\_\-TYPE} = 0x8015}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_aca5ff459ff309805a054eb5af32d091c}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ac819c74afaae71b2a3ac8b12ca407974}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-CONFIG\_\-CAVEAT@{GLX\_\-CONFIG\_\-CAVEAT}}
+\index{GLX\_\-CONFIG\_\-CAVEAT@{GLX\_\-CONFIG\_\-CAVEAT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-CONFIG\_\-CAVEAT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-CONFIG\_\-CAVEAT} = 0x20}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ac819c74afaae71b2a3ac8b12ca407974}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a3fa5e550a34663b1153f8fbd643366d1}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-DAMAGED@{GLX\_\-DAMAGED}}
+\index{GLX\_\-DAMAGED@{GLX\_\-DAMAGED}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-DAMAGED}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-DAMAGED} = 0x8020}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a3fa5e550a34663b1153f8fbd643366d1}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a2edb4c4f6cb3c8aaecba060d252374bb}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-DEPTH\_\-BUFFER\_\-BIT@{GLX\_\-DEPTH\_\-BUFFER\_\-BIT}}
+\index{GLX\_\-DEPTH\_\-BUFFER\_\-BIT@{GLX\_\-DEPTH\_\-BUFFER\_\-BIT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-DEPTH\_\-BUFFER\_\-BIT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-DEPTH\_\-BUFFER\_\-BIT} = 0x00000020}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a2edb4c4f6cb3c8aaecba060d252374bb}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a1810eb0afa5700e1e72b6bba71647ce6}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-DEPTH\_\-SIZE@{GLX\_\-DEPTH\_\-SIZE}}
+\index{GLX\_\-DEPTH\_\-SIZE@{GLX\_\-DEPTH\_\-SIZE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-DEPTH\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-DEPTH\_\-SIZE} = 12}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a1810eb0afa5700e1e72b6bba71647ce6}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ae7c06440f69e30d7f700e19c41c30a96}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-DIRECT\_\-COLOR@{GLX\_\-DIRECT\_\-COLOR}}
+\index{GLX\_\-DIRECT\_\-COLOR@{GLX\_\-DIRECT\_\-COLOR}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-DIRECT\_\-COLOR}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-DIRECT\_\-COLOR} = 0x8003}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ae7c06440f69e30d7f700e19c41c30a96}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ab31b0c872736b40dc162d5f05f171147}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-DIRECT\_\-COLOR\_\-EXT@{GLX\_\-DIRECT\_\-COLOR\_\-EXT}}
+\index{GLX\_\-DIRECT\_\-COLOR\_\-EXT@{GLX\_\-DIRECT\_\-COLOR\_\-EXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-DIRECT\_\-COLOR\_\-EXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-DIRECT\_\-COLOR\_\-EXT} = 0x8003}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ab31b0c872736b40dc162d5f05f171147}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a11cda7d73face7eabc20e12fb7d990a1}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-DONT\_\-CARE@{GLX\_\-DONT\_\-CARE}}
+\index{GLX\_\-DONT\_\-CARE@{GLX\_\-DONT\_\-CARE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-DONT\_\-CARE}]{\setlength{\rightskip}{0pt plus 5cm}const uint {\bf Tao.Platform.X11.Glx.GLX\_\-DONT\_\-CARE} = 0xFFFFFFFF}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a11cda7d73face7eabc20e12fb7d990a1}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a76cfa4610aa8f6c72e50aa96b9d2ba38}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-DOUBLEBUFFER@{GLX\_\-DOUBLEBUFFER}}
+\index{GLX\_\-DOUBLEBUFFER@{GLX\_\-DOUBLEBUFFER}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-DOUBLEBUFFER}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-DOUBLEBUFFER} = 5}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a76cfa4610aa8f6c72e50aa96b9d2ba38}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_abd580356fe0bc30ae3eb7d3fd85b66a0}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-DRAWABLE\_\-TYPE@{GLX\_\-DRAWABLE\_\-TYPE}}
+\index{GLX\_\-DRAWABLE\_\-TYPE@{GLX\_\-DRAWABLE\_\-TYPE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-DRAWABLE\_\-TYPE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-DRAWABLE\_\-TYPE} = 0x8010}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_abd580356fe0bc30ae3eb7d3fd85b66a0}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a1a6cc2a5122e3ab70b2af77556b04c5a}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-EVENT\_\-MASK@{GLX\_\-EVENT\_\-MASK}}
+\index{GLX\_\-EVENT\_\-MASK@{GLX\_\-EVENT\_\-MASK}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-EVENT\_\-MASK}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-EVENT\_\-MASK} = 0x801F}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a1a6cc2a5122e3ab70b2af77556b04c5a}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_abec2a3b7c5910903cdfca72d15e02d22}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-EXT\_\-import\_\-context@{GLX\_\-EXT\_\-import\_\-context}}
+\index{GLX\_\-EXT\_\-import\_\-context@{GLX\_\-EXT\_\-import\_\-context}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-EXT\_\-import\_\-context}]{\setlength{\rightskip}{0pt plus 5cm}const bool {\bf Tao.Platform.X11.Glx.GLX\_\-EXT\_\-import\_\-context} = true}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_abec2a3b7c5910903cdfca72d15e02d22}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_af37f74af4723886fda0cbc536bb75f8c}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-EXT\_\-visual\_\-info@{GLX\_\-EXT\_\-visual\_\-info}}
+\index{GLX\_\-EXT\_\-visual\_\-info@{GLX\_\-EXT\_\-visual\_\-info}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-EXT\_\-visual\_\-info}]{\setlength{\rightskip}{0pt plus 5cm}const bool {\bf Tao.Platform.X11.Glx.GLX\_\-EXT\_\-visual\_\-info} = true}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_af37f74af4723886fda0cbc536bb75f8c}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ae700b9e1b0c2d6641015ff34403ee28f}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-EXT\_\-visual\_\-rating@{GLX\_\-EXT\_\-visual\_\-rating}}
+\index{GLX\_\-EXT\_\-visual\_\-rating@{GLX\_\-EXT\_\-visual\_\-rating}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-EXT\_\-visual\_\-rating}]{\setlength{\rightskip}{0pt plus 5cm}const bool {\bf Tao.Platform.X11.Glx.GLX\_\-EXT\_\-visual\_\-rating} = true}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ae700b9e1b0c2d6641015ff34403ee28f}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_aa98e7ad8e8c05de7ed45f2578b86b280}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-EXTENSIONS@{GLX\_\-EXTENSIONS}}
+\index{GLX\_\-EXTENSIONS@{GLX\_\-EXTENSIONS}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-EXTENSIONS}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-EXTENSIONS} = 0x3}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_aa98e7ad8e8c05de7ed45f2578b86b280}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a9058319d3f2837e9c43e7822f0ce1f53}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-FBCONFIG\_\-ID@{GLX\_\-FBCONFIG\_\-ID}}
+\index{GLX\_\-FBCONFIG\_\-ID@{GLX\_\-FBCONFIG\_\-ID}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-FBCONFIG\_\-ID}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-FBCONFIG\_\-ID} = 0x8013}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a9058319d3f2837e9c43e7822f0ce1f53}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ab5e6633688255a2b3c1c2936c49b163e}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-FRONT\_\-LEFT\_\-BUFFER\_\-BIT@{GLX\_\-FRONT\_\-LEFT\_\-BUFFER\_\-BIT}}
+\index{GLX\_\-FRONT\_\-LEFT\_\-BUFFER\_\-BIT@{GLX\_\-FRONT\_\-LEFT\_\-BUFFER\_\-BIT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-FRONT\_\-LEFT\_\-BUFFER\_\-BIT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-FRONT\_\-LEFT\_\-BUFFER\_\-BIT} = 0x00000001}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ab5e6633688255a2b3c1c2936c49b163e}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_adc5d0545c96bfb8b1bdd0de0ef29cb0e}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-FRONT\_\-RIGHT\_\-BUFFER\_\-BIT@{GLX\_\-FRONT\_\-RIGHT\_\-BUFFER\_\-BIT}}
+\index{GLX\_\-FRONT\_\-RIGHT\_\-BUFFER\_\-BIT@{GLX\_\-FRONT\_\-RIGHT\_\-BUFFER\_\-BIT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-FRONT\_\-RIGHT\_\-BUFFER\_\-BIT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-FRONT\_\-RIGHT\_\-BUFFER\_\-BIT} = 0x00000002}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_adc5d0545c96bfb8b1bdd0de0ef29cb0e}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a5ba311a88aac071d258bcc41575e771c}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-GRAY\_\-SCALE@{GLX\_\-GRAY\_\-SCALE}}
+\index{GLX\_\-GRAY\_\-SCALE@{GLX\_\-GRAY\_\-SCALE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-GRAY\_\-SCALE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-GRAY\_\-SCALE} = 0x8006}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a5ba311a88aac071d258bcc41575e771c}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a1c8bf824a1ae02d7bae31010865313f2}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-GRAY\_\-SCALE\_\-EXT@{GLX\_\-GRAY\_\-SCALE\_\-EXT}}
+\index{GLX\_\-GRAY\_\-SCALE\_\-EXT@{GLX\_\-GRAY\_\-SCALE\_\-EXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-GRAY\_\-SCALE\_\-EXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-GRAY\_\-SCALE\_\-EXT} = 0x8006}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a1c8bf824a1ae02d7bae31010865313f2}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a4ea44baa5ca696ca9e15ca33a006f574}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-GREEN\_\-SIZE@{GLX\_\-GREEN\_\-SIZE}}
+\index{GLX\_\-GREEN\_\-SIZE@{GLX\_\-GREEN\_\-SIZE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-GREEN\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-GREEN\_\-SIZE} = 9}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a4ea44baa5ca696ca9e15ca33a006f574}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_acd3e11028d125afbbf1e8a34b156e44a}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-HEIGHT@{GLX\_\-HEIGHT}}
+\index{GLX\_\-HEIGHT@{GLX\_\-HEIGHT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-HEIGHT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-HEIGHT} = 0x801E}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_acd3e11028d125afbbf1e8a34b156e44a}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a19dcd43808f2415373c4f1369ac0b881}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-LARGEST\_\-PBUFFER@{GLX\_\-LARGEST\_\-PBUFFER}}
+\index{GLX\_\-LARGEST\_\-PBUFFER@{GLX\_\-LARGEST\_\-PBUFFER}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-LARGEST\_\-PBUFFER}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-LARGEST\_\-PBUFFER} = 0x801C}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a19dcd43808f2415373c4f1369ac0b881}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a9413f7ed62658e17be5cfec7fa63f08d}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-LEVEL@{GLX\_\-LEVEL}}
+\index{GLX\_\-LEVEL@{GLX\_\-LEVEL}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-LEVEL}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-LEVEL} = 3}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a9413f7ed62658e17be5cfec7fa63f08d}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_aace265087d8b7559282f6b773c747b75}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-MAX\_\-PBUFFER\_\-HEIGHT@{GLX\_\-MAX\_\-PBUFFER\_\-HEIGHT}}
+\index{GLX\_\-MAX\_\-PBUFFER\_\-HEIGHT@{GLX\_\-MAX\_\-PBUFFER\_\-HEIGHT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-MAX\_\-PBUFFER\_\-HEIGHT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-MAX\_\-PBUFFER\_\-HEIGHT} = 0x8017}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_aace265087d8b7559282f6b773c747b75}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a9824a3a00017f01c9afc95553a295504}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-MAX\_\-PBUFFER\_\-PIXELS@{GLX\_\-MAX\_\-PBUFFER\_\-PIXELS}}
+\index{GLX\_\-MAX\_\-PBUFFER\_\-PIXELS@{GLX\_\-MAX\_\-PBUFFER\_\-PIXELS}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-MAX\_\-PBUFFER\_\-PIXELS}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-MAX\_\-PBUFFER\_\-PIXELS} = 0x8018}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a9824a3a00017f01c9afc95553a295504}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a94799aa9360ef6848752dc1cffbf2e09}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-MAX\_\-PBUFFER\_\-WIDTH@{GLX\_\-MAX\_\-PBUFFER\_\-WIDTH}}
+\index{GLX\_\-MAX\_\-PBUFFER\_\-WIDTH@{GLX\_\-MAX\_\-PBUFFER\_\-WIDTH}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-MAX\_\-PBUFFER\_\-WIDTH}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-MAX\_\-PBUFFER\_\-WIDTH} = 0x8016}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a94799aa9360ef6848752dc1cffbf2e09}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a4964628e8c7c0a05fa0c8cf3739770b7}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-NO\_\-EXTENSION@{GLX\_\-NO\_\-EXTENSION}}
+\index{GLX\_\-NO\_\-EXTENSION@{GLX\_\-NO\_\-EXTENSION}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-NO\_\-EXTENSION}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-NO\_\-EXTENSION} = 3}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a4964628e8c7c0a05fa0c8cf3739770b7}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a1e338432449cbc213a3a4c2673123ca0}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-NON\_\-CONFORMANT\_\-CONFIG@{GLX\_\-NON\_\-CONFORMANT\_\-CONFIG}}
+\index{GLX\_\-NON\_\-CONFORMANT\_\-CONFIG@{GLX\_\-NON\_\-CONFORMANT\_\-CONFIG}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-NON\_\-CONFORMANT\_\-CONFIG}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-NON\_\-CONFORMANT\_\-CONFIG} = 0x800D}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a1e338432449cbc213a3a4c2673123ca0}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_af52ed35e6d62a6b15c0b1c8146f39325}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-NON\_\-CONFORMANT\_\-VISUAL\_\-EXT@{GLX\_\-NON\_\-CONFORMANT\_\-VISUAL\_\-EXT}}
+\index{GLX\_\-NON\_\-CONFORMANT\_\-VISUAL\_\-EXT@{GLX\_\-NON\_\-CONFORMANT\_\-VISUAL\_\-EXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-NON\_\-CONFORMANT\_\-VISUAL\_\-EXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-NON\_\-CONFORMANT\_\-VISUAL\_\-EXT} = 0x800D}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_af52ed35e6d62a6b15c0b1c8146f39325}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a51737dacb361ecb25c36db057d0646d1}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-NONE@{GLX\_\-NONE}}
+\index{GLX\_\-NONE@{GLX\_\-NONE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-NONE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-NONE} = 0x8000}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a51737dacb361ecb25c36db057d0646d1}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ab4845c9111062972b88a73f6115539a8}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-NONE\_\-EXT@{GLX\_\-NONE\_\-EXT}}
+\index{GLX\_\-NONE\_\-EXT@{GLX\_\-NONE\_\-EXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-NONE\_\-EXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-NONE\_\-EXT} = 0x8000}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ab4845c9111062972b88a73f6115539a8}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_af47ec9964a832b5f77fb66616d845771}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-OPTIMAL\_\-PBUFFER\_\-HEIGHT\_\-SGIX@{GLX\_\-OPTIMAL\_\-PBUFFER\_\-HEIGHT\_\-SGIX}}
+\index{GLX\_\-OPTIMAL\_\-PBUFFER\_\-HEIGHT\_\-SGIX@{GLX\_\-OPTIMAL\_\-PBUFFER\_\-HEIGHT\_\-SGIX}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-OPTIMAL\_\-PBUFFER\_\-HEIGHT\_\-SGIX}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-OPTIMAL\_\-PBUFFER\_\-HEIGHT\_\-SGIX} = 0x801A}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_af47ec9964a832b5f77fb66616d845771}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ab87b4beadb6382fd25ce4f4f320055a9}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-OPTIMAL\_\-PBUFFER\_\-WIDTH\_\-SGIX@{GLX\_\-OPTIMAL\_\-PBUFFER\_\-WIDTH\_\-SGIX}}
+\index{GLX\_\-OPTIMAL\_\-PBUFFER\_\-WIDTH\_\-SGIX@{GLX\_\-OPTIMAL\_\-PBUFFER\_\-WIDTH\_\-SGIX}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-OPTIMAL\_\-PBUFFER\_\-WIDTH\_\-SGIX}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-OPTIMAL\_\-PBUFFER\_\-WIDTH\_\-SGIX} = 0x8019}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ab87b4beadb6382fd25ce4f4f320055a9}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a2fc2a28bd00b531b96e0041cbdeef3c3}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-PBUFFER@{GLX\_\-PBUFFER}}
+\index{GLX\_\-PBUFFER@{GLX\_\-PBUFFER}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-PBUFFER}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-PBUFFER} = 0x8023}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a2fc2a28bd00b531b96e0041cbdeef3c3}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a64b5d49bef52b11f4ad5bd1ef90e84ca}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-PBUFFER\_\-BIT@{GLX\_\-PBUFFER\_\-BIT}}
+\index{GLX\_\-PBUFFER\_\-BIT@{GLX\_\-PBUFFER\_\-BIT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-PBUFFER\_\-BIT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-PBUFFER\_\-BIT} = 0x00000004}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a64b5d49bef52b11f4ad5bd1ef90e84ca}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a8a9f936a285b35c0aa0a3054c135b4cc}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-PBUFFER\_\-CLOBBER\_\-MASK@{GLX\_\-PBUFFER\_\-CLOBBER\_\-MASK}}
+\index{GLX\_\-PBUFFER\_\-CLOBBER\_\-MASK@{GLX\_\-PBUFFER\_\-CLOBBER\_\-MASK}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-PBUFFER\_\-CLOBBER\_\-MASK}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-PBUFFER\_\-CLOBBER\_\-MASK} = 0x08000000}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a8a9f936a285b35c0aa0a3054c135b4cc}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a2caba72e0d68ed8925433140b69cae1f}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-PBUFFER\_\-HEIGHT@{GLX\_\-PBUFFER\_\-HEIGHT}}
+\index{GLX\_\-PBUFFER\_\-HEIGHT@{GLX\_\-PBUFFER\_\-HEIGHT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-PBUFFER\_\-HEIGHT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-PBUFFER\_\-HEIGHT} = 0x8040}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a2caba72e0d68ed8925433140b69cae1f}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a3befe7327e4d27a9361056283a741b3a}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-PBUFFER\_\-WIDTH@{GLX\_\-PBUFFER\_\-WIDTH}}
+\index{GLX\_\-PBUFFER\_\-WIDTH@{GLX\_\-PBUFFER\_\-WIDTH}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-PBUFFER\_\-WIDTH}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-PBUFFER\_\-WIDTH} = 0x8041}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a3befe7327e4d27a9361056283a741b3a}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_abb8f9b7e88bfa3589924a83107ba014d}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-PIXMAP\_\-BIT@{GLX\_\-PIXMAP\_\-BIT}}
+\index{GLX\_\-PIXMAP\_\-BIT@{GLX\_\-PIXMAP\_\-BIT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-PIXMAP\_\-BIT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-PIXMAP\_\-BIT} = 0x00000002}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_abb8f9b7e88bfa3589924a83107ba014d}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a33545f2488ed80af9bce684fe52d0215}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-PRESERVED\_\-CONTENTS@{GLX\_\-PRESERVED\_\-CONTENTS}}
+\index{GLX\_\-PRESERVED\_\-CONTENTS@{GLX\_\-PRESERVED\_\-CONTENTS}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-PRESERVED\_\-CONTENTS}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-PRESERVED\_\-CONTENTS} = 0x801B}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a33545f2488ed80af9bce684fe52d0215}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a98cc081d53938af1a9ed0512a1b8ed98}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-PSEUDO\_\-COLOR@{GLX\_\-PSEUDO\_\-COLOR}}
+\index{GLX\_\-PSEUDO\_\-COLOR@{GLX\_\-PSEUDO\_\-COLOR}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-PSEUDO\_\-COLOR}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-PSEUDO\_\-COLOR} = 0x8004}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a98cc081d53938af1a9ed0512a1b8ed98}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a7e15ee0e44da343b4ea0eff6b8137a56}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-PSEUDO\_\-COLOR\_\-EXT@{GLX\_\-PSEUDO\_\-COLOR\_\-EXT}}
+\index{GLX\_\-PSEUDO\_\-COLOR\_\-EXT@{GLX\_\-PSEUDO\_\-COLOR\_\-EXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-PSEUDO\_\-COLOR\_\-EXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-PSEUDO\_\-COLOR\_\-EXT} = 0x8004}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a7e15ee0e44da343b4ea0eff6b8137a56}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a033dbf660bd6df8f09dba42972b69a0b}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-RED\_\-SIZE@{GLX\_\-RED\_\-SIZE}}
+\index{GLX\_\-RED\_\-SIZE@{GLX\_\-RED\_\-SIZE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-RED\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-RED\_\-SIZE} = 8}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a033dbf660bd6df8f09dba42972b69a0b}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a34fd97e1e32bc93a6fb58867f3d14879}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-RENDER\_\-TYPE@{GLX\_\-RENDER\_\-TYPE}}
+\index{GLX\_\-RENDER\_\-TYPE@{GLX\_\-RENDER\_\-TYPE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-RENDER\_\-TYPE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-RENDER\_\-TYPE} = 0x8011}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a34fd97e1e32bc93a6fb58867f3d14879}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ac7d84613555c5152e3ce4f4999a5d8e5}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-RGBA@{GLX\_\-RGBA}}
+\index{GLX\_\-RGBA@{GLX\_\-RGBA}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-RGBA}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-RGBA} = 4}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ac7d84613555c5152e3ce4f4999a5d8e5}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a46959909212bb7c1157ce812e621f2f6}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-RGBA\_\-BIT@{GLX\_\-RGBA\_\-BIT}}
+\index{GLX\_\-RGBA\_\-BIT@{GLX\_\-RGBA\_\-BIT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-RGBA\_\-BIT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-RGBA\_\-BIT} = 0x00000001}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a46959909212bb7c1157ce812e621f2f6}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a9d98f89beff5043030c657aa94352647}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-RGBA\_\-TYPE@{GLX\_\-RGBA\_\-TYPE}}
+\index{GLX\_\-RGBA\_\-TYPE@{GLX\_\-RGBA\_\-TYPE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-RGBA\_\-TYPE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-RGBA\_\-TYPE} = 0x8014}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a9d98f89beff5043030c657aa94352647}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_aa93523144cfdbd8382aa99383205c17d}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-SAMPLE\_\-BUFFERS\_\-SGIS@{GLX\_\-SAMPLE\_\-BUFFERS\_\-SGIS}}
+\index{GLX\_\-SAMPLE\_\-BUFFERS\_\-SGIS@{GLX\_\-SAMPLE\_\-BUFFERS\_\-SGIS}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-SAMPLE\_\-BUFFERS\_\-SGIS}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-SAMPLE\_\-BUFFERS\_\-SGIS} = 100000}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_aa93523144cfdbd8382aa99383205c17d}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_acbb6099d7e93d979f469e8f4e74d908f}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-SAMPLES\_\-SGIS@{GLX\_\-SAMPLES\_\-SGIS}}
+\index{GLX\_\-SAMPLES\_\-SGIS@{GLX\_\-SAMPLES\_\-SGIS}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-SAMPLES\_\-SGIS}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-SAMPLES\_\-SGIS} = 100001}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_acbb6099d7e93d979f469e8f4e74d908f}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ae496c91203442a990a7c9d65e68d437a}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-SAVED@{GLX\_\-SAVED}}
+\index{GLX\_\-SAVED@{GLX\_\-SAVED}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-SAVED}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-SAVED} = 0x8021}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ae496c91203442a990a7c9d65e68d437a}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a0b9ae4d32b7263fa6c4a8c8fa35030c9}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-SCREEN@{GLX\_\-SCREEN}}
+\index{GLX\_\-SCREEN@{GLX\_\-SCREEN}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-SCREEN}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-SCREEN} = 0x800C}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a0b9ae4d32b7263fa6c4a8c8fa35030c9}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a7f97f97f95eddfb79e1ae39032c98a7f}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-SCREEN\_\-EXT@{GLX\_\-SCREEN\_\-EXT}}
+\index{GLX\_\-SCREEN\_\-EXT@{GLX\_\-SCREEN\_\-EXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-SCREEN\_\-EXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-SCREEN\_\-EXT} = 0x800C}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a7f97f97f95eddfb79e1ae39032c98a7f}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a1d7d422f83455ebe81d6d69f850d5033}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-SHARE\_\-CONTEXT\_\-EXT@{GLX\_\-SHARE\_\-CONTEXT\_\-EXT}}
+\index{GLX\_\-SHARE\_\-CONTEXT\_\-EXT@{GLX\_\-SHARE\_\-CONTEXT\_\-EXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-SHARE\_\-CONTEXT\_\-EXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-SHARE\_\-CONTEXT\_\-EXT} = 0x800A}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a1d7d422f83455ebe81d6d69f850d5033}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ae00dd5da604664ab67feebfd716fae89}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-SLOW\_\-CONFIG@{GLX\_\-SLOW\_\-CONFIG}}
+\index{GLX\_\-SLOW\_\-CONFIG@{GLX\_\-SLOW\_\-CONFIG}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-SLOW\_\-CONFIG}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-SLOW\_\-CONFIG} = 0x8001}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ae00dd5da604664ab67feebfd716fae89}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a6ace1cdea8ca8d0277262bbbdab3208e}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-SLOW\_\-VISUAL\_\-EXT@{GLX\_\-SLOW\_\-VISUAL\_\-EXT}}
+\index{GLX\_\-SLOW\_\-VISUAL\_\-EXT@{GLX\_\-SLOW\_\-VISUAL\_\-EXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-SLOW\_\-VISUAL\_\-EXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-SLOW\_\-VISUAL\_\-EXT} = 0x8001}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a6ace1cdea8ca8d0277262bbbdab3208e}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a1303f2e0f2f13f0a1e5ffa33a22ea888}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-STATIC\_\-COLOR@{GLX\_\-STATIC\_\-COLOR}}
+\index{GLX\_\-STATIC\_\-COLOR@{GLX\_\-STATIC\_\-COLOR}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-STATIC\_\-COLOR}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-STATIC\_\-COLOR} = 0x8005}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a1303f2e0f2f13f0a1e5ffa33a22ea888}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a1eab7def5d1f9ca7f7ca4ce75108a68e}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-STATIC\_\-COLOR\_\-EXT@{GLX\_\-STATIC\_\-COLOR\_\-EXT}}
+\index{GLX\_\-STATIC\_\-COLOR\_\-EXT@{GLX\_\-STATIC\_\-COLOR\_\-EXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-STATIC\_\-COLOR\_\-EXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-STATIC\_\-COLOR\_\-EXT} = 0x8005}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a1eab7def5d1f9ca7f7ca4ce75108a68e}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a9eaa0fc788ced88feee6d0cbfc083c86}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-STATIC\_\-GRAY@{GLX\_\-STATIC\_\-GRAY}}
+\index{GLX\_\-STATIC\_\-GRAY@{GLX\_\-STATIC\_\-GRAY}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-STATIC\_\-GRAY}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-STATIC\_\-GRAY} = 0x8007}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a9eaa0fc788ced88feee6d0cbfc083c86}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_aba49bcbbff3a03176c368da11db5aaae}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-STATIC\_\-GRAY\_\-EXT@{GLX\_\-STATIC\_\-GRAY\_\-EXT}}
+\index{GLX\_\-STATIC\_\-GRAY\_\-EXT@{GLX\_\-STATIC\_\-GRAY\_\-EXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-STATIC\_\-GRAY\_\-EXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-STATIC\_\-GRAY\_\-EXT} = 0x8007}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_aba49bcbbff3a03176c368da11db5aaae}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_abe1d839f1268a0a69d7754360a86a539}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-STENCIL\_\-BUFFER\_\-BIT@{GLX\_\-STENCIL\_\-BUFFER\_\-BIT}}
+\index{GLX\_\-STENCIL\_\-BUFFER\_\-BIT@{GLX\_\-STENCIL\_\-BUFFER\_\-BIT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-STENCIL\_\-BUFFER\_\-BIT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-STENCIL\_\-BUFFER\_\-BIT} = 0x00000040}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_abe1d839f1268a0a69d7754360a86a539}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a64b2809c8935d9a5e6cd2fd81ae7273a}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-STENCIL\_\-SIZE@{GLX\_\-STENCIL\_\-SIZE}}
+\index{GLX\_\-STENCIL\_\-SIZE@{GLX\_\-STENCIL\_\-SIZE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-STENCIL\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-STENCIL\_\-SIZE} = 13}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a64b2809c8935d9a5e6cd2fd81ae7273a}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a15dffacce94171d23e8941ce8c7128b1}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-STEREO@{GLX\_\-STEREO}}
+\index{GLX\_\-STEREO@{GLX\_\-STEREO}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-STEREO}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-STEREO} = 6}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a15dffacce94171d23e8941ce8c7128b1}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a70d4f7954350861ad0d71ed03e300b33}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-SWAP\_\-COPY\_\-OML@{GLX\_\-SWAP\_\-COPY\_\-OML}}
+\index{GLX\_\-SWAP\_\-COPY\_\-OML@{GLX\_\-SWAP\_\-COPY\_\-OML}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-SWAP\_\-COPY\_\-OML}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-SWAP\_\-COPY\_\-OML} = 0x8062}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a70d4f7954350861ad0d71ed03e300b33}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a7867fdb981fbefbb0f4cc4ec47d5451b}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-SWAP\_\-EXCHANGE\_\-OML@{GLX\_\-SWAP\_\-EXCHANGE\_\-OML}}
+\index{GLX\_\-SWAP\_\-EXCHANGE\_\-OML@{GLX\_\-SWAP\_\-EXCHANGE\_\-OML}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-SWAP\_\-EXCHANGE\_\-OML}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-SWAP\_\-EXCHANGE\_\-OML} = 0x8061}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a7867fdb981fbefbb0f4cc4ec47d5451b}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_aa3a152fce38aec49cf836f6cea9ad5d6}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-SWAP\_\-METHOD\_\-OML@{GLX\_\-SWAP\_\-METHOD\_\-OML}}
+\index{GLX\_\-SWAP\_\-METHOD\_\-OML@{GLX\_\-SWAP\_\-METHOD\_\-OML}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-SWAP\_\-METHOD\_\-OML}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-SWAP\_\-METHOD\_\-OML} = 0x8060}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_aa3a152fce38aec49cf836f6cea9ad5d6}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ac0b3ee6aa931dd05a099b72bd433d664}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-SWAP\_\-UNDEFINED\_\-OML@{GLX\_\-SWAP\_\-UNDEFINED\_\-OML}}
+\index{GLX\_\-SWAP\_\-UNDEFINED\_\-OML@{GLX\_\-SWAP\_\-UNDEFINED\_\-OML}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-SWAP\_\-UNDEFINED\_\-OML}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-SWAP\_\-UNDEFINED\_\-OML} = 0x8063}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ac0b3ee6aa931dd05a099b72bd433d664}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_af7cef16f92ad62258a38868572d21ae3}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-TRANSPARENT\_\-ALPHA\_\-VALUE@{GLX\_\-TRANSPARENT\_\-ALPHA\_\-VALUE}}
+\index{GLX\_\-TRANSPARENT\_\-ALPHA\_\-VALUE@{GLX\_\-TRANSPARENT\_\-ALPHA\_\-VALUE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-TRANSPARENT\_\-ALPHA\_\-VALUE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-TRANSPARENT\_\-ALPHA\_\-VALUE} = 0x28}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_af7cef16f92ad62258a38868572d21ae3}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ab4ac1b85364d8ebc68fc131daeacaa14}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-TRANSPARENT\_\-ALPHA\_\-VALUE\_\-EXT@{GLX\_\-TRANSPARENT\_\-ALPHA\_\-VALUE\_\-EXT}}
+\index{GLX\_\-TRANSPARENT\_\-ALPHA\_\-VALUE\_\-EXT@{GLX\_\-TRANSPARENT\_\-ALPHA\_\-VALUE\_\-EXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-TRANSPARENT\_\-ALPHA\_\-VALUE\_\-EXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-TRANSPARENT\_\-ALPHA\_\-VALUE\_\-EXT} = 0x28}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ab4ac1b85364d8ebc68fc131daeacaa14}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ac14d4b887ee1ff38d42538e2dd4f2a91}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-TRANSPARENT\_\-BLUE\_\-VALUE@{GLX\_\-TRANSPARENT\_\-BLUE\_\-VALUE}}
+\index{GLX\_\-TRANSPARENT\_\-BLUE\_\-VALUE@{GLX\_\-TRANSPARENT\_\-BLUE\_\-VALUE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-TRANSPARENT\_\-BLUE\_\-VALUE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-TRANSPARENT\_\-BLUE\_\-VALUE} = 0x27}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ac14d4b887ee1ff38d42538e2dd4f2a91}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a333ee7b32c4683b67f35a39b058c33bd}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-TRANSPARENT\_\-BLUE\_\-VALUE\_\-EXT@{GLX\_\-TRANSPARENT\_\-BLUE\_\-VALUE\_\-EXT}}
+\index{GLX\_\-TRANSPARENT\_\-BLUE\_\-VALUE\_\-EXT@{GLX\_\-TRANSPARENT\_\-BLUE\_\-VALUE\_\-EXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-TRANSPARENT\_\-BLUE\_\-VALUE\_\-EXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-TRANSPARENT\_\-BLUE\_\-VALUE\_\-EXT} = 0x27}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a333ee7b32c4683b67f35a39b058c33bd}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ade187253eb5b8a9f770c317f403eefc1}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-TRANSPARENT\_\-GREEN\_\-VALUE@{GLX\_\-TRANSPARENT\_\-GREEN\_\-VALUE}}
+\index{GLX\_\-TRANSPARENT\_\-GREEN\_\-VALUE@{GLX\_\-TRANSPARENT\_\-GREEN\_\-VALUE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-TRANSPARENT\_\-GREEN\_\-VALUE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-TRANSPARENT\_\-GREEN\_\-VALUE} = 0x26}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ade187253eb5b8a9f770c317f403eefc1}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a687072d3336a0824a63a3204b5d0cd37}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-TRANSPARENT\_\-GREEN\_\-VALUE\_\-EXT@{GLX\_\-TRANSPARENT\_\-GREEN\_\-VALUE\_\-EXT}}
+\index{GLX\_\-TRANSPARENT\_\-GREEN\_\-VALUE\_\-EXT@{GLX\_\-TRANSPARENT\_\-GREEN\_\-VALUE\_\-EXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-TRANSPARENT\_\-GREEN\_\-VALUE\_\-EXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-TRANSPARENT\_\-GREEN\_\-VALUE\_\-EXT} = 0x26}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a687072d3336a0824a63a3204b5d0cd37}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a4d22273f56dbecae8152d8db2e95000e}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-TRANSPARENT\_\-INDEX@{GLX\_\-TRANSPARENT\_\-INDEX}}
+\index{GLX\_\-TRANSPARENT\_\-INDEX@{GLX\_\-TRANSPARENT\_\-INDEX}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-TRANSPARENT\_\-INDEX}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-TRANSPARENT\_\-INDEX} = 0x8009}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a4d22273f56dbecae8152d8db2e95000e}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a36d6c7ce71b4e1bb5695d4dea2cd393b}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-TRANSPARENT\_\-INDEX\_\-EXT@{GLX\_\-TRANSPARENT\_\-INDEX\_\-EXT}}
+\index{GLX\_\-TRANSPARENT\_\-INDEX\_\-EXT@{GLX\_\-TRANSPARENT\_\-INDEX\_\-EXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-TRANSPARENT\_\-INDEX\_\-EXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-TRANSPARENT\_\-INDEX\_\-EXT} = 0x8009}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a36d6c7ce71b4e1bb5695d4dea2cd393b}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a4c9c3cb131d742722f69aaf0ad814943}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-TRANSPARENT\_\-INDEX\_\-VALUE@{GLX\_\-TRANSPARENT\_\-INDEX\_\-VALUE}}
+\index{GLX\_\-TRANSPARENT\_\-INDEX\_\-VALUE@{GLX\_\-TRANSPARENT\_\-INDEX\_\-VALUE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-TRANSPARENT\_\-INDEX\_\-VALUE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-TRANSPARENT\_\-INDEX\_\-VALUE} = 0x24}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a4c9c3cb131d742722f69aaf0ad814943}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a1e8f3f9cf583863da934aadd55f7cc7c}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-TRANSPARENT\_\-INDEX\_\-VALUE\_\-EXT@{GLX\_\-TRANSPARENT\_\-INDEX\_\-VALUE\_\-EXT}}
+\index{GLX\_\-TRANSPARENT\_\-INDEX\_\-VALUE\_\-EXT@{GLX\_\-TRANSPARENT\_\-INDEX\_\-VALUE\_\-EXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-TRANSPARENT\_\-INDEX\_\-VALUE\_\-EXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-TRANSPARENT\_\-INDEX\_\-VALUE\_\-EXT} = 0x24}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a1e8f3f9cf583863da934aadd55f7cc7c}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a460b7d08f1fbc6d9bd8b925b1a709e3b}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-TRANSPARENT\_\-RED\_\-VALUE@{GLX\_\-TRANSPARENT\_\-RED\_\-VALUE}}
+\index{GLX\_\-TRANSPARENT\_\-RED\_\-VALUE@{GLX\_\-TRANSPARENT\_\-RED\_\-VALUE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-TRANSPARENT\_\-RED\_\-VALUE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-TRANSPARENT\_\-RED\_\-VALUE} = 0x25}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a460b7d08f1fbc6d9bd8b925b1a709e3b}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a8c0d163ec64d715d5ee60da7c9b008bc}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-TRANSPARENT\_\-RED\_\-VALUE\_\-EXT@{GLX\_\-TRANSPARENT\_\-RED\_\-VALUE\_\-EXT}}
+\index{GLX\_\-TRANSPARENT\_\-RED\_\-VALUE\_\-EXT@{GLX\_\-TRANSPARENT\_\-RED\_\-VALUE\_\-EXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-TRANSPARENT\_\-RED\_\-VALUE\_\-EXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-TRANSPARENT\_\-RED\_\-VALUE\_\-EXT} = 0x25}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a8c0d163ec64d715d5ee60da7c9b008bc}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a327c03a517966cea8af701bc311ddc85}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-TRANSPARENT\_\-RGB@{GLX\_\-TRANSPARENT\_\-RGB}}
+\index{GLX\_\-TRANSPARENT\_\-RGB@{GLX\_\-TRANSPARENT\_\-RGB}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-TRANSPARENT\_\-RGB}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-TRANSPARENT\_\-RGB} = 0x8008}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a327c03a517966cea8af701bc311ddc85}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a5afa705a44c8f37c53f84ae1ca0fdd2b}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-TRANSPARENT\_\-RGB\_\-EXT@{GLX\_\-TRANSPARENT\_\-RGB\_\-EXT}}
+\index{GLX\_\-TRANSPARENT\_\-RGB\_\-EXT@{GLX\_\-TRANSPARENT\_\-RGB\_\-EXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-TRANSPARENT\_\-RGB\_\-EXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-TRANSPARENT\_\-RGB\_\-EXT} = 0x8008}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a5afa705a44c8f37c53f84ae1ca0fdd2b}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a63935700d84aed4d00078363b042ba6d}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-TRANSPARENT\_\-TYPE@{GLX\_\-TRANSPARENT\_\-TYPE}}
+\index{GLX\_\-TRANSPARENT\_\-TYPE@{GLX\_\-TRANSPARENT\_\-TYPE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-TRANSPARENT\_\-TYPE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-TRANSPARENT\_\-TYPE} = 0x23}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a63935700d84aed4d00078363b042ba6d}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a593a81b432a1d5ec6e300ad2f57438e3}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-TRANSPARENT\_\-TYPE\_\-EXT@{GLX\_\-TRANSPARENT\_\-TYPE\_\-EXT}}
+\index{GLX\_\-TRANSPARENT\_\-TYPE\_\-EXT@{GLX\_\-TRANSPARENT\_\-TYPE\_\-EXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-TRANSPARENT\_\-TYPE\_\-EXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-TRANSPARENT\_\-TYPE\_\-EXT} = 0x23}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a593a81b432a1d5ec6e300ad2f57438e3}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a4df6c260ab08a6d229d3d407e2ba1dc2}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-TRUE\_\-COLOR@{GLX\_\-TRUE\_\-COLOR}}
+\index{GLX\_\-TRUE\_\-COLOR@{GLX\_\-TRUE\_\-COLOR}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-TRUE\_\-COLOR}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-TRUE\_\-COLOR} = 0x8002}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a4df6c260ab08a6d229d3d407e2ba1dc2}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a9ccebdda70318edcdb01ec9040546701}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-TRUE\_\-COLOR\_\-EXT@{GLX\_\-TRUE\_\-COLOR\_\-EXT}}
+\index{GLX\_\-TRUE\_\-COLOR\_\-EXT@{GLX\_\-TRUE\_\-COLOR\_\-EXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-TRUE\_\-COLOR\_\-EXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-TRUE\_\-COLOR\_\-EXT} = 0x8002}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a9ccebdda70318edcdb01ec9040546701}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_aa9b8db15184e106df8fede97d26c1cc6}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-USE\_\-GL@{GLX\_\-USE\_\-GL}}
+\index{GLX\_\-USE\_\-GL@{GLX\_\-USE\_\-GL}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-USE\_\-GL}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-USE\_\-GL} = 1}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_aa9b8db15184e106df8fede97d26c1cc6}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a1a8d04f2c9ed80340eb6ddae62962c65}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-VENDOR@{GLX\_\-VENDOR}}
+\index{GLX\_\-VENDOR@{GLX\_\-VENDOR}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-VENDOR}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-VENDOR} = 0x1}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a1a8d04f2c9ed80340eb6ddae62962c65}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_ae1c13229f4b03607ede1ec39f5fdfade}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-VERSION@{GLX\_\-VERSION}}
+\index{GLX\_\-VERSION@{GLX\_\-VERSION}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-VERSION}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-VERSION} = 0x2}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_ae1c13229f4b03607ede1ec39f5fdfade}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a27c592286dce935d5c444c7d961cf901}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-VERSION\_\-1\_\-1@{GLX\_\-VERSION\_\-1\_\-1}}
+\index{GLX\_\-VERSION\_\-1\_\-1@{GLX\_\-VERSION\_\-1\_\-1}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-VERSION\_\-1\_\-1}]{\setlength{\rightskip}{0pt plus 5cm}const bool {\bf Tao.Platform.X11.Glx.GLX\_\-VERSION\_\-1\_\-1} = true}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a27c592286dce935d5c444c7d961cf901}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_aa86a895296cc69c0989e87378e7ea4c7}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-VERSION\_\-1\_\-2@{GLX\_\-VERSION\_\-1\_\-2}}
+\index{GLX\_\-VERSION\_\-1\_\-2@{GLX\_\-VERSION\_\-1\_\-2}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-VERSION\_\-1\_\-2}]{\setlength{\rightskip}{0pt plus 5cm}const bool {\bf Tao.Platform.X11.Glx.GLX\_\-VERSION\_\-1\_\-2} = true}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_aa86a895296cc69c0989e87378e7ea4c7}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a48ad50734126818cdcb41a659aead31c}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-VERSION\_\-1\_\-3@{GLX\_\-VERSION\_\-1\_\-3}}
+\index{GLX\_\-VERSION\_\-1\_\-3@{GLX\_\-VERSION\_\-1\_\-3}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-VERSION\_\-1\_\-3}]{\setlength{\rightskip}{0pt plus 5cm}const bool {\bf Tao.Platform.X11.Glx.GLX\_\-VERSION\_\-1\_\-3} = true}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a48ad50734126818cdcb41a659aead31c}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a772129eb8346c477e9cdc01efa76e24e}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-VERSION\_\-1\_\-4@{GLX\_\-VERSION\_\-1\_\-4}}
+\index{GLX\_\-VERSION\_\-1\_\-4@{GLX\_\-VERSION\_\-1\_\-4}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-VERSION\_\-1\_\-4}]{\setlength{\rightskip}{0pt plus 5cm}const bool {\bf Tao.Platform.X11.Glx.GLX\_\-VERSION\_\-1\_\-4} = true}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a772129eb8346c477e9cdc01efa76e24e}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a115fc61ebf65a9448a116a74944299f3}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-VISUAL\_\-CAVEAT\_\-EXT@{GLX\_\-VISUAL\_\-CAVEAT\_\-EXT}}
+\index{GLX\_\-VISUAL\_\-CAVEAT\_\-EXT@{GLX\_\-VISUAL\_\-CAVEAT\_\-EXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-VISUAL\_\-CAVEAT\_\-EXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-VISUAL\_\-CAVEAT\_\-EXT} = 0x20}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a115fc61ebf65a9448a116a74944299f3}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a6e069356f6070485b2c4d0d8224aa167}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-VISUAL\_\-ID@{GLX\_\-VISUAL\_\-ID}}
+\index{GLX\_\-VISUAL\_\-ID@{GLX\_\-VISUAL\_\-ID}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-VISUAL\_\-ID}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-VISUAL\_\-ID} = 0x800B}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a6e069356f6070485b2c4d0d8224aa167}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a50a7a17fed6da4d8691aec98b882ad16}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-VISUAL\_\-ID\_\-EXT@{GLX\_\-VISUAL\_\-ID\_\-EXT}}
+\index{GLX\_\-VISUAL\_\-ID\_\-EXT@{GLX\_\-VISUAL\_\-ID\_\-EXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-VISUAL\_\-ID\_\-EXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-VISUAL\_\-ID\_\-EXT} = 0x800B}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a50a7a17fed6da4d8691aec98b882ad16}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a2893e772610e2ca4b80c46216137bef2}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-VISUAL\_\-SELECT\_\-GROUP\_\-SGIX@{GLX\_\-VISUAL\_\-SELECT\_\-GROUP\_\-SGIX}}
+\index{GLX\_\-VISUAL\_\-SELECT\_\-GROUP\_\-SGIX@{GLX\_\-VISUAL\_\-SELECT\_\-GROUP\_\-SGIX}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-VISUAL\_\-SELECT\_\-GROUP\_\-SGIX}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-VISUAL\_\-SELECT\_\-GROUP\_\-SGIX} = 0x8028}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a2893e772610e2ca4b80c46216137bef2}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a20f2b47a4e7d251d68992f8af2250b30}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-WIDTH@{GLX\_\-WIDTH}}
+\index{GLX\_\-WIDTH@{GLX\_\-WIDTH}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-WIDTH}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-WIDTH} = 0x801D}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a20f2b47a4e7d251d68992f8af2250b30}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a6f88ad44e0889a5ad2156f84a70bb493}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-WINDOW@{GLX\_\-WINDOW}}
+\index{GLX\_\-WINDOW@{GLX\_\-WINDOW}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-WINDOW}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-WINDOW} = 0x8022}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a6f88ad44e0889a5ad2156f84a70bb493}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a276a399a7aaf0d9b0d1c627ec02860b3}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-WINDOW\_\-BIT@{GLX\_\-WINDOW\_\-BIT}}
+\index{GLX\_\-WINDOW\_\-BIT@{GLX\_\-WINDOW\_\-BIT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-WINDOW\_\-BIT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-WINDOW\_\-BIT} = 0x00000001}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a276a399a7aaf0d9b0d1c627ec02860b3}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_af839e96ef74a4a68ba5f6b93012f804c}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-X\_\-RENDERABLE@{GLX\_\-X\_\-RENDERABLE}}
+\index{GLX\_\-X\_\-RENDERABLE@{GLX\_\-X\_\-RENDERABLE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-X\_\-RENDERABLE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-X\_\-RENDERABLE} = 0x8012}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_af839e96ef74a4a68ba5f6b93012f804c}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a0b25c68a108b2b1e3fd9a45a758e16f5}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-X\_\-VISUAL\_\-TYPE@{GLX\_\-X\_\-VISUAL\_\-TYPE}}
+\index{GLX\_\-X\_\-VISUAL\_\-TYPE@{GLX\_\-X\_\-VISUAL\_\-TYPE}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-X\_\-VISUAL\_\-TYPE}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-X\_\-VISUAL\_\-TYPE} = 0x22}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a0b25c68a108b2b1e3fd9a45a758e16f5}
+\hypertarget{class_tao_1_1_platform_1_1_x11_1_1_glx_a2daf7c1f9d1e7abca98e0365a6d6adc5}{
+\index{Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}!GLX\_\-X\_\-VISUAL\_\-TYPE\_\-EXT@{GLX\_\-X\_\-VISUAL\_\-TYPE\_\-EXT}}
+\index{GLX\_\-X\_\-VISUAL\_\-TYPE\_\-EXT@{GLX\_\-X\_\-VISUAL\_\-TYPE\_\-EXT}!Tao::Platform::X11::Glx@{Tao::Platform::X11::Glx}}
+\subsubsection[{GLX\_\-X\_\-VISUAL\_\-TYPE\_\-EXT}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf Tao.Platform.X11.Glx.GLX\_\-X\_\-VISUAL\_\-TYPE\_\-EXT} = 0x22}}
+\label{class_tao_1_1_platform_1_1_x11_1_1_glx_a2daf7c1f9d1e7abca98e0365a6d6adc5}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Platform.X11/\hyperlink{_glx_8cs}{Glx.cs}\end{DoxyCompactItemize}

@@ -1,0 +1,109 @@
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_button_event}{
+\section{Tao.Sdl.Sdl.SDL\_\-MouseButtonEvent Struct Reference}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_button_event}\index{Tao::Sdl::Sdl::SDL\_\-MouseButtonEvent@{Tao::Sdl::Sdl::SDL\_\-MouseButtonEvent}}
+}
+
+
+Mouse button event structure.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_button_event_af73bc2825de969d231eec503be2d37e0}{type}
+\begin{DoxyCompactList}\small\item\em SDL\_\-MOUSEBUTTONDOWN or SDL\_\-MOUSEBUTTONUP. \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_button_event_a09f1d658c8d4c53a52238cbd995227ad}{which}
+\begin{DoxyCompactList}\small\item\em The mouse device index. \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_button_event_ac38acdda954b63dea23005661b539f9f}{button}
+\begin{DoxyCompactList}\small\item\em The mouse button index (SDL\_\-BUTTON\_\-LEFT, SDL\_\-BUTTON\_\-MIDDLE, SDL\_\-BUTTON\_\-RIGHT). \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_button_event_ac9f8588a4e768fc2f973ce149456311a}{state}
+\begin{DoxyCompactList}\small\item\em SDL\_\-PRESSED or SDL\_\-RELEASED. \item\end{DoxyCompactList}\item 
+short \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_button_event_a763a7a3847b0348d2353c33207c6ffea}{x}
+\begin{DoxyCompactList}\small\item\em The X coordinate of the mouse at press/release time. \item\end{DoxyCompactList}\item 
+short \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_button_event_a287e7c64bf03edbeb1cb8044ae0455b7}{y}
+\begin{DoxyCompactList}\small\item\em The Y coordinate of the mouse at press/release time. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Mouse button event structure. \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_button_event}{SDL\_\-MouseButtonEvent} is a member of the \hyperlink{struct_tao_1_1_sdl_1_1_s_d_l___event}{SDL\_\-Event} union and is used when an event of type SDL\_\-MOUSEBUTTONDOWN or SDL\_\-MOUSEBUTTONUP is reported. 
+
+When a mouse button press or release is detected then number of the button pressed (from 1 to 255, with 1 usually being the left button and 2 the right) is placed into button, the position of the mouse when this event occured is stored in the x and the y fields. Like \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___keyboard_event}{SDL\_\-KeyboardEvent}, information on whether the event was a press or a release event is stored in both the type and state fields, but this should be obvious.  
+
+Struct in SDL\_\-events.h 
+\begin{DoxyCode}
+            typedef struct{
+                        Uint8 type;
+                        Uint8 button;
+                        Uint8 state;
+                        Uint16 x, y;
+                } SDL_MouseButtonEvent;
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{struct_tao_1_1_sdl_1_1_s_d_l___event}{SDL\_\-Event}, \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_motion_event}{SDL\_\-MouseMotionEvent}
+
+
+\end{DoxySeeAlso}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_button_event_ac38acdda954b63dea23005661b539f9f}{
+\index{Tao::Sdl::Sdl::SDL\_\-MouseButtonEvent@{Tao::Sdl::Sdl::SDL\_\-MouseButtonEvent}!button@{button}}
+\index{button@{button}!Tao::Sdl::Sdl::SDL_MouseButtonEvent@{Tao::Sdl::Sdl::SDL\_\-MouseButtonEvent}}
+\subsubsection[{button}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-MouseButtonEvent.button}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_button_event_ac38acdda954b63dea23005661b539f9f}
+
+
+The mouse button index (SDL\_\-BUTTON\_\-LEFT, SDL\_\-BUTTON\_\-MIDDLE, SDL\_\-BUTTON\_\-RIGHT). 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_button_event_ac9f8588a4e768fc2f973ce149456311a}{
+\index{Tao::Sdl::Sdl::SDL\_\-MouseButtonEvent@{Tao::Sdl::Sdl::SDL\_\-MouseButtonEvent}!state@{state}}
+\index{state@{state}!Tao::Sdl::Sdl::SDL_MouseButtonEvent@{Tao::Sdl::Sdl::SDL\_\-MouseButtonEvent}}
+\subsubsection[{state}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-MouseButtonEvent.state}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_button_event_ac9f8588a4e768fc2f973ce149456311a}
+
+
+SDL\_\-PRESSED or SDL\_\-RELEASED. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_button_event_af73bc2825de969d231eec503be2d37e0}{
+\index{Tao::Sdl::Sdl::SDL\_\-MouseButtonEvent@{Tao::Sdl::Sdl::SDL\_\-MouseButtonEvent}!type@{type}}
+\index{type@{type}!Tao::Sdl::Sdl::SDL_MouseButtonEvent@{Tao::Sdl::Sdl::SDL\_\-MouseButtonEvent}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-MouseButtonEvent.type}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_button_event_af73bc2825de969d231eec503be2d37e0}
+
+
+SDL\_\-MOUSEBUTTONDOWN or SDL\_\-MOUSEBUTTONUP. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_button_event_a09f1d658c8d4c53a52238cbd995227ad}{
+\index{Tao::Sdl::Sdl::SDL\_\-MouseButtonEvent@{Tao::Sdl::Sdl::SDL\_\-MouseButtonEvent}!which@{which}}
+\index{which@{which}!Tao::Sdl::Sdl::SDL_MouseButtonEvent@{Tao::Sdl::Sdl::SDL\_\-MouseButtonEvent}}
+\subsubsection[{which}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-MouseButtonEvent.which}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_button_event_a09f1d658c8d4c53a52238cbd995227ad}
+
+
+The mouse device index. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_button_event_a763a7a3847b0348d2353c33207c6ffea}{
+\index{Tao::Sdl::Sdl::SDL\_\-MouseButtonEvent@{Tao::Sdl::Sdl::SDL\_\-MouseButtonEvent}!x@{x}}
+\index{x@{x}!Tao::Sdl::Sdl::SDL_MouseButtonEvent@{Tao::Sdl::Sdl::SDL\_\-MouseButtonEvent}}
+\subsubsection[{x}]{\setlength{\rightskip}{0pt plus 5cm}short {\bf Tao.Sdl.Sdl.SDL\_\-MouseButtonEvent.x}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_button_event_a763a7a3847b0348d2353c33207c6ffea}
+
+
+The X coordinate of the mouse at press/release time. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_button_event_a287e7c64bf03edbeb1cb8044ae0455b7}{
+\index{Tao::Sdl::Sdl::SDL\_\-MouseButtonEvent@{Tao::Sdl::Sdl::SDL\_\-MouseButtonEvent}!y@{y}}
+\index{y@{y}!Tao::Sdl::Sdl::SDL_MouseButtonEvent@{Tao::Sdl::Sdl::SDL\_\-MouseButtonEvent}}
+\subsubsection[{y}]{\setlength{\rightskip}{0pt plus 5cm}short {\bf Tao.Sdl.Sdl.SDL\_\-MouseButtonEvent.y}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___mouse_button_event_a287e7c64bf03edbeb1cb8044ae0455b7}
+
+
+The Y coordinate of the mouse at press/release time. 
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Sdl/\hyperlink{_sdl_8cs}{Sdl.cs}\end{DoxyCompactItemize}

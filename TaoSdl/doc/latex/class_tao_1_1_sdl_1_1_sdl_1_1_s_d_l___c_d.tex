@@ -1,0 +1,142 @@
+\hypertarget{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d}{
+\section{Tao.Sdl.Sdl.SDL\_\-CD Class Reference}
+\label{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d}\index{Tao::Sdl::Sdl::SDL\_\-CD@{Tao::Sdl::Sdl::SDL\_\-CD}}
+}
+
+
+CDROM Drive Information.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d_aa962f3726d70beffc8924c51382e22d2}{SDL\_\-CD} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d_aa67216f022e18c25481dadfa918c3b0d}{id}
+\begin{DoxyCompactList}\small\item\em Private drive identifier. \item\end{DoxyCompactList}\item 
+int \hyperlink{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d_a5c6afca95e5c23b41664b17434ea6f28}{status}
+\begin{DoxyCompactList}\small\item\em Current drive status. \item\end{DoxyCompactList}\item 
+int \hyperlink{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d_ae41951995f9e509c8a85316aec65696b}{numtracks}
+\begin{DoxyCompactList}\small\item\em Number of tracks on the CD. \item\end{DoxyCompactList}\item 
+int \hyperlink{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d_a21e657e809122dcd17a4c3d1104c5cef}{cur\_\-track}
+\begin{DoxyCompactList}\small\item\em Current track. \item\end{DoxyCompactList}\item 
+int \hyperlink{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d_a316ed7c6cd0e34e361ee549b70f08b69}{cur\_\-frame}
+\begin{DoxyCompactList}\small\item\em Current frame offset within current track. \item\end{DoxyCompactList}\item 
+\hyperlink{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d_track_data}{SDL\_\-CDTrackData} \hyperlink{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d_abdd4b66871d91cbb568bc907ffcb3107}{track}
+\begin{DoxyCompactList}\small\item\em Array of track descriptions. (see \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_dtrack}{SDL\_\-CDtrack}). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+CDROM Drive Information. An \hyperlink{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d}{SDL\_\-CD} structure is returned by SDL\_\-CDOpen. It represents an opened CDROM device and stores information on the layout of the tracks on the disc. 
+
+A frame is the base data unit of a CD. CD\_\-FPS frames is equal to 1 second of music. SDL provides two macros for converting between time and frames: FRAMES\_\-TO\_\-MSF(f, M,S,F) and MSF\_\-TO\_\-FRAMES. 
+
+Struct from SDL\_\-cdrom.h 
+\begin{DoxyCode}
+            typedef struct{
+            int id;
+            CDstatus status;
+            int numtracks;
+            int cur_track;
+            int cur_frame;
+            SDL_CDtrack track[SDL_MAX_TRACKS+1];
+            } SDL_CD;
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}
+            int min, sec, frame;
+                        int frame_offset;
+
+                        FRAMES_TO_MSF(cdrom-&gt;cur_frame, &amp;min, &amp;sec, &a
+      mp;frame);
+                        printf("Current Position: %d minutes, %d seconds, %d fram
+      es\n", min, sec, frame);
+
+                        frame_offset=MSF_TO_FRAMES(min, sec, frame);
+\end{DoxyCode}
+ 
+
+\begin{DoxySeeAlso}{See also}
+SDL\_\-CDOpen, \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_dtrack}{SDL\_\-CDtrack}
+
+
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d_aa962f3726d70beffc8924c51382e22d2}{
+\index{Tao::Sdl::Sdl::SDL\_\-CD@{Tao::Sdl::Sdl::SDL\_\-CD}!SDL\_\-CD@{SDL\_\-CD}}
+\index{SDL\_\-CD@{SDL\_\-CD}!Tao::Sdl::Sdl::SDL_CD@{Tao::Sdl::Sdl::SDL\_\-CD}}
+\subsubsection[{SDL\_\-CD}]{\setlength{\rightskip}{0pt plus 5cm}Tao.Sdl.Sdl.SDL\_\-CD.SDL\_\-CD (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d_aa962f3726d70beffc8924c51382e22d2}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d_a316ed7c6cd0e34e361ee549b70f08b69}{
+\index{Tao::Sdl::Sdl::SDL\_\-CD@{Tao::Sdl::Sdl::SDL\_\-CD}!cur\_\-frame@{cur\_\-frame}}
+\index{cur\_\-frame@{cur\_\-frame}!Tao::Sdl::Sdl::SDL_CD@{Tao::Sdl::Sdl::SDL\_\-CD}}
+\subsubsection[{cur\_\-frame}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Sdl.Sdl.SDL\_\-CD.cur\_\-frame}}}
+\label{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d_a316ed7c6cd0e34e361ee549b70f08b69}
+
+
+Current frame offset within current track. 
+
+\hypertarget{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d_a21e657e809122dcd17a4c3d1104c5cef}{
+\index{Tao::Sdl::Sdl::SDL\_\-CD@{Tao::Sdl::Sdl::SDL\_\-CD}!cur\_\-track@{cur\_\-track}}
+\index{cur\_\-track@{cur\_\-track}!Tao::Sdl::Sdl::SDL_CD@{Tao::Sdl::Sdl::SDL\_\-CD}}
+\subsubsection[{cur\_\-track}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Sdl.Sdl.SDL\_\-CD.cur\_\-track}}}
+\label{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d_a21e657e809122dcd17a4c3d1104c5cef}
+
+
+Current track. 
+
+\hypertarget{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d_aa67216f022e18c25481dadfa918c3b0d}{
+\index{Tao::Sdl::Sdl::SDL\_\-CD@{Tao::Sdl::Sdl::SDL\_\-CD}!id@{id}}
+\index{id@{id}!Tao::Sdl::Sdl::SDL_CD@{Tao::Sdl::Sdl::SDL\_\-CD}}
+\subsubsection[{id}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Sdl.Sdl.SDL\_\-CD.id}}}
+\label{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d_aa67216f022e18c25481dadfa918c3b0d}
+
+
+Private drive identifier. 
+
+\hypertarget{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d_ae41951995f9e509c8a85316aec65696b}{
+\index{Tao::Sdl::Sdl::SDL\_\-CD@{Tao::Sdl::Sdl::SDL\_\-CD}!numtracks@{numtracks}}
+\index{numtracks@{numtracks}!Tao::Sdl::Sdl::SDL_CD@{Tao::Sdl::Sdl::SDL\_\-CD}}
+\subsubsection[{numtracks}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Sdl.Sdl.SDL\_\-CD.numtracks}}}
+\label{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d_ae41951995f9e509c8a85316aec65696b}
+
+
+Number of tracks on the CD. 
+
+\hypertarget{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d_a5c6afca95e5c23b41664b17434ea6f28}{
+\index{Tao::Sdl::Sdl::SDL\_\-CD@{Tao::Sdl::Sdl::SDL\_\-CD}!status@{status}}
+\index{status@{status}!Tao::Sdl::Sdl::SDL_CD@{Tao::Sdl::Sdl::SDL\_\-CD}}
+\subsubsection[{status}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Sdl.Sdl.SDL\_\-CD.status}}}
+\label{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d_a5c6afca95e5c23b41664b17434ea6f28}
+
+
+Current drive status. 
+
+SDL\_\-CDStatus enum \hypertarget{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d_abdd4b66871d91cbb568bc907ffcb3107}{
+\index{Tao::Sdl::Sdl::SDL\_\-CD@{Tao::Sdl::Sdl::SDL\_\-CD}!track@{track}}
+\index{track@{track}!Tao::Sdl::Sdl::SDL_CD@{Tao::Sdl::Sdl::SDL\_\-CD}}
+\subsubsection[{track}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SDL\_\-CDTrackData} {\bf Tao.Sdl.Sdl.SDL\_\-CD.track}}}
+\label{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d_abdd4b66871d91cbb568bc907ffcb3107}
+
+
+Array of track descriptions. (see \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_dtrack}{SDL\_\-CDtrack}). 
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Sdl/\hyperlink{_sdl_8cs}{Sdl.cs}\end{DoxyCompactItemize}

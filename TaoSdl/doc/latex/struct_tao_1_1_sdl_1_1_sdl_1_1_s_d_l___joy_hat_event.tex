@@ -1,0 +1,111 @@
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_hat_event}{
+\section{Tao.Sdl.Sdl.SDL\_\-JoyHatEvent Struct Reference}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_hat_event}\index{Tao::Sdl::Sdl::SDL\_\-JoyHatEvent@{Tao::Sdl::Sdl::SDL\_\-JoyHatEvent}}
+}
+
+
+Joystick hat position change event structure.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_hat_event_a504a458cdb6163c0fd06bdf0f5adc330}{type}
+\begin{DoxyCompactList}\small\item\em SDL\_\-JOYHATMOTION. \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_hat_event_a432ddbd1d5b39e4ab65e90414fb04aca}{which}
+\begin{DoxyCompactList}\small\item\em The joystick device index. \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_hat_event_af4a1d5fb1c29cb4359322b7341d4db42}{hat}
+\begin{DoxyCompactList}\small\item\em The joystick hat index. \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_hat_event_a0a000070dcc327197403faeaf76bbe87}{val}
+\begin{DoxyCompactList}\small\item\em The hat position value: \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Joystick hat position change event structure. \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_hat_event}{SDL\_\-JoyHatEvent} is a member of the \hyperlink{struct_tao_1_1_sdl_1_1_s_d_l___event}{SDL\_\-Event} union and is used when an event of type SDL\_\-JOYHATMOTION is reported. 
+
+A SDL\_\-JOYHATMOTION event occurs when ever a user moves a hat on the joystick. The field which is the index of the joystick that reported the event and hat is the index of the hat (for a more detailed exlaination see the Joystick section). value is the current position of the hat. It is a logically OR'd combination of the following values (whose meanings should be pretty obvious:) : 
+
+SDL\_\-HAT\_\-CENTERED 
+
+SDL\_\-HAT\_\-UP 
+
+SDL\_\-HAT\_\-RIGHT 
+
+SDL\_\-HAT\_\-DOWN 
+
+SDL\_\-HAT\_\-LEFT 
+
+The following defines are also provided: 
+
+SDL\_\-HAT\_\-RIGHTUP 
+
+SDL\_\-HAT\_\-RIGHTDOWN 
+
+SDL\_\-HAT\_\-LEFTUP 
+
+SDL\_\-HAT\_\-LEFTDOWN 
+
+Struct from SDL\_\-events.h 
+\begin{DoxyCode}
+            typedef struct{
+                        Uint8 type;
+                        Uint8 which;
+                        Uint8 hat;
+                        Uint8 value;
+                } SDL_JoyHatEvent;
+\end{DoxyCode}
+ \begin{DoxySeeAlso}{See also}
+\hyperlink{struct_tao_1_1_sdl_1_1_s_d_l___event}{SDL\_\-Event}, \hyperlink{_sdl_8cs_a4b5786d792bade406949c738f0290eca}{SDL\_\-JoystickEventState}, \hyperlink{_sdl_8cs_aa92ba2b7e2f685e0fe7587b73cbd8f22}{SDL\_\-JoystickGetHat}
+
+
+\end{DoxySeeAlso}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_hat_event_af4a1d5fb1c29cb4359322b7341d4db42}{
+\index{Tao::Sdl::Sdl::SDL\_\-JoyHatEvent@{Tao::Sdl::Sdl::SDL\_\-JoyHatEvent}!hat@{hat}}
+\index{hat@{hat}!Tao::Sdl::Sdl::SDL_JoyHatEvent@{Tao::Sdl::Sdl::SDL\_\-JoyHatEvent}}
+\subsubsection[{hat}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-JoyHatEvent.hat}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_hat_event_af4a1d5fb1c29cb4359322b7341d4db42}
+
+
+The joystick hat index. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_hat_event_a504a458cdb6163c0fd06bdf0f5adc330}{
+\index{Tao::Sdl::Sdl::SDL\_\-JoyHatEvent@{Tao::Sdl::Sdl::SDL\_\-JoyHatEvent}!type@{type}}
+\index{type@{type}!Tao::Sdl::Sdl::SDL_JoyHatEvent@{Tao::Sdl::Sdl::SDL\_\-JoyHatEvent}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-JoyHatEvent.type}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_hat_event_a504a458cdb6163c0fd06bdf0f5adc330}
+
+
+SDL\_\-JOYHATMOTION. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_hat_event_a0a000070dcc327197403faeaf76bbe87}{
+\index{Tao::Sdl::Sdl::SDL\_\-JoyHatEvent@{Tao::Sdl::Sdl::SDL\_\-JoyHatEvent}!val@{val}}
+\index{val@{val}!Tao::Sdl::Sdl::SDL_JoyHatEvent@{Tao::Sdl::Sdl::SDL\_\-JoyHatEvent}}
+\subsubsection[{val}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-JoyHatEvent.val}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_hat_event_a0a000070dcc327197403faeaf76bbe87}
+
+
+The hat position value: 
+
+
+\begin{DoxyCode}
+SDL_HAT_LEFTUP   SDL_HAT_UP       SDL_HAT_RIGHTUP
+                 SDL_HAT_LEFT     SDL_HAT_CENTERED SDL_HAT_RIGHT
+                 SDL_HAT_LEFTDOWN SDL_HAT_DOWN     SDL_HAT_RIGHTDOWN
+\end{DoxyCode}
+ Note that zero means the POV is centered. \hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_hat_event_a432ddbd1d5b39e4ab65e90414fb04aca}{
+\index{Tao::Sdl::Sdl::SDL\_\-JoyHatEvent@{Tao::Sdl::Sdl::SDL\_\-JoyHatEvent}!which@{which}}
+\index{which@{which}!Tao::Sdl::Sdl::SDL_JoyHatEvent@{Tao::Sdl::Sdl::SDL\_\-JoyHatEvent}}
+\subsubsection[{which}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-JoyHatEvent.which}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_hat_event_a432ddbd1d5b39e4ab65e90414fb04aca}
+
+
+The joystick device index. 
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Sdl/\hyperlink{_sdl_8cs}{Sdl.cs}\end{DoxyCompactItemize}

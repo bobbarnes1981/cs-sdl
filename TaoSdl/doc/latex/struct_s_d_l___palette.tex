@@ -1,0 +1,47 @@
+\hypertarget{struct_s_d_l___palette}{
+\section{SDL\_\-Palette Struct Reference}
+\label{struct_s_d_l___palette}\index{SDL\_\-Palette@{SDL\_\-Palette}}
+}
+
+
+Color palette for 8-\/bit pixel formats.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{struct_s_d_l___palette_ac5e1433dc0331e63010048d63d2be8e2}{ncolors}
+\begin{DoxyCompactList}\small\item\em Number of colors used in this palette. \item\end{DoxyCompactList}\item 
+\hyperlink{struct_s_d_l___color}{SDL\_\-Color}\mbox{[}$\,$\mbox{]} \hyperlink{struct_s_d_l___palette_a3c2b56423f3b4721342f1d3c578c74f8}{colors}
+\begin{DoxyCompactList}\small\item\em Array of \hyperlink{struct_s_d_l___color}{SDL\_\-Color} structures that make up the palette. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Color palette for 8-\/bit pixel formats. Each pixel in an 8-\/bit surface is an index into the colors field of the \hyperlink{struct_s_d_l___palette}{SDL\_\-Palette} structure store in \hyperlink{struct_s_d_l___pixel_format}{SDL\_\-PixelFormat}. A \hyperlink{struct_s_d_l___palette}{SDL\_\-Palette} should never need to be created manually. It is automatically created when SDL allocates a \hyperlink{struct_s_d_l___pixel_format}{SDL\_\-PixelFormat} for a surface. The colors values of a \hyperlink{struct_s_d_l___surface}{SDL\_\-Surface} palette can be set with the \hyperlink{_sdl_8cs_a7d863c2bb7590dba1b9eb040d44449e7}{SDL\_\-SetColors}.
+
+\hyperlink{struct_s_d_l___color}{SDL\_\-Color} \hyperlink{struct_s_d_l___surface}{SDL\_\-Surface} \hyperlink{_sdl_8cs_a7d863c2bb7590dba1b9eb040d44449e7}{SDL\_\-SetColors} \hyperlink{_sdl_8cs_afe8acab3b160f7859c903cec5fbb4f86}{SDL\_\-SetPalette} 
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_s_d_l___palette_a3c2b56423f3b4721342f1d3c578c74f8}{
+\index{SDL\_\-Palette@{SDL\_\-Palette}!colors@{colors}}
+\index{colors@{colors}!SDL_Palette@{SDL\_\-Palette}}
+\subsubsection[{colors}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SDL\_\-Color} \mbox{[}$\,$\mbox{]} {\bf SDL\_\-Palette.colors}}}
+\label{struct_s_d_l___palette_a3c2b56423f3b4721342f1d3c578c74f8}
+
+
+Array of \hyperlink{struct_s_d_l___color}{SDL\_\-Color} structures that make up the palette. 
+
+\hypertarget{struct_s_d_l___palette_ac5e1433dc0331e63010048d63d2be8e2}{
+\index{SDL\_\-Palette@{SDL\_\-Palette}!ncolors@{ncolors}}
+\index{ncolors@{ncolors}!SDL_Palette@{SDL\_\-Palette}}
+\subsubsection[{ncolors}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf SDL\_\-Palette.ncolors}}}
+\label{struct_s_d_l___palette_ac5e1433dc0331e63010048d63d2be8e2}
+
+
+Number of colors used in this palette. 
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Sdl/\hyperlink{_sdl_8cs}{Sdl.cs}\end{DoxyCompactItemize}

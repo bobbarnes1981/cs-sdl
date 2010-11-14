@@ -1,0 +1,1799 @@
+\hypertarget{_ode_8cs}{
+\section{src/Tao.Ode/Ode.cs File Reference}
+\label{_ode_8cs}\index{src/Tao.Ode/Ode.cs@{src/Tao.Ode/Ode.cs}}
+}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries Tao.Ode.Ode}
+\begin{DoxyCompactList}\small\item\em Open Dynamics Engine (ODE -\/ \href{http://ode.org}{\tt http://ode.org}) bindings for .NET ODE Version: 0.9. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_mass}{Tao.Ode.Ode.dMass}
+\begin{DoxyCompactList}\small\item\em Describes the mass parameters of a rigid body. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_contact_geom}{Tao.Ode.Ode.dContactGeom}
+\begin{DoxyCompactList}\small\item\em Contact info set by collision functions. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters}{Tao.Ode.Ode.dSurfaceParameters}
+\begin{DoxyCompactList}\small\item\em Defines the properties of the colliding surfaces. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_contact}{Tao.Ode.Ode.dContact}
+\begin{DoxyCompactList}\small\item\em Contact structure used by contact joint. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_vector3}{Tao.Ode.Ode.dVector3}
+\item 
+struct \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_vector4}{Tao.Ode.Ode.dVector4}
+\item 
+struct \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_quaternion}{Tao.Ode.Ode.dQuaternion}
+\item 
+struct \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1_aabb}{Tao.Ode.Ode.Aabb}
+\item 
+struct \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_matrix3}{Tao.Ode.Ode.dMatrix3}
+\item 
+struct \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_matrix4}{Tao.Ode.Ode.dMatrix4}
+\item 
+struct \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_joint_feedback}{Tao.Ode.Ode.dJointFeedback}
+\begin{DoxyCompactList}\small\item\em During the world time step, the forces that are applied by each joint are computed. These forces are added directly to the joined bodies, and the user normally has no way of telling which joint contributed how much force. \item\end{DoxyCompactList}\item 
+struct \hyperlink{structd_geom_class}{dGeomClass}
+\end{DoxyCompactItemize}
+\subsection*{Packages}
+\begin{DoxyCompactItemize}
+\item 
+package \hyperlink{namespace_tao_1_1_ode}{Tao.Ode}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{_ode_8cs_a2157ed83c79dd11dc32e23d0c5c1204b}{TriMeshNumbers} \{ \hyperlink{_ode_8cs_a2157ed83c79dd11dc32e23d0c5c1204b}{TRIMESH\_\-FACE\_\-NORMALS} =  1, 
+\hyperlink{_ode_8cs_a2157ed83c79dd11dc32e23d0c5c1204b}{TRIMESH\_\-LAST\_\-TRANSFORMATION} =  2
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+During the time step any feedback structures that are attached to joints will be filled in with the joint s force and torque information.The \hyperlink{namespace_tao_1_1_ode_acb665b0ad53713bdc6095725a790aa80}{Tao::Ode.dJointGetFeedback} () function returns the current feedback structure pointer
+\item 
+The \hyperlink{_ode_8cs_a07cc3bd5b4ca5475a438318e49089dd2}{dJointGetFeedback} () function returns the current feedback structure pointer
+\item 
+The or if none is \hyperlink{_ode_8cs_a3e9e37fbaf89af1e16a11b9a385280d9}{used} (this is the default).TODO
+\item 
+static void \hyperlink{_ode_8cs_a58f0eb4c35d6312a70f827b2e670851a}{dJointSetLMotorAxis} (dJointID j, int anum, int rel, dReal x, dReal y, dReal z)
+\item 
+static void \hyperlink{_ode_8cs_ad62b01bca13dc53a6262255113413556}{dJointSetLMotorNumAxes} (dJointID j, int num)
+\item 
+static void \hyperlink{_ode_8cs_ad401355c4fe31e8b024ee4b0da121808}{dJointSetLMotorParam} (dJointID j, int parameter, dReal value)
+\item 
+static void \hyperlink{_ode_8cs_a5af69dda8972c3accde4b7e122d57c30}{JointSetPlane2DAngleParam} (dJointID j, int parameter, dReal value)
+\item 
+static void \hyperlink{_ode_8cs_a8bda6c23edfe1fd9408bf38839d2c1e1}{dJointSetPlane2DXParam} (dJointID j, int parameter, dReal value)
+\item 
+static void \hyperlink{_ode_8cs_ad356cbf8aaea2cd1a9ad36663f794203}{dJointSetPlane2DYParam} (dJointID j, int parameter, dReal value)
+\item 
+static void \hyperlink{_ode_8cs_aed50686046aed524de65cf879f7c1940}{dJointSetPRAnchor} (dJointID j, dReal x, dReal y, dReal z)
+\item 
+static void \hyperlink{_ode_8cs_a4ceb7e4be680848525f9bdc57d6d1c9d}{dJointSetPRAxis1} (dJointID j, dReal x, dReal y, dReal z)
+\item 
+static void \hyperlink{_ode_8cs_ad46ee0deeecbcd3607d61a5089ec66da}{dJointSetPRAxis2} (dJointID j, dReal x, dReal y, dReal z)
+\item 
+static void \hyperlink{_ode_8cs_aef94db2bfb30299415b79abb7a067123}{dJointSetPRParam} (dJointID j, int parameter, dReal value)
+\item 
+static void \hyperlink{_ode_8cs_ac3309bec4d1ff1e0d04233de3b1f1ddb}{dJointGetLMotorAxis} (dJointID j, int anum, out dVector3 result)
+\item 
+static int \hyperlink{_ode_8cs_ac06485f942af5aa604e296867e4f66d7}{dJointGetLMotorNumAxes} (dJointID j)
+\item 
+static dReal \hyperlink{_ode_8cs_a605e283872954c73ea474216fc4f1f7f}{dJointGetLMotorParam} (dJointID j, int parameter)
+\item 
+static void \hyperlink{_ode_8cs_a5f6d494230c3ec3b60dff9c75ebaed8a}{dJointGetPRAnchor} (dJointID j, out dVector3 result)
+\item 
+static void \hyperlink{_ode_8cs_a870298f1d30d7ec95806d7f30322cdf7}{dJointGetPRAxis1} (dJointID j, out dVector3 result)
+\item 
+static void \hyperlink{_ode_8cs_ad84d600847f7a4cdf6495f9da8794005}{dJointGetPRAxis2} (dJointID j, out dVector3 result)
+\item 
+static dReal \hyperlink{_ode_8cs_a9b362ffba9a70ea7c3a3c49b607023cb}{dJointGetPRParam} (dJointID j, int parameter)
+\item 
+static dReal \hyperlink{_ode_8cs_ab1fc6e4fe7df4475cd8f68c5a1e0aef7}{dJointGetPRPosition} (dJointID j)
+\item 
+static void \hyperlink{_ode_8cs_a165f5a187c95879b11adfa3884e10bbc}{dJointGetUniversalAngles} (dJointID j, out dReal angle1, out dReal angle2)
+\item 
+static dReal \hyperlink{_ode_8cs_af3a147e1211da5ad5a0210a52e4d7315}{dJointGetPRPositionRate} (dJointID j)
+\item 
+static void \hyperlink{_ode_8cs_a31e1da8dd3cd29a04ab35ac309322376}{dMassSetTrimesh} (out dMass mass, dReal density, dGeomID g)
+\item 
+static void \hyperlink{_ode_8cs_ae4c463c950a1b777499e370e3db6f13a}{dGeomSetQuaternion} (dGeomID geom, ref dReal w)
+\item 
+static void \hyperlink{_ode_8cs_ad732c7cd8a338afbeeb91c3c2c036472}{dGeomHeightfieldDataBuildByte} (dHeightfieldDataID d, byte\mbox{[}$\,$\mbox{]} pHeightData, int bCopyHeightData, dReal width, dReal depth, int widthSamples, int depthSamples, dReal scale, dReal offset, dReal thickness, int bWrap)
+\item 
+static void \hyperlink{_ode_8cs_a601d0f1182dae1156ae3dfbffa760332}{dGeomHeightfieldDataBuildByte} (dHeightfieldDataID d, IntPtr pHeightData, int bCopyHeightData, dReal width, dReal depth, int widthSamples, int depthSamples, dReal scale, dReal offset, dReal thickness, int bWrap)
+\item 
+static void \hyperlink{_ode_8cs_a6f37d1cfbe377ce2318749d6c1e13131}{dGeomHeightfieldDataBuildCallback} (dHeightfieldDataID d, IntPtr pUserData, dHeightfieldGetHeight pCallback, dReal width, dReal depth, int widthSamples, int depthSamples, dReal scale, dReal offset, dReal thickness, int bWrap)
+\item 
+static void \hyperlink{_ode_8cs_a49d3bc12496785d992a6b1cbf824e466}{dGeomHeightfieldDataBuildShort} (dHeightfieldDataID d, ushort\mbox{[}$\,$\mbox{]} pHeightData, int bCopyHeightData, dReal width, dReal depth, int widthSamples, int depthSamples, dReal scale, dReal offset, dReal thickness, int bWrap)
+\item 
+static void \hyperlink{_ode_8cs_a339ce0497e17f8c2e6e44ae3771b2131}{dGeomHeightfieldDataBuildShort} (dHeightfieldDataID d, short\mbox{[}$\,$\mbox{]} pHeightData, int bCopyHeightData, dReal width, dReal depth, int widthSamples, int depthSamples, dReal scale, dReal offset, dReal thickness, int bWrap)
+\item 
+static void \hyperlink{_ode_8cs_a0f1ccdd29e66019875b502098fcfe65d}{dGeomHeightfieldDataBuildShort} (dHeightfieldDataID d, IntPtr pHeightData, int bCopyHeightData, dReal width, dReal depth, int widthSamples, int depthSamples, dReal scale, dReal offset, dReal thickness, int bWrap)
+\item 
+static void \hyperlink{_ode_8cs_a5ce59646759409362e2dd5fa8bbf3e47}{dGeomHeightfieldDataBuildSingle} (dHeightfieldDataID d, float\mbox{[}$\,$\mbox{]} pHeightData, int bCopyHeightData, dReal width, dReal depth, int widthSamples, int depthSamples, dReal scale, dReal offset, dReal thickness, int bWrap)
+\item 
+static void \hyperlink{_ode_8cs_a6d457ebff18965566ce9a6568b48014c}{dGeomHeightfieldDataBuildSingle} (dHeightfieldDataID d, IntPtr pHeightData, int bCopyHeightData, dReal width, dReal depth, int widthSamples, int depthSamples, dReal scale, dReal offset, dReal thickness, int bWrap)
+\item 
+static void \hyperlink{_ode_8cs_a6e114f567cff8aa0e93e83a9f67df615}{dGeomHeightfieldDataBuildDouble} (dHeightfieldDataID d, double\mbox{[}$\,$\mbox{]} pHeightData, int bCopyHeightData, dReal width, dReal depth, int widthSamples, int depthSamples, dReal scale, dReal offset, dReal thickness, int bWrap)
+\item 
+static void \hyperlink{_ode_8cs_af79b9c8cb536c2f295933d50d07fd5b6}{dGeomHeightfieldDataBuildDouble} (dHeightfieldDataID d, IntPtr pHeightData, int bCopyHeightData, dReal width, dReal depth, int widthSamples, int depthSamples, dReal scale, dReal offset, dReal thickness, int bWrap)
+\item 
+static dHeightfieldDataID \hyperlink{_ode_8cs_afff13ba8bb3d2199017b81b915feef13}{dGeomHeightfieldDataCreate} ()
+\item 
+static void \hyperlink{_ode_8cs_ab0d5fd57ecf3d3a6d50c9e781c237c4d}{dGeomHeightfieldDataDestroy} (dHeightfieldDataID d)
+\item 
+static void \hyperlink{_ode_8cs_aef377be3ae5818e0caab5868a9cc065c}{dGeomHeightfieldDataSetBounds} (dHeightfieldDataID d, dReal minHeight, dReal maxHeight)
+\item 
+static dHeightfieldDataID \hyperlink{_ode_8cs_a5c5503006c72eda1e84d47934061db43}{dGeomHeightfieldGetHeightfieldData} (dGeomID g)
+\item 
+static void \hyperlink{_ode_8cs_aae9c6cd4992bd69f6c2add54eaade3e4}{dGeomHeightfieldSetHeightfieldData} (dGeomID g, dHeightfieldDataID d)
+\item 
+static void \hyperlink{_ode_8cs_ac6317fd4624fc9f63138eec7128387e7}{dGeomGetAABB} (dGeomID geom, out dReal minX)
+\item 
+static void \hyperlink{_ode_8cs_ab57741fa03caff2ea1ebc82f56314199}{dGeomSetOffsetQuaternion} (dGeomID geom, ref dReal X)
+\item 
+static void \hyperlink{_ode_8cs_a4f27ffe9d826b8d872077347e222c3cf}{dGeomSetOffsetWorldRotation} (dGeomID geom, ref dReal M00)
+\item 
+static void \hyperlink{_ode_8cs_aee1c6069a1d1fd584d8bccd2e93d37df}{dGeomSetOffsetWorldQuaternion} (dGeomID geom, ref dReal X)
+\item 
+static void \hyperlink{_ode_8cs_a2ee3d0eccbd38f4d5f27a2ab058ae145}{dGeomSetConvex} (dGeomID geom, dReal\mbox{[}$\,$\mbox{]} planes, int planeCount, dReal\mbox{[}$\,$\mbox{]} points, int pointCount, int\mbox{[}$\,$\mbox{]} polygons)
+\item 
+static dGeomID \hyperlink{_ode_8cs_afb3ddd8fadf9119eb74ed8016caa3ad9}{dCreateConvex} (dSpaceID space, dReal\mbox{[}$\,$\mbox{]} planes, int planeCount, dReal\mbox{[}$\,$\mbox{]} points, int pointCount, int\mbox{[}$\,$\mbox{]} polygons)
+\item 
+static void \hyperlink{_ode_8cs_ab3e936fa2b54c8e010f7eaf8780f54e9}{dGeomBoxGetLengths} (dGeomID geom, out dReal x)
+\item 
+static void \hyperlink{_ode_8cs_a75d4df8eef0229e0588090ae5bbb3ee6}{dGeomCopyOffsetPosition} (dGeomID geom, ref dVector3 pos)
+\item 
+static void \hyperlink{_ode_8cs_a31991b3f97953afc4d969078979c12a8}{dGeomCopyOffsetPosition} (dGeomID geom, ref dReal X)
+\item 
+static void \hyperlink{_ode_8cs_afc23145d5866df730bf513cb0faf76f2}{dGeomCopyOffsetRotation} (dGeomID geom, ref dMatrix3 R)
+\item 
+static void \hyperlink{_ode_8cs_aabae452405aa2379d7ba210790c6ed69}{dGeomCopyOffsetRotation} (dGeomID geom, ref dReal M00)
+\item 
+static void \hyperlink{_ode_8cs_a2b2b6745b1084c3a029de571f2d083b2}{dGeomCopyPosition} (dGeomID geom, out dVector3 pos)
+\item 
+static void \hyperlink{_ode_8cs_a59d21c3458f7a7e3529bfebbbeb8ca25}{dGeomCopyPosition} (dGeomID geom, out dReal X)
+\item 
+static void \hyperlink{_ode_8cs_a30f3812914d39a460487a6a3cd82d5c0}{dGeomCopyRotation} (dGeomID geom, out dMatrix3 R)
+\item 
+static void \hyperlink{_ode_8cs_a864885ca3bdcfb31329ae2ac8de4c413}{dGeomCopyRotation} (dGeomID geom, out dReal M00)
+\item 
+static void \hyperlink{_ode_8cs_a21ea25b8c22767bc676371e6f3fe0922}{dGeomRayGet} (dGeomID ray, ref dReal startX, ref dReal dirX)
+\item 
+static int \hyperlink{_ode_8cs_a10d6e0a493ec80cfbbd0abf00789fde3}{dBoxBox} (dVector3 p1, dMatrix3 R1, dVector3 side1, dVector3 p2, dMatrix3 R2, dVector3 side2, ref dVector3 normal, ref dReal depth, ref int return\_\-code, int maxc, ref dContactGeom\mbox{[}$\,$\mbox{]} contact, int skip)
+\begin{DoxyCompactList}\small\item\em given two boxes (p1,R1,side1) and (p2,R2,side2), collide them together and generate contact points. this returns 0 if there is no contact otherwise it returns the number of contacts generated. `normal' returns the contact normal. `depth' returns the maximum penetration depth along that normal. `return\_\-code' returns a number indicating the type of contact that was detected: 1,2,3 = box 2 intersects with a face of box 1 4,5,6 = box 1 intersects with a face of box 2 7..15 = edge-\/edge contact `maxc' is the maximum number of contacts allowed to be generated, i.e. the size of the `contact' array. `contact' and `skip' are the contact array information provided to the collision functions. \item\end{DoxyCompactList}\item 
+static dSpaceID \hyperlink{_ode_8cs_ac70cdf5d8bd8fb3e2e708beeca56ffb2}{dQuadTreeSpaceCreate} (dSpaceID space, ref dReal centerX, ref dReal extentsX, int depth)
+\item 
+static void \hyperlink{_ode_8cs_a190cdef4095fce078d098378ce84da5d}{dGeomTriMeshDataUpdate} (dTriMeshDataID g)
+\item 
+static dTriMeshDataID \hyperlink{_ode_8cs_aadc17d0cf524f88c56d9acff42f3b514}{dGeomTriMeshGetData} (dGeomID g)
+\item 
+static void \hyperlink{_ode_8cs_a39c2edea1aa16bf1eb7683496fee41de}{dGeomTriMeshDataBuildDouble} (dTriMeshDataID g, IntPtr vertices, int vertexStride, int vertexCount, IntPtr indices, int indexCount, int triStride, IntPtr normals)
+\item 
+static void \hyperlink{_ode_8cs_a4c954c536869c38c4c3d8656ca2baba4}{dGeomTriMeshDataBuildDouble} (dTriMeshDataID g, IntPtr vertices, int vertexStride, int vertexCount, IntPtr indices, int indexCount, int triStride)
+\item 
+static void \hyperlink{_ode_8cs_a825e20b95a45c0b3f643322313d8bf75}{dGeomTriMeshDataBuildSingle} (dTriMeshDataID g, IntPtr vertices, int vertexStride, int vertexCount, IntPtr indices, int indexCount, int triStride)
+\item 
+static void \hyperlink{_ode_8cs_a91c2ed2ffa4c9fe82267de39f18f896b}{dGeomTriMeshDataBuildSingle1} (dTriMeshDataID g, IntPtr vertices, int vertexStride, int vertexCount, IntPtr indices, int indexCount, int triStride, IntPtr normals)
+\item 
+delegate int \hyperlink{_ode_8cs_adbcb4a7147ca2964d9f59da33ed2ce74}{dTriCallback} (dGeomID TriMesh, dGeomID RefObject, int TriangleIndex)
+\begin{DoxyCompactList}\small\item\em Per triangle callback. Allows user to state if a collision with a particular triangle is wanted If the return value is zero no contact will be generated. \item\end{DoxyCompactList}\item 
+delegate void \hyperlink{_ode_8cs_a63a515bf9497d715d7842b7a8bf386b7}{dTriArrayCallback} (dGeomID TriMesh, dGeomID RefObject, int\mbox{[}$\,$\mbox{]} TriIndices, int TriCount)
+\begin{DoxyCompactList}\small\item\em Per object callback. Allows user to get the list of all intersecting triangles in one shot. \item\end{DoxyCompactList}\item 
+delegate int \hyperlink{_ode_8cs_a0cf752c8ec5fa62fd5c87d2b242bd264}{dTriRayCallback} (dGeomID TriMesh, dGeomID Ray, int TriangleIndex, dReal u, dReal v)
+\begin{DoxyCompactList}\small\item\em Ray callback. Allows the user to determine if a ray collides with a triangle based on the barycentric coordinates of an intersection. The user can for example sample a bitmap to determine if a collision should occur. \item\end{DoxyCompactList}\item 
+static IntPtr \hyperlink{_ode_8cs_a70437688328e4ceb804dac39fd635487}{dGeomTriMeshDataGet} (dTriMeshDataID g, int data\_\-id)
+\item 
+static void \hyperlink{_ode_8cs_af56dc2a1594fae6afa9bc23d81709eab}{dGeomTriMeshDataPreprocess} (dTriMeshDataID g)
+\item 
+static void \hyperlink{_ode_8cs_ae74a5008767c082b706b50bc1ba4e933}{dGeomTriMeshSetLastTransform} (dTriMeshDataID d, ref dMatrix4 last\_\-trans)
+\item 
+static void \hyperlink{_ode_8cs_ac454d453ee0242dbedbe98b3f853412c}{dGeomTriMeshSetLastTransform} (dTriMeshDataID d, ref dReal M00)
+\item 
+static void \hyperlink{_ode_8cs_ab34cabf46bc824c139242142b1fe8fac}{dBodyCopyPosition} (dBodyID body, out dVector3 pos)
+\item 
+static void \hyperlink{_ode_8cs_ac92d63debb1c1522df946aa4168bcf75}{dBodyCopyPosition} (dBodyID body, out dReal X)
+\item 
+static void \hyperlink{_ode_8cs_a6ac483ba55f1173f9c1257ab403afbe3}{dBodyCopyQuaternion} (dBodyID body, out dQuaternion quat)
+\item 
+static void \hyperlink{_ode_8cs_a0570ffcd91da39b5a7b942e2fe4e1b79}{dBodyCopyQuaternion} (dBodyID body, out dReal X)
+\item 
+static void \hyperlink{_ode_8cs_a6c2edbc2d76b77610708ee34c580013a}{dBodyCopyRotation} (dBodyID body, out dMatrix3 R)
+\item 
+static void \hyperlink{_ode_8cs_a37b678d9ce4302bb96130b45de2a05b4}{dBodyCopyRotation} (dBodyID body, out dReal M00)
+\item 
+delegate int \hyperlink{_ode_8cs_a7a73b346e8f32f15ef6ac4b2dffdc4d9}{dAABBTestFn} (dGeomID o1, dGeomID o2, ref dReal aabb)
+\item 
+delegate int \hyperlink{_ode_8cs_a5946a7255d406b91387ad9e0d52c391b}{dColliderFn} (dGeomID o1, dGeomID o2, int flags, out dContactGeom contact, int skip)
+\item 
+delegate void \hyperlink{_ode_8cs_abbb8314bfcbe2d3cee3c0d48916dc88f}{dGetAABBFn} (dGeomID geom, out dReal aabb)
+\item 
+delegate dColliderFn \hyperlink{_ode_8cs_aa744fce20d8fb198bb331b22f4316809}{dGetColliderFnFn} (int num)
+\item 
+delegate void \hyperlink{_ode_8cs_a1e9960969ad7e9de2959a8a06149ca50}{dGeomDtorFn} (dGeomID o)
+\item 
+delegate dReal \hyperlink{_ode_8cs_a7e0dfd69561fa3b24d2c50a25e611a93}{dHeightfieldGetHeight} (IntPtr p\_\-user\_\-data, int x, int z)
+\item 
+static IntPtr \hyperlink{_ode_8cs_ae383b9a5efb697dcfde19841eab6ba21}{dCreateHeightfield} (dSpaceID space, IntPtr data, int bPlaceable)
+\item 
+static void \hyperlink{_ode_8cs_a93c4a70834483898f9afd18a065c1ead}{dSetZero} (out dReal a, int n)
+\item 
+static void \hyperlink{_ode_8cs_a37ee521dfd6a696c9b5ad492692cd042}{dSetValue} (out dReal a, int n)
+\item 
+static dReal \hyperlink{_ode_8cs_a42755b484badbd41e7af83675774e438}{dDot} (ref dReal X0, ref dReal X1, int n)
+\item 
+static dJointID \hyperlink{_ode_8cs_a0a48570b51319b34bd2dbbaa43416643}{dJointCreatePlane2D} (dWorldID world, dJointGroupID group)
+\item 
+static dJointID \hyperlink{_ode_8cs_a9be21a98139c4074df8a8e0f076322be}{dJointCreatePR} (dWorldID world, dJointGroupID group)
+\item 
+static void \hyperlink{_ode_8cs_a8c681d06376fddd501914b61773723fb}{dJointAddPRTorque} (dJointID joint, dReal torque)
+\item 
+static int \hyperlink{_ode_8cs_a26d7a78b9b456d8912278fa16c694a37}{dFactorCholesky} (ref dReal A00, int n)
+\item 
+static void \hyperlink{_ode_8cs_a1fef2643f7d6d92590b98c1c3cea778a}{dSolveCholesky} (ref dReal L, out dReal b, int n)
+\item 
+static int \hyperlink{_ode_8cs_ab1b03f8bdd3e47d8ea0dc26b45c3844e}{dInvertPDMatrix} (ref dReal A, out dReal Ainv, int n)
+\item 
+static int \hyperlink{_ode_8cs_a9b49221bb7d1559bb3fd81c6ed39b695}{dIsPositiveDefinite} (ref dReal A, int n)
+\item 
+static void \hyperlink{_ode_8cs_add43816df5e5d5392bb4a82769fa40b9}{dFactorLDLT} (ref dReal A, out dReal d, int n, int nskip)
+\item 
+static void \hyperlink{_ode_8cs_a4ec3a5f83b28a068cff59aac4d5594b0}{dSolveL1T} (ref dReal L, out dReal b, int n, int nskip)
+\item 
+static void \hyperlink{_ode_8cs_a5e8531078921a0d039032597b3ad3094}{dVectorScale} (out dReal a, ref dReal d, int n)
+\item 
+static void \hyperlink{_ode_8cs_ac6bf5a8ac0a9af55d8e240442fc15a5b}{dLDLTAddTL} (ref dReal L, ref dReal d, ref dReal a, int n, int nskip)
+\item 
+static dReal \hyperlink{_ode_8cs_ad4cfde6459ce24497420a9abd11aae04}{dRandReal} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+dVector3 \hyperlink{namespace_tao_1_1_ode_a18b074b8eb179ae30ccd8800c92c8f2e}{Tao::Ode.t1}
+\begin{DoxyCompactList}\small\item\em Get the jointfeedback structure from the joint to get information about the forces applied by each joint. \item\end{DoxyCompactList}\item 
+dVector3 \hyperlink{namespace_tao_1_1_ode_ac86f748879f29523f490ddabfaf964e6}{Tao::Ode.f2}
+\item 
+dVector3 \hyperlink{namespace_tao_1_1_ode_a26d9983cf37b06be0dc8f8034f9c1cb8}{Tao::Ode.t2}
+\end{DoxyCompactItemize}
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{_ode_8cs_a2157ed83c79dd11dc32e23d0c5c1204b}{
+\index{Ode.cs@{Ode.cs}!TriMeshNumbers@{TriMeshNumbers}}
+\index{TriMeshNumbers@{TriMeshNumbers}!Ode.cs@{Ode.cs}}
+\subsubsection[{TriMeshNumbers}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf TriMeshNumbers}}}
+\label{_ode_8cs_a2157ed83c79dd11dc32e23d0c5c1204b}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{TRIMESH\_\-FACE\_\-NORMALS@{TRIMESH\_\-FACE\_\-NORMALS}!Ode.cs@{Ode.cs}}\index{Ode.cs@{Ode.cs}!TRIMESH\_\-FACE\_\-NORMALS@{TRIMESH\_\-FACE\_\-NORMALS}}\item[{\em 
+\hypertarget{_ode_8cs_a2157ed83c79dd11dc32e23d0c5c1204b}{
+TRIMESH\_\-FACE\_\-NORMALS}
+\label{_ode_8cs_a2157ed83c79dd11dc32e23d0c5c1204b}
+}]\index{TRIMESH\_\-LAST\_\-TRANSFORMATION@{TRIMESH\_\-LAST\_\-TRANSFORMATION}!Ode.cs@{Ode.cs}}\index{Ode.cs@{Ode.cs}!TRIMESH\_\-LAST\_\-TRANSFORMATION@{TRIMESH\_\-LAST\_\-TRANSFORMATION}}\item[{\em 
+\hypertarget{_ode_8cs_a2157ed83c79dd11dc32e23d0c5c1204b}{
+TRIMESH\_\-LAST\_\-TRANSFORMATION}
+\label{_ode_8cs_a2157ed83c79dd11dc32e23d0c5c1204b}
+}]\end{description}
+\end{Desc}
+
+
+
+\subsection{Function Documentation}
+\hypertarget{_ode_8cs_a7a73b346e8f32f15ef6ac4b2dffdc4d9}{
+\index{Ode.cs@{Ode.cs}!dAABBTestFn@{dAABBTestFn}}
+\index{dAABBTestFn@{dAABBTestFn}!Ode.cs@{Ode.cs}}
+\subsubsection[{dAABBTestFn}]{\setlength{\rightskip}{0pt plus 5cm}delegate int dAABBTestFn (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ o1, }
+\item[{dGeomID}]{ o2, }
+\item[{ref dReal}]{ aabb}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a7a73b346e8f32f15ef6ac4b2dffdc4d9}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em o1}]\item[{\em o2}]\item[{\em aabb}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_ab34cabf46bc824c139242142b1fe8fac}{
+\index{Ode.cs@{Ode.cs}!dBodyCopyPosition@{dBodyCopyPosition}}
+\index{dBodyCopyPosition@{dBodyCopyPosition}!Ode.cs@{Ode.cs}}
+\subsubsection[{dBodyCopyPosition}]{\setlength{\rightskip}{0pt plus 5cm}static void dBodyCopyPosition (
+\begin{DoxyParamCaption}
+\item[{dBodyID}]{ body, }
+\item[{out dVector3}]{ pos}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ab34cabf46bc824c139242142b1fe8fac}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em body}]\item[{\em pos}]\end{DoxyParams}
+\hypertarget{_ode_8cs_ac92d63debb1c1522df946aa4168bcf75}{
+\index{Ode.cs@{Ode.cs}!dBodyCopyPosition@{dBodyCopyPosition}}
+\index{dBodyCopyPosition@{dBodyCopyPosition}!Ode.cs@{Ode.cs}}
+\subsubsection[{dBodyCopyPosition}]{\setlength{\rightskip}{0pt plus 5cm}static void dBodyCopyPosition (
+\begin{DoxyParamCaption}
+\item[{dBodyID}]{ body, }
+\item[{out dReal}]{ X}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ac92d63debb1c1522df946aa4168bcf75}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em body}]\item[{\em X}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a6ac483ba55f1173f9c1257ab403afbe3}{
+\index{Ode.cs@{Ode.cs}!dBodyCopyQuaternion@{dBodyCopyQuaternion}}
+\index{dBodyCopyQuaternion@{dBodyCopyQuaternion}!Ode.cs@{Ode.cs}}
+\subsubsection[{dBodyCopyQuaternion}]{\setlength{\rightskip}{0pt plus 5cm}static void dBodyCopyQuaternion (
+\begin{DoxyParamCaption}
+\item[{dBodyID}]{ body, }
+\item[{out dQuaternion}]{ quat}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a6ac483ba55f1173f9c1257ab403afbe3}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em body}]\item[{\em quat}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a0570ffcd91da39b5a7b942e2fe4e1b79}{
+\index{Ode.cs@{Ode.cs}!dBodyCopyQuaternion@{dBodyCopyQuaternion}}
+\index{dBodyCopyQuaternion@{dBodyCopyQuaternion}!Ode.cs@{Ode.cs}}
+\subsubsection[{dBodyCopyQuaternion}]{\setlength{\rightskip}{0pt plus 5cm}static void dBodyCopyQuaternion (
+\begin{DoxyParamCaption}
+\item[{dBodyID}]{ body, }
+\item[{out dReal}]{ X}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a0570ffcd91da39b5a7b942e2fe4e1b79}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em body}]\item[{\em X}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a6c2edbc2d76b77610708ee34c580013a}{
+\index{Ode.cs@{Ode.cs}!dBodyCopyRotation@{dBodyCopyRotation}}
+\index{dBodyCopyRotation@{dBodyCopyRotation}!Ode.cs@{Ode.cs}}
+\subsubsection[{dBodyCopyRotation}]{\setlength{\rightskip}{0pt plus 5cm}static void dBodyCopyRotation (
+\begin{DoxyParamCaption}
+\item[{dBodyID}]{ body, }
+\item[{out dMatrix3}]{ R}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a6c2edbc2d76b77610708ee34c580013a}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em body}]\item[{\em R}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a37b678d9ce4302bb96130b45de2a05b4}{
+\index{Ode.cs@{Ode.cs}!dBodyCopyRotation@{dBodyCopyRotation}}
+\index{dBodyCopyRotation@{dBodyCopyRotation}!Ode.cs@{Ode.cs}}
+\subsubsection[{dBodyCopyRotation}]{\setlength{\rightskip}{0pt plus 5cm}static void dBodyCopyRotation (
+\begin{DoxyParamCaption}
+\item[{dBodyID}]{ body, }
+\item[{out dReal}]{ M00}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a37b678d9ce4302bb96130b45de2a05b4}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em body}]\item[{\em M00}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a10d6e0a493ec80cfbbd0abf00789fde3}{
+\index{Ode.cs@{Ode.cs}!dBoxBox@{dBoxBox}}
+\index{dBoxBox@{dBoxBox}!Ode.cs@{Ode.cs}}
+\subsubsection[{dBoxBox}]{\setlength{\rightskip}{0pt plus 5cm}static int dBoxBox (
+\begin{DoxyParamCaption}
+\item[{dVector3}]{ p1, }
+\item[{dMatrix3}]{ R1, }
+\item[{dVector3}]{ side1, }
+\item[{dVector3}]{ p2, }
+\item[{dMatrix3}]{ R2, }
+\item[{dVector3}]{ side2, }
+\item[{ref dVector3}]{ normal, }
+\item[{ref dReal}]{ depth, }
+\item[{ref int}]{ return\_\-code, }
+\item[{int}]{ maxc, }
+\item[{ref dContactGeom\mbox{[}$\,$\mbox{]}}]{ contact, }
+\item[{int}]{ skip}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a10d6e0a493ec80cfbbd0abf00789fde3}
+
+
+given two boxes (p1,R1,side1) and (p2,R2,side2), collide them together and generate contact points. this returns 0 if there is no contact otherwise it returns the number of contacts generated. `normal' returns the contact normal. `depth' returns the maximum penetration depth along that normal. `return\_\-code' returns a number indicating the type of contact that was detected: 1,2,3 = box 2 intersects with a face of box 1 4,5,6 = box 1 intersects with a face of box 2 7..15 = edge-\/edge contact `maxc' is the maximum number of contacts allowed to be generated, i.e. the size of the `contact' array. `contact' and `skip' are the contact array information provided to the collision functions. 
+
+this function only fills in the position and depth fields.
+
+TODO: Needs testing. 
+\begin{DoxyParams}{Parameters}
+\item[{\em p1}]A dVector3 containing the center coordinates for box 1\item[{\em R1}]A dMatrix3 containing the rotation matrix for box 1\item[{\em side1}]A dVector3 containing the side lengths (x/y/z) for box 1\item[{\em p2}]A dVector3 containing the center coordinates for box 2\item[{\em R2}]A dMatrix3 containing the rotation matrix for box 2\item[{\em side2}]A dVector3 containing the side lengths (x/y/z) for box 1\item[{\em normal}]returns the value of the contact normal\item[{\em depth}]returns the maximum penetration along the contact normal\item[{\em return\_\-code}]returns the type of contact detected\item[{\em maxc}]specifies the maximum number of contacts allowed (should match size of contact array)\item[{\em contact}]an array of ContactGeoms returning the contact information\item[{\em skip}]contact array information provided to collision functions. Size of contact geom?\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of contacts generated
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_a5946a7255d406b91387ad9e0d52c391b}{
+\index{Ode.cs@{Ode.cs}!dColliderFn@{dColliderFn}}
+\index{dColliderFn@{dColliderFn}!Ode.cs@{Ode.cs}}
+\subsubsection[{dColliderFn}]{\setlength{\rightskip}{0pt plus 5cm}delegate int dColliderFn (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ o1, }
+\item[{dGeomID}]{ o2, }
+\item[{int}]{ flags, }
+\item[{out dContactGeom}]{ contact, }
+\item[{int}]{ skip}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a5946a7255d406b91387ad9e0d52c391b}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em o1}]\item[{\em o2}]\item[{\em flags}]\item[{\em contact}]\item[{\em skip}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_afb3ddd8fadf9119eb74ed8016caa3ad9}{
+\index{Ode.cs@{Ode.cs}!dCreateConvex@{dCreateConvex}}
+\index{dCreateConvex@{dCreateConvex}!Ode.cs@{Ode.cs}}
+\subsubsection[{dCreateConvex}]{\setlength{\rightskip}{0pt plus 5cm}static dGeomID dCreateConvex (
+\begin{DoxyParamCaption}
+\item[{dSpaceID}]{ space, }
+\item[{dReal\mbox{[}$\,$\mbox{]}}]{ planes, }
+\item[{int}]{ planeCount, }
+\item[{dReal\mbox{[}$\,$\mbox{]}}]{ points, }
+\item[{int}]{ pointCount, }
+\item[{int\mbox{[}$\,$\mbox{]}}]{ polygons}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_afb3ddd8fadf9119eb74ed8016caa3ad9}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em space}]\item[{\em planes}]\item[{\em planeCount}]\item[{\em points}]\item[{\em pointCount}]\item[{\em polygons}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_ae383b9a5efb697dcfde19841eab6ba21}{
+\index{Ode.cs@{Ode.cs}!dCreateHeightfield@{dCreateHeightfield}}
+\index{dCreateHeightfield@{dCreateHeightfield}!Ode.cs@{Ode.cs}}
+\subsubsection[{dCreateHeightfield}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr dCreateHeightfield (
+\begin{DoxyParamCaption}
+\item[{dSpaceID}]{ space, }
+\item[{IntPtr}]{ data, }
+\item[{int}]{ bPlaceable}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ae383b9a5efb697dcfde19841eab6ba21}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em space}]\item[{\em data}]\item[{\em bPlaceable}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_a42755b484badbd41e7af83675774e438}{
+\index{Ode.cs@{Ode.cs}!dDot@{dDot}}
+\index{dDot@{dDot}!Ode.cs@{Ode.cs}}
+\subsubsection[{dDot}]{\setlength{\rightskip}{0pt plus 5cm}static dReal dDot (
+\begin{DoxyParamCaption}
+\item[{ref dReal}]{ X0, }
+\item[{ref dReal}]{ X1, }
+\item[{int}]{ n}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a42755b484badbd41e7af83675774e438}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em X0}]\item[{\em X1}]\item[{\em n}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_a26d7a78b9b456d8912278fa16c694a37}{
+\index{Ode.cs@{Ode.cs}!dFactorCholesky@{dFactorCholesky}}
+\index{dFactorCholesky@{dFactorCholesky}!Ode.cs@{Ode.cs}}
+\subsubsection[{dFactorCholesky}]{\setlength{\rightskip}{0pt plus 5cm}static int dFactorCholesky (
+\begin{DoxyParamCaption}
+\item[{ref dReal}]{ A00, }
+\item[{int}]{ n}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a26d7a78b9b456d8912278fa16c694a37}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em A00}]\item[{\em n}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_add43816df5e5d5392bb4a82769fa40b9}{
+\index{Ode.cs@{Ode.cs}!dFactorLDLT@{dFactorLDLT}}
+\index{dFactorLDLT@{dFactorLDLT}!Ode.cs@{Ode.cs}}
+\subsubsection[{dFactorLDLT}]{\setlength{\rightskip}{0pt plus 5cm}static void dFactorLDLT (
+\begin{DoxyParamCaption}
+\item[{ref dReal}]{ A, }
+\item[{out dReal}]{ d, }
+\item[{int}]{ n, }
+\item[{int}]{ nskip}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_add43816df5e5d5392bb4a82769fa40b9}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em A}]\item[{\em d}]\item[{\em n}]\item[{\em nskip}]\end{DoxyParams}
+\hypertarget{_ode_8cs_ab3e936fa2b54c8e010f7eaf8780f54e9}{
+\index{Ode.cs@{Ode.cs}!dGeomBoxGetLengths@{dGeomBoxGetLengths}}
+\index{dGeomBoxGetLengths@{dGeomBoxGetLengths}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomBoxGetLengths}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomBoxGetLengths (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ geom, }
+\item[{out dReal}]{ x}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ab3e936fa2b54c8e010f7eaf8780f54e9}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em geom}]\item[{\em x}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a75d4df8eef0229e0588090ae5bbb3ee6}{
+\index{Ode.cs@{Ode.cs}!dGeomCopyOffsetPosition@{dGeomCopyOffsetPosition}}
+\index{dGeomCopyOffsetPosition@{dGeomCopyOffsetPosition}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomCopyOffsetPosition}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomCopyOffsetPosition (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ geom, }
+\item[{ref dVector3}]{ pos}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a75d4df8eef0229e0588090ae5bbb3ee6}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em geom}]\item[{\em pos}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_a31991b3f97953afc4d969078979c12a8}{
+\index{Ode.cs@{Ode.cs}!dGeomCopyOffsetPosition@{dGeomCopyOffsetPosition}}
+\index{dGeomCopyOffsetPosition@{dGeomCopyOffsetPosition}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomCopyOffsetPosition}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomCopyOffsetPosition (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ geom, }
+\item[{ref dReal}]{ X}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a31991b3f97953afc4d969078979c12a8}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em geom}]\item[{\em X}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_afc23145d5866df730bf513cb0faf76f2}{
+\index{Ode.cs@{Ode.cs}!dGeomCopyOffsetRotation@{dGeomCopyOffsetRotation}}
+\index{dGeomCopyOffsetRotation@{dGeomCopyOffsetRotation}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomCopyOffsetRotation}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomCopyOffsetRotation (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ geom, }
+\item[{ref dMatrix3}]{ R}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_afc23145d5866df730bf513cb0faf76f2}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em geom}]\item[{\em R}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_aabae452405aa2379d7ba210790c6ed69}{
+\index{Ode.cs@{Ode.cs}!dGeomCopyOffsetRotation@{dGeomCopyOffsetRotation}}
+\index{dGeomCopyOffsetRotation@{dGeomCopyOffsetRotation}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomCopyOffsetRotation}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomCopyOffsetRotation (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ geom, }
+\item[{ref dReal}]{ M00}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_aabae452405aa2379d7ba210790c6ed69}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em geom}]\item[{\em M00}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_a59d21c3458f7a7e3529bfebbbeb8ca25}{
+\index{Ode.cs@{Ode.cs}!dGeomCopyPosition@{dGeomCopyPosition}}
+\index{dGeomCopyPosition@{dGeomCopyPosition}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomCopyPosition}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomCopyPosition (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ geom, }
+\item[{out dReal}]{ X}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a59d21c3458f7a7e3529bfebbbeb8ca25}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em geom}]\item[{\em X}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a2b2b6745b1084c3a029de571f2d083b2}{
+\index{Ode.cs@{Ode.cs}!dGeomCopyPosition@{dGeomCopyPosition}}
+\index{dGeomCopyPosition@{dGeomCopyPosition}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomCopyPosition}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomCopyPosition (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ geom, }
+\item[{out dVector3}]{ pos}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a2b2b6745b1084c3a029de571f2d083b2}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em geom}]\item[{\em pos}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a30f3812914d39a460487a6a3cd82d5c0}{
+\index{Ode.cs@{Ode.cs}!dGeomCopyRotation@{dGeomCopyRotation}}
+\index{dGeomCopyRotation@{dGeomCopyRotation}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomCopyRotation}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomCopyRotation (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ geom, }
+\item[{out dMatrix3}]{ R}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a30f3812914d39a460487a6a3cd82d5c0}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em geom}]\item[{\em R}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a864885ca3bdcfb31329ae2ac8de4c413}{
+\index{Ode.cs@{Ode.cs}!dGeomCopyRotation@{dGeomCopyRotation}}
+\index{dGeomCopyRotation@{dGeomCopyRotation}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomCopyRotation}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomCopyRotation (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ geom, }
+\item[{out dReal}]{ M00}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a864885ca3bdcfb31329ae2ac8de4c413}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em geom}]\item[{\em M00}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a1e9960969ad7e9de2959a8a06149ca50}{
+\index{Ode.cs@{Ode.cs}!dGeomDtorFn@{dGeomDtorFn}}
+\index{dGeomDtorFn@{dGeomDtorFn}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomDtorFn}]{\setlength{\rightskip}{0pt plus 5cm}delegate void dGeomDtorFn (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ o}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a1e9960969ad7e9de2959a8a06149ca50}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em o}]\end{DoxyParams}
+\hypertarget{_ode_8cs_ac6317fd4624fc9f63138eec7128387e7}{
+\index{Ode.cs@{Ode.cs}!dGeomGetAABB@{dGeomGetAABB}}
+\index{dGeomGetAABB@{dGeomGetAABB}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomGetAABB}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomGetAABB (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ geom, }
+\item[{out dReal}]{ minX}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ac6317fd4624fc9f63138eec7128387e7}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em geom}]\item[{\em minX}]\end{DoxyParams}
+\hypertarget{_ode_8cs_ad732c7cd8a338afbeeb91c3c2c036472}{
+\index{Ode.cs@{Ode.cs}!dGeomHeightfieldDataBuildByte@{dGeomHeightfieldDataBuildByte}}
+\index{dGeomHeightfieldDataBuildByte@{dGeomHeightfieldDataBuildByte}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomHeightfieldDataBuildByte}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomHeightfieldDataBuildByte (
+\begin{DoxyParamCaption}
+\item[{dHeightfieldDataID}]{ d, }
+\item[{byte\mbox{[}$\,$\mbox{]}}]{ pHeightData, }
+\item[{int}]{ bCopyHeightData, }
+\item[{dReal}]{ width, }
+\item[{dReal}]{ depth, }
+\item[{int}]{ widthSamples, }
+\item[{int}]{ depthSamples, }
+\item[{dReal}]{ scale, }
+\item[{dReal}]{ offset, }
+\item[{dReal}]{ thickness, }
+\item[{int}]{ bWrap}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ad732c7cd8a338afbeeb91c3c2c036472}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em d}]\item[{\em pHeightData}]\item[{\em bCopyHeightData}]\item[{\em width}]\item[{\em depth}]\item[{\em widthSamples}]\item[{\em depthSamples}]\item[{\em scale}]\item[{\em offset}]\item[{\em thickness}]\item[{\em bWrap}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a601d0f1182dae1156ae3dfbffa760332}{
+\index{Ode.cs@{Ode.cs}!dGeomHeightfieldDataBuildByte@{dGeomHeightfieldDataBuildByte}}
+\index{dGeomHeightfieldDataBuildByte@{dGeomHeightfieldDataBuildByte}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomHeightfieldDataBuildByte}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomHeightfieldDataBuildByte (
+\begin{DoxyParamCaption}
+\item[{dHeightfieldDataID}]{ d, }
+\item[{IntPtr}]{ pHeightData, }
+\item[{int}]{ bCopyHeightData, }
+\item[{dReal}]{ width, }
+\item[{dReal}]{ depth, }
+\item[{int}]{ widthSamples, }
+\item[{int}]{ depthSamples, }
+\item[{dReal}]{ scale, }
+\item[{dReal}]{ offset, }
+\item[{dReal}]{ thickness, }
+\item[{int}]{ bWrap}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a601d0f1182dae1156ae3dfbffa760332}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em d}]\item[{\em pHeightData}]\item[{\em bCopyHeightData}]\item[{\em width}]\item[{\em depth}]\item[{\em widthSamples}]\item[{\em depthSamples}]\item[{\em scale}]\item[{\em offset}]\item[{\em thickness}]\item[{\em bWrap}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a6f37d1cfbe377ce2318749d6c1e13131}{
+\index{Ode.cs@{Ode.cs}!dGeomHeightfieldDataBuildCallback@{dGeomHeightfieldDataBuildCallback}}
+\index{dGeomHeightfieldDataBuildCallback@{dGeomHeightfieldDataBuildCallback}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomHeightfieldDataBuildCallback}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomHeightfieldDataBuildCallback (
+\begin{DoxyParamCaption}
+\item[{dHeightfieldDataID}]{ d, }
+\item[{IntPtr}]{ pUserData, }
+\item[{dHeightfieldGetHeight}]{ pCallback, }
+\item[{dReal}]{ width, }
+\item[{dReal}]{ depth, }
+\item[{int}]{ widthSamples, }
+\item[{int}]{ depthSamples, }
+\item[{dReal}]{ scale, }
+\item[{dReal}]{ offset, }
+\item[{dReal}]{ thickness, }
+\item[{int}]{ bWrap}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a6f37d1cfbe377ce2318749d6c1e13131}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em d}]\item[{\em pUserData}]\item[{\em pCallback}]\item[{\em width}]\item[{\em depth}]\item[{\em widthSamples}]\item[{\em depthSamples}]\item[{\em scale}]\item[{\em offset}]\item[{\em thickness}]\item[{\em bWrap}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a6e114f567cff8aa0e93e83a9f67df615}{
+\index{Ode.cs@{Ode.cs}!dGeomHeightfieldDataBuildDouble@{dGeomHeightfieldDataBuildDouble}}
+\index{dGeomHeightfieldDataBuildDouble@{dGeomHeightfieldDataBuildDouble}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomHeightfieldDataBuildDouble}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomHeightfieldDataBuildDouble (
+\begin{DoxyParamCaption}
+\item[{dHeightfieldDataID}]{ d, }
+\item[{double\mbox{[}$\,$\mbox{]}}]{ pHeightData, }
+\item[{int}]{ bCopyHeightData, }
+\item[{dReal}]{ width, }
+\item[{dReal}]{ depth, }
+\item[{int}]{ widthSamples, }
+\item[{int}]{ depthSamples, }
+\item[{dReal}]{ scale, }
+\item[{dReal}]{ offset, }
+\item[{dReal}]{ thickness, }
+\item[{int}]{ bWrap}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a6e114f567cff8aa0e93e83a9f67df615}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em d}]\item[{\em pHeightData}]\item[{\em bCopyHeightData}]\item[{\em width}]\item[{\em depth}]\item[{\em widthSamples}]\item[{\em depthSamples}]\item[{\em scale}]\item[{\em offset}]\item[{\em thickness}]\item[{\em bWrap}]\end{DoxyParams}
+\hypertarget{_ode_8cs_af79b9c8cb536c2f295933d50d07fd5b6}{
+\index{Ode.cs@{Ode.cs}!dGeomHeightfieldDataBuildDouble@{dGeomHeightfieldDataBuildDouble}}
+\index{dGeomHeightfieldDataBuildDouble@{dGeomHeightfieldDataBuildDouble}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomHeightfieldDataBuildDouble}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomHeightfieldDataBuildDouble (
+\begin{DoxyParamCaption}
+\item[{dHeightfieldDataID}]{ d, }
+\item[{IntPtr}]{ pHeightData, }
+\item[{int}]{ bCopyHeightData, }
+\item[{dReal}]{ width, }
+\item[{dReal}]{ depth, }
+\item[{int}]{ widthSamples, }
+\item[{int}]{ depthSamples, }
+\item[{dReal}]{ scale, }
+\item[{dReal}]{ offset, }
+\item[{dReal}]{ thickness, }
+\item[{int}]{ bWrap}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_af79b9c8cb536c2f295933d50d07fd5b6}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em d}]\item[{\em pHeightData}]\item[{\em bCopyHeightData}]\item[{\em width}]\item[{\em depth}]\item[{\em widthSamples}]\item[{\em depthSamples}]\item[{\em scale}]\item[{\em offset}]\item[{\em thickness}]\item[{\em bWrap}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a49d3bc12496785d992a6b1cbf824e466}{
+\index{Ode.cs@{Ode.cs}!dGeomHeightfieldDataBuildShort@{dGeomHeightfieldDataBuildShort}}
+\index{dGeomHeightfieldDataBuildShort@{dGeomHeightfieldDataBuildShort}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomHeightfieldDataBuildShort}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomHeightfieldDataBuildShort (
+\begin{DoxyParamCaption}
+\item[{dHeightfieldDataID}]{ d, }
+\item[{ushort\mbox{[}$\,$\mbox{]}}]{ pHeightData, }
+\item[{int}]{ bCopyHeightData, }
+\item[{dReal}]{ width, }
+\item[{dReal}]{ depth, }
+\item[{int}]{ widthSamples, }
+\item[{int}]{ depthSamples, }
+\item[{dReal}]{ scale, }
+\item[{dReal}]{ offset, }
+\item[{dReal}]{ thickness, }
+\item[{int}]{ bWrap}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a49d3bc12496785d992a6b1cbf824e466}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em d}]\item[{\em pHeightData}]\item[{\em bCopyHeightData}]\item[{\em width}]\item[{\em depth}]\item[{\em widthSamples}]\item[{\em depthSamples}]\item[{\em scale}]\item[{\em offset}]\item[{\em thickness}]\item[{\em bWrap}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a339ce0497e17f8c2e6e44ae3771b2131}{
+\index{Ode.cs@{Ode.cs}!dGeomHeightfieldDataBuildShort@{dGeomHeightfieldDataBuildShort}}
+\index{dGeomHeightfieldDataBuildShort@{dGeomHeightfieldDataBuildShort}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomHeightfieldDataBuildShort}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomHeightfieldDataBuildShort (
+\begin{DoxyParamCaption}
+\item[{dHeightfieldDataID}]{ d, }
+\item[{short\mbox{[}$\,$\mbox{]}}]{ pHeightData, }
+\item[{int}]{ bCopyHeightData, }
+\item[{dReal}]{ width, }
+\item[{dReal}]{ depth, }
+\item[{int}]{ widthSamples, }
+\item[{int}]{ depthSamples, }
+\item[{dReal}]{ scale, }
+\item[{dReal}]{ offset, }
+\item[{dReal}]{ thickness, }
+\item[{int}]{ bWrap}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a339ce0497e17f8c2e6e44ae3771b2131}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em d}]\item[{\em pHeightData}]\item[{\em bCopyHeightData}]\item[{\em width}]\item[{\em depth}]\item[{\em widthSamples}]\item[{\em depthSamples}]\item[{\em scale}]\item[{\em offset}]\item[{\em thickness}]\item[{\em bWrap}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a0f1ccdd29e66019875b502098fcfe65d}{
+\index{Ode.cs@{Ode.cs}!dGeomHeightfieldDataBuildShort@{dGeomHeightfieldDataBuildShort}}
+\index{dGeomHeightfieldDataBuildShort@{dGeomHeightfieldDataBuildShort}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomHeightfieldDataBuildShort}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomHeightfieldDataBuildShort (
+\begin{DoxyParamCaption}
+\item[{dHeightfieldDataID}]{ d, }
+\item[{IntPtr}]{ pHeightData, }
+\item[{int}]{ bCopyHeightData, }
+\item[{dReal}]{ width, }
+\item[{dReal}]{ depth, }
+\item[{int}]{ widthSamples, }
+\item[{int}]{ depthSamples, }
+\item[{dReal}]{ scale, }
+\item[{dReal}]{ offset, }
+\item[{dReal}]{ thickness, }
+\item[{int}]{ bWrap}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a0f1ccdd29e66019875b502098fcfe65d}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em d}]\item[{\em pHeightData}]\item[{\em bCopyHeightData}]\item[{\em width}]\item[{\em depth}]\item[{\em widthSamples}]\item[{\em depthSamples}]\item[{\em scale}]\item[{\em offset}]\item[{\em thickness}]\item[{\em bWrap}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a6d457ebff18965566ce9a6568b48014c}{
+\index{Ode.cs@{Ode.cs}!dGeomHeightfieldDataBuildSingle@{dGeomHeightfieldDataBuildSingle}}
+\index{dGeomHeightfieldDataBuildSingle@{dGeomHeightfieldDataBuildSingle}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomHeightfieldDataBuildSingle}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomHeightfieldDataBuildSingle (
+\begin{DoxyParamCaption}
+\item[{dHeightfieldDataID}]{ d, }
+\item[{IntPtr}]{ pHeightData, }
+\item[{int}]{ bCopyHeightData, }
+\item[{dReal}]{ width, }
+\item[{dReal}]{ depth, }
+\item[{int}]{ widthSamples, }
+\item[{int}]{ depthSamples, }
+\item[{dReal}]{ scale, }
+\item[{dReal}]{ offset, }
+\item[{dReal}]{ thickness, }
+\item[{int}]{ bWrap}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a6d457ebff18965566ce9a6568b48014c}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em d}]\item[{\em pHeightData}]\item[{\em bCopyHeightData}]\item[{\em width}]\item[{\em depth}]\item[{\em widthSamples}]\item[{\em depthSamples}]\item[{\em scale}]\item[{\em offset}]\item[{\em thickness}]\item[{\em bWrap}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a5ce59646759409362e2dd5fa8bbf3e47}{
+\index{Ode.cs@{Ode.cs}!dGeomHeightfieldDataBuildSingle@{dGeomHeightfieldDataBuildSingle}}
+\index{dGeomHeightfieldDataBuildSingle@{dGeomHeightfieldDataBuildSingle}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomHeightfieldDataBuildSingle}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomHeightfieldDataBuildSingle (
+\begin{DoxyParamCaption}
+\item[{dHeightfieldDataID}]{ d, }
+\item[{float\mbox{[}$\,$\mbox{]}}]{ pHeightData, }
+\item[{int}]{ bCopyHeightData, }
+\item[{dReal}]{ width, }
+\item[{dReal}]{ depth, }
+\item[{int}]{ widthSamples, }
+\item[{int}]{ depthSamples, }
+\item[{dReal}]{ scale, }
+\item[{dReal}]{ offset, }
+\item[{dReal}]{ thickness, }
+\item[{int}]{ bWrap}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a5ce59646759409362e2dd5fa8bbf3e47}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em d}]\item[{\em pHeightData}]\item[{\em bCopyHeightData}]\item[{\em width}]\item[{\em depth}]\item[{\em widthSamples}]\item[{\em depthSamples}]\item[{\em scale}]\item[{\em offset}]\item[{\em thickness}]\item[{\em bWrap}]\end{DoxyParams}
+\hypertarget{_ode_8cs_afff13ba8bb3d2199017b81b915feef13}{
+\index{Ode.cs@{Ode.cs}!dGeomHeightfieldDataCreate@{dGeomHeightfieldDataCreate}}
+\index{dGeomHeightfieldDataCreate@{dGeomHeightfieldDataCreate}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomHeightfieldDataCreate}]{\setlength{\rightskip}{0pt plus 5cm}static dHeightfieldDataID dGeomHeightfieldDataCreate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_afff13ba8bb3d2199017b81b915feef13}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_ab0d5fd57ecf3d3a6d50c9e781c237c4d}{
+\index{Ode.cs@{Ode.cs}!dGeomHeightfieldDataDestroy@{dGeomHeightfieldDataDestroy}}
+\index{dGeomHeightfieldDataDestroy@{dGeomHeightfieldDataDestroy}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomHeightfieldDataDestroy}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomHeightfieldDataDestroy (
+\begin{DoxyParamCaption}
+\item[{dHeightfieldDataID}]{ d}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ab0d5fd57ecf3d3a6d50c9e781c237c4d}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em d}]\end{DoxyParams}
+\hypertarget{_ode_8cs_aef377be3ae5818e0caab5868a9cc065c}{
+\index{Ode.cs@{Ode.cs}!dGeomHeightfieldDataSetBounds@{dGeomHeightfieldDataSetBounds}}
+\index{dGeomHeightfieldDataSetBounds@{dGeomHeightfieldDataSetBounds}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomHeightfieldDataSetBounds}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomHeightfieldDataSetBounds (
+\begin{DoxyParamCaption}
+\item[{dHeightfieldDataID}]{ d, }
+\item[{dReal}]{ minHeight, }
+\item[{dReal}]{ maxHeight}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_aef377be3ae5818e0caab5868a9cc065c}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em d}]\item[{\em minHeight}]\item[{\em maxHeight}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a5c5503006c72eda1e84d47934061db43}{
+\index{Ode.cs@{Ode.cs}!dGeomHeightfieldGetHeightfieldData@{dGeomHeightfieldGetHeightfieldData}}
+\index{dGeomHeightfieldGetHeightfieldData@{dGeomHeightfieldGetHeightfieldData}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomHeightfieldGetHeightfieldData}]{\setlength{\rightskip}{0pt plus 5cm}static dHeightfieldDataID dGeomHeightfieldGetHeightfieldData (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ g}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a5c5503006c72eda1e84d47934061db43}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em g}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_aae9c6cd4992bd69f6c2add54eaade3e4}{
+\index{Ode.cs@{Ode.cs}!dGeomHeightfieldSetHeightfieldData@{dGeomHeightfieldSetHeightfieldData}}
+\index{dGeomHeightfieldSetHeightfieldData@{dGeomHeightfieldSetHeightfieldData}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomHeightfieldSetHeightfieldData}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomHeightfieldSetHeightfieldData (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ g, }
+\item[{dHeightfieldDataID}]{ d}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_aae9c6cd4992bd69f6c2add54eaade3e4}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em g}]\item[{\em d}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a21ea25b8c22767bc676371e6f3fe0922}{
+\index{Ode.cs@{Ode.cs}!dGeomRayGet@{dGeomRayGet}}
+\index{dGeomRayGet@{dGeomRayGet}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomRayGet}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomRayGet (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ ray, }
+\item[{ref dReal}]{ startX, }
+\item[{ref dReal}]{ dirX}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a21ea25b8c22767bc676371e6f3fe0922}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em ray}]\item[{\em startX}]\item[{\em dirX}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a2ee3d0eccbd38f4d5f27a2ab058ae145}{
+\index{Ode.cs@{Ode.cs}!dGeomSetConvex@{dGeomSetConvex}}
+\index{dGeomSetConvex@{dGeomSetConvex}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomSetConvex}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomSetConvex (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ geom, }
+\item[{dReal\mbox{[}$\,$\mbox{]}}]{ planes, }
+\item[{int}]{ planeCount, }
+\item[{dReal\mbox{[}$\,$\mbox{]}}]{ points, }
+\item[{int}]{ pointCount, }
+\item[{int\mbox{[}$\,$\mbox{]}}]{ polygons}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a2ee3d0eccbd38f4d5f27a2ab058ae145}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em geom}]\item[{\em planes}]\item[{\em planeCount}]\item[{\em points}]\item[{\em pointCount}]\item[{\em polygons}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_ab57741fa03caff2ea1ebc82f56314199}{
+\index{Ode.cs@{Ode.cs}!dGeomSetOffsetQuaternion@{dGeomSetOffsetQuaternion}}
+\index{dGeomSetOffsetQuaternion@{dGeomSetOffsetQuaternion}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomSetOffsetQuaternion}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomSetOffsetQuaternion (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ geom, }
+\item[{ref dReal}]{ X}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ab57741fa03caff2ea1ebc82f56314199}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em geom}]\item[{\em X}]\end{DoxyParams}
+\hypertarget{_ode_8cs_aee1c6069a1d1fd584d8bccd2e93d37df}{
+\index{Ode.cs@{Ode.cs}!dGeomSetOffsetWorldQuaternion@{dGeomSetOffsetWorldQuaternion}}
+\index{dGeomSetOffsetWorldQuaternion@{dGeomSetOffsetWorldQuaternion}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomSetOffsetWorldQuaternion}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomSetOffsetWorldQuaternion (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ geom, }
+\item[{ref dReal}]{ X}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_aee1c6069a1d1fd584d8bccd2e93d37df}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em geom}]\item[{\em X}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a4f27ffe9d826b8d872077347e222c3cf}{
+\index{Ode.cs@{Ode.cs}!dGeomSetOffsetWorldRotation@{dGeomSetOffsetWorldRotation}}
+\index{dGeomSetOffsetWorldRotation@{dGeomSetOffsetWorldRotation}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomSetOffsetWorldRotation}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomSetOffsetWorldRotation (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ geom, }
+\item[{ref dReal}]{ M00}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a4f27ffe9d826b8d872077347e222c3cf}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em geom}]\item[{\em M00}]\end{DoxyParams}
+\hypertarget{_ode_8cs_ae4c463c950a1b777499e370e3db6f13a}{
+\index{Ode.cs@{Ode.cs}!dGeomSetQuaternion@{dGeomSetQuaternion}}
+\index{dGeomSetQuaternion@{dGeomSetQuaternion}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomSetQuaternion}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomSetQuaternion (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ geom, }
+\item[{ref dReal}]{ w}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ae4c463c950a1b777499e370e3db6f13a}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em geom}]\item[{\em w}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a4c954c536869c38c4c3d8656ca2baba4}{
+\index{Ode.cs@{Ode.cs}!dGeomTriMeshDataBuildDouble@{dGeomTriMeshDataBuildDouble}}
+\index{dGeomTriMeshDataBuildDouble@{dGeomTriMeshDataBuildDouble}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomTriMeshDataBuildDouble}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomTriMeshDataBuildDouble (
+\begin{DoxyParamCaption}
+\item[{dTriMeshDataID}]{ g, }
+\item[{IntPtr}]{ vertices, }
+\item[{int}]{ vertexStride, }
+\item[{int}]{ vertexCount, }
+\item[{IntPtr}]{ indices, }
+\item[{int}]{ indexCount, }
+\item[{int}]{ triStride}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a4c954c536869c38c4c3d8656ca2baba4}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em g}]\item[{\em vertices}]\item[{\em vertexStride}]\item[{\em vertexCount}]\item[{\em indices}]\item[{\em indexCount}]\item[{\em triStride}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a39c2edea1aa16bf1eb7683496fee41de}{
+\index{Ode.cs@{Ode.cs}!dGeomTriMeshDataBuildDouble@{dGeomTriMeshDataBuildDouble}}
+\index{dGeomTriMeshDataBuildDouble@{dGeomTriMeshDataBuildDouble}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomTriMeshDataBuildDouble}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomTriMeshDataBuildDouble (
+\begin{DoxyParamCaption}
+\item[{dTriMeshDataID}]{ g, }
+\item[{IntPtr}]{ vertices, }
+\item[{int}]{ vertexStride, }
+\item[{int}]{ vertexCount, }
+\item[{IntPtr}]{ indices, }
+\item[{int}]{ indexCount, }
+\item[{int}]{ triStride, }
+\item[{IntPtr}]{ normals}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a39c2edea1aa16bf1eb7683496fee41de}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em g}]\item[{\em vertices}]\item[{\em vertexStride}]\item[{\em vertexCount}]\item[{\em indices}]\item[{\em indexCount}]\item[{\em triStride}]\item[{\em normals}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a825e20b95a45c0b3f643322313d8bf75}{
+\index{Ode.cs@{Ode.cs}!dGeomTriMeshDataBuildSingle@{dGeomTriMeshDataBuildSingle}}
+\index{dGeomTriMeshDataBuildSingle@{dGeomTriMeshDataBuildSingle}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomTriMeshDataBuildSingle}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomTriMeshDataBuildSingle (
+\begin{DoxyParamCaption}
+\item[{dTriMeshDataID}]{ g, }
+\item[{IntPtr}]{ vertices, }
+\item[{int}]{ vertexStride, }
+\item[{int}]{ vertexCount, }
+\item[{IntPtr}]{ indices, }
+\item[{int}]{ indexCount, }
+\item[{int}]{ triStride}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a825e20b95a45c0b3f643322313d8bf75}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em g}]\item[{\em vertices}]\item[{\em vertexStride}]\item[{\em vertexCount}]\item[{\em indices}]\item[{\em indexCount}]\item[{\em triStride}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a91c2ed2ffa4c9fe82267de39f18f896b}{
+\index{Ode.cs@{Ode.cs}!dGeomTriMeshDataBuildSingle1@{dGeomTriMeshDataBuildSingle1}}
+\index{dGeomTriMeshDataBuildSingle1@{dGeomTriMeshDataBuildSingle1}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomTriMeshDataBuildSingle1}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomTriMeshDataBuildSingle1 (
+\begin{DoxyParamCaption}
+\item[{dTriMeshDataID}]{ g, }
+\item[{IntPtr}]{ vertices, }
+\item[{int}]{ vertexStride, }
+\item[{int}]{ vertexCount, }
+\item[{IntPtr}]{ indices, }
+\item[{int}]{ indexCount, }
+\item[{int}]{ triStride, }
+\item[{IntPtr}]{ normals}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a91c2ed2ffa4c9fe82267de39f18f896b}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em g}]\item[{\em vertices}]\item[{\em vertexStride}]\item[{\em vertexCount}]\item[{\em indices}]\item[{\em indexCount}]\item[{\em triStride}]\item[{\em normals}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a70437688328e4ceb804dac39fd635487}{
+\index{Ode.cs@{Ode.cs}!dGeomTriMeshDataGet@{dGeomTriMeshDataGet}}
+\index{dGeomTriMeshDataGet@{dGeomTriMeshDataGet}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomTriMeshDataGet}]{\setlength{\rightskip}{0pt plus 5cm}static IntPtr dGeomTriMeshDataGet (
+\begin{DoxyParamCaption}
+\item[{dTriMeshDataID}]{ g, }
+\item[{int}]{ data\_\-id}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a70437688328e4ceb804dac39fd635487}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em g}]\item[{\em data\_\-id}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_af56dc2a1594fae6afa9bc23d81709eab}{
+\index{Ode.cs@{Ode.cs}!dGeomTriMeshDataPreprocess@{dGeomTriMeshDataPreprocess}}
+\index{dGeomTriMeshDataPreprocess@{dGeomTriMeshDataPreprocess}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomTriMeshDataPreprocess}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomTriMeshDataPreprocess (
+\begin{DoxyParamCaption}
+\item[{dTriMeshDataID}]{ g}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_af56dc2a1594fae6afa9bc23d81709eab}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em g}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a190cdef4095fce078d098378ce84da5d}{
+\index{Ode.cs@{Ode.cs}!dGeomTriMeshDataUpdate@{dGeomTriMeshDataUpdate}}
+\index{dGeomTriMeshDataUpdate@{dGeomTriMeshDataUpdate}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomTriMeshDataUpdate}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomTriMeshDataUpdate (
+\begin{DoxyParamCaption}
+\item[{dTriMeshDataID}]{ g}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a190cdef4095fce078d098378ce84da5d}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em g}]\end{DoxyParams}
+\hypertarget{_ode_8cs_aadc17d0cf524f88c56d9acff42f3b514}{
+\index{Ode.cs@{Ode.cs}!dGeomTriMeshGetData@{dGeomTriMeshGetData}}
+\index{dGeomTriMeshGetData@{dGeomTriMeshGetData}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomTriMeshGetData}]{\setlength{\rightskip}{0pt plus 5cm}static dTriMeshDataID dGeomTriMeshGetData (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ g}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_aadc17d0cf524f88c56d9acff42f3b514}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em g}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_ac454d453ee0242dbedbe98b3f853412c}{
+\index{Ode.cs@{Ode.cs}!dGeomTriMeshSetLastTransform@{dGeomTriMeshSetLastTransform}}
+\index{dGeomTriMeshSetLastTransform@{dGeomTriMeshSetLastTransform}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomTriMeshSetLastTransform}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomTriMeshSetLastTransform (
+\begin{DoxyParamCaption}
+\item[{dTriMeshDataID}]{ d, }
+\item[{ref dReal}]{ M00}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ac454d453ee0242dbedbe98b3f853412c}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em d}]\item[{\em M00}]\end{DoxyParams}
+\hypertarget{_ode_8cs_ae74a5008767c082b706b50bc1ba4e933}{
+\index{Ode.cs@{Ode.cs}!dGeomTriMeshSetLastTransform@{dGeomTriMeshSetLastTransform}}
+\index{dGeomTriMeshSetLastTransform@{dGeomTriMeshSetLastTransform}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGeomTriMeshSetLastTransform}]{\setlength{\rightskip}{0pt plus 5cm}static void dGeomTriMeshSetLastTransform (
+\begin{DoxyParamCaption}
+\item[{dTriMeshDataID}]{ d, }
+\item[{ref dMatrix4}]{ last\_\-trans}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ae74a5008767c082b706b50bc1ba4e933}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em d}]\item[{\em last\_\-trans}]\end{DoxyParams}
+\hypertarget{_ode_8cs_abbb8314bfcbe2d3cee3c0d48916dc88f}{
+\index{Ode.cs@{Ode.cs}!dGetAABBFn@{dGetAABBFn}}
+\index{dGetAABBFn@{dGetAABBFn}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGetAABBFn}]{\setlength{\rightskip}{0pt plus 5cm}delegate void dGetAABBFn (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ geom, }
+\item[{out dReal}]{ aabb}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_abbb8314bfcbe2d3cee3c0d48916dc88f}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em geom}]\item[{\em aabb}]\end{DoxyParams}
+\hypertarget{_ode_8cs_aa744fce20d8fb198bb331b22f4316809}{
+\index{Ode.cs@{Ode.cs}!dGetColliderFnFn@{dGetColliderFnFn}}
+\index{dGetColliderFnFn@{dGetColliderFnFn}!Ode.cs@{Ode.cs}}
+\subsubsection[{dGetColliderFnFn}]{\setlength{\rightskip}{0pt plus 5cm}delegate dColliderFn dGetColliderFnFn (
+\begin{DoxyParamCaption}
+\item[{int}]{ num}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_aa744fce20d8fb198bb331b22f4316809}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em num}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_a7e0dfd69561fa3b24d2c50a25e611a93}{
+\index{Ode.cs@{Ode.cs}!dHeightfieldGetHeight@{dHeightfieldGetHeight}}
+\index{dHeightfieldGetHeight@{dHeightfieldGetHeight}!Ode.cs@{Ode.cs}}
+\subsubsection[{dHeightfieldGetHeight}]{\setlength{\rightskip}{0pt plus 5cm}delegate dReal dHeightfieldGetHeight (
+\begin{DoxyParamCaption}
+\item[{IntPtr}]{ p\_\-user\_\-data, }
+\item[{int}]{ x, }
+\item[{int}]{ z}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a7e0dfd69561fa3b24d2c50a25e611a93}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em p\_\-user\_\-data}]\item[{\em x}]\item[{\em z}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_ab1b03f8bdd3e47d8ea0dc26b45c3844e}{
+\index{Ode.cs@{Ode.cs}!dInvertPDMatrix@{dInvertPDMatrix}}
+\index{dInvertPDMatrix@{dInvertPDMatrix}!Ode.cs@{Ode.cs}}
+\subsubsection[{dInvertPDMatrix}]{\setlength{\rightskip}{0pt plus 5cm}static int dInvertPDMatrix (
+\begin{DoxyParamCaption}
+\item[{ref dReal}]{ A, }
+\item[{out dReal}]{ Ainv, }
+\item[{int}]{ n}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ab1b03f8bdd3e47d8ea0dc26b45c3844e}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em A}]\item[{\em Ainv}]\item[{\em n}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_a9b49221bb7d1559bb3fd81c6ed39b695}{
+\index{Ode.cs@{Ode.cs}!dIsPositiveDefinite@{dIsPositiveDefinite}}
+\index{dIsPositiveDefinite@{dIsPositiveDefinite}!Ode.cs@{Ode.cs}}
+\subsubsection[{dIsPositiveDefinite}]{\setlength{\rightskip}{0pt plus 5cm}static int dIsPositiveDefinite (
+\begin{DoxyParamCaption}
+\item[{ref dReal}]{ A, }
+\item[{int}]{ n}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a9b49221bb7d1559bb3fd81c6ed39b695}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em A}]\item[{\em n}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_a8c681d06376fddd501914b61773723fb}{
+\index{Ode.cs@{Ode.cs}!dJointAddPRTorque@{dJointAddPRTorque}}
+\index{dJointAddPRTorque@{dJointAddPRTorque}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointAddPRTorque}]{\setlength{\rightskip}{0pt plus 5cm}static void dJointAddPRTorque (
+\begin{DoxyParamCaption}
+\item[{dJointID}]{ joint, }
+\item[{dReal}]{ torque}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a8c681d06376fddd501914b61773723fb}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em joint}]\item[{\em torque}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a0a48570b51319b34bd2dbbaa43416643}{
+\index{Ode.cs@{Ode.cs}!dJointCreatePlane2D@{dJointCreatePlane2D}}
+\index{dJointCreatePlane2D@{dJointCreatePlane2D}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointCreatePlane2D}]{\setlength{\rightskip}{0pt plus 5cm}static dJointID dJointCreatePlane2D (
+\begin{DoxyParamCaption}
+\item[{dWorldID}]{ world, }
+\item[{dJointGroupID}]{ group}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a0a48570b51319b34bd2dbbaa43416643}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em world}]\item[{\em group}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_a9be21a98139c4074df8a8e0f076322be}{
+\index{Ode.cs@{Ode.cs}!dJointCreatePR@{dJointCreatePR}}
+\index{dJointCreatePR@{dJointCreatePR}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointCreatePR}]{\setlength{\rightskip}{0pt plus 5cm}static dJointID dJointCreatePR (
+\begin{DoxyParamCaption}
+\item[{dWorldID}]{ world, }
+\item[{dJointGroupID}]{ group}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a9be21a98139c4074df8a8e0f076322be}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em world}]\item[{\em group}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_a07cc3bd5b4ca5475a438318e49089dd2}{
+\index{Ode.cs@{Ode.cs}!dJointGetFeedback@{dJointGetFeedback}}
+\index{dJointGetFeedback@{dJointGetFeedback}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointGetFeedback}]{\setlength{\rightskip}{0pt plus 5cm}The dJointGetFeedback (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a07cc3bd5b4ca5475a438318e49089dd2}
+\hypertarget{_ode_8cs_ac3309bec4d1ff1e0d04233de3b1f1ddb}{
+\index{Ode.cs@{Ode.cs}!dJointGetLMotorAxis@{dJointGetLMotorAxis}}
+\index{dJointGetLMotorAxis@{dJointGetLMotorAxis}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointGetLMotorAxis}]{\setlength{\rightskip}{0pt plus 5cm}static void dJointGetLMotorAxis (
+\begin{DoxyParamCaption}
+\item[{dJointID}]{ j, }
+\item[{int}]{ anum, }
+\item[{out dVector3}]{ result}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ac3309bec4d1ff1e0d04233de3b1f1ddb}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em j}]\item[{\em anum}]\item[{\em result}]\end{DoxyParams}
+\hypertarget{_ode_8cs_ac06485f942af5aa604e296867e4f66d7}{
+\index{Ode.cs@{Ode.cs}!dJointGetLMotorNumAxes@{dJointGetLMotorNumAxes}}
+\index{dJointGetLMotorNumAxes@{dJointGetLMotorNumAxes}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointGetLMotorNumAxes}]{\setlength{\rightskip}{0pt plus 5cm}static int dJointGetLMotorNumAxes (
+\begin{DoxyParamCaption}
+\item[{dJointID}]{ j}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ac06485f942af5aa604e296867e4f66d7}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em j}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_a605e283872954c73ea474216fc4f1f7f}{
+\index{Ode.cs@{Ode.cs}!dJointGetLMotorParam@{dJointGetLMotorParam}}
+\index{dJointGetLMotorParam@{dJointGetLMotorParam}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointGetLMotorParam}]{\setlength{\rightskip}{0pt plus 5cm}static dReal dJointGetLMotorParam (
+\begin{DoxyParamCaption}
+\item[{dJointID}]{ j, }
+\item[{int}]{ parameter}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a605e283872954c73ea474216fc4f1f7f}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em j}]\item[{\em parameter}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_a5f6d494230c3ec3b60dff9c75ebaed8a}{
+\index{Ode.cs@{Ode.cs}!dJointGetPRAnchor@{dJointGetPRAnchor}}
+\index{dJointGetPRAnchor@{dJointGetPRAnchor}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointGetPRAnchor}]{\setlength{\rightskip}{0pt plus 5cm}static void dJointGetPRAnchor (
+\begin{DoxyParamCaption}
+\item[{dJointID}]{ j, }
+\item[{out dVector3}]{ result}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a5f6d494230c3ec3b60dff9c75ebaed8a}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em j}]\item[{\em result}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a870298f1d30d7ec95806d7f30322cdf7}{
+\index{Ode.cs@{Ode.cs}!dJointGetPRAxis1@{dJointGetPRAxis1}}
+\index{dJointGetPRAxis1@{dJointGetPRAxis1}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointGetPRAxis1}]{\setlength{\rightskip}{0pt plus 5cm}static void dJointGetPRAxis1 (
+\begin{DoxyParamCaption}
+\item[{dJointID}]{ j, }
+\item[{out dVector3}]{ result}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a870298f1d30d7ec95806d7f30322cdf7}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em j}]\item[{\em result}]\end{DoxyParams}
+\hypertarget{_ode_8cs_ad84d600847f7a4cdf6495f9da8794005}{
+\index{Ode.cs@{Ode.cs}!dJointGetPRAxis2@{dJointGetPRAxis2}}
+\index{dJointGetPRAxis2@{dJointGetPRAxis2}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointGetPRAxis2}]{\setlength{\rightskip}{0pt plus 5cm}static void dJointGetPRAxis2 (
+\begin{DoxyParamCaption}
+\item[{dJointID}]{ j, }
+\item[{out dVector3}]{ result}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ad84d600847f7a4cdf6495f9da8794005}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em j}]\item[{\em result}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a9b362ffba9a70ea7c3a3c49b607023cb}{
+\index{Ode.cs@{Ode.cs}!dJointGetPRParam@{dJointGetPRParam}}
+\index{dJointGetPRParam@{dJointGetPRParam}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointGetPRParam}]{\setlength{\rightskip}{0pt plus 5cm}static dReal dJointGetPRParam (
+\begin{DoxyParamCaption}
+\item[{dJointID}]{ j, }
+\item[{int}]{ parameter}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a9b362ffba9a70ea7c3a3c49b607023cb}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em j}]\item[{\em parameter}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_ab1fc6e4fe7df4475cd8f68c5a1e0aef7}{
+\index{Ode.cs@{Ode.cs}!dJointGetPRPosition@{dJointGetPRPosition}}
+\index{dJointGetPRPosition@{dJointGetPRPosition}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointGetPRPosition}]{\setlength{\rightskip}{0pt plus 5cm}static dReal dJointGetPRPosition (
+\begin{DoxyParamCaption}
+\item[{dJointID}]{ j}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ab1fc6e4fe7df4475cd8f68c5a1e0aef7}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em j}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_af3a147e1211da5ad5a0210a52e4d7315}{
+\index{Ode.cs@{Ode.cs}!dJointGetPRPositionRate@{dJointGetPRPositionRate}}
+\index{dJointGetPRPositionRate@{dJointGetPRPositionRate}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointGetPRPositionRate}]{\setlength{\rightskip}{0pt plus 5cm}static dReal dJointGetPRPositionRate (
+\begin{DoxyParamCaption}
+\item[{dJointID}]{ j}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_af3a147e1211da5ad5a0210a52e4d7315}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em j}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_a165f5a187c95879b11adfa3884e10bbc}{
+\index{Ode.cs@{Ode.cs}!dJointGetUniversalAngles@{dJointGetUniversalAngles}}
+\index{dJointGetUniversalAngles@{dJointGetUniversalAngles}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointGetUniversalAngles}]{\setlength{\rightskip}{0pt plus 5cm}static void dJointGetUniversalAngles (
+\begin{DoxyParamCaption}
+\item[{dJointID}]{ j, }
+\item[{out dReal}]{ angle1, }
+\item[{out dReal}]{ angle2}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a165f5a187c95879b11adfa3884e10bbc}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em j}]\item[{\em angle1}]\item[{\em angle2}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a58f0eb4c35d6312a70f827b2e670851a}{
+\index{Ode.cs@{Ode.cs}!dJointSetLMotorAxis@{dJointSetLMotorAxis}}
+\index{dJointSetLMotorAxis@{dJointSetLMotorAxis}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointSetLMotorAxis}]{\setlength{\rightskip}{0pt plus 5cm}static void dJointSetLMotorAxis (
+\begin{DoxyParamCaption}
+\item[{dJointID}]{ j, }
+\item[{int}]{ anum, }
+\item[{int}]{ rel, }
+\item[{dReal}]{ x, }
+\item[{dReal}]{ y, }
+\item[{dReal}]{ z}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a58f0eb4c35d6312a70f827b2e670851a}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em j}]\item[{\em anum}]\item[{\em rel}]\item[{\em x}]\item[{\em y}]\item[{\em z}]\end{DoxyParams}
+\hypertarget{_ode_8cs_ad62b01bca13dc53a6262255113413556}{
+\index{Ode.cs@{Ode.cs}!dJointSetLMotorNumAxes@{dJointSetLMotorNumAxes}}
+\index{dJointSetLMotorNumAxes@{dJointSetLMotorNumAxes}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointSetLMotorNumAxes}]{\setlength{\rightskip}{0pt plus 5cm}static void dJointSetLMotorNumAxes (
+\begin{DoxyParamCaption}
+\item[{dJointID}]{ j, }
+\item[{int}]{ num}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ad62b01bca13dc53a6262255113413556}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em j}]\item[{\em num}]\end{DoxyParams}
+\hypertarget{_ode_8cs_ad401355c4fe31e8b024ee4b0da121808}{
+\index{Ode.cs@{Ode.cs}!dJointSetLMotorParam@{dJointSetLMotorParam}}
+\index{dJointSetLMotorParam@{dJointSetLMotorParam}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointSetLMotorParam}]{\setlength{\rightskip}{0pt plus 5cm}static void dJointSetLMotorParam (
+\begin{DoxyParamCaption}
+\item[{dJointID}]{ j, }
+\item[{int}]{ parameter, }
+\item[{dReal}]{ value}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ad401355c4fe31e8b024ee4b0da121808}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em j}]\item[{\em parameter}]\item[{\em value}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a8bda6c23edfe1fd9408bf38839d2c1e1}{
+\index{Ode.cs@{Ode.cs}!dJointSetPlane2DXParam@{dJointSetPlane2DXParam}}
+\index{dJointSetPlane2DXParam@{dJointSetPlane2DXParam}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointSetPlane2DXParam}]{\setlength{\rightskip}{0pt plus 5cm}static void dJointSetPlane2DXParam (
+\begin{DoxyParamCaption}
+\item[{dJointID}]{ j, }
+\item[{int}]{ parameter, }
+\item[{dReal}]{ value}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a8bda6c23edfe1fd9408bf38839d2c1e1}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em j}]\item[{\em parameter}]\item[{\em value}]\end{DoxyParams}
+\hypertarget{_ode_8cs_ad356cbf8aaea2cd1a9ad36663f794203}{
+\index{Ode.cs@{Ode.cs}!dJointSetPlane2DYParam@{dJointSetPlane2DYParam}}
+\index{dJointSetPlane2DYParam@{dJointSetPlane2DYParam}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointSetPlane2DYParam}]{\setlength{\rightskip}{0pt plus 5cm}static void dJointSetPlane2DYParam (
+\begin{DoxyParamCaption}
+\item[{dJointID}]{ j, }
+\item[{int}]{ parameter, }
+\item[{dReal}]{ value}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ad356cbf8aaea2cd1a9ad36663f794203}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em j}]\item[{\em parameter}]\item[{\em value}]\end{DoxyParams}
+\hypertarget{_ode_8cs_aed50686046aed524de65cf879f7c1940}{
+\index{Ode.cs@{Ode.cs}!dJointSetPRAnchor@{dJointSetPRAnchor}}
+\index{dJointSetPRAnchor@{dJointSetPRAnchor}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointSetPRAnchor}]{\setlength{\rightskip}{0pt plus 5cm}static void dJointSetPRAnchor (
+\begin{DoxyParamCaption}
+\item[{dJointID}]{ j, }
+\item[{dReal}]{ x, }
+\item[{dReal}]{ y, }
+\item[{dReal}]{ z}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_aed50686046aed524de65cf879f7c1940}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em j}]\item[{\em x}]\item[{\em y}]\item[{\em z}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a4ceb7e4be680848525f9bdc57d6d1c9d}{
+\index{Ode.cs@{Ode.cs}!dJointSetPRAxis1@{dJointSetPRAxis1}}
+\index{dJointSetPRAxis1@{dJointSetPRAxis1}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointSetPRAxis1}]{\setlength{\rightskip}{0pt plus 5cm}static void dJointSetPRAxis1 (
+\begin{DoxyParamCaption}
+\item[{dJointID}]{ j, }
+\item[{dReal}]{ x, }
+\item[{dReal}]{ y, }
+\item[{dReal}]{ z}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a4ceb7e4be680848525f9bdc57d6d1c9d}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em j}]\item[{\em x}]\item[{\em y}]\item[{\em z}]\end{DoxyParams}
+\hypertarget{_ode_8cs_ad46ee0deeecbcd3607d61a5089ec66da}{
+\index{Ode.cs@{Ode.cs}!dJointSetPRAxis2@{dJointSetPRAxis2}}
+\index{dJointSetPRAxis2@{dJointSetPRAxis2}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointSetPRAxis2}]{\setlength{\rightskip}{0pt plus 5cm}static void dJointSetPRAxis2 (
+\begin{DoxyParamCaption}
+\item[{dJointID}]{ j, }
+\item[{dReal}]{ x, }
+\item[{dReal}]{ y, }
+\item[{dReal}]{ z}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ad46ee0deeecbcd3607d61a5089ec66da}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em j}]\item[{\em x}]\item[{\em y}]\item[{\em z}]\end{DoxyParams}
+\hypertarget{_ode_8cs_aef94db2bfb30299415b79abb7a067123}{
+\index{Ode.cs@{Ode.cs}!dJointSetPRParam@{dJointSetPRParam}}
+\index{dJointSetPRParam@{dJointSetPRParam}!Ode.cs@{Ode.cs}}
+\subsubsection[{dJointSetPRParam}]{\setlength{\rightskip}{0pt plus 5cm}static void dJointSetPRParam (
+\begin{DoxyParamCaption}
+\item[{dJointID}]{ j, }
+\item[{int}]{ parameter, }
+\item[{dReal}]{ value}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_aef94db2bfb30299415b79abb7a067123}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em j}]\item[{\em parameter}]\item[{\em value}]\end{DoxyParams}
+\hypertarget{_ode_8cs_ac6bf5a8ac0a9af55d8e240442fc15a5b}{
+\index{Ode.cs@{Ode.cs}!dLDLTAddTL@{dLDLTAddTL}}
+\index{dLDLTAddTL@{dLDLTAddTL}!Ode.cs@{Ode.cs}}
+\subsubsection[{dLDLTAddTL}]{\setlength{\rightskip}{0pt plus 5cm}static void dLDLTAddTL (
+\begin{DoxyParamCaption}
+\item[{ref dReal}]{ L, }
+\item[{ref dReal}]{ d, }
+\item[{ref dReal}]{ a, }
+\item[{int}]{ n, }
+\item[{int}]{ nskip}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ac6bf5a8ac0a9af55d8e240442fc15a5b}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em L}]\item[{\em d}]\item[{\em a}]\item[{\em n}]\item[{\em nskip}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a31e1da8dd3cd29a04ab35ac309322376}{
+\index{Ode.cs@{Ode.cs}!dMassSetTrimesh@{dMassSetTrimesh}}
+\index{dMassSetTrimesh@{dMassSetTrimesh}!Ode.cs@{Ode.cs}}
+\subsubsection[{dMassSetTrimesh}]{\setlength{\rightskip}{0pt plus 5cm}static void dMassSetTrimesh (
+\begin{DoxyParamCaption}
+\item[{out dMass}]{ mass, }
+\item[{dReal}]{ density, }
+\item[{dGeomID}]{ g}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a31e1da8dd3cd29a04ab35ac309322376}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em mass}]\item[{\em density}]\item[{\em g}]\end{DoxyParams}
+\hypertarget{_ode_8cs_ac70cdf5d8bd8fb3e2e708beeca56ffb2}{
+\index{Ode.cs@{Ode.cs}!dQuadTreeSpaceCreate@{dQuadTreeSpaceCreate}}
+\index{dQuadTreeSpaceCreate@{dQuadTreeSpaceCreate}!Ode.cs@{Ode.cs}}
+\subsubsection[{dQuadTreeSpaceCreate}]{\setlength{\rightskip}{0pt plus 5cm}static dSpaceID dQuadTreeSpaceCreate (
+\begin{DoxyParamCaption}
+\item[{dSpaceID}]{ space, }
+\item[{ref dReal}]{ centerX, }
+\item[{ref dReal}]{ extentsX, }
+\item[{int}]{ depth}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ac70cdf5d8bd8fb3e2e708beeca56ffb2}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em space}]\item[{\em centerX}]\item[{\em extentsX}]\item[{\em depth}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_ad4cfde6459ce24497420a9abd11aae04}{
+\index{Ode.cs@{Ode.cs}!dRandReal@{dRandReal}}
+\index{dRandReal@{dRandReal}!Ode.cs@{Ode.cs}}
+\subsubsection[{dRandReal}]{\setlength{\rightskip}{0pt plus 5cm}static dReal dRandReal (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_ad4cfde6459ce24497420a9abd11aae04}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{_ode_8cs_a37ee521dfd6a696c9b5ad492692cd042}{
+\index{Ode.cs@{Ode.cs}!dSetValue@{dSetValue}}
+\index{dSetValue@{dSetValue}!Ode.cs@{Ode.cs}}
+\subsubsection[{dSetValue}]{\setlength{\rightskip}{0pt plus 5cm}static void dSetValue (
+\begin{DoxyParamCaption}
+\item[{out dReal}]{ a, }
+\item[{int}]{ n}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a37ee521dfd6a696c9b5ad492692cd042}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em a}]\item[{\em n}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a93c4a70834483898f9afd18a065c1ead}{
+\index{Ode.cs@{Ode.cs}!dSetZero@{dSetZero}}
+\index{dSetZero@{dSetZero}!Ode.cs@{Ode.cs}}
+\subsubsection[{dSetZero}]{\setlength{\rightskip}{0pt plus 5cm}static void dSetZero (
+\begin{DoxyParamCaption}
+\item[{out dReal}]{ a, }
+\item[{int}]{ n}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a93c4a70834483898f9afd18a065c1ead}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em a}]\item[{\em n}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a1fef2643f7d6d92590b98c1c3cea778a}{
+\index{Ode.cs@{Ode.cs}!dSolveCholesky@{dSolveCholesky}}
+\index{dSolveCholesky@{dSolveCholesky}!Ode.cs@{Ode.cs}}
+\subsubsection[{dSolveCholesky}]{\setlength{\rightskip}{0pt plus 5cm}static void dSolveCholesky (
+\begin{DoxyParamCaption}
+\item[{ref dReal}]{ L, }
+\item[{out dReal}]{ b, }
+\item[{int}]{ n}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a1fef2643f7d6d92590b98c1c3cea778a}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em L}]\item[{\em b}]\item[{\em n}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a4ec3a5f83b28a068cff59aac4d5594b0}{
+\index{Ode.cs@{Ode.cs}!dSolveL1T@{dSolveL1T}}
+\index{dSolveL1T@{dSolveL1T}!Ode.cs@{Ode.cs}}
+\subsubsection[{dSolveL1T}]{\setlength{\rightskip}{0pt plus 5cm}static void dSolveL1T (
+\begin{DoxyParamCaption}
+\item[{ref dReal}]{ L, }
+\item[{out dReal}]{ b, }
+\item[{int}]{ n, }
+\item[{int}]{ nskip}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a4ec3a5f83b28a068cff59aac4d5594b0}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em L}]\item[{\em b}]\item[{\em n}]\item[{\em nskip}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a63a515bf9497d715d7842b7a8bf386b7}{
+\index{Ode.cs@{Ode.cs}!dTriArrayCallback@{dTriArrayCallback}}
+\index{dTriArrayCallback@{dTriArrayCallback}!Ode.cs@{Ode.cs}}
+\subsubsection[{dTriArrayCallback}]{\setlength{\rightskip}{0pt plus 5cm}delegate void dTriArrayCallback (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ TriMesh, }
+\item[{dGeomID}]{ RefObject, }
+\item[{int\mbox{[}$\,$\mbox{]}}]{ TriIndices, }
+\item[{int}]{ TriCount}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a63a515bf9497d715d7842b7a8bf386b7}
+
+
+Per object callback. Allows user to get the list of all intersecting triangles in one shot. 
+
+\hypertarget{_ode_8cs_adbcb4a7147ca2964d9f59da33ed2ce74}{
+\index{Ode.cs@{Ode.cs}!dTriCallback@{dTriCallback}}
+\index{dTriCallback@{dTriCallback}!Ode.cs@{Ode.cs}}
+\subsubsection[{dTriCallback}]{\setlength{\rightskip}{0pt plus 5cm}delegate int dTriCallback (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ TriMesh, }
+\item[{dGeomID}]{ RefObject, }
+\item[{int}]{ TriangleIndex}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_adbcb4a7147ca2964d9f59da33ed2ce74}
+
+
+Per triangle callback. Allows user to state if a collision with a particular triangle is wanted If the return value is zero no contact will be generated. 
+
+\hypertarget{_ode_8cs_a0cf752c8ec5fa62fd5c87d2b242bd264}{
+\index{Ode.cs@{Ode.cs}!dTriRayCallback@{dTriRayCallback}}
+\index{dTriRayCallback@{dTriRayCallback}!Ode.cs@{Ode.cs}}
+\subsubsection[{dTriRayCallback}]{\setlength{\rightskip}{0pt plus 5cm}delegate int dTriRayCallback (
+\begin{DoxyParamCaption}
+\item[{dGeomID}]{ TriMesh, }
+\item[{dGeomID}]{ Ray, }
+\item[{int}]{ TriangleIndex, }
+\item[{dReal}]{ u, }
+\item[{dReal}]{ v}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a0cf752c8ec5fa62fd5c87d2b242bd264}
+
+
+Ray callback. Allows the user to determine if a ray collides with a triangle based on the barycentric coordinates of an intersection. The user can for example sample a bitmap to determine if a collision should occur. 
+
+\hypertarget{_ode_8cs_a5e8531078921a0d039032597b3ad3094}{
+\index{Ode.cs@{Ode.cs}!dVectorScale@{dVectorScale}}
+\index{dVectorScale@{dVectorScale}!Ode.cs@{Ode.cs}}
+\subsubsection[{dVectorScale}]{\setlength{\rightskip}{0pt plus 5cm}static void dVectorScale (
+\begin{DoxyParamCaption}
+\item[{out dReal}]{ a, }
+\item[{ref dReal}]{ d, }
+\item[{int}]{ n}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a5e8531078921a0d039032597b3ad3094}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em a}]\item[{\em d}]\item[{\em n}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a5af69dda8972c3accde4b7e122d57c30}{
+\index{Ode.cs@{Ode.cs}!JointSetPlane2DAngleParam@{JointSetPlane2DAngleParam}}
+\index{JointSetPlane2DAngleParam@{JointSetPlane2DAngleParam}!Ode.cs@{Ode.cs}}
+\subsubsection[{JointSetPlane2DAngleParam}]{\setlength{\rightskip}{0pt plus 5cm}static void JointSetPlane2DAngleParam (
+\begin{DoxyParamCaption}
+\item[{dJointID}]{ j, }
+\item[{int}]{ parameter, }
+\item[{dReal}]{ value}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a5af69dda8972c3accde4b7e122d57c30}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em j}]\item[{\em parameter}]\item[{\em value}]\end{DoxyParams}
+\hypertarget{_ode_8cs_a3e9e37fbaf89af1e16a11b9a385280d9}{
+\index{Ode.cs@{Ode.cs}!used@{used}}
+\index{used@{used}!Ode.cs@{Ode.cs}}
+\subsubsection[{used}]{\setlength{\rightskip}{0pt plus 5cm}The or if none is used (
+\begin{DoxyParamCaption}
+\item[{this is the}]{ default}
+\end{DoxyParamCaption}
+)}}
+\label{_ode_8cs_a3e9e37fbaf89af1e16a11b9a385280d9}

@@ -1,0 +1,171 @@
+\hypertarget{struct_s_d_l___surface}{
+\section{SDL\_\-Surface Struct Reference}
+\label{struct_s_d_l___surface}\index{SDL\_\-Surface@{SDL\_\-Surface}}
+}
+
+
+Graphical Surface Structure.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{struct_s_d_l___surface_a9b902c7b843cd1cc115de47efd82979b}{flags}
+\begin{DoxyCompactList}\small\item\em Surface flags. \item\end{DoxyCompactList}\item 
+IntPtr \hyperlink{struct_s_d_l___surface_ad70ef89eb3879b7310311b3da48aa393}{format}
+\begin{DoxyCompactList}\small\item\em Pixel format Pointer to \hyperlink{struct_s_d_l___pixel_format}{SDL\_\-PixelFormat}. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_s_d_l___surface_ae80caa4de3b72895c314a9a7b099149a}{w}
+\begin{DoxyCompactList}\small\item\em Width of the surface. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_s_d_l___surface_a4c41b17fe185ae45b0a2ffba5d09c1d8}{h}
+\begin{DoxyCompactList}\small\item\em Height of the surface. \item\end{DoxyCompactList}\item 
+short \hyperlink{struct_s_d_l___surface_a5a49b2858d06c49d2bb95ad39a6c62d7}{pitch}
+\begin{DoxyCompactList}\small\item\em Length of a surface scanline in bytes. \item\end{DoxyCompactList}\item 
+IntPtr \hyperlink{struct_s_d_l___surface_aec4109250396885d55724d1d90493af8}{pixels}
+\begin{DoxyCompactList}\small\item\em Pointer to the actual pixel data Void pointer. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_s_d_l___surface_a6cfa15440f7eaa8b3eab829086e0e2e9}{offset}
+\item 
+IntPtr \hyperlink{struct_s_d_l___surface_a6da45c19f4069e7f3ff6b9a3a3eb1779}{hwdata}
+\begin{DoxyCompactList}\small\item\em Hardware-\/specific surface info. \item\end{DoxyCompactList}\item 
+\hyperlink{struct_s_d_l___rect}{SDL\_\-Rect} \hyperlink{struct_s_d_l___surface_a81af31ca468e945890d6ba93743aca4a}{clip\_\-rect}
+\begin{DoxyCompactList}\small\item\em surface clip rectangle \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_s_d_l___surface_a1a935a28ce9c4367f21ca1c93e1fa510}{unused1}
+\item 
+int \hyperlink{struct_s_d_l___surface_a7781fdb11c51fd860988f4f3467f6573}{locked}
+\begin{DoxyCompactList}\small\item\em Allow recursive locks. \item\end{DoxyCompactList}\item 
+IntPtr \hyperlink{struct_s_d_l___surface_a65e3b1ef2108b927d32f1261c9300f17}{map}
+\begin{DoxyCompactList}\small\item\em info for fast blit mapping to other surfaces \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_s_d_l___surface_a6df25efce6b1921af43cd50e99261a14}{format\_\-version}
+\begin{DoxyCompactList}\small\item\em format version, bumped at every change to invalidate blit maps \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_s_d_l___surface_a3bc1f5a9735f4eadd6a9f5c149f3afd5}{refcount}
+\begin{DoxyCompactList}\small\item\em Reference count -\/-\/ used when freeing surface. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Graphical Surface Structure. This structure should be treated as read-\/only, except for 'pixels', which, if not NULL, contains the raw pixel data for the surface. SDL\_\-Surface's represent areas of \char`\"{}graphical\char`\"{} memory, memory that can be drawn to. The video framebuffer is returned as a \hyperlink{struct_s_d_l___surface}{SDL\_\-Surface} by SDL\_\-SetVideoMode and SDL\_\-GetVideoSurface. Most of the fields should be pretty obvious. w and h are the width and height of the surface in pixels. pixels is a pointer to the actual pixel data, the surface should be locked before accessing this field. The clip\_\-rect field is the clipping rectangle as set by SDL\_\-SetClipRect.
+
+The following are supported in the flags field. code$>$ SDL\_\-SWSURFACE Surface is stored in system memory SDL\_\-HWSURFACE Surface is stored in video memory SDL\_\-ASYNCBLIT Surface uses asynchronous blits if possible SDL\_\-ANYFORMAT Allows any pixel-\/format (Display surface) SDL\_\-HWPALETTE Surface has exclusive palette SDL\_\-DOUBLEBUF Surface is double buffered (Display surface) SDL\_\-FULLSCREEN Surface is full screen (Display Surface) SDL\_\-OPENGL Surface has an OpenGL context (Display Surface) SDL\_\-OPENGLBLIT Surface supports OpenGL blitting (Display Surface) SDL\_\-RESIZABLE Surface is resizable (Display Surface) SDL\_\-HWACCEL Surface blit uses hardware acceleration SDL\_\-SRCCOLORKEY Surface use colorkey blitting SDL\_\-RLEACCEL Colorkey blitting is accelerated with RLE SDL\_\-SRCALPHA Surface blit uses alpha blending SDL\_\-PREALLOC Surface uses preallocated memory 
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_s_d_l___surface_a81af31ca468e945890d6ba93743aca4a}{
+\index{SDL\_\-Surface@{SDL\_\-Surface}!clip\_\-rect@{clip\_\-rect}}
+\index{clip\_\-rect@{clip\_\-rect}!SDL_Surface@{SDL\_\-Surface}}
+\subsubsection[{clip\_\-rect}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SDL\_\-Rect} {\bf SDL\_\-Surface.clip\_\-rect}}}
+\label{struct_s_d_l___surface_a81af31ca468e945890d6ba93743aca4a}
+
+
+surface clip rectangle 
+
+\hypertarget{struct_s_d_l___surface_a9b902c7b843cd1cc115de47efd82979b}{
+\index{SDL\_\-Surface@{SDL\_\-Surface}!flags@{flags}}
+\index{flags@{flags}!SDL_Surface@{SDL\_\-Surface}}
+\subsubsection[{flags}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf SDL\_\-Surface.flags}}}
+\label{struct_s_d_l___surface_a9b902c7b843cd1cc115de47efd82979b}
+
+
+Surface flags. 
+
+\hypertarget{struct_s_d_l___surface_ad70ef89eb3879b7310311b3da48aa393}{
+\index{SDL\_\-Surface@{SDL\_\-Surface}!format@{format}}
+\index{format@{format}!SDL_Surface@{SDL\_\-Surface}}
+\subsubsection[{format}]{\setlength{\rightskip}{0pt plus 5cm}IntPtr {\bf SDL\_\-Surface.format}}}
+\label{struct_s_d_l___surface_ad70ef89eb3879b7310311b3da48aa393}
+
+
+Pixel format Pointer to \hyperlink{struct_s_d_l___pixel_format}{SDL\_\-PixelFormat}. 
+
+\hypertarget{struct_s_d_l___surface_a6df25efce6b1921af43cd50e99261a14}{
+\index{SDL\_\-Surface@{SDL\_\-Surface}!format\_\-version@{format\_\-version}}
+\index{format\_\-version@{format\_\-version}!SDL_Surface@{SDL\_\-Surface}}
+\subsubsection[{format\_\-version}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf SDL\_\-Surface.format\_\-version}}}
+\label{struct_s_d_l___surface_a6df25efce6b1921af43cd50e99261a14}
+
+
+format version, bumped at every change to invalidate blit maps 
+
+\hypertarget{struct_s_d_l___surface_a4c41b17fe185ae45b0a2ffba5d09c1d8}{
+\index{SDL\_\-Surface@{SDL\_\-Surface}!h@{h}}
+\index{h@{h}!SDL_Surface@{SDL\_\-Surface}}
+\subsubsection[{h}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf SDL\_\-Surface.h}}}
+\label{struct_s_d_l___surface_a4c41b17fe185ae45b0a2ffba5d09c1d8}
+
+
+Height of the surface. 
+
+\hypertarget{struct_s_d_l___surface_a6da45c19f4069e7f3ff6b9a3a3eb1779}{
+\index{SDL\_\-Surface@{SDL\_\-Surface}!hwdata@{hwdata}}
+\index{hwdata@{hwdata}!SDL_Surface@{SDL\_\-Surface}}
+\subsubsection[{hwdata}]{\setlength{\rightskip}{0pt plus 5cm}IntPtr {\bf SDL\_\-Surface.hwdata}}}
+\label{struct_s_d_l___surface_a6da45c19f4069e7f3ff6b9a3a3eb1779}
+
+
+Hardware-\/specific surface info. 
+
+\hypertarget{struct_s_d_l___surface_a7781fdb11c51fd860988f4f3467f6573}{
+\index{SDL\_\-Surface@{SDL\_\-Surface}!locked@{locked}}
+\index{locked@{locked}!SDL_Surface@{SDL\_\-Surface}}
+\subsubsection[{locked}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf SDL\_\-Surface.locked}}}
+\label{struct_s_d_l___surface_a7781fdb11c51fd860988f4f3467f6573}
+
+
+Allow recursive locks. 
+
+\hypertarget{struct_s_d_l___surface_a65e3b1ef2108b927d32f1261c9300f17}{
+\index{SDL\_\-Surface@{SDL\_\-Surface}!map@{map}}
+\index{map@{map}!SDL_Surface@{SDL\_\-Surface}}
+\subsubsection[{map}]{\setlength{\rightskip}{0pt plus 5cm}IntPtr {\bf SDL\_\-Surface.map}}}
+\label{struct_s_d_l___surface_a65e3b1ef2108b927d32f1261c9300f17}
+
+
+info for fast blit mapping to other surfaces 
+
+\hypertarget{struct_s_d_l___surface_a6cfa15440f7eaa8b3eab829086e0e2e9}{
+\index{SDL\_\-Surface@{SDL\_\-Surface}!offset@{offset}}
+\index{offset@{offset}!SDL_Surface@{SDL\_\-Surface}}
+\subsubsection[{offset}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf SDL\_\-Surface.offset}}}
+\label{struct_s_d_l___surface_a6cfa15440f7eaa8b3eab829086e0e2e9}
+\hypertarget{struct_s_d_l___surface_a5a49b2858d06c49d2bb95ad39a6c62d7}{
+\index{SDL\_\-Surface@{SDL\_\-Surface}!pitch@{pitch}}
+\index{pitch@{pitch}!SDL_Surface@{SDL\_\-Surface}}
+\subsubsection[{pitch}]{\setlength{\rightskip}{0pt plus 5cm}short {\bf SDL\_\-Surface.pitch}}}
+\label{struct_s_d_l___surface_a5a49b2858d06c49d2bb95ad39a6c62d7}
+
+
+Length of a surface scanline in bytes. 
+
+\hypertarget{struct_s_d_l___surface_aec4109250396885d55724d1d90493af8}{
+\index{SDL\_\-Surface@{SDL\_\-Surface}!pixels@{pixels}}
+\index{pixels@{pixels}!SDL_Surface@{SDL\_\-Surface}}
+\subsubsection[{pixels}]{\setlength{\rightskip}{0pt plus 5cm}IntPtr {\bf SDL\_\-Surface.pixels}}}
+\label{struct_s_d_l___surface_aec4109250396885d55724d1d90493af8}
+
+
+Pointer to the actual pixel data Void pointer. 
+
+\hypertarget{struct_s_d_l___surface_a3bc1f5a9735f4eadd6a9f5c149f3afd5}{
+\index{SDL\_\-Surface@{SDL\_\-Surface}!refcount@{refcount}}
+\index{refcount@{refcount}!SDL_Surface@{SDL\_\-Surface}}
+\subsubsection[{refcount}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf SDL\_\-Surface.refcount}}}
+\label{struct_s_d_l___surface_a3bc1f5a9735f4eadd6a9f5c149f3afd5}
+
+
+Reference count -\/-\/ used when freeing surface. 
+
+\hypertarget{struct_s_d_l___surface_a1a935a28ce9c4367f21ca1c93e1fa510}{
+\index{SDL\_\-Surface@{SDL\_\-Surface}!unused1@{unused1}}
+\index{unused1@{unused1}!SDL_Surface@{SDL\_\-Surface}}
+\subsubsection[{unused1}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf SDL\_\-Surface.unused1}}}
+\label{struct_s_d_l___surface_a1a935a28ce9c4367f21ca1c93e1fa510}
+\hypertarget{struct_s_d_l___surface_ae80caa4de3b72895c314a9a7b099149a}{
+\index{SDL\_\-Surface@{SDL\_\-Surface}!w@{w}}
+\index{w@{w}!SDL_Surface@{SDL\_\-Surface}}
+\subsubsection[{w}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf SDL\_\-Surface.w}}}
+\label{struct_s_d_l___surface_ae80caa4de3b72895c314a9a7b099149a}
+
+
+Width of the surface. 
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Sdl/\hyperlink{_sdl_8cs}{Sdl.cs}\end{DoxyCompactItemize}

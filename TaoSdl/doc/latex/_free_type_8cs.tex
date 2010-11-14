@@ -1,0 +1,149 @@
+\hypertarget{_free_type_8cs}{
+\section{src/Tao.FreeType/FreeType.cs File Reference}
+\label{_free_type_8cs}\index{src/Tao.FreeType/FreeType.cs@{src/Tao.FreeType/FreeType.cs}}
+}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_memory_rec__}{Tao.FreeType.MemoryRec\_\-}
+\begin{DoxyCompactList}\small\item\em \hyperlink{namespace_tao_1_1_free_type}{FreeType} 2 Binding for .NET. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___stream_rec}{Tao.FreeType.FT\_\-StreamRec}
+\begin{DoxyCompactList}\small\item\em A structure used to describe an input stream. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___stream_desc}{Tao.FreeType.FT\_\-StreamDesc}
+\begin{DoxyCompactList}\small\item\em A union type used to store either a long or a pointer. This is used to store a file descriptor or a ‘FILE$\ast$’ in an input stream. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___vector}{Tao.FreeType.FT\_\-Vector}
+\begin{DoxyCompactList}\small\item\em A simple structure used to store a 2D vector; coordinates are of the FT\_\-Pos type. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___b_box}{Tao.FreeType.FT\_\-BBox}
+\begin{DoxyCompactList}\small\item\em A structure used to hold an outline's bounding box, i.e., the coordinates of its extrema in the horizontal and vertical directions. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___bitmap}{Tao.FreeType.FT\_\-Bitmap}
+\begin{DoxyCompactList}\small\item\em A structure used to describe a bitmap or pixmap to the raster. Note that we now manage pixmaps of various depths through the ‘pixel\_\-mode’ field. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___outline}{Tao.FreeType.FT\_\-Outline}
+\begin{DoxyCompactList}\small\item\em This structure is used to describe an outline to the scan-\/line converter. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___outline___funcs}{Tao.FreeType.FT\_\-Outline\_\-Funcs}
+\begin{DoxyCompactList}\small\item\em A structure to hold various function pointers used during outline decomposition in order to emit segments, conic, and cubic Béziers, as well as ‘move to’ and ‘close to’ operations. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_raster_rec__}{Tao.FreeType.RasterRec\_\-}
+\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___span}{Tao.FreeType.FT\_\-Span}
+\begin{DoxyCompactList}\small\item\em A structure used to model a single span of gray (or black) pixels when rendering a monochrome or anti-\/aliased bitmap. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___raster___params}{Tao.FreeType.FT\_\-Raster\_\-Params}
+\begin{DoxyCompactList}\small\item\em A structure to hold the arguments used by a raster's render functions. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___raster___funcs}{Tao.FreeType.FT\_\-Raster\_\-Funcs}
+\begin{DoxyCompactList}\small\item\em A structure used to describe a given raster class to the library. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___unit_vector}{Tao.FreeType.FT\_\-UnitVector}
+\begin{DoxyCompactList}\small\item\em A simple structure used to store a 2D vector unit vector. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___matrix}{Tao.FreeType.FT\_\-Matrix}
+\begin{DoxyCompactList}\small\item\em A simple structure used to store a 2x2 matrix. Coefficients are in 16.16 fixed float format. The computation performed is: x' = x$\ast$xx + y$\ast$xy y' = x$\ast$yx + y$\ast$yy. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___data}{Tao.FreeType.FT\_\-Data}
+\begin{DoxyCompactList}\small\item\em Read-\/only binary data represented as a pointer and a length. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___generic}{Tao.FreeType.FT\_\-Generic}
+\begin{DoxyCompactList}\small\item\em Client applications often need to associate their own data to a variety of \hyperlink{namespace_tao_1_1_free_type}{FreeType} core objects. For example, a text layout API might want to associate a glyph cache to a given size object. Most \hyperlink{namespace_tao_1_1_free_type}{FreeType} object contains a ‘generic’ field, of type \hyperlink{struct_tao_1_1_free_type_1_1_f_t___generic}{FT\_\-Generic}, which usage is left to client applications and font servers. It can be used to store a pointer to client-\/specific data, as well as the address of a ‘finalizer’ function, which will be called by \hyperlink{namespace_tao_1_1_free_type}{FreeType} when the object is destroyed (for example, the previous client example would put the address of the glyph cache destructor in the ‘finalizer’ field). \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___list_node_rec}{Tao.FreeType.FT\_\-ListNodeRec}
+\begin{DoxyCompactList}\small\item\em A structure used to hold a single list element. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___list_rec}{Tao.FreeType.FT\_\-ListRec}
+\begin{DoxyCompactList}\small\item\em A structure used to hold a simple double-\/linked list. These are used in many parts of \hyperlink{namespace_tao_1_1_free_type}{FreeType}. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___glyph___metrics}{Tao.FreeType.FT\_\-Glyph\_\-Metrics}
+\begin{DoxyCompactList}\small\item\em A structure used to model the metrics of a single glyph. The values are expressed in 26.6 fractional pixel format; if the flag FT\_\-LOAD\_\-NO\_\-SCALE has been used while loading the glyph, values are expressed in font units instead. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___bitmap___size}{Tao.FreeType.FT\_\-Bitmap\_\-Size}
+\begin{DoxyCompactList}\small\item\em This structure models the metrics of a bitmap strike (i.e., a set of glyphs for a given point size and resolution) in a bitmap font. It is used for the ‘available\_\-sizes’ field of FT\_\-Face. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_library_rec__}{Tao.FreeType.LibraryRec\_\-}
+\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_module_rec__}{Tao.FreeType.ModuleRec\_\-}
+\begin{DoxyCompactList}\small\item\em / \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_driver_rec__}{Tao.FreeType.DriverRec\_\-}
+\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_renderer_rec__}{Tao.FreeType.RendererRec\_\-}
+\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___face_rec}{Tao.FreeType.FT\_\-FaceRec}
+\begin{DoxyCompactList}\small\item\em \hyperlink{namespace_tao_1_1_free_type}{FreeType} root face class structure. A face object models a typeface in a font file. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___size_rec}{Tao.FreeType.FT\_\-SizeRec}
+\begin{DoxyCompactList}\small\item\em \hyperlink{namespace_tao_1_1_free_type}{FreeType} root size class structure. A size object models a face object at a given size. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___glyph_slot_rec}{Tao.FreeType.FT\_\-GlyphSlotRec}
+\begin{DoxyCompactList}\small\item\em \hyperlink{namespace_tao_1_1_free_type}{FreeType} root glyph slot class structure. A glyph slot is a container where individual glyphs can be loaded, be they in outline or bitmap format. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___char_map_rec}{Tao.FreeType.FT\_\-CharMapRec}
+\begin{DoxyCompactList}\small\item\em The base charmap structure. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_face___internal_rec__}{Tao.FreeType.Face\_\-InternalRec\_\-}
+\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_size___internal_rec__}{Tao.FreeType.Size\_\-InternalRec\_\-}
+\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___size___metrics}{Tao.FreeType.FT\_\-Size\_\-Metrics}
+\begin{DoxyCompactList}\small\item\em The size metrics structure gives the metrics of a size object. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_sub_glyph_rec__}{Tao.FreeType.SubGlyphRec\_\-}
+\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_slot___internal_rec__}{Tao.FreeType.Slot\_\-InternalRec\_\-}
+\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___parameter}{Tao.FreeType.FT\_\-Parameter}
+\begin{DoxyCompactList}\small\item\em A simple structure used to pass more or less generic parameters to FT\_\-Open\_\-Face. \item\end{DoxyCompactList}\item 
+struct \hyperlink{struct_tao_1_1_free_type_1_1_f_t___open___args}{Tao.FreeType.FT\_\-Open\_\-Args}
+\begin{DoxyCompactList}\small\item\em A structure used to indicate how to open a new font file or stream. A pointer to such a structure can be used as a parameter for the functions FT\_\-Open\_\-Face and FT\_\-Attach\_\-Stream. \item\end{DoxyCompactList}\item 
+class \hyperlink{class_tao_1_1_free_type_1_1_f_t}{Tao.FreeType.FT}
+\begin{DoxyCompactList}\small\item\em Main \hyperlink{namespace_tao_1_1_free_type}{FreeType} method class. Call FT\_\-Init\_\-FreeType to initialise. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Packages}
+\begin{DoxyCompactItemize}
+\item 
+package \hyperlink{namespace_tao_1_1_free_type}{Tao.FreeType}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespace_tao_1_1_free_type_a838e39a4720d122a3c4e60e342281bad}{Tao::FreeType.FT\_\-Pixel\_\-Mode} \{ \par
+\hyperlink{namespace_tao_1_1_free_type_a838e39a4720d122a3c4e60e342281bad}{Tao::FreeType.FT\_\-PIXEL\_\-MODE\_\-NONE} =  0, 
+\hyperlink{namespace_tao_1_1_free_type_a838e39a4720d122a3c4e60e342281bad}{Tao::FreeType.FT\_\-PIXEL\_\-MODE\_\-MONO}, 
+\hyperlink{namespace_tao_1_1_free_type_a838e39a4720d122a3c4e60e342281bad}{Tao::FreeType.FT\_\-PIXEL\_\-MODE\_\-GRAY}, 
+\hyperlink{namespace_tao_1_1_free_type_a838e39a4720d122a3c4e60e342281bad}{Tao::FreeType.FT\_\-PIXEL\_\-MODE\_\-GRAY2}, 
+\par
+\hyperlink{namespace_tao_1_1_free_type_a838e39a4720d122a3c4e60e342281bad}{Tao::FreeType.FT\_\-PIXEL\_\-MODE\_\-GRAY4}, 
+\hyperlink{namespace_tao_1_1_free_type_a838e39a4720d122a3c4e60e342281bad}{Tao::FreeType.FT\_\-PIXEL\_\-MODE\_\-LCD}, 
+\hyperlink{namespace_tao_1_1_free_type_a838e39a4720d122a3c4e60e342281bad}{Tao::FreeType.FT\_\-PIXEL\_\-MODE\_\-LCD\_\-V}, 
+\hyperlink{namespace_tao_1_1_free_type_a838e39a4720d122a3c4e60e342281bad}{Tao::FreeType.FT\_\-PIXEL\_\-MODE\_\-MAX}
+ \}
+\begin{DoxyCompactList}\small\item\em An enumeration type used to describe the format of pixels in a given bitmap. Note that additional formats may be added in the future. \item\end{DoxyCompactList}\item 
+enum \hyperlink{namespace_tao_1_1_free_type_ad679060462ff497f8f802417f8b719e0}{Tao::FreeType.FT\_\-Glyph\_\-Format} \{ \par
+\hyperlink{namespace_tao_1_1_free_type_ad679060462ff497f8f802417f8b719e0}{Tao::FreeType.FT\_\-GLYPH\_\-FORMAT\_\-NONE} =  (int)((uint)0 $<$$<$ 24 $|$ (uint)0 $<$$<$ 16 $|$ (uint)0 $<$$<$ 8 $|$ (uint)0), 
+\hyperlink{namespace_tao_1_1_free_type_ad679060462ff497f8f802417f8b719e0}{Tao::FreeType.FT\_\-GLYPH\_\-FORMAT\_\-COMPOSITE} =  (int)((uint)'c' $<$$<$ 24 $|$ (uint)'o' $<$$<$ 16 $|$ (uint)'m' $<$$<$ 8 $|$ (uint)'p'), 
+\hyperlink{namespace_tao_1_1_free_type_ad679060462ff497f8f802417f8b719e0}{Tao::FreeType.FT\_\-GLYPH\_\-FORMAT\_\-BITMAP} =  (int)((uint)'b' $<$$<$ 24 $|$ (uint)'i' $<$$<$ 16 $|$ (uint)'t' $<$$<$ 8 $|$ (uint)'s'), 
+\hyperlink{namespace_tao_1_1_free_type_ad679060462ff497f8f802417f8b719e0}{Tao::FreeType.FT\_\-GLYPH\_\-FORMAT\_\-OUTLINE} =  (int)((uint)'o' $<$$<$ 24 $|$ (uint)'u' $<$$<$ 16 $|$ (uint)'t' $<$$<$ 8 $|$ (uint)'l'), 
+\par
+\hyperlink{namespace_tao_1_1_free_type_ad679060462ff497f8f802417f8b719e0}{Tao::FreeType.FT\_\-GLYPH\_\-FORMAT\_\-PLOTTER} =  (int)((uint)'p' $<$$<$ 24 $|$ (uint)'l' $<$$<$ 16 $|$ (uint)'o' $<$$<$ 8 $|$ (uint)'t')
+ \}
+\begin{DoxyCompactList}\small\item\em An enumeration type used to describe the format of a given glyph image. Note that this version of FreeType only supports two image formats, even though future font drivers will be able to register their own format. \item\end{DoxyCompactList}\item 
+enum \hyperlink{namespace_tao_1_1_free_type_a87a3c6633d19c2af09744e5a3d0a51ed}{Tao::FreeType.FT\_\-Encoding} \{ \par
+\hyperlink{namespace_tao_1_1_free_type_a87a3c6633d19c2af09744e5a3d0a51ed}{Tao::FreeType.FT\_\-ENCODING\_\-NONE} =  (int)((uint)0 $<$$<$ 24 $|$ (uint)0 $<$$<$ 16 $|$ (uint)0 $<$$<$ 8 $|$ (uint)0), 
+\hyperlink{namespace_tao_1_1_free_type_a87a3c6633d19c2af09744e5a3d0a51ed}{Tao::FreeType.FT\_\-ENCODING\_\-MS\_\-SYMBOL} =  (int)((uint)'s' $<$$<$ 24 $|$ (uint)'y' $<$$<$ 16 $|$ (uint)'m' $<$$<$ 8 $|$ (uint)'b'), 
+\hyperlink{namespace_tao_1_1_free_type_a87a3c6633d19c2af09744e5a3d0a51ed}{Tao::FreeType.FT\_\-ENCODING\_\-UNICODE} =  (int)((uint)'u' $<$$<$ 24 $|$ (uint)'n' $<$$<$ 16 $|$ (uint)'i' $<$$<$ 8 $|$ (uint)'c'), 
+\hyperlink{namespace_tao_1_1_free_type_a87a3c6633d19c2af09744e5a3d0a51ed}{Tao::FreeType.FT\_\-ENCODING\_\-SJIS} =  (int)((uint)'s' $<$$<$ 24 $|$ (uint)'j' $<$$<$ 16 $|$ (uint)'i' $<$$<$ 8 $|$ (uint)'s'), 
+\par
+\hyperlink{namespace_tao_1_1_free_type_a87a3c6633d19c2af09744e5a3d0a51ed}{Tao::FreeType.FT\_\-ENCODING\_\-GB2312} =  (int)((uint)'g' $<$$<$ 24 $|$ (uint)'b' $<$$<$ 16 $|$ (uint)' ' $<$$<$ 8 $|$ (uint)' '), 
+\hyperlink{namespace_tao_1_1_free_type_a87a3c6633d19c2af09744e5a3d0a51ed}{Tao::FreeType.FT\_\-ENCODING\_\-BIG5} =  (int)((uint)'b' $<$$<$ 24 $|$ (uint)'i' $<$$<$ 16 $|$ (uint)'g' $<$$<$ 8 $|$ (uint)'5'), 
+\hyperlink{namespace_tao_1_1_free_type_a87a3c6633d19c2af09744e5a3d0a51ed}{Tao::FreeType.FT\_\-ENCODING\_\-WANSUNG} =  (int)((uint)'w' $<$$<$ 24 $|$ (uint)'a' $<$$<$ 16 $|$ (uint)'n' $<$$<$ 8 $|$ (uint)'s'), 
+\hyperlink{namespace_tao_1_1_free_type_a87a3c6633d19c2af09744e5a3d0a51ed}{Tao::FreeType.FT\_\-ENCODING\_\-JOHAB} =  (int)((uint)'j' $<$$<$ 24 $|$ (uint)'o' $<$$<$ 16 $|$ (uint)'h' $<$$<$ 8 $|$ (uint)'a'), 
+\par
+\hyperlink{namespace_tao_1_1_free_type_a87a3c6633d19c2af09744e5a3d0a51ed}{Tao::FreeType.FT\_\-ENCODING\_\-MS\_\-SJIS} =  (int)(FT\_\-Encoding.FT\_\-ENCODING\_\-SJIS), 
+\hyperlink{namespace_tao_1_1_free_type_a87a3c6633d19c2af09744e5a3d0a51ed}{Tao::FreeType.FT\_\-ENCODING\_\-MS\_\-GB2312} =  (int)(FT\_\-Encoding.FT\_\-ENCODING\_\-GB2312), 
+\hyperlink{namespace_tao_1_1_free_type_a87a3c6633d19c2af09744e5a3d0a51ed}{Tao::FreeType.FT\_\-ENCODING\_\-MS\_\-BIG5} =  (int)(FT\_\-Encoding.FT\_\-ENCODING\_\-BIG5), 
+\hyperlink{namespace_tao_1_1_free_type_a87a3c6633d19c2af09744e5a3d0a51ed}{Tao::FreeType.FT\_\-ENCODING\_\-MS\_\-WANSUNG} =  (int)(FT\_\-Encoding.FT\_\-ENCODING\_\-WANSUNG), 
+\par
+\hyperlink{namespace_tao_1_1_free_type_a87a3c6633d19c2af09744e5a3d0a51ed}{Tao::FreeType.FT\_\-ENCODING\_\-MS\_\-JOHAB} =  (int)(FT\_\-Encoding.FT\_\-ENCODING\_\-JOHAB), 
+\hyperlink{namespace_tao_1_1_free_type_a87a3c6633d19c2af09744e5a3d0a51ed}{Tao::FreeType.FT\_\-ENCODING\_\-ADOBE\_\-STANDARD} =  (int)((uint)'A' $<$$<$ 24 $|$ (uint)'D' $<$$<$ 16 $|$ (uint)'O' $<$$<$ 8 $|$ (uint)'B'), 
+\hyperlink{namespace_tao_1_1_free_type_a87a3c6633d19c2af09744e5a3d0a51ed}{Tao::FreeType.FT\_\-ENCODING\_\-ADOBE\_\-EXPERT} =  (int)((uint)'A' $<$$<$ 24 $|$ (uint)'D' $<$$<$ 16 $|$ (uint)'B' $<$$<$ 8 $|$ (uint)'E'), 
+\hyperlink{namespace_tao_1_1_free_type_a87a3c6633d19c2af09744e5a3d0a51ed}{Tao::FreeType.FT\_\-ENCODING\_\-ADOBE\_\-CUSTOM} =  (int)((uint)'A' $<$$<$ 24 $|$ (uint)'D' $<$$<$ 16 $|$ (uint)'B' $<$$<$ 8 $|$ (uint)'C'), 
+\par
+\hyperlink{namespace_tao_1_1_free_type_a87a3c6633d19c2af09744e5a3d0a51ed}{Tao::FreeType.FT\_\-ENCODING\_\-ADOBE\_\-LATIN\_\-1} =  (int)((uint)'l' $<$$<$ 24 $|$ (uint)'a' $<$$<$ 16 $|$ (uint)'t' $<$$<$ 8 $|$ (uint)'1'), 
+\hyperlink{namespace_tao_1_1_free_type_a87a3c6633d19c2af09744e5a3d0a51ed}{Tao::FreeType.FT\_\-ENCODING\_\-OLD\_\-LATIN\_\-2} =  (int)((uint)'l' $<$$<$ 24 $|$ (uint)'a' $<$$<$ 16 $|$ (uint)'t' $<$$<$ 8 $|$ (uint)'2'), 
+\hyperlink{namespace_tao_1_1_free_type_a87a3c6633d19c2af09744e5a3d0a51ed}{Tao::FreeType.FT\_\-ENCODING\_\-APPLE\_\-ROMAN} =  (int)((uint)'a' $<$$<$ 24 $|$ (uint)'r' $<$$<$ 16 $|$ (uint)'m' $<$$<$ 8 $|$ (uint)'n')
+ \}
+\begin{DoxyCompactList}\small\item\em An enumeration used to specify character sets supported by charmaps. Used in the FT\_\-Select\_\-Charmap API function. note: Despite the name, this enumeration lists specific character repertories (i.e., charsets), and not text encoding methods (e.g., UTF-\/8, UTF-\/16, GB2312\_\-EUC, etc.). Because of 32-\/bit charcodes defined in Unicode (i.e., surrogates), all character codes must be expressed as FT\_\-Longs. Other encodings might be defined in the future. \item\end{DoxyCompactList}\item 
+enum \hyperlink{namespace_tao_1_1_free_type_abcbcf9816dde1efe3c9aad1102a7eb1e}{Tao::FreeType.FT\_\-Render\_\-Mode} \{ \par
+\hyperlink{namespace_tao_1_1_free_type_abcbcf9816dde1efe3c9aad1102a7eb1e}{Tao::FreeType.FT\_\-RENDER\_\-MODE\_\-NORMAL} =  0, 
+\hyperlink{namespace_tao_1_1_free_type_abcbcf9816dde1efe3c9aad1102a7eb1e}{Tao::FreeType.FT\_\-RENDER\_\-MODE\_\-LIGHT}, 
+\hyperlink{namespace_tao_1_1_free_type_abcbcf9816dde1efe3c9aad1102a7eb1e}{Tao::FreeType.FT\_\-RENDER\_\-MODE\_\-MONO}, 
+\hyperlink{namespace_tao_1_1_free_type_abcbcf9816dde1efe3c9aad1102a7eb1e}{Tao::FreeType.FT\_\-RENDER\_\-MODE\_\-LCD}, 
+\par
+\hyperlink{namespace_tao_1_1_free_type_abcbcf9816dde1efe3c9aad1102a7eb1e}{Tao::FreeType.FT\_\-RENDER\_\-MODE\_\-LCD\_\-V}, 
+\hyperlink{namespace_tao_1_1_free_type_abcbcf9816dde1efe3c9aad1102a7eb1e}{Tao::FreeType.FT\_\-RENDER\_\-MODE\_\-MAX}
+ \}
+\begin{DoxyCompactList}\small\item\em An enumeration type that lists the render modes supported by FreeType 2. Each mode corresponds to a specific type of scanline conversion performed on the outline. For bitmap fonts the ‘bitmap-\/$>$pixel\_\-mode’ field in the FT\_\-GlyphSlotRec structure gives the format of the returned bitmap. \item\end{DoxyCompactList}\item 
+enum \hyperlink{namespace_tao_1_1_free_type_a5069a53afad046166d8b3a3121d02b4d}{Tao::FreeType.FT\_\-Kerning\_\-Mode} \{ \hyperlink{namespace_tao_1_1_free_type_a5069a53afad046166d8b3a3121d02b4d}{Tao::FreeType.FT\_\-KERNING\_\-DEFAULT} =  0, 
+\hyperlink{namespace_tao_1_1_free_type_a5069a53afad046166d8b3a3121d02b4d}{Tao::FreeType.FT\_\-KERNING\_\-UNFITTED}, 
+\hyperlink{namespace_tao_1_1_free_type_a5069a53afad046166d8b3a3121d02b4d}{Tao::FreeType.FT\_\-KERNING\_\-UNSCALED}
+ \}
+\begin{DoxyCompactList}\small\item\em An enumeration used to specify which kerning values to return in FT\_\-Get\_\-Kerning. \item\end{DoxyCompactList}\end{DoxyCompactItemize}

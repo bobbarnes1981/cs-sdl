@@ -1,0 +1,179 @@
+\hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters}{
+\section{Tao.Ode.Ode.dSurfaceParameters Struct Reference}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters}\index{Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}}
+}
+
+
+Defines the properties of the colliding surfaces.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_ace05e405fc79921fd890d0beb83a3d8c}{dSurfaceParameters} (int \_\-mode, dReal \_\-mu, dReal \_\-mu2, dReal \_\-bounce, dReal \_\-bounce\_\-vel, dReal \_\-soft\_\-erp, dReal \_\-soft\_\-cfm, dReal \_\-motion1, dReal \_\-motion2, dReal \_\-slip1, dReal \_\-slip2)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_aae7058942ccb4df5cf6fbe3176965fd6}{mode}
+\begin{DoxyCompactList}\small\item\em Contact flags. This must always be set. This is a combination of one or more of the following flags: \item\end{DoxyCompactList}\item 
+dReal \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_a2a60d95da0f8ca8b32f22febdd2319b3}{mu}
+\begin{DoxyCompactList}\small\item\em Coulomb friction coefficient. This must be in the range 0 to dInfinity. 0 results in a frictionless contact, and dInfinity results in a contact that never slips. Note that frictionless contacts are less time consuming to compute than ones with friction, and infinite friction contacts can be cheaper than contacts with finite friction. \item\end{DoxyCompactList}\item 
+dReal \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_a36843e30f735975c949e7c9705f97e3f}{mu2}
+\begin{DoxyCompactList}\small\item\em Optional Coulomb friction coefficient for friction direction 2 (0..dInfinity). \item\end{DoxyCompactList}\item 
+dReal \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_a19b4e15c93286cc09d1a92493b04fec9}{bounce}
+\begin{DoxyCompactList}\small\item\em Restitution parameter (0..1). 0 means the surfaces are not bouncy at all, 1 is maximum bouncyness. \item\end{DoxyCompactList}\item 
+dReal \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_af77b6d5d3b2ba9a132d65a9ed46e32d4}{bounce\_\-vel}
+\begin{DoxyCompactList}\small\item\em Restitution parameter (0..1). 0 means the surfaces are not bouncy at all, 1 is maximum bouncyness. \item\end{DoxyCompactList}\item 
+dReal \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_a8823dedc4e6e8a71f5ac77c64e5e78e0}{soft\_\-erp}
+\begin{DoxyCompactList}\small\item\em Contact normal ``softness'' parameter. \item\end{DoxyCompactList}\item 
+dReal \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_adb1e3b96c1e72c91f5f2a08efdcb8261}{soft\_\-cfm}
+\begin{DoxyCompactList}\small\item\em Contact normal ``softness'' parameter. \item\end{DoxyCompactList}\item 
+dReal \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_a9c1e4fb56115f862e4b74f04ecbdf73d}{motion1}
+\begin{DoxyCompactList}\small\item\em Surface velocity in friction directions 1 (in m/s). \item\end{DoxyCompactList}\item 
+dReal \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_a04243c207c92edb82d524c91422f2baf}{motion2}
+\begin{DoxyCompactList}\small\item\em Surface velocity in friction directions 1 (in m/s). \item\end{DoxyCompactList}\item 
+dReal \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_a6fe751650e76028f7367e75a606817ae}{slip1}
+\begin{DoxyCompactList}\small\item\em The coefficients of force-\/dependent-\/slip (FDS) for friction directions 1 and 2. \item\end{DoxyCompactList}\item 
+dReal \hyperlink{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_af7197edb7b0a6bb33e1d20298e7bed79}{slip2}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Defines the properties of the colliding surfaces. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_ace05e405fc79921fd890d0beb83a3d8c}{
+\index{Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}!dSurfaceParameters@{dSurfaceParameters}}
+\index{dSurfaceParameters@{dSurfaceParameters}!Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}}
+\subsubsection[{dSurfaceParameters}]{\setlength{\rightskip}{0pt plus 5cm}Tao.Ode.Ode.dSurfaceParameters.dSurfaceParameters (
+\begin{DoxyParamCaption}
+\item[{int}]{ \_\-mode, }
+\item[{dReal}]{ \_\-mu, }
+\item[{dReal}]{ \_\-mu2, }
+\item[{dReal}]{ \_\-bounce, }
+\item[{dReal}]{ \_\-bounce\_\-vel, }
+\item[{dReal}]{ \_\-soft\_\-erp, }
+\item[{dReal}]{ \_\-soft\_\-cfm, }
+\item[{dReal}]{ \_\-motion1, }
+\item[{dReal}]{ \_\-motion2, }
+\item[{dReal}]{ \_\-slip1, }
+\item[{dReal}]{ \_\-slip2}
+\end{DoxyParamCaption}
+)}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_ace05e405fc79921fd890d0beb83a3d8c}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_a19b4e15c93286cc09d1a92493b04fec9}{
+\index{Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}!bounce@{bounce}}
+\index{bounce@{bounce}!Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}}
+\subsubsection[{bounce}]{\setlength{\rightskip}{0pt plus 5cm}dReal {\bf Tao.Ode.Ode.dSurfaceParameters.bounce}}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_a19b4e15c93286cc09d1a92493b04fec9}
+
+
+Restitution parameter (0..1). 0 means the surfaces are not bouncy at all, 1 is maximum bouncyness. 
+
+This is only set if the corresponding flag is set in mode. \hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_af77b6d5d3b2ba9a132d65a9ed46e32d4}{
+\index{Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}!bounce\_\-vel@{bounce\_\-vel}}
+\index{bounce\_\-vel@{bounce\_\-vel}!Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}}
+\subsubsection[{bounce\_\-vel}]{\setlength{\rightskip}{0pt plus 5cm}dReal {\bf Tao.Ode.Ode.dSurfaceParameters.bounce\_\-vel}}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_af77b6d5d3b2ba9a132d65a9ed46e32d4}
+
+
+Restitution parameter (0..1). 0 means the surfaces are not bouncy at all, 1 is maximum bouncyness. 
+
+This is only set if the corresponding flag is set in mode. \hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_aae7058942ccb4df5cf6fbe3176965fd6}{
+\index{Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}!mode@{mode}}
+\index{mode@{mode}!Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}}
+\subsubsection[{mode}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Ode.Ode.dSurfaceParameters.mode}}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_aae7058942ccb4df5cf6fbe3176965fd6}
+
+
+Contact flags. This must always be set. This is a combination of one or more of the following flags: 
+
+dContactMu2 If not set, use mu for both friction directions. If set, use mu for friction direction 1, use mu2 for friction direction 2. dContactFDir1 If set, take fdir1 as friction direction 1, otherwise automatically compute friction direction 1 to be perpendicular to the contact normal (in which case its resulting orientation is unpredictable). dContactBounce If set, the contact surface is bouncy, in other words the bodies will bounce off each other. The exact amount of bouncyness is controlled by the bounce parameter. dContactSoftERP If set, the error reduction parameter of the contact normal can be set with the soft\_\-erp parameter. This is useful to make surfaces soft. dContactSoftCFM If set, the constraint force mixing parameter of the contact normal can be set with the soft\_\-cfm parameter. This is useful to make surfaces soft. dContactMotion1 If set, the contact surface is assumed to be moving independently of the motion of the bodies. This is kind of like a conveyor belt running over the surface. When this flag is set, motion1 defines the surface velocity in friction direction 1. dContactMotion2 The same thing as above, but for friction direction 2. dContactSlip1 Force-\/dependent-\/slip (FDS) in friction direction 1. dContactSlip2 Force-\/dependent-\/slip (FDS) in friction direction 2. dContactApprox0 TODO: Document me dContactApprox1\_\-1 Use the friction pyramid approximation for friction direction 1. If this is not specified then the constant-\/force-\/limit approximation is used (and mu is a force limit). dContactApprox1\_\-2 Use the friction pyramid approximation for friction direction 2. If this is not specified then the constant-\/force-\/limit approximation is used (and mu is a force limit). dContactApprox1 Equivalent to both dContactApprox1\_\-1 and dContactApprox1\_\-2. \hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_a9c1e4fb56115f862e4b74f04ecbdf73d}{
+\index{Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}!motion1@{motion1}}
+\index{motion1@{motion1}!Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}}
+\subsubsection[{motion1}]{\setlength{\rightskip}{0pt plus 5cm}dReal {\bf Tao.Ode.Ode.dSurfaceParameters.motion1}}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_a9c1e4fb56115f862e4b74f04ecbdf73d}
+
+
+Surface velocity in friction directions 1 (in m/s). 
+
+Only set if the corresponding flags are set in mode. \hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_a04243c207c92edb82d524c91422f2baf}{
+\index{Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}!motion2@{motion2}}
+\index{motion2@{motion2}!Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}}
+\subsubsection[{motion2}]{\setlength{\rightskip}{0pt plus 5cm}dReal {\bf Tao.Ode.Ode.dSurfaceParameters.motion2}}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_a04243c207c92edb82d524c91422f2baf}
+
+
+Surface velocity in friction directions 1 (in m/s). 
+
+Only set if the corresponding flags are set in mode. \hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_a2a60d95da0f8ca8b32f22febdd2319b3}{
+\index{Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}!mu@{mu}}
+\index{mu@{mu}!Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}}
+\subsubsection[{mu}]{\setlength{\rightskip}{0pt plus 5cm}dReal {\bf Tao.Ode.Ode.dSurfaceParameters.mu}}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_a2a60d95da0f8ca8b32f22febdd2319b3}
+
+
+Coulomb friction coefficient. This must be in the range 0 to dInfinity. 0 results in a frictionless contact, and dInfinity results in a contact that never slips. Note that frictionless contacts are less time consuming to compute than ones with friction, and infinite friction contacts can be cheaper than contacts with finite friction. 
+
+This must always be set. \hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_a36843e30f735975c949e7c9705f97e3f}{
+\index{Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}!mu2@{mu2}}
+\index{mu2@{mu2}!Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}}
+\subsubsection[{mu2}]{\setlength{\rightskip}{0pt plus 5cm}dReal {\bf Tao.Ode.Ode.dSurfaceParameters.mu2}}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_a36843e30f735975c949e7c9705f97e3f}
+
+
+Optional Coulomb friction coefficient for friction direction 2 (0..dInfinity). 
+
+This is only set if the corresponding flag is set in mode. \hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_a6fe751650e76028f7367e75a606817ae}{
+\index{Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}!slip1@{slip1}}
+\index{slip1@{slip1}!Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}}
+\subsubsection[{slip1}]{\setlength{\rightskip}{0pt plus 5cm}dReal {\bf Tao.Ode.Ode.dSurfaceParameters.slip1}}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_a6fe751650e76028f7367e75a606817ae}
+
+
+The coefficients of force-\/dependent-\/slip (FDS) for friction directions 1 and 2. 
+
+These are only set if the corresponding flags are set in mode.
+
+FDS is an effect that causes the contacting surfaces to side past each other with a velocity that is proportional to the force that is being applied tangentially to that surface.
+
+Consider a contact point where the coefficient of friction mu is infinite. Normally, if a force f is applied to the two contacting surfaces, to try and get them to slide past each other, they will not move. However, if the FDS coefficient is set to a positive value k then the surfaces will slide past each other, building up to a steady velocity of k$\ast$f relative to each other.
+
+Note that this is quite different from normal frictional effects: the force does not cause a constant acceleration of the surfaces relative to each other -\/ it causes a brief acceleration to achieve the steady velocity.
+
+This is useful for modeling some situations, in particular tires. For example consider a car at rest on a road. Pushing the car in its direction of travel will cause it to start moving (i.e. the tires will start rolling). Pushing the car in the perpendicular direction will have no effect, as the tires do not roll in that direction. However -\/ if the car is moving at a velocity v, applying a force f in the perpendicular direction will cause the tires to slip on the road with a velocity proportional to f$\ast$v (Yes, this really happens).
+
+To model this in ODE set the tire-\/road contact parameters as follows: set friction direction 1 in the direction that the tire is rolling in, and set the FDS slip coefficient in friction direction 2 to k$\ast$v, where v is the tire rolling velocity and k is a tire parameter that you can choose based on experimentation.
+
+Note that FDS is quite separate from the sticking/slipping effects of Coulomb friction -\/ both modes can be used together at a single contact point. \hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_af7197edb7b0a6bb33e1d20298e7bed79}{
+\index{Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}!slip2@{slip2}}
+\index{slip2@{slip2}!Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}}
+\subsubsection[{slip2}]{\setlength{\rightskip}{0pt plus 5cm}dReal {\bf Tao.Ode.Ode.dSurfaceParameters.slip2}}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_af7197edb7b0a6bb33e1d20298e7bed79}
+\hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_adb1e3b96c1e72c91f5f2a08efdcb8261}{
+\index{Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}!soft\_\-cfm@{soft\_\-cfm}}
+\index{soft\_\-cfm@{soft\_\-cfm}!Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}}
+\subsubsection[{soft\_\-cfm}]{\setlength{\rightskip}{0pt plus 5cm}dReal {\bf Tao.Ode.Ode.dSurfaceParameters.soft\_\-cfm}}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_adb1e3b96c1e72c91f5f2a08efdcb8261}
+
+
+Contact normal ``softness'' parameter. 
+
+This is only set if the corresponding flag is set in mode. \hypertarget{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_a8823dedc4e6e8a71f5ac77c64e5e78e0}{
+\index{Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}!soft\_\-erp@{soft\_\-erp}}
+\index{soft\_\-erp@{soft\_\-erp}!Tao::Ode::Ode::dSurfaceParameters@{Tao::Ode::Ode::dSurfaceParameters}}
+\subsubsection[{soft\_\-erp}]{\setlength{\rightskip}{0pt plus 5cm}dReal {\bf Tao.Ode.Ode.dSurfaceParameters.soft\_\-erp}}}
+\label{struct_tao_1_1_ode_1_1_ode_1_1d_surface_parameters_a8823dedc4e6e8a71f5ac77c64e5e78e0}
+
+
+Contact normal ``softness'' parameter. 
+
+This is only set if the corresponding flag is set in mode. 
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Ode/\hyperlink{_ode_8cs}{Ode.cs}\end{DoxyCompactItemize}

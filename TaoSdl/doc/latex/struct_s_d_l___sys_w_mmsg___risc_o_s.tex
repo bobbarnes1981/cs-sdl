@@ -1,0 +1,60 @@
+\hypertarget{struct_s_d_l___sys_w_mmsg___risc_o_s}{
+\section{SDL\_\-SysWMmsg\_\-RiscOS Struct Reference}
+\label{struct_s_d_l___sys_w_mmsg___risc_o_s}\index{SDL\_\-SysWMmsg\_\-RiscOS@{SDL\_\-SysWMmsg\_\-RiscOS}}
+}
+
+
+RISC OS custom event structure.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_s_d_l__version}{SDL\_\-version} \hyperlink{struct_s_d_l___sys_w_mmsg___risc_o_s_a94d601d905191552ef3635e28e266857}{version}
+\item 
+int \hyperlink{struct_s_d_l___sys_w_mmsg___risc_o_s_acd14001482921411c2a6a3d15c43e792}{eventCode}
+\begin{DoxyCompactList}\small\item\em The window for the message. \item\end{DoxyCompactList}\item 
+int\mbox{[}$\,$\mbox{]} \hyperlink{struct_s_d_l___sys_w_mmsg___risc_o_s_a25f68ce4afc24def27a7b228f80565c0}{pollBlock}
+\begin{DoxyCompactList}\small\item\em The window for the message. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+RISC OS custom event structure. Struct in SDL\_\-syswm.h 
+\begin{DoxyCode}
+            struct SDL_SysWMmsg {
+                SDL_version version;
+                int eventCode;
+            int pollBlock[64];
+            };          
+\end{DoxyCode}
+  
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_s_d_l___sys_w_mmsg___risc_o_s_acd14001482921411c2a6a3d15c43e792}{
+\index{SDL\_\-SysWMmsg\_\-RiscOS@{SDL\_\-SysWMmsg\_\-RiscOS}!eventCode@{eventCode}}
+\index{eventCode@{eventCode}!SDL_SysWMmsg_RiscOS@{SDL\_\-SysWMmsg\_\-RiscOS}}
+\subsubsection[{eventCode}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf SDL\_\-SysWMmsg\_\-RiscOS.eventCode}}}
+\label{struct_s_d_l___sys_w_mmsg___risc_o_s_acd14001482921411c2a6a3d15c43e792}
+
+
+The window for the message. 
+
+\hypertarget{struct_s_d_l___sys_w_mmsg___risc_o_s_a25f68ce4afc24def27a7b228f80565c0}{
+\index{SDL\_\-SysWMmsg\_\-RiscOS@{SDL\_\-SysWMmsg\_\-RiscOS}!pollBlock@{pollBlock}}
+\index{pollBlock@{pollBlock}!SDL_SysWMmsg_RiscOS@{SDL\_\-SysWMmsg\_\-RiscOS}}
+\subsubsection[{pollBlock}]{\setlength{\rightskip}{0pt plus 5cm}int \mbox{[}$\,$\mbox{]} {\bf SDL\_\-SysWMmsg\_\-RiscOS.pollBlock}}}
+\label{struct_s_d_l___sys_w_mmsg___risc_o_s_a25f68ce4afc24def27a7b228f80565c0}
+
+
+The window for the message. 
+
+\hypertarget{struct_s_d_l___sys_w_mmsg___risc_o_s_a94d601d905191552ef3635e28e266857}{
+\index{SDL\_\-SysWMmsg\_\-RiscOS@{SDL\_\-SysWMmsg\_\-RiscOS}!version@{version}}
+\index{version@{version}!SDL_SysWMmsg_RiscOS@{SDL\_\-SysWMmsg\_\-RiscOS}}
+\subsubsection[{version}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SDL\_\-version} {\bf SDL\_\-SysWMmsg\_\-RiscOS.version}}}
+\label{struct_s_d_l___sys_w_mmsg___risc_o_s_a94d601d905191552ef3635e28e266857}
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Sdl/\hyperlink{_sdl_8cs}{Sdl.cs}\end{DoxyCompactItemize}

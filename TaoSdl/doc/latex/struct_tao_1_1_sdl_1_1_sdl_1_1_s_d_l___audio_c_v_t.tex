@@ -1,0 +1,164 @@
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t}{
+\section{Tao.Sdl.Sdl.SDL\_\-AudioCVT Struct Reference}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t}\index{Tao::Sdl::Sdl::SDL\_\-AudioCVT@{Tao::Sdl::Sdl::SDL\_\-AudioCVT}}
+}
+
+
+Audio Conversion Structure.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_af623472b2426f08b7cbaab7635012669}{needed}
+\begin{DoxyCompactList}\small\item\em Set to 1 if conversion possible. \item\end{DoxyCompactList}\item 
+short \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_ad28834c5978683aa99aacc462354922b}{src\_\-format}
+\begin{DoxyCompactList}\small\item\em Audio format of the source. \item\end{DoxyCompactList}\item 
+short \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_ab7f9d5ab7996bb5d01a7fb9a3b0babb5}{dst\_\-format}
+\begin{DoxyCompactList}\small\item\em Audio format of the destination. \item\end{DoxyCompactList}\item 
+double \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_af40b193d1692d8530fbb6493516f3b6d}{rate\_\-incr}
+\begin{DoxyCompactList}\small\item\em Rate conversion increment. \item\end{DoxyCompactList}\item 
+IntPtr \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_a4b59d447082f4bb651fee2d3c540461b}{buf}
+\begin{DoxyCompactList}\small\item\em Buffer to hold entire audio data. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_a266a472d3486caac7c30d76decf93060}{len}
+\begin{DoxyCompactList}\small\item\em Length of original audio buffer in bytes. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_afa598d7f6ea5a01b48eb3a9abf6a1330}{len\_\-cvt}
+\begin{DoxyCompactList}\small\item\em Length of converted audio buffer in bytes (calculated). \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_ab4b192a9b37bc2b12a3c3e2ae75cff6b}{len\_\-mult}
+\begin{DoxyCompactList}\small\item\em buf must be len$\ast$len\_\-mult bytes in size(calculated) \item\end{DoxyCompactList}\item 
+double \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_a44c58ef048924e18f4f7ad0fa43ee678}{len\_\-ratio}
+\begin{DoxyCompactList}\small\item\em Final audio size is len$\ast$len\_\-ratio. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_a5ac13735d9e6e12c22626a1d40fcb1b8}{filter\_\-index}
+\begin{DoxyCompactList}\small\item\em Current audio conversion function. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Audio Conversion Structure. The \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t}{SDL\_\-AudioCVT} is used to convert audio data between different formats. A \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t}{SDL\_\-AudioCVT} structure is created with the \hyperlink{_sdl_8cs_ab290a18bf5bf8a161042ceb8c43c5654}{SDL\_\-BuildAudioCVT(IntPtr, short, byte, int, short, byte, int)} function, while the actual conversion is done by the SDL\_\-ConvertAudio function. 
+
+Many of the fields in the \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t}{SDL\_\-AudioCVT} structure should be considered private and their function will not be discussed here. 
+
+
+\begin{DoxyCode}
+             typedef struct{
+                        int needed;
+                        Uint16 src_format;
+                        Uint16 dest_format;
+                        double rate_incr;
+                        Uint8 *buf;
+                        int len;
+                        int len_cvt;
+                        int len_mult;
+                        double len_ratio;
+                        void (*filters[10])(struct SDL_AudioCVT *cvt, Uint16 form
+      at);
+                                                                        int 
+      filter_index;
+                                                                } SDL_AudioCVT;
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{_sdl_8cs_ab290a18bf5bf8a161042ceb8c43c5654}{SDL\_\-BuildAudioCVT(IntPtr, short, byte, int, short, byte, int)}, \hyperlink{_sdl_8cs_a7ed641a1e339dc97cfd58c08dd9af2e2}{SDL\_\-ConvertAudio}, \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_spec}{SDL\_\-AudioSpec}
+
+
+\end{DoxySeeAlso}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_a4b59d447082f4bb651fee2d3c540461b}{
+\index{Tao::Sdl::Sdl::SDL\_\-AudioCVT@{Tao::Sdl::Sdl::SDL\_\-AudioCVT}!buf@{buf}}
+\index{buf@{buf}!Tao::Sdl::Sdl::SDL_AudioCVT@{Tao::Sdl::Sdl::SDL\_\-AudioCVT}}
+\subsubsection[{buf}]{\setlength{\rightskip}{0pt plus 5cm}IntPtr {\bf Tao.Sdl.Sdl.SDL\_\-AudioCVT.buf}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_a4b59d447082f4bb651fee2d3c540461b}
+
+
+Buffer to hold entire audio data. 
+
+This points to the audio data that will be used in the conversion. It is both the source and the destination, which means the converted audio data overwrites the original data. It also means that the converted data may be larger than the original data (if you were converting from 8-\/bit to 16-\/bit, for instance), so you must ensure buf is large enough. See below. 
+
+IntPtr to byte \hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_ab7f9d5ab7996bb5d01a7fb9a3b0babb5}{
+\index{Tao::Sdl::Sdl::SDL\_\-AudioCVT@{Tao::Sdl::Sdl::SDL\_\-AudioCVT}!dst\_\-format@{dst\_\-format}}
+\index{dst\_\-format@{dst\_\-format}!Tao::Sdl::Sdl::SDL_AudioCVT@{Tao::Sdl::Sdl::SDL\_\-AudioCVT}}
+\subsubsection[{dst\_\-format}]{\setlength{\rightskip}{0pt plus 5cm}short {\bf Tao.Sdl.Sdl.SDL\_\-AudioCVT.dst\_\-format}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_ab7f9d5ab7996bb5d01a7fb9a3b0babb5}
+
+
+Audio format of the destination. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_a5ac13735d9e6e12c22626a1d40fcb1b8}{
+\index{Tao::Sdl::Sdl::SDL\_\-AudioCVT@{Tao::Sdl::Sdl::SDL\_\-AudioCVT}!filter\_\-index@{filter\_\-index}}
+\index{filter\_\-index@{filter\_\-index}!Tao::Sdl::Sdl::SDL_AudioCVT@{Tao::Sdl::Sdl::SDL\_\-AudioCVT}}
+\subsubsection[{filter\_\-index}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Sdl.Sdl.SDL\_\-AudioCVT.filter\_\-index}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_a5ac13735d9e6e12c22626a1d40fcb1b8}
+
+
+Current audio conversion function. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_a266a472d3486caac7c30d76decf93060}{
+\index{Tao::Sdl::Sdl::SDL\_\-AudioCVT@{Tao::Sdl::Sdl::SDL\_\-AudioCVT}!len@{len}}
+\index{len@{len}!Tao::Sdl::Sdl::SDL_AudioCVT@{Tao::Sdl::Sdl::SDL\_\-AudioCVT}}
+\subsubsection[{len}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Sdl.Sdl.SDL\_\-AudioCVT.len}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_a266a472d3486caac7c30d76decf93060}
+
+
+Length of original audio buffer in bytes. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_afa598d7f6ea5a01b48eb3a9abf6a1330}{
+\index{Tao::Sdl::Sdl::SDL\_\-AudioCVT@{Tao::Sdl::Sdl::SDL\_\-AudioCVT}!len\_\-cvt@{len\_\-cvt}}
+\index{len\_\-cvt@{len\_\-cvt}!Tao::Sdl::Sdl::SDL_AudioCVT@{Tao::Sdl::Sdl::SDL\_\-AudioCVT}}
+\subsubsection[{len\_\-cvt}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Sdl.Sdl.SDL\_\-AudioCVT.len\_\-cvt}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_afa598d7f6ea5a01b48eb3a9abf6a1330}
+
+
+Length of converted audio buffer in bytes (calculated). 
+
+This is the length of the original audio data in bytes. \hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_ab4b192a9b37bc2b12a3c3e2ae75cff6b}{
+\index{Tao::Sdl::Sdl::SDL\_\-AudioCVT@{Tao::Sdl::Sdl::SDL\_\-AudioCVT}!len\_\-mult@{len\_\-mult}}
+\index{len\_\-mult@{len\_\-mult}!Tao::Sdl::Sdl::SDL_AudioCVT@{Tao::Sdl::Sdl::SDL\_\-AudioCVT}}
+\subsubsection[{len\_\-mult}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Sdl.Sdl.SDL\_\-AudioCVT.len\_\-mult}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_ab4b192a9b37bc2b12a3c3e2ae75cff6b}
+
+
+buf must be len$\ast$len\_\-mult bytes in size(calculated) 
+
+As explained above, the audio buffer needs to be big enough to store the converted data, which may be bigger than the original audio data. The length of buf should be len$\ast$len\_\-mult. \hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_a44c58ef048924e18f4f7ad0fa43ee678}{
+\index{Tao::Sdl::Sdl::SDL\_\-AudioCVT@{Tao::Sdl::Sdl::SDL\_\-AudioCVT}!len\_\-ratio@{len\_\-ratio}}
+\index{len\_\-ratio@{len\_\-ratio}!Tao::Sdl::Sdl::SDL_AudioCVT@{Tao::Sdl::Sdl::SDL\_\-AudioCVT}}
+\subsubsection[{len\_\-ratio}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf Tao.Sdl.Sdl.SDL\_\-AudioCVT.len\_\-ratio}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_a44c58ef048924e18f4f7ad0fa43ee678}
+
+
+Final audio size is len$\ast$len\_\-ratio. 
+
+When you have finished converting your audio data, you need to know how much of your audio buffer is valid. len$\ast$len\_\-ratio is the size of the converted audio data in bytes. This is very similar to len\_\-mult, however when the convert audio data is shorter than the original len\_\-mult would be 1. len\_\-ratio, on the other hand, would be a fractional number between 0 and 1. \hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_af623472b2426f08b7cbaab7635012669}{
+\index{Tao::Sdl::Sdl::SDL\_\-AudioCVT@{Tao::Sdl::Sdl::SDL\_\-AudioCVT}!needed@{needed}}
+\index{needed@{needed}!Tao::Sdl::Sdl::SDL_AudioCVT@{Tao::Sdl::Sdl::SDL\_\-AudioCVT}}
+\subsubsection[{needed}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Sdl.Sdl.SDL\_\-AudioCVT.needed}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_af623472b2426f08b7cbaab7635012669}
+
+
+Set to 1 if conversion possible. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_af40b193d1692d8530fbb6493516f3b6d}{
+\index{Tao::Sdl::Sdl::SDL\_\-AudioCVT@{Tao::Sdl::Sdl::SDL\_\-AudioCVT}!rate\_\-incr@{rate\_\-incr}}
+\index{rate\_\-incr@{rate\_\-incr}!Tao::Sdl::Sdl::SDL_AudioCVT@{Tao::Sdl::Sdl::SDL\_\-AudioCVT}}
+\subsubsection[{rate\_\-incr}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf Tao.Sdl.Sdl.SDL\_\-AudioCVT.rate\_\-incr}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_af40b193d1692d8530fbb6493516f3b6d}
+
+
+Rate conversion increment. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_ad28834c5978683aa99aacc462354922b}{
+\index{Tao::Sdl::Sdl::SDL\_\-AudioCVT@{Tao::Sdl::Sdl::SDL\_\-AudioCVT}!src\_\-format@{src\_\-format}}
+\index{src\_\-format@{src\_\-format}!Tao::Sdl::Sdl::SDL_AudioCVT@{Tao::Sdl::Sdl::SDL\_\-AudioCVT}}
+\subsubsection[{src\_\-format}]{\setlength{\rightskip}{0pt plus 5cm}short {\bf Tao.Sdl.Sdl.SDL\_\-AudioCVT.src\_\-format}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___audio_c_v_t_ad28834c5978683aa99aacc462354922b}
+
+
+Audio format of the source. 
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Sdl/\hyperlink{_sdl_8cs}{Sdl.cs}\end{DoxyCompactItemize}
