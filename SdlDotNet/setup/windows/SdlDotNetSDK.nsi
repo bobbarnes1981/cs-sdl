@@ -2,7 +2,7 @@
 
 !define PRODUCT_NAME "SdlDotNet SDK"
 !define PRODUCT_TYPE "sdk"
-!define PRODUCT_VERSION "6.1.0"
+!define PRODUCT_VERSION "6.1.1beta"
 !define PRODUCT_PUBLISHER "SdlDotNet"
 !define PRODUCT_PACKAGE "sdldotnet"
 !define PRODUCT_WEB_SITE "http://cs-sdl.sourceforge.net"
@@ -24,7 +24,7 @@
 ;!define MUI_UNWELCOMEFINISHPAGE_BITMAP "SdlDotNetLogo.bmp"
 ;!define MUI_UNWELCOMEFINISHPAGE_BITMAP_NOSTRETCH
 
-BrandingText "© 2003-2007 David Hudson, http://cs-sdl.sourceforge.net/"
+BrandingText "© 2003-2010 David Hudson and Stefan Ekamn, http://cs-sdl.sourceforge.net/"
 SetCompressor lzma
 CRCCheck on
 
