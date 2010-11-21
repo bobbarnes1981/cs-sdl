@@ -40,6 +40,8 @@ namespace SdlDotNet.Widgets
         bool selected;
         string text;
 
+        Object lockObject = new object();
+
         #endregion Fields
 
         #region Constructors
@@ -126,21 +128,23 @@ namespace SdlDotNet.Widgets
         }
 
         private void DrawBuffer() {
-            if (buffer != null) {
-                buffer.Close();
-            }
-            Surface textSurface = TextRenderer.RenderTextBasic(font, text, null, foreColor, false, 0, 0, 0, 0);
-            if (image != null) {
-                Surface newBuffer = new Surface(new Size(image.Width + (5 * 2) + textSurface.Width, image.Height + (5 * 2)));
-                newBuffer.Transparent = true;
-                newBuffer.TransparentColor = Color.Transparent;
-                newBuffer.Fill(Color.Transparent);
-                newBuffer.Blit(image, new Point(5, 5));
-                newBuffer.Blit(textSurface, new Point(5 + image.Width + 5, 5));
-                buffer = newBuffer;
-                textSurface.Close();
-            } else {
-                buffer = textSurface;
+            lock (lockObject) {
+                if (buffer != null) {
+                    buffer.Close();
+                }
+                Surface textSurface = TextRenderer.RenderTextBasic2(font, text, null, foreColor, false, 0, 0, 0, 0);
+                if (image != null) {
+                    Surface newBuffer = new Surface(new Size(image.Width + (5 * 2) + textSurface.Width, image.Height + (5 * 2)));
+                    newBuffer.Transparent = true;
+                    newBuffer.TransparentColor = Color.Transparent;
+                    newBuffer.Fill(Color.Transparent);
+                    newBuffer.Blit(image, new Point(5, 5));
+                    newBuffer.Blit(textSurface, new Point(5 + image.Width + 5, 5));
+                    buffer = newBuffer;
+                    textSurface.Close();
+                } else {
+                    buffer = textSurface;
+                }
             }
         }
 

@@ -44,6 +44,8 @@ namespace SdlDotNet.Widgets
         string text;
         VScrollBar vScroll;
         bool wordWrap;
+        bool autoScrollSet = false;
+        bool scrollToBottom;
 
         #endregion Fields
 
@@ -233,8 +235,9 @@ namespace SdlDotNet.Widgets
         }
 
         public void ScrollToBottom() {
-            if (vScroll.Visible) {
-                vScroll.Value = vScroll.Maximum;
+            if (vScroll != null && vScroll.Visible) {
+                //vScroll.Value = vScroll.Maximum;
+                scrollToBottom = true;
             }
         }
 
@@ -264,53 +267,99 @@ namespace SdlDotNet.Widgets
         }
 
         protected override void DrawBuffer() {
-            if (this.Updating == false) {
-                if (string.IsNullOrEmpty(text)) {
-                    base.DrawBuffer();
-                }
-                if (!string.IsNullOrEmpty(text)) {
-                    CheckFont();
-
-                    //if (autoSize) {
-                    //    Size newSize = TextRenderer.SizeText(font, text, antiAlias, maxWidth);
-                    //    if (this.Size != newSize) {
-                    //        ResizeInternal(new Size(newSize.Width + 10, newSize.Height));
-                    //    }
-                    //}
-                    base.DrawBuffer();
-
-                    SdlDotNet.Graphics.Surface textSurface;
-                    Color textColor;
-                    if (hoverColor != Color.Empty && MouseInBounds) {
-                        textColor = hoverColor;
-                    } else {
-                        textColor = this.ForeColor;
+            lock (lockObject) {
+                if (this.Updating == false) {
+                    this.Updating = true;
+                    if (string.IsNullOrEmpty(text)) {
+                        base.DrawBuffer();
                     }
-                    if (vScroll != null && vScroll.Visible && hScroll != null && hScroll.Visible) {
-                        textSurface = TextRenderer.RenderTextBasic2(this.font, text, charRenderOptions.ToArray(), textColor, false, this.Width - vScroll.Width - 5, this.Height - hScroll.Height, 0, 0);
-                    } else if (vScroll != null && vScroll.Visible) {
-                        textSurface = TextRenderer.RenderTextBasic2(this.font, text, charRenderOptions.ToArray(), textColor, false, this.Width - vScroll.Width - 5, this.Height, 0, vScroll.Value);
-                    } else if (hScroll != null && hScroll.Visible) {
-                        textSurface = TextRenderer.RenderTextBasic2(this.font, text, charRenderOptions.ToArray(), textColor, false, this.Width - 5, this.Height - hScroll.Height, 0, 0);
-                    } else {
-                        textSurface = TextRenderer.RenderTextBasic2(this.font, text, charRenderOptions.ToArray(), textColor, false, this.Width - 5, this.Height, 0, 0);
-                    }
+                    if (!string.IsNullOrEmpty(text)) {
+                        CheckFont();
 
-                    if (textSurface != null) {
-                        Point drawPoint;
-                        if (!centered) {
-                            drawPoint = new Point(5, 0);
-                        } else {
-                            drawPoint = DrawingSupport.GetCenter(this.Size, textSurface.Size);
+                        //if (autoSize) {
+                        //    Size newSize = TextRenderer.SizeText(font, text, antiAlias, maxWidth);
+                        //    if (this.Size != newSize) {
+                        //        ResizeInternal(new Size(newSize.Width + 10, newSize.Height));
+                        //    }
+                        //}
+                        base.DrawBuffer();
+
+                        //string escapedText = System.Text.RegularExpressions.Regex.Escape(text);
+                        //if (escapedText.Length != charRenderOptions.Count) {
+                        //    charRenderOptions.Clear();
+
+                        //    for (int i = 0; i < escapedText.Length; i++) {
+                        //        charRenderOptions.Add(new CharRenderOptions(this.ForeColor));
+                        //    }
+                        //}
+
+                        if (autoScroll && autoScrollSet) {
+                            int width = this.Width;
+                            //Size textSize1 = TextRenderer.SizeText2(font, text, antiAlias, width);
+                            Size textSize2 = TextRenderer.SizeText2(font, text, antiAlias, width - 12);//vScroll.Width);
+                            Size goodSize = new Size();
+
+                            //if (textSize2.Height > this.Height) {
+                            //    goodSize = textSize2;
+                            //} else if (textSize1.Height > this.Height) {
+                            //    goodSize = textSize1;
+                            //}
+                            goodSize = textSize2;
+
+                            if (goodSize.Height > this.Height) {
+                                CheckVScrollBar();
+                                vScroll.Location = new Point(this.Width - 12, 0);
+                                vScroll.Size = new Size(12, this.Height);
+                                vScroll.Minimum = 0;
+                                //vScroll.Value = 0;
+                                vScroll.Maximum = RoundToMultiple((goodSize.Height / font.Height), 1) - (this.Height / font.Height) + 1;
+                                vScroll.Visible = true;
+                                if (scrollToBottom) {
+                                    vScroll.Value = vScroll.Maximum;
+                                    scrollToBottom = false;
+                                }
+                            } else {
+                                if (vScroll != null && vScroll.Visible) {
+                                    vScroll.Visible = false;
+                                }
+                            }
+                            autoScrollSet = false;
                         }
-                        base.Buffer.Blit(textSurface, drawPoint);
-                        textSurface.Close();
+
+                        SdlDotNet.Graphics.Surface textSurface;
+                        Color textColor;
+                        if (hoverColor != Color.Empty && IsMouseInBounds()) {
+                            textColor = hoverColor;
+                        } else {
+                            textColor = this.ForeColor;
+                        }
+                        if (vScroll != null && vScroll.Visible && hScroll != null && hScroll.Visible) {
+                            textSurface = TextRenderer.RenderTextBasic2(this.font, text, charRenderOptions.ToArray(), textColor, false, this.Width - vScroll.Width - 5, this.Height - hScroll.Height, 0, 0);
+                        } else if (vScroll != null && vScroll.Visible) {
+                            textSurface = TextRenderer.RenderTextBasic2(this.font, text, charRenderOptions.ToArray(), textColor, false, this.Width - vScroll.Width - 5, this.Height, 0, vScroll.Value);
+                        } else if (hScroll != null && hScroll.Visible) {
+                            textSurface = TextRenderer.RenderTextBasic2(this.font, text, charRenderOptions.ToArray(), textColor, false, this.Width - 5, this.Height - hScroll.Height, 0, 0);
+                        } else {
+                            textSurface = TextRenderer.RenderTextBasic2(this.font, text, charRenderOptions.ToArray(), textColor, false, this.Width - 5, this.Height, 0, 0);
+                        }
+
+                        if (textSurface != null) {
+                            Point drawPoint;
+                            if (!centered) {
+                                drawPoint = new Point(5, 0);
+                            } else {
+                                drawPoint = DrawingSupport.GetCenter(this.Size, textSurface.Size);
+                            }
+                            base.Buffer.Blit(textSurface, drawPoint);
+                            textSurface.Close();
+                        }
                     }
+                    if (vScroll != null) {
+                        vScroll.BlitToScreen(base.Buffer);
+                    }
+                    base.DrawBorder();
+                    this.Updating = false;
                 }
-                if (vScroll != null) {
-                    vScroll.BlitToScreen(base.Buffer);
-                }
-                base.DrawBorder();
             }
         }
 
@@ -366,7 +415,7 @@ namespace SdlDotNet.Widgets
                     vScroll.Location = new Point(this.Width - 12, 0);
                     vScroll.Size = new Size(12, this.Height);
                     vScroll.Minimum = 0;
-                    vScroll.Maximum = RoundToMultiple((textSize.Height / font.Height), 1) - (this.Height / font.Height) + 1;
+                    vScroll.Maximum = RoundToMultiple((textSize.Height / font.Height), 1) - (this.Height / font.Height);
                     vScroll.Visible = true;
                 } else {
                     if (vScroll != null) {
@@ -392,8 +441,8 @@ namespace SdlDotNet.Widgets
                     }
                 }
 
-                CheckFont();
                 if (autoSize) {
+                    CheckFont();
                     Size newSize = TextRenderer.SizeText2(font, text, antiAlias, maxWidth);
                     if (this.Size != newSize) {
                         //this.updatingText = true;
@@ -407,31 +456,9 @@ namespace SdlDotNet.Widgets
                     if (vScroll != null && vScroll.Visible) {
                         vScroll.Hide();
                     }
-                } else if (autoScroll) {
-                    int width = this.Width;
-                    Size textSize1 = TextRenderer.SizeText2(font, text, antiAlias, width);
-                    Size textSize2 = TextRenderer.SizeText2(font, text, antiAlias, width - 12);//vScroll.Width);
-                    Size goodSize = new Size();
-
-                    if (textSize2.Height > this.Height) {
-                        goodSize = textSize2;
-                    } else if (textSize1.Height > this.Height) {
-                        goodSize = textSize1;
-                    }
-
-                    if (goodSize.Height > this.Height) {
-                        CheckVScrollBar();
-                        vScroll.Location = new Point(this.Width - 12, 0);
-                        vScroll.Size = new Size(12, this.Height);
-                        vScroll.Minimum = 0;
-                        //vScroll.Value = 0;
-                        vScroll.Maximum = RoundToMultiple((goodSize.Height / font.Height), 1) - (this.Height / font.Height) + 1;
-                        vScroll.Visible = true;
-                    } else {
-                        if (vScroll != null && vScroll.Visible) {
-                            vScroll.Visible = false;
-                        }
-                    }
+                }
+                if (autoScroll) {
+                    autoScrollSet = true;
                 }
 
                 base.RequestRedraw();

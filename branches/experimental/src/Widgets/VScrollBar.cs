@@ -120,26 +120,30 @@ namespace SdlDotNet.Widgets
         public int Maximum {
             get { return maximum; }
             set {
-                maximum = value;
-                if (maximum < 0)
-                    maximum = 0;
-                if (this.value > maximum)
-                    this.value = maximum;
-                RecalculateScrollButton();
-                RequestRedraw();
+                if (this.maximum != value) {
+                    maximum = value;
+                    if (maximum < 0)
+                        maximum = 0;
+                    if (this.value > maximum)
+                        this.value = maximum;
+                    RecalculateScrollButton();
+                    RequestRedraw();
+                }
             }
         }
 
         public int Minimum {
             get { return minimum; }
             set {
-                minimum = value;
-                if (this.value < minimum)
-                    this.value = minimum;
-                if (minimum > maximum)
-                    minimum = maximum;
-                RecalculateScrollButton();
-                RequestRedraw();
+                if (this.minimum != value) {
+                    minimum = value;
+                    if (this.value < minimum)
+                        this.value = minimum;
+                    if (minimum > maximum)
+                        minimum = maximum;
+                    RecalculateScrollButton();
+                    RequestRedraw();
+                }
             }
         }
 
@@ -156,10 +160,12 @@ namespace SdlDotNet.Widgets
         public new Size Size {
             get { return base.Size; }
             set {
-                base.Size = value;
-                RecalculateButtonPositions();
-                RecalculateScrollButton();
-                RequestRedraw();
+                if (base.Size != value) {
+                    base.Size = value;
+                    RecalculateButtonPositions();
+                    RecalculateScrollButton();
+                    RequestRedraw();
+                }
             }
         }
 

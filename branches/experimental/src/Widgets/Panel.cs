@@ -32,6 +32,8 @@ namespace SdlDotNet.Widgets
 
         Object lockObject = new object();
 
+        public event EventHandler Paint;
+
         #endregion Fields
 
         #region Constructors
@@ -47,7 +49,9 @@ namespace SdlDotNet.Widgets
         protected override void DrawBuffer() {
             lock (lockObject) {
                 base.DrawBuffer();
-                base.UpdateBuffer(true);
+                if (Paint != null)
+                    Paint(this, EventArgs.Empty);
+                base.UpdateBuffer(false);
                 base.DrawBorder();
             }
         }
