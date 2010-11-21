@@ -582,6 +582,7 @@ namespace SdlDotNet.Widgets
             get { return this.Size.Width; }
             set {
                 if (bounds.Width != value) {
+                    ClearWidget();
                     bounds.Width = value;
                     ResizeBuffer();
                 }
@@ -657,6 +658,7 @@ namespace SdlDotNet.Widgets
             BlitToScreen(destinationSurface, Rectangle.Empty, location);
         }
 
+        bool blitting = false;
         /// <summary>
         /// Blits to screen.
         /// </summary>
@@ -664,7 +666,8 @@ namespace SdlDotNet.Widgets
         /// <param name="sourceRectangle">The source rectangle.</param>
         /// <param name="location">The location.</param>
         public virtual void BlitToScreen(SdlDotNet.Graphics.Surface destinationSurface, Rectangle sourceRectangle, Point location) {
-            lock (lockObject) {
+            if (blitting == false) {
+                blitting = true;
                 if (!disposed) {
                     if (redrawRequested) {
                         redrawRequested = false;
@@ -693,6 +696,9 @@ namespace SdlDotNet.Widgets
                     }
                     //}
                 }
+                blitting = false;
+            } else {
+                Console.WriteLine("break");
             }
         }
 
@@ -907,6 +913,10 @@ namespace SdlDotNet.Widgets
         /// </summary>
         public void RequestRedraw() {
             this.redrawRequested = true;
+        }
+
+        public void CancelRedrawRequest() {
+            this.redrawRequested = false;
         }
 
         [Obsolete]

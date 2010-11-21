@@ -47,8 +47,7 @@ namespace SdlDotNet.Widgets
         #region Constructors
 
         public ContainerWidget(string name)
-            : base(name)
-        {
+            : base(name) {
             childWidgets = new WidgetCollection();
             components = new ComponentCollection();
 
@@ -67,26 +66,22 @@ namespace SdlDotNet.Widgets
 
         #region Properties
 
-        public Widget ActiveWidget
-        {
+        public Widget ActiveWidget {
             get { return activeWidget; }
             set {
                 SetActiveWidget(value);
             }
         }
 
-        public WidgetCollection ChildWidgets
-        {
+        public WidgetCollection ChildWidgets {
             get { return childWidgets; }
         }
 
-        public ComponentCollection Components
-        {
+        public ComponentCollection Components {
             get { return components; }
         }
 
-        public bool UpdateParentContainer
-        {
+        public bool UpdateParentContainer {
             get {
                 return updateParentContainer;
             }
@@ -99,8 +94,7 @@ namespace SdlDotNet.Widgets
 
         #region Methods
 
-        public void AddWidget(string name, Widget widget)
-        {
+        public void AddWidget(string name, Widget widget) {
             if (widget != null && !string.IsNullOrEmpty(name)) {
                 widget.Parent = this;
                 widget.ParentContainer = this;
@@ -118,39 +112,58 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        public void AddWidget(Widget widget)
-        {
+        public void AddWidget(Widget widget) {
             if (widget != null) {
                 AddWidget(widget.Name, widget);
             }
         }
 
-        public void AddWidget(string name, Component component)
-        {
+        public void AddWidget(string name, Component component) {
             if (component != null && !string.IsNullOrEmpty(name)) {
                 components.AddComponent(name, component);
             }
         }
 
-        public void AddWidget(Component component)
-        {
+        public void AddWidget(Component component) {
             if (component != null) {
                 AddWidget(component.Name, component);
             }
         }
 
-        public override void BlitToScreen(SdlDotNet.Graphics.Surface destinationSurface)
-        {
+        public override void BlitToScreen(SdlDotNet.Graphics.Surface destinationSurface) {
+            CheckWidgets();
             base.BlitToScreen(destinationSurface);
         }
 
-        public void ClearRegion(Rectangle bounds, Widget widgetToSkip)
-        {
+        public void CheckWidgets() {
+            for (int i = 0; i < childWidgets.Count; i++) {
+                if (childWidgets[i].RedrawRequested && childWidgets[i].Visible) {
+                    ClearRegion(childWidgets[i].Bounds, childWidgets[i]);
+                    UpdateWidget(childWidgets[i]);
+                }
+                if (childWidgets[i] is ContainerWidget) {
+                    //((ContainerWidget)childWidgets[i]).CheckWidgets();
+                    CheckContainerWidgets((ContainerWidget)childWidgets[i]);
+                }
+            }
+        }
+
+        public void CheckContainerWidgets(ContainerWidget container) {
+            for (int i = 0; i < container.childWidgets.Count; i++) {
+                if (container.childWidgets[i].RedrawRequested) {
+                    container.RequestRedraw();
+                }
+                if (container.childWidgets[i] is ContainerWidget) {
+                    CheckContainerWidgets((ContainerWidget)container.childWidgets[i]);
+                }
+            }
+        }
+
+        public void ClearRegion(Rectangle bounds, Widget widgetToSkip) {
             ClearRegion(bounds, widgetToSkip, true);
         }
 
-        public void ClearRegion(Rectangle bounds, Widget widgetToSkip, bool updateParent)
-        {
+        public void ClearRegion(Rectangle bounds, Widget widgetToSkip, bool updateParent) {
             lock (lockObject) {
                 DrawBackgroundRegion(bounds);
                 base.DrawBackgroundImageRegion(bounds);
@@ -166,19 +179,19 @@ namespace SdlDotNet.Widgets
                 // TriggerRedrawEvent();
                 if (updateParentContainer && updateParent) {
                     if (ParentContainer != null && ParentContainer != this) {
-                        ParentContainer.UpdateWidget(this);
+                        base.RequestRedraw();
+                        //RequestRedraw();
+                        //ParentContainer.UpdateWidget(this);
                     }
                 }
             }
         }
 
-        public bool ContainsWidget(string name)
-        {
+        public bool ContainsWidget(string name) {
             return (childWidgets.FindWidget(name) > -1);
         }
 
-        public override void FreeResources()
-        {
+        public override void FreeResources() {
             base.FreeResources();
             if (childWidgets != null) {
                 for (int i = 0; i < childWidgets.Count; i++) {
@@ -192,8 +205,7 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        public Widget GetWidget(string name)
-        {
+        public Widget GetWidget(string name) {
             int index = childWidgets.FindWidget(name);
             if (index > -1) {
                 return childWidgets[index];
@@ -202,8 +214,7 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        public void LoadComplete()
-        {
+        public void LoadComplete() {
             loaded = true;
             for (int i = 0; i < childWidgets.Count; i++) {
                 //childWidgets[i].SelectiveDrawBuffer();
@@ -213,8 +224,7 @@ namespace SdlDotNet.Widgets
             //DrawBuffer();
         }
 
-        public override void OnKeyboardDown(SdlDotNet.Input.KeyboardEventArgs e)
-        {
+        public override void OnKeyboardDown(SdlDotNet.Input.KeyboardEventArgs e) {
             if (activeWidget != null) {
                 activeWidget.OnKeyboardDown(e);
             } else {
@@ -222,8 +232,7 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        public override void OnKeyboardUp(SdlDotNet.Input.KeyboardEventArgs e)
-        {
+        public override void OnKeyboardUp(SdlDotNet.Input.KeyboardEventArgs e) {
             if (activeWidget != null) {
                 activeWidget.OnKeyboardUp(e);
             } else {
@@ -231,8 +240,7 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        public override void OnMouseDown(MouseButtonEventArgs e)
-        {
+        public override void OnMouseDown(MouseButtonEventArgs e) {
             base.OnMouseDown(e);
             e.Position = new Point(e.Position.X - this.Location.X, e.Position.Y - this.Location.Y);
             //Point location = this.ScreenLocation;
@@ -251,8 +259,7 @@ namespace SdlDotNet.Widgets
             activeWidget = null;
         }
 
-        public override void OnMouseMotion(SdlDotNet.Input.MouseMotionEventArgs e)
-        {
+        public override void OnMouseMotion(SdlDotNet.Input.MouseMotionEventArgs e) {
             base.OnMouseMotion(e);
             Point location = this.ScreenLocation;
             Point relPoint = new Point(e.Position.X - location.X, e.Position.Y - location.Y);
@@ -266,8 +273,7 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        public override void OnMouseUp(MouseButtonEventArgs e)
-        {
+        public override void OnMouseUp(MouseButtonEventArgs e) {
             base.OnMouseUp(e);
             e.Position = new Point(e.Position.X - this.Location.X, e.Position.Y - this.Location.Y);
             //Point location = this.ScreenLocation;
@@ -282,9 +288,7 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        public override void OnTick(SdlDotNet.Core.TickEventArgs e)
-        {
-            base.OnTick(e);
+        public override void OnTick(SdlDotNet.Core.TickEventArgs e) {
             if (components != null) {
                 for (int i = 0; i < components.Count; i++) {
                     components[i].OnTick(e);
@@ -295,16 +299,10 @@ namespace SdlDotNet.Widgets
                     childWidgets[i].OnTick(e);
                 }
             }
-            for (int i = 0; i < childWidgets.Count; i++) {
-                if (childWidgets[i].Visible && childWidgets[i].RedrawRequested) {
-                    ClearRegion(childWidgets[i].Bounds, childWidgets[i]);
-                    UpdateWidget(childWidgets[i]);
-                }
-            }
+            base.OnTick(e);
         }
 
-        public void RemoveWidget(string name)
-        {
+        public void RemoveWidget(string name) {
             lock (lockObject) {
                 int index = childWidgets.FindWidget(name);
                 if (index > -1) {
@@ -321,21 +319,18 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        public void SetActiveWidget(Widget widget)
-        {
+        public void SetActiveWidget(Widget widget) {
             int index = childWidgets.FindWidget(widget.Name);
             if (index > -1) {
                 activeWidget = widget;
             }
         }
 
-        public void UpdateBuffer()
-        {
+        public void UpdateBuffer() {
             UpdateBuffer(true);
         }
 
-        public void UpdateBuffer(bool resetBackground)
-        {
+        public void UpdateBuffer(bool resetBackground) {
             lock (lockObject) {
                 if (!base.Updating) {
                     if (resetBackground) {
@@ -354,8 +349,7 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        public void UpdateWidget(Widget widget)
-        {
+        public void UpdateWidget(Widget widget) {
             lock (lockObject) {
                 if (!base.Updating) {
                     if (!string.IsNullOrEmpty(widget.Name)) {
@@ -378,7 +372,9 @@ namespace SdlDotNet.Widgets
                         if (updateParentContainer) {
                             if (ParentContainer != null && ParentContainer != this) {
                                 base.RequestRedraw();
-                                ParentContainer.UpdateWidget(this);
+                                //ParentContainer.RequestRedraw();
+                                //base.RequestRedraw();
+                                //ParentContainer.UpdateWidget(this);
                             }
                         }
                     }
@@ -386,15 +382,13 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        protected virtual void DrawBackgroundRegion(Rectangle region)
-        {
+        protected virtual void DrawBackgroundRegion(Rectangle region) {
             lock (lockObject) {
                 base.Buffer.Fill(region, this.BackColor);
             }
         }
 
-        private Rectangle CalculateRegion(Rectangle parentBounds, Rectangle childBounds)
-        {
+        private Rectangle CalculateRegion(Rectangle parentBounds, Rectangle childBounds) {
             int width = 0;
             int height = 0;
             int x = 0;

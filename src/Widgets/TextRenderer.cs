@@ -1183,6 +1183,7 @@ namespace SdlDotNet.Widgets
             int width = 0;
             int height = font.Height;
             int longestWidth = 0;
+            GlyphData[] glyphDataCache = new GlyphData[textItem.Length];
             for (int i = 0; i < textItem.Length; i++) {
                 if (textItem[i] != '\n') {
                     bool moved = false;
@@ -1194,19 +1195,27 @@ namespace SdlDotNet.Widgets
                                 if (wordWidth > maxWidth - 5) {
                                     height += font.Height;
                                     width = 0;
-                                    i = z;
+                                    i = z - 1;
                                     moved = true;
                                 }
                                 break;
                             }
-                            wordWidth += font.SizeText(textItem[z].ToString()).Width;
+                            if (glyphDataCache[z].Advance == 0) {
+                                glyphDataCache[z] = font.GetGlyphMetrics(textItem[z]);
+                            }
+                            //wordWidth += font.SizeText(textItem[z].ToString()).Width;
+                            wordWidth += glyphDataCache[z].Advance;
 
                             z++;
                         }
                     }
 
                     if (!moved) {
-                        width += font.SizeText(textItem[i].ToString()).Width;
+                        if (glyphDataCache[i].Advance == 0) {
+                            glyphDataCache[i] = font.GetGlyphMetrics(textItem[i]);
+                        }
+                        width += glyphDataCache[i].Advance;
+                        //width += font.SizeText(textItem[i].ToString()).Width;
                         if (width > longestWidth) {
                             longestWidth = width;
                         }
