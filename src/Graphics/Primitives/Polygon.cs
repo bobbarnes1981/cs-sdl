@@ -193,7 +193,7 @@ namespace SdlDotNet.Graphics.Primitives
             }
             if (fill)
             {
-                int result = SdlGfx.filledPolygonRGBA(surface.Handle, this.PositionsX(), this.PositionsY(), this.NumberOfSides, color.R, color.G, color.G,
+                int result = SdlGfx.filledPolygonRGBA(surface.Handle, this.PositionsX(), this.PositionsY(), this.NumberOfSides, color.R, color.G, color.B,
                 color.A);
                 GC.KeepAlive(this);
                 if (result != (int)SdlFlag.Success)
