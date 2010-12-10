@@ -12,6 +12,7 @@
 		<module>Arcane</module>
 		<module>CardGenerator</module>
 		<module>CrystalKeepRulings</module>
+		<module>MagicCardsInfo</module>
 		<module>MagicTraders</module>
 		<module>MTGVault</module>
 	</modules>
