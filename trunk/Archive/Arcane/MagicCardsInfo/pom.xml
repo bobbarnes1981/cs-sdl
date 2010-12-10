@@ -4,9 +4,9 @@
 	<groupId>net.slightlymagic</groupId>
 	<artifactId>magiccardsinfo</artifactId>
 	<packaging>jar</packaging>
-	<name>CardGenerator</name>
+	<name>MagicCardsInfo</name>
 	<version>1.0-SNAPSHOT</version>
-	<description>iMagic Card Generator for Arcane</description>
+	<description>Magic Card Generator for Arcane</description>
 	<url>http://www.slightlymagic.net/</url>
 	<properties>
 		<project.build.sourceEncoding>
