@@ -41,8 +41,7 @@ namespace SdlDotNet.Widgets
         #region Constructors
 
         public ListBox(String name)
-            : base(name, true)
-        {
+            : base(name, true) {
             base.InitializeDefaultWidget();
 
             vScroll = new VScrollBar("vScroll");
@@ -72,19 +71,16 @@ namespace SdlDotNet.Widgets
         /// <summary>
         /// Gets the items of the SdlDotNet.Widgets.ListBox.
         /// </summary>
-        public ListBoxItemCollection Items
-        {
+        public ListBoxItemCollection Items {
             get { return items; }
         }
 
-        public bool MultiSelect
-        {
+        public bool MultiSelect {
             get { return multiSelect; }
             set { multiSelect = value; }
         }
 
-        public int SelectedIndex
-        {
+        public int SelectedIndex {
             get {
                 if (selectedItems.Count > 0) {
                     for (int i = 0; i < items.Count; i++) {
@@ -102,8 +98,7 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        public IListBoxItem SelectedItem
-        {
+        public IListBoxItem SelectedItem {
             get {
                 if (selectedItems.Count > 0) {
                     return selectedItems[0];
@@ -113,8 +108,7 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        public SelectedItemCollection<IListBoxItem> SelectedItems
-        {
+        public SelectedItemCollection<IListBoxItem> SelectedItems {
             get { return selectedItems; }
         }
 
@@ -122,8 +116,7 @@ namespace SdlDotNet.Widgets
 
         #region Methods
 
-        public override void FreeResources()
-        {
+        public override void FreeResources() {
             base.FreeResources();
             if (vScroll != null) {
                 vScroll.FreeResources();
@@ -133,16 +126,14 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        public override void OnMouseDown(MouseButtonEventArgs e)
-        {
+        public override void OnMouseDown(MouseButtonEventArgs e) {
             base.OnMouseDown(e);
             if (vScroll.Visible && DrawingSupport.PointInBounds(e.RelativePosition, vScroll.Bounds)) {
                 vScroll.OnMouseDown(new MouseButtonEventArgs(e.MouseEventArgs, e.RelativePosition));
             }
         }
 
-        public override void OnMouseMotion(Input.MouseMotionEventArgs e)
-        {
+        public override void OnMouseMotion(Input.MouseMotionEventArgs e) {
             base.OnMouseMotion(e);
             Point location = this.ScreenLocation;
             Point relPoint = new Point(e.Position.X - location.X, e.Position.Y - location.Y);
@@ -151,16 +142,14 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        public override void OnMouseUp(MouseButtonEventArgs e)
-        {
+        public override void OnMouseUp(MouseButtonEventArgs e) {
             base.OnMouseUp(e);
             if (vScroll.Visible && DrawingSupport.PointInBounds(e.RelativePosition, vScroll.Bounds)) {
                 vScroll.OnMouseUp(new MouseButtonEventArgs(e.MouseEventArgs, e.RelativePosition));
             }
         }
 
-        public void SelectItem(int index)
-        {
+        public void SelectItem(int index) {
             if (items[index].Selected == false) {
                 items[index].Selected = true;
                 selectedItems.Add(items[index]);
@@ -171,8 +160,7 @@ namespace SdlDotNet.Widgets
                 ItemSelected(this, EventArgs.Empty);
         }
 
-        public void SelectItem(string textIdentifier, bool caseSensitive)
-        {
+        public void SelectItem(string textIdentifier, bool caseSensitive) {
             for (int i = 0; i < items.Count; i++) {
                 if ((caseSensitive ? items[i].TextIdentifier.ToLower() : items[i].TextIdentifier) == (caseSensitive ? textIdentifier.ToLower() : textIdentifier)) {
                     SelectItem(i);
@@ -183,13 +171,11 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        public void SelectItem(string textIdentifier)
-        {
+        public void SelectItem(string textIdentifier) {
             SelectItem(textIdentifier, false);
         }
 
-        public void ToggleItem(int index)
-        {
+        public void ToggleItem(int index) {
             if (items[index].Selected) {
                 items[index].Selected = false;
                 selectedItems.Remove(items[index]);
@@ -203,21 +189,31 @@ namespace SdlDotNet.Widgets
                 ItemSelected(this, EventArgs.Empty);
         }
 
-        internal void ItemCountChanged()
-        {
-            int vScrollMax = CalculateVScrollMax();
-            if (vScrollMax > 0) {
-                vScroll.Show();
-                vScroll.Maximum = vScrollMax;
+        internal void ItemCountChanged() {
+            if (items.Count > 0) {
+                for (int i = selectedItems.Count - 1; i >= 0; i--) {
+                    if (items.Contains(selectedItems[i]) == false) {
+                        selectedItems.RemoveAt(i);
+                    }
+                }
             } else {
-                vScroll.Hide();
+                selectedItems.Clear();
             }
             RequestRedraw();
         }
 
-        protected override void DrawBuffer()
-        {
+        protected override void DrawBuffer() {
             base.DrawBuffer();
+
+            int vScrollMax = CalculateVScrollMax();
+            if (vScroll.Maximum != vScrollMax) {
+                if (vScrollMax > 0) {
+                    vScroll.Show();
+                    vScroll.Maximum = vScrollMax;
+                } else {
+                    vScroll.Hide();
+                }
+            }
 
             int itemStart = 0;
             int itemEnd = items.Count;
@@ -236,6 +232,7 @@ namespace SdlDotNet.Widgets
                 if (items[i].Selected) {
                     base.Buffer.Fill(new Rectangle(5, lastY, this.Width - 10, items[i].Buffer.Height), Color.Blue);
                 }
+                items[i].AttemptRedraw();
                 base.Buffer.Blit(items[i].Buffer, new Point(5, lastY));
                 lastY += items[i].Buffer.Height;
             }
@@ -247,12 +244,11 @@ namespace SdlDotNet.Widgets
             base.DrawBorder();
         }
 
-        private int CalculateVScrollMax()
-        {
+        private int CalculateVScrollMax() {
             int currentHeight = 5;
             int visibleItems = 0;
             for (int i = 0; i < items.Count; i++) {
-                currentHeight += items[i].Buffer.Height;
+                currentHeight += items[i].Height;
                 if (currentHeight <= base.Height) {
                     visibleItems++;
                 }
@@ -264,8 +260,7 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        private void HandleMultiSelect(int itemToKeep)
-        {
+        private void HandleMultiSelect(int itemToKeep) {
             if (!multiSelect) {
                 for (int z = 0; z < items.Count; z++) {
                     if (items[z] != items[itemToKeep]) {
@@ -278,8 +273,7 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        void ListBox_Click(object sender, MouseButtonEventArgs e)
-        {
+        void ListBox_Click(object sender, MouseButtonEventArgs e) {
             if (e.MouseEventArgs.Button == Input.MouseButton.PrimaryButton) {
                 int itemStart = 0;
                 int itemEnd = items.Count;
@@ -303,14 +297,12 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        void ListBox_Resized(object sender, EventArgs e)
-        {
+        void ListBox_Resized(object sender, EventArgs e) {
             vScroll.Location = new Point(this.Width - 12, 0);
             vScroll.Size = new Size(12, this.Height);
         }
 
-        void vScroll_ValueChanged(object sender, ValueChangedEventArgs e)
-        {
+        void vScroll_ValueChanged(object sender, ValueChangedEventArgs e) {
             RequestRedraw();
         }
 

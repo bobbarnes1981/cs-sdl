@@ -48,14 +48,14 @@ namespace SdlDotNet.Widgets
 
         public static void UpdateWidget(Surface destinationBuffer, Widget widgetToUpdate, WidgetCollection childWidgets) {
             for (int i = 0; i < childWidgets.Count; i++) {
-                if (childWidgets[i].Visible) {
+                //if (childWidgets[i].Visible) {
                     if (childWidgets[i] == widgetToUpdate) {
                         childWidgets[i].BlitToScreen(destinationBuffer);
                     } else if (childWidgets[i].Bounds.IntersectsWith(widgetToUpdate.Bounds)) {
                         Rectangle region = CalculateRegion(widgetToUpdate.Bounds, childWidgets[i].Bounds);//new Rectangle(widget.X, widget.Y, System.Math.Min((childWidgets[i].Width + childWidgets[i].X) - widget.X, widget.Width), System.Math.Min((childWidgets[i].Height + childWidgets[i].Y) - widget.Y, widget.Height));
                         childWidgets[i].BlitToScreen(destinationBuffer, region, new Point(childWidgets[i].X + region.X, childWidgets[i].Y + region.Y));
                     }
-                }
+                //}
             }
         }
 

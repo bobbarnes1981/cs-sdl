@@ -39,6 +39,8 @@ namespace SdlDotNet.Widgets
         Surface image;
         bool selected;
         string text;
+        bool redrawRequired = false;
+        int height = -1;
 
         Object lockObject = new object();
 
@@ -51,7 +53,7 @@ namespace SdlDotNet.Widgets
             this.text = text;
             this.foreColor = Color.Black;
 
-            DrawBuffer();
+            RequestRedraw();
         }
 
         #endregion Constructors
@@ -59,7 +61,10 @@ namespace SdlDotNet.Widgets
         #region Properties
 
         public SdlDotNet.Graphics.Surface Buffer {
-            get { return buffer; }
+            get {
+                AttemptRedraw();
+                return buffer;
+            }
         }
 
         public SdlDotNet.Graphics.Font Font {
@@ -69,7 +74,7 @@ namespace SdlDotNet.Widgets
                     font.Close();
                 }
                 font = value;
-                DrawBuffer();
+                RequestRedraw();
             }
         }
 
@@ -77,7 +82,7 @@ namespace SdlDotNet.Widgets
             get { return foreColor; }
             set {
                 foreColor = value;
-                DrawBuffer();
+                RequestRedraw();
             }
         }
 
@@ -85,7 +90,7 @@ namespace SdlDotNet.Widgets
             get { return image; }
             set {
                 image = value;
-                DrawBuffer();
+                RequestRedraw();
             }
         }
 
@@ -105,7 +110,7 @@ namespace SdlDotNet.Widgets
             get { return text; }
             set {
                 text = value;
-                DrawBuffer();
+                RequestRedraw();
             }
         }
 
@@ -114,9 +119,31 @@ namespace SdlDotNet.Widgets
             set { Text = value; }
         }
 
+        public int Height {
+            get {
+                if (height == -1) {
+                    height = CalculateHeight();
+                }
+
+                return height;
+            }
+        }
+
         #endregion Properties
 
         #region Methods
+
+        private int CalculateHeight() {
+            int height = -1;
+            if (image != null) {
+                height = image.Height + (5 * 2);
+            } else {
+                Size textSize = TextRenderer.SizeText2(font, text, false, 0);
+                height = textSize.Height;
+            }
+
+            return height;
+        }
 
         public void FreeResources() {
             if (buffer != null) {
@@ -145,6 +172,21 @@ namespace SdlDotNet.Widgets
                 } else {
                     buffer = textSurface;
                 }
+                height = buffer.Height;
+            }
+        }
+
+        private void RequestRedraw() {
+            this.redrawRequired = true;
+        }
+
+        public bool AttemptRedraw() {
+            if (redrawRequired) {
+                this.redrawRequired = false;
+                DrawBuffer();
+                return true;
+            } else {
+                return false;
             }
         }
 

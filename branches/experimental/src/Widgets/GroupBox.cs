@@ -127,6 +127,11 @@ namespace SdlDotNet.Widgets
             pnlContainer.UpdateWidget(widget);
         }
 
+        public override void BlitToScreen(SdlDotNet.Graphics.Surface destinationSurface) {
+            pnlContainer.BlitToScreen(base.Buffer);
+            base.BlitToScreen(destinationSurface);
+        }
+
         protected override void DrawBuffer() {
             base.DrawBuffer();
             if (!string.IsNullOrEmpty(text) && font != null) {

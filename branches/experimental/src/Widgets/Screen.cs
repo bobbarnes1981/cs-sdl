@@ -51,6 +51,10 @@ namespace SdlDotNet.Widgets
             get { return WindowManager.destSurf.Width; }
         }
 
+        public static WidgetCollection Widgets {
+            get { return widgets; }
+        }
+
         #endregion Properties
 
         #region Methods
@@ -64,6 +68,18 @@ namespace SdlDotNet.Widgets
             for (int i = widgets.Count - 1; i >= 0; i--) {
                 widgets[i].FreeResources();
                 widgets.RemoveWidget(i);
+            }
+        }
+
+        public static void RemoveWidget(Widget widget) {
+            RemoveWidget(widget.Name);
+        }
+
+        public static void RemoveWidget(string name) {
+            if (!string.IsNullOrEmpty(name)) {
+                int index = widgets.FindWidget(name);
+                widgets[index].FreeResources();
+                widgets.RemoveWidget(index);
             }
         }
 

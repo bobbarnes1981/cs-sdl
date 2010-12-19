@@ -101,6 +101,11 @@ namespace SdlDotNet.Widgets
         public event EventHandler<MouseButtonEventArgs> Click;
 
         /// <summary>
+        /// Fired when this widget is double-clicked on.
+        /// </summary>
+        public event EventHandler<MouseButtonEventArgs> DoubleClick;
+
+        /// <summary>
         /// Fired when a key is pressed down while this widget is the active widget.
         /// </summary>
         public event EventHandler<SdlDotNet.Input.KeyboardEventArgs> KeyDown;
@@ -517,8 +522,17 @@ namespace SdlDotNet.Widgets
             set {
                 if (bounds.Size != value) {
                     ClearWidget();
+                    //if (ParentContainer != null) {
+                    //    ParentContainer.ClearRegion(this.bounds, this);
+                    //    ParentContainer.UpdateWidget(this);
+                    //}
                     bounds.Size = value;
                     ResizeBuffer();
+                    if (ParentContainer != null) {
+                        //    ParentContainer.ClearRegion(this.bounds, this);
+                        //    ParentContainer.UpdateWidget(this);
+                        ParentContainer.RequestRedraw();
+                    }
                 }
             }
         }
@@ -562,8 +576,16 @@ namespace SdlDotNet.Widgets
             set {
                 if (visible != value) {
                     visible = value;
+                    //if (ParentContainer != null) {
+                    //    ParentContainer.ClearRegion(this.bounds, this);
+                    //    ParentContainer.UpdateWidget(this);
+                    //}
+                    //RequestRedraw();
                     if (!visible) {
-                        ClearWidget();
+                        if (ParentContainer != null) {
+                            parentContainer.clearRegionRequests.Add(new ClearRegionRequest(this.Bounds, this));
+                        }
+                        //ClearWidget();
                     } else {
                         RequestRedraw();
                     }
@@ -715,6 +737,11 @@ namespace SdlDotNet.Widgets
             if (parentContainer != null) {
                 parentContainer.SetActiveWidget(this);
             }
+            if (topLevel) {
+                if (Screen.ContainsWidget(this.Name)) {
+                    Screen.activeWidget = this;
+                }
+            }
         }
 
         /// <summary>
@@ -861,6 +888,7 @@ namespace SdlDotNet.Widgets
                 MouseMotion(this, e);
         }
 
+        int lastClick;
         public virtual void OnMouseUp(MouseButtonEventArgs e) {
             e.RelativePosition = new Point(e.Position.X - this.Location.X, e.Position.Y - this.Location.Y);
             if (MouseUp != null)
@@ -868,6 +896,13 @@ namespace SdlDotNet.Widgets
             if (mouseDown) {
                 TriggerClickEvent(e);
                 mouseDown = false;
+                if ((lastClick > 0) && (SdlDotNet.Core.Timer.TicksElapsed < lastClick + 250)) {
+                    if (DoubleClick != null)
+                        DoubleClick(this, new MouseButtonEventArgs(e));
+                    lastClick = 0;
+                } else {
+                    lastClick = SdlDotNet.Core.Timer.TicksElapsed;
+                }
             }
         }
 
@@ -1017,14 +1052,18 @@ namespace SdlDotNet.Widgets
             }
         }
 
+        internal void ForceDrawBuffer() {
+            DrawBuffer();
+        }
+
         /// <summary>
         /// Draws the buffer.
         /// </summary>
         protected virtual void DrawBuffer() {
             if (!disposed) {
-                lock (lockObject) {
+                //lock (lockObject) {
                     buffer.Fill(this.BackColor);
-                }
+                //}
                 DrawBackgroundImage();
             }
         }
@@ -1134,6 +1173,9 @@ namespace SdlDotNet.Widgets
             }
         }
 
+        /// <summary>
+        /// Obtains the location to add on to the widgets relative location to obtains a widgets absolution location
+        /// </summary>
         private Point GetTotalAddLocation(Point addLoc, Widget widget) {
             if (widget.Parent != null) {
                 return GetTotalAddLocation(new Point(addLoc.X + widget.Parent.Location.X, addLoc.Y + widget.Parent.Location.Y), widget.Parent);

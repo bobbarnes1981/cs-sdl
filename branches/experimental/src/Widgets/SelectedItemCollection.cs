@@ -72,6 +72,14 @@ namespace SdlDotNet.Widgets
             items.Remove(item);
         }
 
+        public void RemoveAt(int index) {
+            items.RemoveAt(index);
+        }
+
+        public bool Contains(T item) {
+            return items.Contains(item);
+        }
+
         #endregion Methods
     }
 }

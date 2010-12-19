@@ -49,11 +49,16 @@ namespace SdlDotNet.Widgets
             set;
         }
 
+        int Height {
+            get;
+        }
+
         #endregion Properties
 
         #region Methods
 
         void FreeResources();
+        bool AttemptRedraw();
 
         #endregion Methods
     }

@@ -424,6 +424,7 @@ namespace SdlDotNet.Core
             Events.CloseMixer();
             Events.CloseTimer();
             Events.CloseVideo();
+            Widgets.Widgets.CloseWidgets();
             Sdl.SDL_Quit();
             Quit = null;
         }

@@ -100,6 +100,8 @@ namespace SdlDotNet.Widgets
 
         #endregion Properties
 
+        public event EventHandler TextChanged;
+
         #region Methods
 
         public override void FreeResources() {
@@ -269,6 +271,8 @@ namespace SdlDotNet.Widgets
                         }
                         break;
                 }
+                if (TextChanged != null)
+                    TextChanged(this, EventArgs.Empty);
             }
         }
 
