@@ -117,6 +117,19 @@ namespace SdlDotNet.Widgets
             }
         }
 
+        public static void CloseWidgets() {
+            // First, close all screen widgets
+            Screen.ClearWidgets();
+            // Close all open windows
+            for (int i = 0; i < WindowManager.Windows.Count; i++) {
+                Window windowToClose = WindowManager.Windows[i];
+                WindowManager.Windows.RemoveWindow(windowToClose);
+                windowToClose.FreeResources();
+            }
+            WindowManager.ToggleWindowSwitcher(false);
+            WindowManager.windowSwitcher.FreeResources();
+        }
+
         static void Events_KeyboardDown(object sender, Input.KeyboardEventArgs e) {
             WindowManager.HandleKeyboardDown(e);
         }

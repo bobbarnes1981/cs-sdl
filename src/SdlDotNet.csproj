@@ -149,12 +149,15 @@
     <Compile Include="Widgets\Button.cs" />
     <Compile Include="Widgets\CharRenderOptions.cs" />
     <Compile Include="Widgets\CheckBox.cs" />
+    <Compile Include="Widgets\ClearRegionRequest.cs" />
     <Compile Include="Widgets\ComboBox.cs" />
     <Compile Include="Widgets\Component.cs" />
     <Compile Include="Widgets\ComponentCollection.cs" />
     <Compile Include="Widgets\ContainerWidget.cs" />
     <Compile Include="Widgets\DialogResult.cs" />
     <Compile Include="Widgets\DrawingSupport.cs" />
+    <Compile Include="Widgets\FileBrowserDialog.cs" />
+    <Compile Include="Widgets\FileDialog.cs" />
     <Compile Include="Widgets\GroupBox.cs" />
     <Compile Include="Widgets\Highlighter.cs" />
     <Compile Include="Widgets\HighlightType.cs" />
@@ -177,6 +180,7 @@
     <Compile Include="Widgets\ProgressBar.cs" />
     <Compile Include="Widgets\ProgressBarTextStyle.cs" />
     <Compile Include="Widgets\RadioButton.cs" />
+    <Compile Include="Widgets\SaveFileDialog.cs" />
     <Compile Include="Widgets\Screen.cs" />
     <Compile Include="Widgets\ScrollableWidget.cs" />
     <Compile Include="Widgets\SelectedItemCollection.cs" />

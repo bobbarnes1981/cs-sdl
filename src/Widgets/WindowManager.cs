@@ -42,7 +42,7 @@ namespace SdlDotNet.Widgets
         static int mainThreadID = -1;
         static WidgetOverlayCollection overlayCollection;
         static WindowCollection windows;
-        static WindowSwitcher windowSwitcher;
+        internal static WindowSwitcher windowSwitcher;
         static bool windowSwitcherEnabled;
 
         #endregion Fields
@@ -260,12 +260,18 @@ namespace SdlDotNet.Widgets
         /// <returns></returns>
         public static bool HandleKeyboardDown(SdlDotNet.Input.KeyboardEventArgs e) {
             if (initialized) {
+                if (currentModalWindow != null) {
+                    currentModalWindow.OnKeyboardDown(e);
+                    return true;
+                }
+
                 if (Screen.activeWidget != null) {
                     bool value = Screen.HandleKeyboardDown(e);
                     if (value) {
                         return true;
                     }
                 }
+
                 if (activeWindow != null) {
                     activeWindow.OnKeyboardDown(e);
                     return true;
@@ -289,12 +295,19 @@ namespace SdlDotNet.Widgets
         /// <returns></returns>
         public static bool HandleKeyboardUp(SdlDotNet.Input.KeyboardEventArgs e) {
             if (initialized) {
+
+                if (currentModalWindow != null) {
+                    currentModalWindow.OnKeyboardUp(e);
+                    return true;
+                }
+
                 if (Screen.activeWidget != null) {
                     bool value = Screen.HandleKeyboardUp(e);
                     if (value) {
                         return true;
                     }
                 }
+
                 if (activeWindow != null) {
                     activeWindow.OnKeyboardUp(e);
                     return true;

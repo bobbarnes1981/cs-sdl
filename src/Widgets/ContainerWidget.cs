@@ -41,6 +41,7 @@ namespace SdlDotNet.Widgets
         Size totalSize;
         bool updateParentContainer;
         VScrollBar vScrollBar;
+        internal List<ClearRegionRequest> clearRegionRequests;
 
         #endregion Fields
 
@@ -50,6 +51,7 @@ namespace SdlDotNet.Widgets
             : base(name) {
             childWidgets = new WidgetCollection();
             components = new ComponentCollection();
+            clearRegionRequests = new List<ClearRegionRequest>();
 
             updateParentContainer = true;
 
@@ -131,13 +133,18 @@ namespace SdlDotNet.Widgets
         }
 
         public override void BlitToScreen(SdlDotNet.Graphics.Surface destinationSurface) {
+            for (int i = 0; i < clearRegionRequests.Count; i++) {
+                ClearRegion(clearRegionRequests[i].Region, clearRegionRequests[i].WidgetToSkip);
+                //clearRegionRequests.RemoveAt(i);
+            }
+            clearRegionRequests.Clear();
             CheckWidgets();
             base.BlitToScreen(destinationSurface);
         }
 
         public void CheckWidgets() {
             for (int i = 0; i < childWidgets.Count; i++) {
-                if (childWidgets[i].RedrawRequested && childWidgets[i].Visible) {
+                if (childWidgets[i].RedrawRequested) {
                     ClearRegion(childWidgets[i].Bounds, childWidgets[i]);
                     UpdateWidget(childWidgets[i]);
                 }
@@ -150,11 +157,11 @@ namespace SdlDotNet.Widgets
 
         public void CheckContainerWidgets(ContainerWidget container) {
             for (int i = 0; i < container.childWidgets.Count; i++) {
-                if (container.childWidgets[i].RedrawRequested) {
-                    container.RequestRedraw();
-                }
                 if (container.childWidgets[i] is ContainerWidget) {
                     CheckContainerWidgets((ContainerWidget)container.childWidgets[i]);
+                }
+                if (container.childWidgets[i].RedrawRequested || container.clearRegionRequests.Count > 0) {
+                    container.RequestRedraw();
                 }
             }
         }
@@ -192,7 +199,6 @@ namespace SdlDotNet.Widgets
         }
 
         public override void FreeResources() {
-            base.FreeResources();
             if (childWidgets != null) {
                 for (int i = 0; i < childWidgets.Count; i++) {
                     childWidgets[i].FreeResources();
@@ -203,6 +209,7 @@ namespace SdlDotNet.Widgets
                     components[i].FreeResources();
                 }
             }
+            base.FreeResources();
         }
 
         public Widget GetWidget(string name) {
@@ -317,6 +324,14 @@ namespace SdlDotNet.Widgets
                     }
                 }
             }
+        }
+
+        public void RemoveWidgets() {
+            for (int i = childWidgets.Count - 1; i >= 0; i--) {
+                childWidgets[i].FreeResources();
+                childWidgets.RemoveWidget(i);
+            }
+            UpdateBuffer(true);
         }
 
         public void SetActiveWidget(Widget widget) {

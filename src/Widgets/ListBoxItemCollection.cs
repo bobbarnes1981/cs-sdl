@@ -74,6 +74,10 @@ namespace SdlDotNet.Widgets
             Add(textItem);
         }
 
+        public bool Contains(IListBoxItem item) {
+            return items.Contains(item);
+        }
+
         public void Clear() {
             for (int i = items.Count - 1; i >= 0; i--) {
                 items[i].FreeResources();
