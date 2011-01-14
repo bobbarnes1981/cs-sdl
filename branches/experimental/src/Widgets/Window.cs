@@ -342,10 +342,10 @@ namespace SdlDotNet.Widgets
             lock (lockObject) {
                 if (windowed) {
                     this.Location = new Point(base.Location.X, base.Location.Y - titleBar.UnscaledSize.Height);
-                    Size size = this.ScaledSize;
+                    Size size = this.Size;
                     fullBounds.Width = size.Width;
                     fullBounds.Height = size.Height;
-                    Point location = this.ScaledLocation;
+                    Point location = this.Location;
                     fullBounds.X = location.X;
                     fullBounds.Y = location.Y;
                 }

@@ -49,7 +49,7 @@ namespace SdlDotNet.Widgets
         Color borderColor;
         BorderStyle borderStyle;
         int borderWidth;
-        Rectangle bounds;
+        //Rectangle bounds;
         SdlDotNet.Graphics.Surface buffer;
         Rectangle clipRectangle;
         Color foreColor;
@@ -71,6 +71,7 @@ namespace SdlDotNet.Widgets
         bool updating;
         bool visible;
         Rectangle cachedBounds = Rectangle.Empty;
+        Rectangle cachedOriginalBounds = Rectangle.Empty;
         bool resizeRequested;
         bool relocateRequested;
         Rectangle unscaledBounds = Rectangle.Empty;
@@ -407,10 +408,18 @@ namespace SdlDotNet.Widgets
                 //}
             }
             set {
-                if (bounds.Height != value) {
+                if (unscaledBounds.Height != value) {
+                    cachedOriginalBounds.Height = this.ScaledSize.Height;
+
+                    unscaledBounds.Height = value;
+
+                    if (Video.UseResolutionScaling) {
+                        value = Core.Resolution.ConvertHeight(value);
+                    }
+
                     cachedBounds.Height = value;
-                    if (cachedBounds.Width == 0) {
-                        cachedBounds.Width = bounds.Width;
+                    if (cachedBounds.Height == 0) {
+                        cachedBounds.Height = unscaledBounds.Height;
                     }
                     resizeRequested = true;
                     RequestRedraw();
@@ -458,7 +467,7 @@ namespace SdlDotNet.Widgets
         public Point ScaledLocation {
             get {
                 if (cachedBounds.Location == Point.Empty) {
-                    return bounds.Location;
+                    return unscaledBounds.Location;
                 } else {
                     return cachedBounds.Location;
                 }
@@ -479,18 +488,22 @@ namespace SdlDotNet.Widgets
                 //}
             }
             set {
-                unscaledBounds.Location = value;
-
-                if (SdlDotNet.Graphics.Video.UseResolutionScaling) {
-                    value = Core.Resolution.ConvertPoint(value.X, value.Y);
-                }
-
-                SetLocation(value);
+                SetLocation(value, true);
             }
         }
 
-        private void SetLocation(Point location) {
-            if (bounds.Location != location) {
+        private void SetLocation(Point location, bool scale) {
+            if (unscaledBounds.Location != location) {
+                cachedOriginalBounds.Location = this.ScaledLocation;
+
+                unscaledBounds.Location = location;
+
+                if (scale) {
+                    if (SdlDotNet.Graphics.Video.UseResolutionScaling) {
+                        location = Core.Resolution.ConvertPoint(location.X, location.Y);
+                    }
+                }
+
                 cachedBounds.Location = location;
                 relocateRequested = true;
                 //ClearWidget();
@@ -506,9 +519,9 @@ namespace SdlDotNet.Widgets
         }
 
         public void SetLocationUnscaled(Point location) {
-            unscaledBounds.Location = location;
+            //unscaledBounds.Location = location;
 
-            SetLocation(location);
+            SetLocation(location, false);
         }
 
         /// <summary>
@@ -580,7 +593,7 @@ namespace SdlDotNet.Widgets
         /// <value>The absolute location of the widget.</value>
         public Point ScreenLocation {
             get {
-                Point totalLoc = GetTotalAddLocation(bounds.Location, this);
+                Point totalLoc = GetTotalAddLocation(unscaledBounds.Location, this);
                 return totalLoc;
             }
         }
@@ -588,7 +601,7 @@ namespace SdlDotNet.Widgets
         public Size ScaledSize {
             get {
                 if (cachedBounds.Size == Size.Empty) {
-                    return bounds.Size;
+                    return unscaledBounds.Size;
                 } else {
                     return cachedBounds.Size;
                 }
@@ -609,14 +622,16 @@ namespace SdlDotNet.Widgets
                 //}
             }
             set {
-                unscaledBounds.Width = value.Width;
-                unscaledBounds.Height = value.Height;
+                if (unscaledBounds.Size != value) {
+                    cachedOriginalBounds.Size = this.ScaledSize;
 
-                if (SdlDotNet.Graphics.Video.UseResolutionScaling) {
-                    value = Core.Resolution.ConvertSize(value.Width, value.Height);
-                }
+                    unscaledBounds.Width = value.Width;
+                    unscaledBounds.Height = value.Height;
 
-                if (bounds.Size != value) {
+                    if (SdlDotNet.Graphics.Video.UseResolutionScaling) {
+                        value = Core.Resolution.ConvertSize(value.Width, value.Height);
+                    }
+
                     cachedBounds.Size = value;
                     resizeRequested = true;
                     //ClearWidget();
@@ -722,16 +737,18 @@ namespace SdlDotNet.Widgets
                 //}
             }
             set {
-                unscaledBounds.Width = value;
+                if (unscaledBounds.Width != value) {
+                    cachedOriginalBounds.Width = this.ScaledSize.Width;
 
-                if (Video.UseResolutionScaling) {
-                    value = Core.Resolution.ConvertWidth(value);
-                }
+                    unscaledBounds.Width = value;
 
-                if (bounds.Width != value) {
+                    if (Video.UseResolutionScaling) {
+                        value = Core.Resolution.ConvertWidth(value);
+                    }
+
                     cachedBounds.Width = value;
                     if (cachedBounds.Height == 0) {
-                        cachedBounds.Height = bounds.Height;
+                        cachedBounds.Height = unscaledBounds.Height;
                     }
                     resizeRequested = true;
                     //ClearWidget();
@@ -745,7 +762,7 @@ namespace SdlDotNet.Widgets
         public int ScaledX {
             get {
                 if (cachedBounds.Location == Point.Empty) {
-                    return bounds.X;
+                    return unscaledBounds.X;
                 } else {
                     return cachedBounds.X;
                 }
@@ -766,8 +783,8 @@ namespace SdlDotNet.Widgets
                 //}
             }
             set {
-                if (this.bounds.X != value) {
-                    this.Location = new Point(value, bounds.Y);
+                if (this.unscaledBounds.X != value) {
+                    this.Location = new Point(value, unscaledBounds.Y);
                 }
                 //ClearWidget();
                 //bounds.X = value;
@@ -779,7 +796,7 @@ namespace SdlDotNet.Widgets
         public int ScaledY {
             get {
                 if (cachedBounds.Location == Point.Empty) {
-                    return bounds.Y;
+                    return unscaledBounds.Y;
                 } else {
                     return cachedBounds.Y;
                 }
@@ -800,8 +817,8 @@ namespace SdlDotNet.Widgets
                 //}
             }
             set {
-                if (this.bounds.Y != value) {
-                    this.Location = new Point(bounds.X, value);
+                if (this.unscaledBounds.Y != value) {
+                    this.Location = new Point(unscaledBounds.X, value);
                 }
                 //ClearWidget();
                 //bounds.Y = value;
@@ -860,9 +877,9 @@ namespace SdlDotNet.Widgets
                     if (relocateRequested) {
                         relocateRequested = false;
                         if (parentContainer != null) {
-                            parentContainer.ClearRegion(bounds, this);
+                            parentContainer.ClearRegion(cachedOriginalBounds, this);
                         }
-                        bounds.Location = cachedBounds.Location;
+                        unscaledBounds.Location = cachedBounds.Location;
                         cachedBounds.Location = Point.Empty;
                         if (!topLevel && parentContainer != null) {
                             RequestRedraw();
@@ -871,7 +888,7 @@ namespace SdlDotNet.Widgets
                     if (resizeRequested) {
                         resizeRequested = false;
                         if (parentContainer != null) {
-                            parentContainer.ClearRegion(bounds, this);
+                            parentContainer.ClearRegion(cachedOriginalBounds, this);
                         }
                         ResizeBuffer();
                         cachedBounds.Size = Size.Empty;
@@ -898,13 +915,13 @@ namespace SdlDotNet.Widgets
                     //if (!e.CancelBufferBlit) {
                     if (sourceRectangle == Rectangle.Empty) {
                         if (location == Point.Empty) {
-                            destinationSurface.Blit(buffer, this.Location);
+                            destinationSurface.Blit(buffer, this.ScaledLocation);
                         } else {
                             destinationSurface.Blit(buffer, location);
                         }
                     } else {
                         if (location == Point.Empty) {
-                            destinationSurface.Blit(buffer, this.Location, sourceRectangle);
+                            destinationSurface.Blit(buffer, this.ScaledLocation, sourceRectangle);
                         } else {
                             destinationSurface.Blit(buffer, location, sourceRectangle);
                         }
@@ -1269,7 +1286,7 @@ namespace SdlDotNet.Widgets
         /// Initializes the default widget.
         /// </summary>
         protected void InitializeDefaultWidget() {
-            bounds = new Rectangle(0, 0, DEFAULT_WIDGET_WIDTH, DEFAULT_WIDGET_HEIGHT);
+            unscaledBounds = new Rectangle(0, 0, DEFAULT_WIDGET_WIDTH, DEFAULT_WIDGET_HEIGHT);
             backColor = Color.LightGray;
             borderColor = Color.Black;
             this.visible = true;
@@ -1304,8 +1321,8 @@ namespace SdlDotNet.Widgets
                 if (buffer != null) {
                     buffer.Close();
                 }
-                bounds.Size = size;
-                buffer = new SdlDotNet.Graphics.Surface(unscaledBounds.Size);
+                unscaledBounds.Size = size;
+                buffer = new SdlDotNet.Graphics.Surface(ScaledBounds.Size);
                 if (backColor.A == 0) {
                     buffer.TransparentColor = Color.Transparent;
                     buffer.Transparent = true;
@@ -1363,7 +1380,7 @@ namespace SdlDotNet.Widgets
             lock (lockObject) {
                 if (!topLevel && parentContainer != null) {
                     if (!autoHide) {
-                        parentContainer.ClearRegion(this.Bounds, this);
+                        parentContainer.ClearRegion(this.ScaledBounds, this);
                     } else {
                         parentContainer.ClearRegion(this.clipRectangle, this);
                     }

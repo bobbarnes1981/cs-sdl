@@ -160,7 +160,7 @@ namespace SdlDotNet.Widgets
         public void CheckWidgets() {
             for (int i = 0; i < childWidgets.Count; i++) {
                 if (childWidgets[i].RedrawRequested) {
-                    ClearRegion(childWidgets[i].Bounds, childWidgets[i]);
+                    ClearRegion(childWidgets[i].ScaledBounds, childWidgets[i]);
                     UpdateWidget(childWidgets[i]);
                 }
                 if (childWidgets[i] is ContainerWidget) {
@@ -199,9 +199,9 @@ namespace SdlDotNet.Widgets
 
                     for (int i = 0; i < childWidgets.Count; i++) {
                         if (childWidgets[i].Visible && (widgetToSkip != null && childWidgets[i] != widgetToSkip)) {
-                            if (childWidgets[i].Bounds.IntersectsWith(bounds)) {
-                                Rectangle region = CalculateRegion(bounds, childWidgets[i].Bounds);//new Rectangle(widgetToSkip.X - childWidgets[i].X, widgetToSkip.Y - childWidgets[i].Y, System.Math.Min((childWidgets[i].Width + childWidgets[i].X) - widgetToSkip.X, widgetToSkip.Width), System.Math.Min((childWidgets[i].Height + childWidgets[i].Y) - widgetToSkip.Y, widgetToSkip.Height));
-                                childWidgets[i].BlitToScreen(base.Buffer, region, new Point(childWidgets[i].X + region.X, childWidgets[i].Y + region.Y));
+                            if (childWidgets[i].ScaledBounds.IntersectsWith(bounds)) {
+                                Rectangle region = CalculateRegion(bounds, childWidgets[i].ScaledBounds);//new Rectangle(widgetToSkip.X - childWidgets[i].X, widgetToSkip.Y - childWidgets[i].Y, System.Math.Min((childWidgets[i].Width + childWidgets[i].X) - widgetToSkip.X, widgetToSkip.Width), System.Math.Min((childWidgets[i].Height + childWidgets[i].Y) - widgetToSkip.Y, widgetToSkip.Height));
+                                childWidgets[i].BlitToScreen(base.Buffer, region, new Point(childWidgets[i].ScaledX + region.X, childWidgets[i].ScaledY + region.Y));
                             }
                         }
                     }

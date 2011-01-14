@@ -55,7 +55,7 @@ namespace SdlDotNetExamples.SmallDemos
             }
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Gui Example";
-            Video.UseResolutionScaling = true;
+            Video.UseResolutionScaling = false;
 
             Resolution.SetStandardResolution(640, 480);
             Resolution.SetResolution(1024, 768);
