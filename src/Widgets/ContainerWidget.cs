@@ -42,6 +42,7 @@ namespace SdlDotNet.Widgets
         bool updateParentContainer;
         VScrollBar vScrollBar;
         internal List<ClearRegionRequest> clearRegionRequests;
+        bool inBlitRegion;
 
         #endregion Fields
 
@@ -109,7 +110,7 @@ namespace SdlDotNet.Widgets
                 }
                 if (loaded || this.Parent == null) {
                     widget.RequestRedraw();
-                    UpdateWidget(widget);
+                    //UpdateWidget(widget);
                 }
             }
         }
@@ -132,14 +133,28 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        public override void BlitToScreen(SdlDotNet.Graphics.Surface destinationSurface) {
+        public override void BlitToScreen(SdlDotNet.Graphics.Surface destinationSurface, Rectangle sourceRectangle, Point location) {
+            inBlitRegion = true;
+            base.BlitToScreen(destinationSurface, sourceRectangle, location);
             for (int i = 0; i < clearRegionRequests.Count; i++) {
                 ClearRegion(clearRegionRequests[i].Region, clearRegionRequests[i].WidgetToSkip);
                 //clearRegionRequests.RemoveAt(i);
             }
             clearRegionRequests.Clear();
             CheckWidgets();
+            inBlitRegion = false;
+        }
+
+        public override void BlitToScreen(SdlDotNet.Graphics.Surface destinationSurface) {
+            //inBlitRegion = true;
             base.BlitToScreen(destinationSurface);
+            //for (int i = 0; i < clearRegionRequests.Count; i++) {
+            //    ClearRegion(clearRegionRequests[i].Region, clearRegionRequests[i].WidgetToSkip);
+            //    //clearRegionRequests.RemoveAt(i);
+            //}
+            //clearRegionRequests.Clear();
+            //CheckWidgets();
+            //inBlitRegion = false;
         }
 
         public void CheckWidgets() {
@@ -167,30 +182,42 @@ namespace SdlDotNet.Widgets
         }
 
         public void ClearRegion(Rectangle bounds, Widget widgetToSkip) {
-            ClearRegion(bounds, widgetToSkip, true);
+            if (inBlitRegion) {
+                ClearRegion(bounds, widgetToSkip, true);
+            } else {
+#if TEST
+                MessageBox.Show("Blit error! (1)", "Error!");
+#endif
+            }
         }
 
         public void ClearRegion(Rectangle bounds, Widget widgetToSkip, bool updateParent) {
-            lock (lockObject) {
-                DrawBackgroundRegion(bounds);
-                base.DrawBackgroundImageRegion(bounds);
+            if (inBlitRegion) {
+                lock (lockObject) {
+                    DrawBackgroundRegion(bounds);
+                    base.DrawBackgroundImageRegion(bounds);
 
-                for (int i = 0; i < childWidgets.Count; i++) {
-                    if (childWidgets[i].Visible && (widgetToSkip != null && childWidgets[i] != widgetToSkip)) {
-                        if (childWidgets[i].Bounds.IntersectsWith(bounds)) {
-                            Rectangle region = CalculateRegion(bounds, childWidgets[i].Bounds);//new Rectangle(widgetToSkip.X - childWidgets[i].X, widgetToSkip.Y - childWidgets[i].Y, System.Math.Min((childWidgets[i].Width + childWidgets[i].X) - widgetToSkip.X, widgetToSkip.Width), System.Math.Min((childWidgets[i].Height + childWidgets[i].Y) - widgetToSkip.Y, widgetToSkip.Height));
-                            childWidgets[i].BlitToScreen(base.Buffer, region, new Point(childWidgets[i].X + region.X, childWidgets[i].Y + region.Y));
+                    for (int i = 0; i < childWidgets.Count; i++) {
+                        if (childWidgets[i].Visible && (widgetToSkip != null && childWidgets[i] != widgetToSkip)) {
+                            if (childWidgets[i].Bounds.IntersectsWith(bounds)) {
+                                Rectangle region = CalculateRegion(bounds, childWidgets[i].Bounds);//new Rectangle(widgetToSkip.X - childWidgets[i].X, widgetToSkip.Y - childWidgets[i].Y, System.Math.Min((childWidgets[i].Width + childWidgets[i].X) - widgetToSkip.X, widgetToSkip.Width), System.Math.Min((childWidgets[i].Height + childWidgets[i].Y) - widgetToSkip.Y, widgetToSkip.Height));
+                                childWidgets[i].BlitToScreen(base.Buffer, region, new Point(childWidgets[i].X + region.X, childWidgets[i].Y + region.Y));
+                            }
+                        }
+                    }
+                    // TriggerRedrawEvent();
+                    if (updateParentContainer && updateParent) {
+                        if (ParentContainer != null && ParentContainer != this) {
+                            base.RequestRedraw();
+                            //RequestRedraw();
+                            //ParentContainer.UpdateWidget(this);
                         }
                     }
                 }
-                // TriggerRedrawEvent();
-                if (updateParentContainer && updateParent) {
-                    if (ParentContainer != null && ParentContainer != this) {
-                        base.RequestRedraw();
-                        //RequestRedraw();
-                        //ParentContainer.UpdateWidget(this);
-                    }
-                }
+            } else {
+#if TEST
+                MessageBox.Show("Blit error! (2)", "Error!");
+#endif
             }
         }
 
@@ -249,12 +276,12 @@ namespace SdlDotNet.Widgets
 
         public override void OnMouseDown(MouseButtonEventArgs e) {
             base.OnMouseDown(e);
-            e.Position = new Point(e.Position.X - this.Location.X, e.Position.Y - this.Location.Y);
+            e.Position = new Point(e.Position.X - this.ScaledLocation.X, e.Position.Y - this.ScaledLocation.Y);
             //Point location = this.ScreenLocation;
             //Point relPoint = new Point(e.Position.X - location.X, e.Position.Y - location.Y);
             for (int i = childWidgets.Count - 1; i >= 0; i--) {
                 if (childWidgets[i].Visible) {
-                    if (DrawingSupport.PointInBounds(e.Position, childWidgets[i].Bounds)) {
+                    if (DrawingSupport.PointInBounds(e.Position, childWidgets[i].ScaledBounds)) {
                         if (!childWidgets[i].PreventFocus) {
                             activeWidget = childWidgets[i];
                         }
@@ -282,12 +309,12 @@ namespace SdlDotNet.Widgets
 
         public override void OnMouseUp(MouseButtonEventArgs e) {
             base.OnMouseUp(e);
-            e.Position = new Point(e.Position.X - this.Location.X, e.Position.Y - this.Location.Y);
+            e.Position = new Point(e.Position.X - this.ScaledLocation.X, e.Position.Y - this.ScaledLocation.Y);
             //Point location = this.ScreenLocation;
             //Point relPoint = new Point(e.Position.X - location.X, e.Position.Y - location.Y);
             for (int i = childWidgets.Count - 1; i >= 0; i--) {
                 if (childWidgets[i].Visible) {
-                    if (DrawingSupport.PointInBounds(e.Position, childWidgets[i].Bounds)) {
+                    if (DrawingSupport.PointInBounds(e.Position, childWidgets[i].ScaledBounds)) {
                         childWidgets[i].OnMouseUp(e);
                         return;
                     }
@@ -313,7 +340,7 @@ namespace SdlDotNet.Widgets
             lock (lockObject) {
                 int index = childWidgets.FindWidget(name);
                 if (index > -1) {
-                    ClearRegion(childWidgets[index].Bounds, childWidgets[index]);
+                    ClearRegion(childWidgets[index].ScaledBounds, childWidgets[index]);
                     childWidgets[index].FreeResources();
                     childWidgets.RemoveWidget(index);
                 } else {
@@ -342,64 +369,88 @@ namespace SdlDotNet.Widgets
         }
 
         public void UpdateBuffer() {
-            UpdateBuffer(true);
+            if (inBlitRegion) {
+                UpdateBuffer(true);
+            } else {
+#if TEST
+                MessageBox.Show("Blit error! (3)", "Error!");
+#endif
+            }
         }
 
         public void UpdateBuffer(bool resetBackground) {
-            lock (lockObject) {
-                if (!base.Updating) {
-                    if (resetBackground) {
-                        base.Buffer.Fill(this.BackColor);
-                        DrawBackgroundImage();
-                    }
-                    if (childWidgets != null) {
-                        for (int i = 0; i < childWidgets.Count; i++) {
-                            if (childWidgets[i].Visible) {
-                                childWidgets[i].BlitToScreen(base.Buffer);
+            if (inBlitRegion) {
+                lock (lockObject) {
+                    if (!base.Updating) {
+                        if (resetBackground) {
+                            base.Buffer.Fill(this.BackColor);
+                            DrawBackgroundImage();
+                        }
+                        if (childWidgets != null) {
+                            for (int i = 0; i < childWidgets.Count; i++) {
+                                if (childWidgets[i].Visible) {
+                                    childWidgets[i].BlitToScreen(base.Buffer);
+                                }
                             }
                         }
+                        TriggerRedrawEvent();
                     }
-                    TriggerRedrawEvent();
                 }
+            } else {
+#if TEST
+                MessageBox.Show("Blit error! (4)", "Error!");
+#endif
             }
         }
 
         public void UpdateWidget(Widget widget) {
-            lock (lockObject) {
-                if (!base.Updating) {
-                    if (!string.IsNullOrEmpty(widget.Name)) {
-                        if (widget.BackColor == Color.Transparent) {
-                            DrawBackgroundRegion(widget.Bounds);
-                            base.DrawBackgroundImageRegion(widget.Bounds);
-                        }
-                        WidgetRenderer.UpdateWidget(base.Buffer, widget, childWidgets);
-                        //for (int i = 0; i < childWidgets.Count; i++) {
-                        //    if (childWidgets[i].Visible) {
-                        //        if (childWidgets[i] == widget) {
-                        //            childWidgets[i].BlitToScreen(base.Buffer);
-                        //        } else if (childWidgets[i].Bounds.IntersectsWith(widget.Bounds)) {
-                        //            Rectangle region = CalculateRegion(widget.Bounds, childWidgets[i].Bounds);//new Rectangle(widget.X, widget.Y, System.Math.Min((childWidgets[i].Width + childWidgets[i].X) - widget.X, widget.Width), System.Math.Min((childWidgets[i].Height + childWidgets[i].Y) - widget.Y, widget.Height));
-                        //            childWidgets[i].BlitToScreen(base.Buffer, region, new Point(childWidgets[i].X + region.X, childWidgets[i].Y + region.Y));
-                        //        }
-                        //    }
-                        //}
-                        TriggerRedrawEvent();
-                        if (updateParentContainer) {
-                            if (ParentContainer != null && ParentContainer != this) {
-                                base.RequestRedraw();
-                                //ParentContainer.RequestRedraw();
-                                //base.RequestRedraw();
-                                //ParentContainer.UpdateWidget(this);
+            if (inBlitRegion) {
+                lock (lockObject) {
+                    if (!base.Updating) {
+                        if (!string.IsNullOrEmpty(widget.Name)) {
+                            if (widget.BackColor == Color.Transparent) {
+                                DrawBackgroundRegion(widget.ScaledBounds);
+                                base.DrawBackgroundImageRegion(widget.ScaledBounds);
+                            }
+                            WidgetRenderer.UpdateWidget(base.Buffer, widget, childWidgets);
+                            //for (int i = 0; i < childWidgets.Count; i++) {
+                            //    if (childWidgets[i].Visible) {
+                            //        if (childWidgets[i] == widget) {
+                            //            childWidgets[i].BlitToScreen(base.Buffer);
+                            //        } else if (childWidgets[i].Bounds.IntersectsWith(widget.Bounds)) {
+                            //            Rectangle region = CalculateRegion(widget.Bounds, childWidgets[i].Bounds);//new Rectangle(widget.X, widget.Y, System.Math.Min((childWidgets[i].Width + childWidgets[i].X) - widget.X, widget.Width), System.Math.Min((childWidgets[i].Height + childWidgets[i].Y) - widget.Y, widget.Height));
+                            //            childWidgets[i].BlitToScreen(base.Buffer, region, new Point(childWidgets[i].X + region.X, childWidgets[i].Y + region.Y));
+                            //        }
+                            //    }
+                            //}
+                            TriggerRedrawEvent();
+                            if (updateParentContainer) {
+                                if (ParentContainer != null && ParentContainer != this) {
+                                    base.RequestRedraw();
+                                    //ParentContainer.RequestRedraw();
+                                    //base.RequestRedraw();
+                                    //ParentContainer.UpdateWidget(this);
+                                }
                             }
                         }
                     }
                 }
+            } else {
+#if TEST
+                MessageBox.Show("Blit error! (5)", "Error!");
+#endif
             }
         }
 
         protected virtual void DrawBackgroundRegion(Rectangle region) {
-            lock (lockObject) {
-                base.Buffer.Fill(region, this.BackColor);
+            if (inBlitRegion) {
+                lock (lockObject) {
+                    base.Buffer.Fill(region, this.BackColor);
+                }
+            } else {
+#if TEST
+                MessageBox.Show("Blit error! (6)", "Error!");
+#endif
             }
         }
 

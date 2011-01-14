@@ -122,6 +122,7 @@
       <DependentUpon>SurfaceControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Compile Include="Core\Resolution.cs" />
     <Compile Include="Graphics\GlyphData.cs" />
     <Compile Include="Graphics\NativeMethods.cs" />
     <Compile Include="Graphics\SurfaceGl.cs" />
@@ -155,6 +156,9 @@
     <Compile Include="Widgets\ComponentCollection.cs" />
     <Compile Include="Widgets\ContainerWidget.cs" />
     <Compile Include="Widgets\DialogResult.cs" />
+    <Compile Include="Widgets\DragDropDataObject.cs" />
+    <Compile Include="Widgets\DragDropEvents.cs" />
+    <Compile Include="Widgets\DragEventArgs.cs" />
     <Compile Include="Widgets\DrawingSupport.cs" />
     <Compile Include="Widgets\FileBrowserDialog.cs" />
     <Compile Include="Widgets\FileDialog.cs" />
@@ -163,6 +167,7 @@
     <Compile Include="Widgets\HighlightType.cs" />
     <Compile Include="Widgets\HScrollBar.cs" />
     <Compile Include="Widgets\IContainer.cs" />
+    <Compile Include="Widgets\IDataObject.cs" />
     <Compile Include="Widgets\IListBoxItem.cs" />
     <Compile Include="Widgets\ImageSizeMode.cs" />
     <Compile Include="Widgets\InvocationItem.cs" />
@@ -175,6 +180,7 @@
     <Compile Include="Widgets\MessageBoxButtons.cs" />
     <Compile Include="Widgets\MouseButtonEventArgs.cs" />
     <Compile Include="Widgets\NumericUpDown.cs" />
+    <Compile Include="Widgets\OpenFileDialog.cs" />
     <Compile Include="Widgets\Panel.cs" />
     <Compile Include="Widgets\PictureBox.cs" />
     <Compile Include="Widgets\ProgressBar.cs" />

@@ -92,7 +92,11 @@ namespace SdlDotNet.Widgets
             clickTickVal = -1;
             scrollDelay = 200;
             scrollSpeed = 50;
+
+            base.Paint += new EventHandler(HScrollBar_Paint);
         }
+
+        
 
         #endregion Constructors
 
@@ -317,8 +321,7 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        protected override void DrawBuffer() {
-            base.DrawBuffer();
+        void HScrollBar_Paint(object sender, EventArgs e) {
             if (btnLeft != null) {
                 btnLeft.BlitToScreen(base.Buffer);
             }

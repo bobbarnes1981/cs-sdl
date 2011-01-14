@@ -65,7 +65,11 @@ namespace SdlDotNet.Widgets
             this.windowed = true;
             base.SetTopLevel(true);
             this.updateLocked = false;
+
+            base.Paint += new EventHandler(Window_Paint);
         }
+
+       
 
         #endregion Constructors
 
@@ -108,14 +112,14 @@ namespace SdlDotNet.Widgets
         public new Point Location {
             get {
                 if (windowed) {
-                    return new Point(base.Location.X, base.Location.Y - titleBar.Size.Height);
+                    return new Point(base.Location.X, base.Location.Y - titleBar.UnscaledSize.Height);
                 } else {
                     return base.Location;
                 }
             }
             set {
                 if (windowed) {
-                    base.Location = new Point(value.X, value.Y + titleBar.Size.Height);
+                    base.Location = new Point(value.X, value.Y + titleBar.UnscaledSize.Height);
                     titleBar.Location = value;
                 } else {
                     base.Location = value;
@@ -137,19 +141,19 @@ namespace SdlDotNet.Widgets
         public new Size Size {
             get {
                 if (windowed) {
-                    return new Size(base.Size.Width, base.Size.Height + titleBar.Size.Height);
+                    return new Size(base.Size.Width, base.Size.Height + titleBar.UnscaledSize.Height);
                 } else {
                     return base.Size;
                 }
             }
             set {
                 if (windowed) {
-                    base.Size = new Size(value.Width, value.Height - titleBar.Size.Height);
+                    base.Size = new Size(value.Width, value.Height - titleBar.UnscaledSize.Height);
                 } else {
                     base.Size = value;
                 }
                 RecalculateFullBounds();
-                titleBar.Size = new Size(value.Width, titleBar.Size.Height);
+                titleBar.Size = new Size(value.Width, titleBar.UnscaledSize.Height);
             }
         }
 
@@ -172,7 +176,7 @@ namespace SdlDotNet.Widgets
             get { return windowed; }
             set {
                 windowed = value;
-                this.Location = base.Location;
+                this.Location = base.UnscaledLocation;
                 if (windowed) {
                     //base.Size = new Size(base.Size.Width, base.Size.Height - titleBar.Size.Height);
                 }
@@ -242,7 +246,7 @@ namespace SdlDotNet.Widgets
         public override void OnMouseDown(MouseButtonEventArgs e) {
             MouseButtonEventArgs eventArgs = new MouseButtonEventArgs(e.MouseEventArgs, e.ScreenPosition);
             base.OnMouseDown(e);
-            if (windowed && titleBar != null && DrawingSupport.PointInBounds(e.ScreenPosition, titleBar.Bounds)) {
+            if (windowed && titleBar != null && DrawingSupport.PointInBounds(e.ScreenPosition, titleBar.ScaledBounds)) {
                 titleBar.OnMouseDown(eventArgs);
             }
         }
@@ -283,6 +287,8 @@ namespace SdlDotNet.Widgets
             if (!WindowManager.IsWindowOpen(this)) {
                 this.dialogResult = DialogResult.OK;
                 Show();
+                this.AlwaysOnTop = true;
+                WindowManager.BringWindowToFront(this);
 
                 while (WindowManager.IsWindowOpen(this)) {
                     if (WindowManager.CurrentModalWindow != this) {
@@ -298,7 +304,8 @@ namespace SdlDotNet.Widgets
         internal void InvokeLoad() {
             if (Load != null)
                 Load(this, EventArgs.Empty);
-            base.UpdateBuffer();
+            base.RequestRedraw();
+            //base.UpdateBuffer();
         }
 
         internal void InvokeShown() {
@@ -306,24 +313,27 @@ namespace SdlDotNet.Widgets
                 Shown(this, EventArgs.Empty);
         }
 
-        protected override void DrawBuffer() {
-            lock (lockObject) {
-                if (updateLocked == false) {
-                    base.DrawBuffer();
-                    if (titleBar != null) {
-                        titleBar.InvokeRedraw();
-                    }
-                    base.UpdateBuffer(false);
-                    base.DrawBorder();
+        void Window_Paint(object sender, EventArgs e) {
+            if (updateLocked == false) {
+                if (titleBar != null) {
+                    titleBar.InvokeRedraw();
                 }
+                base.UpdateBuffer(false);
+                base.DrawBorder();
             }
         }
 
-        private void RecalculateFullBounds() {
+        internal void RecalculateFullBounds() {
             Size size = this.Size;
+            if (SdlDotNet.Graphics.Video.UseResolutionScaling) {
+                size = Resolution.ConvertSize(size.Width, size.Height);
+            }
             fullBounds.Width = size.Width;
             fullBounds.Height = size.Height;
             Point loc = this.Location;
+            if (SdlDotNet.Graphics.Video.UseResolutionScaling) {
+                loc = Resolution.ConvertPoint(loc.X, loc.Y);
+            }
             fullBounds.X = loc.X;
             fullBounds.Y = loc.Y;
         }
@@ -331,11 +341,11 @@ namespace SdlDotNet.Widgets
         void TitleBar_Resized(object sender, EventArgs e) {
             lock (lockObject) {
                 if (windowed) {
-                    this.Location = new Point(base.Location.X, base.Location.Y - titleBar.Size.Height);
-                    Size size = this.Size;
+                    this.Location = new Point(base.Location.X, base.Location.Y - titleBar.UnscaledSize.Height);
+                    Size size = this.ScaledSize;
                     fullBounds.Width = size.Width;
                     fullBounds.Height = size.Height;
-                    Point location = this.Location;
+                    Point location = this.ScaledLocation;
                     fullBounds.X = location.X;
                     fullBounds.Y = location.Y;
                 }

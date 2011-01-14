@@ -118,16 +118,18 @@ namespace SdlDotNet.Widgets
         }
 
         public static void CloseWidgets() {
-            // First, close all screen widgets
-            Screen.ClearWidgets();
-            // Close all open windows
-            for (int i = 0; i < WindowManager.Windows.Count; i++) {
-                Window windowToClose = WindowManager.Windows[i];
-                WindowManager.Windows.RemoveWindow(windowToClose);
-                windowToClose.FreeResources();
+            if (WindowManager.Initialized) {
+                // First, close all screen widgets
+                Screen.ClearWidgets();
+                // Close all open windows
+                for (int i = 0; i < WindowManager.Windows.Count; i++) {
+                    Window windowToClose = WindowManager.Windows[i];
+                    WindowManager.Windows.RemoveWindow(windowToClose);
+                    windowToClose.FreeResources();
+                }
+                WindowManager.ToggleWindowSwitcher(false);
+                WindowManager.windowSwitcher.FreeResources();
             }
-            WindowManager.ToggleWindowSwitcher(false);
-            WindowManager.windowSwitcher.FreeResources();
         }
 
         static void Events_KeyboardDown(object sender, Input.KeyboardEventArgs e) {
@@ -154,6 +156,26 @@ namespace SdlDotNet.Widgets
         static void Events_MouseMotion(object sender, Input.MouseMotionEventArgs e) {
             WindowManager.HandleMouseMotion(e);
         }
+
+        public static IEnumerable<Widget> EnumerateActiveWidgets() {
+            if (WindowManager.Initialized) {
+                for (int i = 0; i < Screen.Widgets.Count; i++) {
+                    yield return Screen.Widgets[i];
+                    if (Screen.Widgets[i] is IContainer) {
+                        foreach (Widget childWidget in ((IContainer)Screen.Widgets[i]).ChildWidgets.EnumerateWidgets()) {
+                            yield return childWidget;
+                        }
+                    }
+                }
+                for (int i = 0; i < WindowManager.Windows.Count; i++) {
+                    yield return WindowManager.Windows[i];
+                    foreach (Widget childWidget in WindowManager.Windows[i].ChildWidgets.EnumerateWidgets()) {
+                        yield return childWidget;
+                    }
+                }
+            }
+        }
+
 
         #endregion Methods
     }

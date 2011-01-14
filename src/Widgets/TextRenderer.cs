@@ -474,7 +474,7 @@ namespace SdlDotNet.Widgets
             return surf2;
         }
 
-        public static SdlDotNet.Graphics.Surface RenderTextBasic2(SdlDotNet.Graphics.Font font, string textItem, CharRenderOptions[] charRenderOptions, Color textColor, bool antiAlias, int maxWidth, int maxHeight, int startX, int startY) {
+        public static Size RenderSizeData(SdlDotNet.Graphics.Font font, string textItem, CharRenderOptions[] charRenderOptions, Color textColor, bool antiAlias, int maxWidth, int maxHeight, int startX, int startY) {
             int width = 0;
             int height = font.Height;
             int longestWidth = 0;
@@ -491,10 +491,10 @@ namespace SdlDotNet.Widgets
                 height = maxHeight;
             }
 
-            Size[] sizes = new Size[textItem.Length];
+            GlyphData[] glyphDatas = new GlyphData[textItem.Length];
             for (int i = 0; i < textItem.Length; i++) {
-                GlyphData glyphData = font.GetGlyphMetrics(textItem[i]);
-                sizes[i] = new Size(glyphData.Advance, glyphData.Height);
+                glyphDatas[i] = font.GetGlyphMetrics(textItem[i]);
+                //glyphDatas[i] = new Size(glyphData.Advance, glyphData.Height);
                 //sizes[i] = font.SizeText(textItem[i].ToString());
             }
 
@@ -502,7 +502,7 @@ namespace SdlDotNet.Widgets
                 for (int i = 0; i < textItem.Length; i++) {
                     if (textItem[i] != '\n') {
                         if (maxWidth == 0) {
-                            width += sizes[i].Width;
+                            width += glyphDatas[i].Advance;
                             if (width > longestWidth) {
                                 longestWidth = width;
                             }
@@ -527,7 +527,7 @@ namespace SdlDotNet.Widgets
                                         }
                                         width = 0;
                                         for (int n = i; n < z; n++) {
-                                            width += sizes[n].Width;
+                                            width += glyphDatas[n].Advance;
                                             if (width > maxWidth) {
                                                 if (!skippingLines) {
                                                     height += font.Height;
@@ -553,13 +553,139 @@ namespace SdlDotNet.Widgets
                                     }
                                     break;
                                 }
-                                wordWidth += sizes[z].Width;
+                                wordWidth += glyphDatas[z].Advance;
 
                                 z++;
                             }
                             i = z;
                             if (z < textItem.Length && textItem[z] != '\n') {
-                                width += sizes[z].Width;
+                                width += glyphDatas[z].Advance;
+                            } else if (z < textItem.Length && textItem[z] == '\n') {
+                                if (width > longestWidth) {
+                                    longestWidth = width;
+                                }
+                                width = 0;
+                                if (skippingLines) {
+                                    linesSkipped++;
+                                    if (skippingLines && linesSkipped >= startY) {
+                                        skippingLines = false;
+                                        linesSkipped = 0;
+                                    }
+                                } else {
+                                    height += font.Height;
+                                }
+                            }
+                        }
+                        //if (i < textItem.Length) {
+                        //    width += font.SizeText(textItem[i].ToString()).Width;
+                        //}
+                    } else {
+                        height += font.Height;
+                        if (width > longestWidth) {
+                            longestWidth = width;
+                        }
+                        width = 0;
+                    }
+                }
+            }
+            if (width > longestWidth) {
+                longestWidth = width;
+            }
+            if (maxWidth == 0) {
+                if (longestWidth == 0) {
+                    longestWidth = width;
+                }
+            }
+
+            return new Size(longestWidth, height);
+        }
+
+        public static SdlDotNet.Graphics.Surface RenderTextBasic2(SdlDotNet.Graphics.Font font, string textItem, CharRenderOptions[] charRenderOptions, Color textColor, bool antiAlias, int maxWidth, int maxHeight, int startX, int startY) {
+            int width = 0;
+            int height = font.Height;
+            int longestWidth = 0;
+            int linesSkipped = 0;
+            bool skippingLines = startY > 0;
+            if (startX >= textItem.Length) {
+                startX = textItem.Length;
+            }
+
+            if (maxWidth > 0) {
+                //longestWidth = maxWidth;
+            }
+            if (maxHeight > 0) {
+                height = maxHeight;
+            }
+
+            GlyphData[] glyphDatas = new GlyphData[textItem.Length];
+            for (int i = 0; i < textItem.Length; i++) {
+                glyphDatas[i] = font.GetGlyphMetrics(textItem[i]);
+                //glyphDatas[i] = new Size(glyphData.Advance, glyphData.Height);
+                //sizes[i] = font.SizeText(textItem[i].ToString());
+            }
+
+            if (true) {//maxWidth == 0 || maxHeight == 0) {
+                for (int i = 0; i < textItem.Length; i++) {
+                    if (textItem[i] != '\n') {
+                        if (maxWidth == 0) {
+                            width += glyphDatas[i].Advance;
+                            if (width > longestWidth) {
+                                longestWidth = width;
+                            }
+                        } else {
+                            int z = i;
+                            int wordWidth = width;
+                            while (true) {
+                                if (z >= textItem.Length || textItem[z] == ' ' || textItem[z] == '\n') {
+                                    if (wordWidth > maxWidth) {
+                                        //if (skippingLines) {
+                                        //    linesSkipped++;
+                                        //    width = wordWidth - width;
+                                        //} else {
+                                        if (!skippingLines) {
+                                            height += font.Height;
+                                        } else {
+                                            linesSkipped++;
+                                            if (skippingLines && linesSkipped >= startY) {
+                                                skippingLines = false;
+                                                linesSkipped = 0;
+                                            }
+                                        }
+                                        width = 0;
+                                        for (int n = i; n < z; n++) {
+                                            width += glyphDatas[n].Advance;
+                                            if (width > maxWidth) {
+                                                if (!skippingLines) {
+                                                    height += font.Height;
+                                                } else {
+                                                    linesSkipped++;
+                                                    if (skippingLines && linesSkipped >= startY) {
+                                                        skippingLines = false;
+                                                        linesSkipped = 0;
+                                                    }
+                                                }
+                                                if (width > longestWidth) {
+                                                    longestWidth = width;
+                                                }
+                                                width = 0;
+                                            }
+                                        }
+                                        //}
+                                    } else {
+                                        width = wordWidth;
+                                        if (width > longestWidth) {
+                                            longestWidth = width;
+                                        }
+                                    }
+                                    break;
+                                }
+                                wordWidth += glyphDatas[z].Advance;
+
+                                z++;
+                            }
+                            i = z;
+                            if (z < textItem.Length && textItem[z] != '\n') {
+                                width += glyphDatas[z].Advance;
                             } else if (z < textItem.Length && textItem[z] == '\n') {
                                 if (width > longestWidth) {
                                     longestWidth = width;
@@ -631,9 +757,9 @@ namespace SdlDotNet.Widgets
                                             renderOptions = charRenderOptions[n];
                                         }
                                         if (!skippingLines) {
-                                            RenderLetter(surf, font, textItem[n], lastX, lastY, textColor, antiAlias, renderOptions);
+                                            RenderLetter(surf, font, textItem[n], glyphDatas[n], lastX, lastY, textColor, antiAlias, renderOptions);
                                         }
-                                        lastX += sizes[n].Width;
+                                        lastX += glyphDatas[n].Advance;
                                         if (lastX > maxWidth) {
                                             if (!skippingLines) {
                                                 lastY += font.Height;
@@ -647,7 +773,53 @@ namespace SdlDotNet.Widgets
                                             lastX = 0;
                                         }
                                     }
-                                    i = z - 1;
+                                    i = z;
+                                    #region New Stuff
+                                    if (z < textItem.Length && textItem[z] != '\n') {
+                                        renderOptions = null;
+                                        if (charRenderOptions != null && charRenderOptions.Length > z) {
+                                            renderOptions = charRenderOptions[z];
+                                        }
+                                        if (!skippingLines) {
+                                            RenderLetter(surf, font, textItem[z], glyphDatas[z], lastX, lastY, textColor, antiAlias, renderOptions);
+                                        }
+                                        lastX += glyphDatas[z].Advance;
+                                        if (lastX > maxWidth) {
+                                            if (!skippingLines) {
+                                                lastY += font.Height;
+                                            } else {
+                                                linesSkipped++;
+                                                if (skippingLines && linesSkipped >= startY) {
+                                                    skippingLines = false;
+                                                    linesSkipped = 0;
+                                                }
+                                            }
+                                            lastX = 0;
+                                        }
+                                    } else if (z < textItem.Length && textItem[z] == '\n') {
+                                        lastX = 0;
+                                        if (skippingLines) {
+                                            linesSkipped++;
+                                            if (skippingLines && linesSkipped >= startY) {
+                                                skippingLines = false;
+                                                linesSkipped = 0;
+                                            }
+                                        } else {
+                                            lastY += font.Height;
+                                        }
+                                    }
+                                    if (linesSkipped >= startY && skippingLines) {
+                                        skippingLines = false;
+                                        //if (linesSkipped > startY) {
+                                        //    lastY += (linesSkipped * font.Height);
+                                        //}
+                                        linesSkipped = 0;
+                                        if (z < textItem.Length && !(textItem[z] == '\n' || textItem[z] == ' ')) {
+                                            //lastY += font.Height;
+                                            i--;
+                                        }
+                                    }
+                                    #endregion
                                     //if (z < textItem.Length && textItem[z] != '\n') {
                                     //    renderOptions = null;
                                     //    if (charRenderOptions != null && charRenderOptions.Length > z) {
@@ -666,9 +838,9 @@ namespace SdlDotNet.Widgets
                                             renderOptions = charRenderOptions[n];
                                         }
                                         if (!skippingLines) {
-                                            RenderLetter(surf, font, textItem[n], lastX, lastY, textColor, antiAlias, renderOptions);
+                                            RenderLetter(surf, font, textItem[n], glyphDatas[n], lastX, lastY, textColor, antiAlias, renderOptions);
                                         }
-                                        lastX += sizes[n].Width;
+                                        lastX += glyphDatas[n].Advance;
                                         if (lastX > maxWidth) {
                                             if (!skippingLines) {
                                                 lastY += font.Height;
@@ -723,9 +895,9 @@ namespace SdlDotNet.Widgets
                                             renderOptions = charRenderOptions[z];
                                         }
                                         if (!skippingLines) {
-                                            RenderLetter(surf, font, textItem[z], lastX, lastY, textColor, antiAlias, renderOptions);
+                                            RenderLetter(surf, font, textItem[z], glyphDatas[z], lastX, lastY, textColor, antiAlias, renderOptions);
                                         }
-                                        lastX += sizes[z].Width;
+                                        lastX += glyphDatas[z].Advance;
                                     } else if (z < textItem.Length && textItem[z] == '\n') {
                                         lastX = 0;
                                         if (skippingLines) {
@@ -752,7 +924,7 @@ namespace SdlDotNet.Widgets
                                 }
                                 break;
                             }
-                            wordWidth += sizes[z].Width;
+                            wordWidth += glyphDatas[z].Advance;
 
                             z++;
                         }
@@ -763,8 +935,8 @@ namespace SdlDotNet.Widgets
                         if (charRenderOptions != null && charRenderOptions.Length > i) {
                             renderOptions = charRenderOptions[i];
                         }
-                        RenderLetter(surf, font, textItem[i], lastX, lastY, textColor, antiAlias, renderOptions);
-                        lastX += sizes[i].Width;
+                        RenderLetter(surf, font, textItem[i], glyphDatas[i], lastX, lastY, textColor, antiAlias, renderOptions);
+                        lastX += glyphDatas[i].Advance;
                     }
 
                 } else {
@@ -1192,9 +1364,19 @@ namespace SdlDotNet.Widgets
                         int wordWidth = width;
                         while (true) {
                             if (z >= textItem.Length || textItem[z] == ' ' || textItem[z] == '\n') {
-                                if (wordWidth > maxWidth - 5) {
+                                if (wordWidth > maxWidth) {
                                     height += font.Height;
                                     width = 0;
+
+                                    for (int n = i; n < z; n++) {
+                                        width += glyphDataCache[n].Advance;
+                                        if (width > maxWidth) {
+                                            height += font.Height;
+                                            width = 0;
+                                        }
+                                    }
+
+
                                     i = z - 1;
                                     moved = true;
                                 }
@@ -1205,6 +1387,12 @@ namespace SdlDotNet.Widgets
                             }
                             //wordWidth += font.SizeText(textItem[z].ToString()).Width;
                             wordWidth += glyphDataCache[z].Advance;
+
+                            //if (wordWidth > maxWidth) {
+                            //    height += font.Height;
+                            //    wordWidth = 0;
+                            //    width = 0;
+                            //}
 
                             z++;
                         }
@@ -1243,34 +1431,48 @@ namespace SdlDotNet.Widgets
             return new Size(surfaceWidth, height);
         }
 
-        private static void RenderLetter(SdlDotNet.Graphics.Surface destSurf, SdlDotNet.Graphics.Font font, char letter, int x, int y, Color textColor, bool antiAlias, CharRenderOptions renderOptions) {
+        private static void RenderLetter(SdlDotNet.Graphics.Surface destSurf, SdlDotNet.Graphics.Font font, char letter, GlyphData glyphData, int x, int y, Color textColor, bool antiAlias, CharRenderOptions renderOptions) {
             Color foreColor = textColor;
             Color backColor = Color.Empty;
             if (renderOptions != null) {
                 if (renderOptions.ForeColor != Color.Empty) {
                     foreColor = renderOptions.ForeColor;
                 }
-                font.Bold = renderOptions.Bold;
-                font.Italic = renderOptions.Italic;
-                font.Underline = renderOptions.Underline;
+                if (font.Bold != renderOptions.Bold) {
+                    font.Bold = renderOptions.Bold;
+                }
+                if (font.Italic != renderOptions.Italic) {
+                    font.Italic = renderOptions.Italic;
+                }
+                if (font.Underline != renderOptions.Underline) {
+                    font.Underline = renderOptions.Underline;
+                }
                 backColor = renderOptions.BackColor;
             }
-            //SdlDotNet.Graphics.Surface fontSurf = font.Render(letter.ToString(), foreColor, backColor, antiAlias);
-            // Render by glyph, it's 5x faster than using the normal font.Render method
-            GlyphData glyphData = font.GetGlyphMetrics(letter);
-            SdlDotNet.Graphics.Surface fontSurf = font.RenderGlyph(letter, foreColor, backColor, false);
-            if (font.Bold == true) {
-                font.Bold = false;
-            }
-            if (font.Italic == true) {
-                font.Italic = false;
-            }
-            if (font.Underline == true) {
-                font.Underline = false;
-            }
-            destSurf.Blit(fontSurf, new Point(x, y + font.Ascent - glyphData.YMax));
-            //destSurf.Blit(fontSurf, new Point(x, y));
-            fontSurf.Close();
+            //if (foreColor != Color.Empty) {
+                //SdlDotNet.Graphics.Surface fontSurf = font.Render(letter.ToString(), foreColor, backColor, antiAlias);
+                // Render by glyph, it's 5x faster than using the normal font.Render method
+                //GlyphData glyphData = font.GetGlyphMetrics(letter);
+                SdlDotNet.Graphics.Surface fontSurf = font.RenderGlyph(letter, foreColor, backColor, false);
+                if (fontSurf.Handle != IntPtr.Zero) {
+                    if (font.Bold == true) {
+                        font.Bold = false;
+                    }
+                    if (font.Italic == true) {
+                        font.Italic = false;
+                    }
+                    if (font.Underline == true) {
+                        font.Underline = false;
+                    }
+                    destSurf.Blit(fontSurf, new Point(x, y + font.Ascent - glyphData.YMax));
+                    //destSurf.Blit(fontSurf, new Point(x, y));
+                    fontSurf.Close();
+                } else {
+                    Console.WriteLine("Test!");
+                }
+            //} else {
+            //    Console.WriteLine("Test!");
+            //}
         }
 
         private static void RenderLetterByGlyph(SdlDotNet.Graphics.Surface destSurf, SdlDotNet.Graphics.Font font, char letter, int x, int y, Color textColor, bool antiAlias, CharRenderOptions renderOptions) {
@@ -1280,9 +1482,15 @@ namespace SdlDotNet.Widgets
                 if (renderOptions.ForeColor != Color.Empty) {
                     foreColor = renderOptions.ForeColor;
                 }
-                font.Bold = renderOptions.Bold;
-                font.Italic = renderOptions.Italic;
-                font.Underline = renderOptions.Underline;
+                if (font.Bold != renderOptions.Bold) {
+                    font.Bold = renderOptions.Bold;
+                }
+                if (font.Italic != renderOptions.Italic) {
+                    font.Italic = renderOptions.Italic;
+                }
+                if (font.Underline != renderOptions.Underline) {
+                    font.Underline = renderOptions.Underline;
+                }
                 backColor = renderOptions.BackColor;
             }
             //SdlDotNet.Graphics.Surface fontSurf = font.Render(letter.ToString(), foreColor, backColor, antiAlias);

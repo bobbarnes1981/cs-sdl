@@ -144,13 +144,23 @@ namespace SdlDotNet.Widgets
                     if (!string.IsNullOrEmpty(filter)) {
                         string[] filters = filter.Split('|');
                         for (int i = 0; i < filters.Length; i++) {
-                            ListBoxTextItem item = new ListBoxTextItem(new Graphics.Font(Widgets.DefaultFontPath, Widgets.DefaultFontSize), filters[i]);
+                            ListBoxTextItem item = new ListBoxTextItem(new Graphics.Font(Widgets.DefaultFontPath, Widgets.DefaultFontSize), filters[i] + " (" + filters[i +1].Replace(";", ", ") + ")");
                             item.Tag = filters[i + 1];
                             cmbFilter.Items.Add(item);
 
                             i += 1;
                         }
                     }
+                }
+            }
+        }
+
+        public string SelectedFilterType {
+            get {
+                if (cmbFilter.SelectedItem != null) {
+                    return cmbFilter.SelectedItem.Tag as string;
+                } else {
+                    return null;
                 }
             }
         }

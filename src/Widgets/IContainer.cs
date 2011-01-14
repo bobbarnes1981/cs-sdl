@@ -60,6 +60,10 @@ namespace SdlDotNet.Widgets
         /// <param name="widget">The widget.</param>
         void UpdateWidget(Widget widget);
 
+        void BlitToScreen(SdlDotNet.Graphics.Surface destinationSurface);
+
+        WidgetCollection ChildWidgets { get; }
+
         #endregion Methods
     }
 }

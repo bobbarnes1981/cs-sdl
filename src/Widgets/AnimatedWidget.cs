@@ -43,7 +43,11 @@ namespace SdlDotNet.Widgets
         public AnimatedWidget(string name)
             : base(name) {
             fps = -1;
+
+            base.Paint += new EventHandler(AnimatedWidget_Paint);
         }
+
+        
 
         #endregion Constructors
 
@@ -89,9 +93,7 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        protected override void DrawBuffer() {
-            base.DrawBuffer();
-
+        void AnimatedWidget_Paint(object sender, EventArgs e) {
             if (RenderFrame != null)
                 RenderFrame(this, EventArgs.Empty);
         }

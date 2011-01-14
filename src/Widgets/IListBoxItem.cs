@@ -59,6 +59,7 @@ namespace SdlDotNet.Widgets
 
         void FreeResources();
         bool AttemptRedraw();
+        void SetContainer(ListBox container);
 
         #endregion Methods
     }

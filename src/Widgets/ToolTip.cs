@@ -44,7 +44,10 @@ namespace SdlDotNet.Widgets
             base.Alpha = 255;
 
             base.BackColor = Color.Yellow;
+            base.MouseEnter += new EventHandler(ToolTip_MouseEnter);
         }
+
+       
 
         #endregion Constructors
 
@@ -83,6 +86,13 @@ namespace SdlDotNet.Widgets
                         WindowManager.RemoveFromOverlayCollection(this);
                     }
                 }
+            }
+        }
+
+        void ToolTip_MouseEnter(object sender, EventArgs e) {
+            if (vanishing) {
+                vanishing = false;
+                WindowManager.RemoveFromOverlayCollection(this);
             }
         }
 

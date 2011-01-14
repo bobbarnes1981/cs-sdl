@@ -41,6 +41,7 @@ namespace SdlDotNet.Widgets
         string text;
         bool redrawRequired = false;
         int height = -1;
+        ListBox container = null;
 
         Object lockObject = new object();
 
@@ -178,6 +179,10 @@ namespace SdlDotNet.Widgets
 
         private void RequestRedraw() {
             this.redrawRequired = true;
+
+            if (container != null) {
+                container.RequestRedraw();
+            }
         }
 
         public bool AttemptRedraw() {
@@ -188,6 +193,10 @@ namespace SdlDotNet.Widgets
             } else {
                 return false;
             }
+        }
+
+        public void SetContainer(ListBox container) {
+            this.container = container;
         }
 
         #endregion Methods

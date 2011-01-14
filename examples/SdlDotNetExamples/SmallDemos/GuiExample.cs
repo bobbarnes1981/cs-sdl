@@ -49,14 +49,17 @@ namespace SdlDotNetExamples.SmallDemos
         }
 
         public void Go() {
-	    if (File.Exists(Path.Combine(dataDirectory,fontName)))
-            {
+            if (File.Exists(Path.Combine(dataDirectory, fontName))) {
 
                 filePath = "";
-            }	
+            }
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Gui Example";
-            screen = Video.SetVideoMode(640, 480, 16);
+            Video.UseResolutionScaling = true;
+
+            Resolution.SetStandardResolution(640, 480);
+            Resolution.SetResolution(1024, 768);
+            screen = Video.SetVideoMode(Resolution.ResolutionWidth, Resolution.ResolutionHeight, 16, true);
 
             Widgets.Initialize(screen, Path.Combine(filePath, Path.Combine(dataDirectory, "Widgets")),
                 Path.Combine(filePath, Path.Combine(dataDirectory, fontName)), 12, true);
@@ -65,6 +68,7 @@ namespace SdlDotNetExamples.SmallDemos
 
             Events.Tick += new EventHandler<TickEventArgs>(this.Tick);
             Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
+            Events.VideoResize += new EventHandler<VideoResizeEventArgs>(Events_VideoResize);
             Events.Run();
         }
 
@@ -101,10 +105,14 @@ namespace SdlDotNetExamples.SmallDemos
         }
 
         void testButton_Click(object sender, MouseButtonEventArgs e) {
-            resultsLabel.Text = "Status:\nWaiting for input...";
-            MessageBoxButtons buttons = (MessageBoxButtons)Enum.Parse(typeof(MessageBoxButtons), messageBoxButtonsSelectionListBox.SelectedItem.TextIdentifier, true);
-            DialogResult result = MessageBox.Show("Pick a button! Any button!", "Button Selection", buttons);
-            resultsLabel.Text = "Status:\n\"" + result.ToString() + "\" selected!";
+            //resultsLabel.Text = "Status:\nWaiting for input...";
+            //MessageBoxButtons buttons = (MessageBoxButtons)Enum.Parse(typeof(MessageBoxButtons), messageBoxButtonsSelectionListBox.SelectedItem.TextIdentifier, true);
+            //DialogResult result = MessageBox.Show("Pick a button! Any button!", "Button Selection", buttons);
+            //resultsLabel.Text = "Status:\n\"" + result.ToString() + "\" selected!";
+
+            FileBrowserDialog fbd = new FileBrowserDialog("fileBrowserDialog");
+            fbd.Filter = "All Files|*.*|Text Files|*.txt;*.dll;*.exe";
+            fbd.ShowDialog();
         }
 
         void Tick(object sender, TickEventArgs e) {
@@ -117,6 +125,11 @@ namespace SdlDotNetExamples.SmallDemos
 
         private void Quit(object sender, QuitEventArgs e) {
             Events.QuitApplication();
+        }
+
+        void Events_VideoResize(object sender, VideoResizeEventArgs e) {
+            Resolution.SetResolution(e.Width, e.Height);
+            screen = Video.SetVideoMode(Resolution.ResolutionWidth, Resolution.ResolutionHeight, 16, true);
         }
 
         /// <summary>

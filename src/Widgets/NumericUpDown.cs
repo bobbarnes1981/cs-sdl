@@ -79,7 +79,11 @@ namespace SdlDotNet.Widgets
             scrollSpeed = 50;
 
             RecalculateButtonPositions();
+
+            base.Paint += new EventHandler(NumericUpDown_Paint);
         }
+
+       
 
         #endregion Constructors
 
@@ -266,8 +270,7 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        protected override void DrawBuffer() {
-            base.DrawBuffer();
+        void NumericUpDown_Paint(object sender, EventArgs e) {
             if (btnUp != null) {
                 btnUp.BlitToScreen(base.Buffer);
             }

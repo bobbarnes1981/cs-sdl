@@ -59,7 +59,11 @@ namespace SdlDotNet.Widgets
             base.InitializeDefaultWidget();
             base.MouseEnter += new EventHandler(RadioButton_MouseEnter);
             base.MouseLeave += new EventHandler(RadioButton_MouseLeave);
+
+            base.Paint += new EventHandler(RadioButton_Paint);
         }
+
+       
 
         #endregion Constructors
 
@@ -163,11 +167,10 @@ namespace SdlDotNet.Widgets
             RequestRedraw();
         }
 
-        protected override void DrawBuffer() {
-            base.DrawBuffer();
+        void RadioButton_Paint(object sender, EventArgs e) {
             Size checkBoxSize = new Size(CHECKBOX_SIZE, CHECKBOX_SIZE);
-            SdlDotNet.Graphics.Surface textSurf = lblText.Render();
-            Point centerPoint = DrawingSupport.GetCenter(base.Buffer, textSurf.Size);
+            //SdlDotNet.Graphics.Surface textSurf = lblText.Render();
+            //Point centerPoint = DrawingSupport.GetCenter(base.Buffer, textSurf.Size);
             if (@checked) {
                 if (base.MouseInBounds) {
                     base.Buffer.Blit(IsCheckedIsOver);
@@ -181,7 +184,8 @@ namespace SdlDotNet.Widgets
                     base.Buffer.Blit(NotCheckedNotOver);
                 }
             }
-            base.Buffer.Blit(textSurf, new Point(2 + CHECKBOX_SIZE + 10, centerPoint.Y));
+            lblText.BlitToScreen(base.Buffer, new Point(2 + CHECKBOX_SIZE + 10, 0));
+            //base.Buffer.Blit(textSurf, new Point(2 + CHECKBOX_SIZE + 10, centerPoint.Y));
 
             base.DrawBorder();
         }

@@ -95,7 +95,11 @@ namespace SdlDotNet.Widgets
             scrollSpeed = 50;
 
             base.BorderStyle = BorderStyle.FixedSingle;
+
+            base.Paint += new EventHandler(VScrollBar_Paint);
         }
+
+
 
         #endregion Constructors
 
@@ -336,9 +340,8 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        protected override void DrawBuffer() {
+        void VScrollBar_Paint(object sender, EventArgs e) {
             lock (lockObject) {
-                base.DrawBuffer();
                 if (btnUp != null) {
                     btnUp.BlitToScreen(base.Buffer);
                 }

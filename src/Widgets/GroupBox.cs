@@ -53,7 +53,10 @@ namespace SdlDotNet.Widgets
             children.AddWidget(pnlContainer);
 
             base.Resized += new EventHandler(GroupBox_Resized);
+            base.Paint += new EventHandler(GroupBox_Paint);
         }
+
+      
 
         #endregion Constructors
 
@@ -67,6 +70,10 @@ namespace SdlDotNet.Widgets
         public string Text {
             get { return text; }
             set { text = value; }
+        }
+
+        public WidgetCollection ChildWidgets {
+            get { return pnlContainer.ChildWidgets; }
         }
 
         #endregion Properties
@@ -132,8 +139,7 @@ namespace SdlDotNet.Widgets
             base.BlitToScreen(destinationSurface);
         }
 
-        protected override void DrawBuffer() {
-            base.DrawBuffer();
+        void GroupBox_Paint(object sender, EventArgs e) {
             if (!string.IsNullOrEmpty(text) && font != null) {
                 //TextRenderer.RenderText(base.Buffer, font, text, base.ForeColor, false, this.Width, 0, 5, 0);
             }

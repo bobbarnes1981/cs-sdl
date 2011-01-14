@@ -40,19 +40,19 @@ namespace SdlDotNet.Widgets
         #region Constructors
 
         public Highlighter(string name)
-            : base(name)
-        {
+            : base(name) {
             base.BackColor = Color.Transparent;
             this.MouseEnter += new EventHandler(Highlighter_MouseEnter);
             this.MouseLeave += new EventHandler(Highlighter_MouseLeave);
+
+            base.Paint += new EventHandler(Highlighter_Paint);
         }
 
         #endregion Constructors
 
         #region Properties
 
-        public Surface HighlightImage
-        {
+        public Surface HighlightImage {
             get { return highlightImage; }
             set {
                 if (highlightImage != null) {
@@ -70,8 +70,7 @@ namespace SdlDotNet.Widgets
 
         #region Methods
 
-        public override void FreeResources()
-        {
+        public override void FreeResources() {
             base.FreeResources();
             if (highlightImage != null) {
                 highlightImage.Close();
@@ -79,22 +78,18 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        protected override void DrawBuffer()
-        {
-            base.DrawBuffer();
+        void Highlighter_Paint(object sender, EventArgs e) {
             if (base.MouseInBounds) {
                 base.Buffer.Blit(highlightImage, new Point(0, 0));
             }
             base.DrawBorder();
         }
 
-        void Highlighter_MouseEnter(object sender, EventArgs e)
-        {
+        void Highlighter_MouseEnter(object sender, EventArgs e) {
             RequestRedraw();
         }
 
-        void Highlighter_MouseLeave(object sender, EventArgs e)
-        {
+        void Highlighter_MouseLeave(object sender, EventArgs e) {
             RequestRedraw();
         }
 

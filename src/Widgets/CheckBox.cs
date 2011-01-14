@@ -48,16 +48,24 @@ namespace SdlDotNet.Widgets
             : base(name, true) {
             lblText = new Label("lblText");
             lblText.AutoSize = true;
+            lblText.BackColor = Color.Transparent;
+
+            base.InitializeDefaultWidget();
+
+            this.BackColor = Color.Transparent;
 
             NotCheckedNotOver = new SdlDotNet.Graphics.Surface(Widgets.ResourceDirectory + "/CheckBox/unchecked.png");
             NotCheckedIsOver = new SdlDotNet.Graphics.Surface(Widgets.ResourceDirectory + "/CheckBox/unchecked-hover.png");
             IsCheckedNotOver = new SdlDotNet.Graphics.Surface(Widgets.ResourceDirectory + "/CheckBox/checked.png");
             IsCheckedIsOver = new SdlDotNet.Graphics.Surface(Widgets.ResourceDirectory + "/CheckBox/checked-hover.png");
 
-            base.InitializeDefaultWidget();
             base.MouseEnter += new EventHandler(CheckBox_MouseEnter);
             base.MouseLeave += new EventHandler(Checkbox_MouseLeave);
+
+            base.Paint += new EventHandler(CheckBox_Paint);
         }
+
+
 
         #endregion Constructors
 
@@ -72,7 +80,6 @@ namespace SdlDotNet.Widgets
         public new Color BackColor {
             get { return base.BackColor; }
             set {
-                lblText.BackColor = Color.Transparent;
                 base.BackColor = value;
             }
         }
@@ -136,11 +143,10 @@ namespace SdlDotNet.Widgets
             Checked = !@checked;
         }
 
-        protected override void DrawBuffer() {
-            base.DrawBuffer();
+        void CheckBox_Paint(object sender, EventArgs e) {
             Size checkBoxSize = new Size(CHECKBOX_SIZE, CHECKBOX_SIZE);
-            SdlDotNet.Graphics.Surface textSurf = lblText.Render();
-            Point centerPoint = DrawingSupport.GetCenter(base.Buffer, textSurf.Size);
+            //SdlDotNet.Graphics.Surface textSurf = lblText.Render();
+            //Point centerPoint = DrawingSupport.GetCenter(base.Buffer, textSurf.Size);
             if (@checked) {
                 if (base.MouseInBounds) {
                     base.Buffer.Blit(IsCheckedIsOver);
@@ -154,7 +160,8 @@ namespace SdlDotNet.Widgets
                     base.Buffer.Blit(NotCheckedNotOver);
                 }
             }
-            base.Buffer.Blit(textSurf, new Point(2 + CHECKBOX_SIZE + 10, centerPoint.Y));
+            lblText.BlitToScreen(base.Buffer, new Point(2 + CHECKBOX_SIZE + 10, 0));
+            //base.Buffer.Blit(textSurf, new Point(2 + CHECKBOX_SIZE + 10, centerPoint.Y));
 
             base.DrawBorder();
         }

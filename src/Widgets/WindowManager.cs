@@ -336,7 +336,7 @@ namespace SdlDotNet.Widgets
                 if (overlayCollection.Items.Count > 0) {
                     bool clickedOnOverlay = false;
                     for (int i = 0; i < overlayCollection.Items.Count; i++) {
-                        if (DrawingSupport.PointInBounds(e.Position, overlayCollection.Items[i].Bounds)) {
+                        if (DrawingSupport.PointInBounds(e.Position, overlayCollection.Items[i].ScaledBounds)) {
                             clickedOnOverlay = true;
                             overlayCollection.Items[i].OnMouseDown(new MouseButtonEventArgs(e, e.Position));
                             break;
@@ -360,7 +360,7 @@ namespace SdlDotNet.Widgets
                 if (windows.Count > 0) {
                     for (int i = windows.Count - 1; i >= 0; i--) {
                         if (IsWindowActive(windows[i]) && DrawingSupport.PointInBounds(e.Position, windows[i].FullBounds)) {
-                            if (windows[i].BackColor != Color.Transparent || DrawingSupport.PointInBounds(e.Position, windows[i].TitleBar.Bounds)) {
+                            if (windows[i].BackColor != Color.Transparent || DrawingSupport.PointInBounds(e.Position, windows[i].TitleBar.ScaledBounds)) {
                                 windows[i].OnMouseDown(new MouseButtonEventArgs(e, e.Position));
                                 int topMostWindow = GetTopMostWindow(windows.Count - 1);
                                 if (topMostWindow > -1) {
@@ -375,9 +375,9 @@ namespace SdlDotNet.Widgets
                                 clicked = true;
                                 break;
                             } else {
-                                Point relPoint = new Point(e.Position.X - windows[i].X, e.Position.Y - windows[i].Y);
+                                Point relPoint = new Point(e.Position.X - windows[i].ScaledX, e.Position.Y - windows[i].ScaledY);
                                 for (int n = windows[i].ChildWidgets.Count; n >= 0; n--) {
-                                    if (DrawingSupport.PointInBounds(relPoint, windows[i].ChildWidgets[n].Bounds)) {
+                                    if (DrawingSupport.PointInBounds(relPoint, windows[i].ChildWidgets[n].ScaledBounds)) {
                                         windows[i].ChildWidgets[n].OnMouseDown(new MouseButtonEventArgs(e, e.Position));
                                         clicked = true;
                                         break;
@@ -387,7 +387,7 @@ namespace SdlDotNet.Widgets
                         }
                     }
                 }
-                if (windowSwitcherEnabled && DrawingSupport.PointInBounds(e.Position, new Rectangle(windowSwitcher.Location, windowSwitcher.Size))) {
+                if (windowSwitcherEnabled && DrawingSupport.PointInBounds(e.Position, new Rectangle(windowSwitcher.ScaledLocation, windowSwitcher.ScaledSize))) {
                     windowSwitcher.OnMouseDown(new MouseButtonEventArgs(e, e.Position));
                     clicked = true;
                 }
@@ -415,7 +415,7 @@ namespace SdlDotNet.Widgets
                 if (overlayCollection.Items.Count > 0) {
                     bool clickedOnOverlay = false;
                     for (int i = 0; i < overlayCollection.Items.Count; i++) {
-                        if (DrawingSupport.PointInBounds(e.Position, overlayCollection.Items[i].Bounds)) {
+                        if (DrawingSupport.PointInBounds(e.Position, overlayCollection.Items[i].ScaledBounds)) {
                             clickedOnOverlay = true;
                             overlayCollection.Items[i].OnMouseUp(new MouseButtonEventArgs(e, e.Position));
                             break;
@@ -439,13 +439,13 @@ namespace SdlDotNet.Widgets
                 if (windows.Count > 0) {
                     for (int i = windows.Count - 1; i >= 0; i--) {
                         if (IsWindowActive(windows[i]) && DrawingSupport.PointInBounds(e.Position, windows[i].FullBounds)) {
-                            if (windows[i].BackColor != Color.Transparent || DrawingSupport.PointInBounds(e.Position, windows[i].TitleBar.Bounds)) {
+                            if (windows[i].BackColor != Color.Transparent || DrawingSupport.PointInBounds(e.Position, windows[i].TitleBar.ScaledBounds)) {
                                 windows[i].OnMouseUp(new MouseButtonEventArgs(e, e.Position));
                                 return true;
                             } else {
-                                Point relPoint = new Point(e.Position.X - windows[i].X, e.Position.Y - windows[i].Y);
+                                Point relPoint = new Point(e.Position.X - windows[i].ScaledX, e.Position.Y - windows[i].ScaledY);
                                 for (int n = 0; n < windows[i].ChildWidgets.Count; n++) {
-                                    if (DrawingSupport.PointInBounds(relPoint, windows[i].ChildWidgets[n].Bounds)) {
+                                    if (DrawingSupport.PointInBounds(relPoint, windows[i].ChildWidgets[n].ScaledBounds)) {
                                         windows[i].ChildWidgets[n].OnMouseUp(new MouseButtonEventArgs(e, e.Position));
                                         return true;
                                     }
@@ -474,7 +474,7 @@ namespace SdlDotNet.Widgets
                 if (overlayCollection.Items.Count > 0) {
                     bool clickedOnOverlay = false;
                     for (int i = 0; i < overlayCollection.Items.Count; i++) {
-                        if (DrawingSupport.PointInBounds(e.Position, overlayCollection.Items[i].Bounds)) {
+                        if (DrawingSupport.PointInBounds(e.Position, overlayCollection.Items[i].ScaledBounds)) {
                             clickedOnOverlay = true;
                             overlayCollection.Items[i].OnMouseMotion(e);
                             break;
@@ -496,7 +496,7 @@ namespace SdlDotNet.Widgets
                 if (windows.Count > 0) {
                     for (int i = windows.Count - 1; i >= 0; i--) {
                         if (IsWindowActive(windows[i]) && DrawingSupport.PointInBounds(e.Position, windows[i].FullBounds)) {
-                            if (windows[i].BackColor != Color.Transparent || DrawingSupport.PointInBounds(e.Position, windows[i].TitleBar.Bounds)) {
+                            if (windows[i].BackColor != Color.Transparent || DrawingSupport.PointInBounds(e.Position, windows[i].TitleBar.ScaledBounds)) {
                                 windows[i].OnMouseMotion(e);
                                 return true;
                             } else {
