@@ -56,6 +56,8 @@ namespace SdlDotNet.Widgets
 
             base.Click += new EventHandler<MouseButtonEventArgs>(ListBox_Click);
             base.Resized += new EventHandler(ListBox_Resized);
+
+            base.Paint += new EventHandler(ListBox_Paint);
         }
 
         #endregion Constructors
@@ -202,9 +204,7 @@ namespace SdlDotNet.Widgets
             RequestRedraw();
         }
 
-        protected override void DrawBuffer() {
-            base.DrawBuffer();
-
+        void ListBox_Paint(object sender, EventArgs e) {
             int vScrollMax = CalculateVScrollMax();
             if (vScroll.Maximum != vScrollMax) {
                 if (vScrollMax > 0) {
@@ -251,6 +251,8 @@ namespace SdlDotNet.Widgets
                 currentHeight += items[i].Height;
                 if (currentHeight <= base.Height) {
                     visibleItems++;
+                } else {
+                    break;
                 }
             }
             if (currentHeight > base.Height) {

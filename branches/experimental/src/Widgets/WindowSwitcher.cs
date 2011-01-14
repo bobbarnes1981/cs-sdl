@@ -61,7 +61,11 @@ namespace SdlDotNet.Widgets
             base.Size = new Size(width, 20);
             base.BackColor = Color.Transparent;
             base.BorderStyle = BorderStyle.None;
+
+            base.Paint += new EventHandler(WindowSwitcher_Paint);
         }
+
+      
 
         #endregion Constructors
 
@@ -159,9 +163,8 @@ namespace SdlDotNet.Widgets
             RequestRedraw();
         }
 
-        protected override void DrawBuffer() {
+        void WindowSwitcher_Paint(object sender, EventArgs e) {
             if (loaded) {
-                base.DrawBuffer();
                 base.Buffer.Blit(menuSurface, new Point(0, 0));
                 //				int lastX = menuSurface.Width;
                 //				for (int i = 0; i < buttons.Count; i++) {

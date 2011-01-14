@@ -47,7 +47,6 @@ namespace SdlDotNet.Widgets
 
         public ProgressBar(string name)
             : base(name) {
-            font = new SdlDotNet.Graphics.Font(Widgets.DefaultFontPath, Widgets.DefaultFontSize);
             barColor = Color.Green;
             max = 100;
             min = 0;
@@ -56,7 +55,11 @@ namespace SdlDotNet.Widgets
             step = 1;
             textStyle = ProgressBarTextStyle.Custom;
             base.BorderStyle = BorderStyle.Fixed3D;
+
+            base.Paint += new EventHandler(ProgressBar_Paint);
         }
+
+
 
         #endregion Constructors
 
@@ -198,21 +201,23 @@ namespace SdlDotNet.Widgets
             Value += step;
         }
 
-        protected override void DrawBuffer() {
-            base.DrawBuffer();
-            if (percent > 0) {
-                decimal newWidth = (decimal)base.Width * ((decimal)percent / (decimal)100);
-                Size barSize = new Size(System.Math.Max(0, (int)newWidth), System.Math.Max(0, base.Height));
-                SdlDotNet.Graphics.Primitives.Box bar = new SdlDotNet.Graphics.Primitives.Box(new Point(0, 0), barSize);
-                base.Buffer.Draw(bar, barColor, false, true);
+        void ProgressBar_Paint(object sender, EventArgs e) {
+            if (base.Buffer != null) {
+                if (percent > 0) {
+                    decimal newWidth = (decimal)base.Width * ((decimal)percent / (decimal)100);
+                    Size barSize = new Size(System.Math.Max(0, (int)newWidth), System.Math.Max(0, base.Height));
+                    SdlDotNet.Graphics.Primitives.Box bar = new SdlDotNet.Graphics.Primitives.Box(new Point(0, 0), barSize);
+                    base.Buffer.Draw(bar, barColor, false, true);
+                }
+                if (!string.IsNullOrEmpty(text)) {
+                    CheckFont();
+                    SdlDotNet.Graphics.Surface fontSurf = TextRenderer.RenderTextBasic2(font, text, null, base.ForeColor, false, 0, 0, 0, 0);
+                    base.Buffer.Blit(fontSurf, DrawingSupport.GetCenter(base.Buffer, fontSurf.Size), new Rectangle(0, 0, this.Width, this.Height));
+                    fontSurf.Close();
+                    fontSurf = null;
+                }
+                base.DrawBorder();
             }
-            if (!string.IsNullOrEmpty(text) && font != null) {
-                SdlDotNet.Graphics.Surface fontSurf = font.Render(text, base.ForeColor, true);
-                base.Buffer.Blit(fontSurf, DrawingSupport.GetCenter(base.Buffer, fontSurf.Size), new Rectangle(0, 0, this.Width, this.Height));
-                fontSurf.Close();
-                fontSurf = null;
-            }
-            base.DrawBorder();
         }
 
         private void UpdateText() {
@@ -229,6 +234,12 @@ namespace SdlDotNet.Widgets
                         this.text = val.ToString() + "/" + max.ToString();
                         break;
                     }
+            }
+        }
+
+        private void CheckFont() {
+            if (font == null) {
+                font = new SdlDotNet.Graphics.Font(Widgets.DefaultFontPath, Widgets.DefaultFontSize);
             }
         }
 

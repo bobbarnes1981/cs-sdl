@@ -38,9 +38,9 @@ namespace SdlDotNet.Widgets
 
             for (int i = 0; i < childWidgets.Count; i++) {
                 if (childWidgets[i].Visible && (widgetToSkip != null && childWidgets[i] != widgetToSkip)) {
-                    if (childWidgets[i].Bounds.IntersectsWith(bounds)) {
-                        Rectangle region = CalculateRegion(bounds, childWidgets[i].Bounds);//new Rectangle(widgetToSkip.X - childWidgets[i].X, widgetToSkip.Y - childWidgets[i].Y, System.Math.Min((childWidgets[i].Width + childWidgets[i].X) - widgetToSkip.X, widgetToSkip.Width), System.Math.Min((childWidgets[i].Height + childWidgets[i].Y) - widgetToSkip.Y, widgetToSkip.Height));
-                        childWidgets[i].BlitToScreen(destinationBuffer, region, new Point(childWidgets[i].X + region.X, childWidgets[i].Y + region.Y));
+                    if (childWidgets[i].ScaledBounds.IntersectsWith(bounds)) {
+                        Rectangle region = CalculateRegion(bounds, childWidgets[i].ScaledBounds);//new Rectangle(widgetToSkip.X - childWidgets[i].X, widgetToSkip.Y - childWidgets[i].Y, System.Math.Min((childWidgets[i].Width + childWidgets[i].X) - widgetToSkip.X, widgetToSkip.Width), System.Math.Min((childWidgets[i].Height + childWidgets[i].Y) - widgetToSkip.Y, widgetToSkip.Height));
+                        childWidgets[i].BlitToScreen(destinationBuffer, region, new Point(childWidgets[i].ScaledX + region.X, childWidgets[i].ScaledY + region.Y));
                     }
                 }
             }
@@ -51,9 +51,13 @@ namespace SdlDotNet.Widgets
                 //if (childWidgets[i].Visible) {
                     if (childWidgets[i] == widgetToUpdate) {
                         childWidgets[i].BlitToScreen(destinationBuffer);
-                    } else if (childWidgets[i].Bounds.IntersectsWith(widgetToUpdate.Bounds)) {
-                        Rectangle region = CalculateRegion(widgetToUpdate.Bounds, childWidgets[i].Bounds);//new Rectangle(widget.X, widget.Y, System.Math.Min((childWidgets[i].Width + childWidgets[i].X) - widget.X, widget.Width), System.Math.Min((childWidgets[i].Height + childWidgets[i].Y) - widget.Y, widget.Height));
-                        childWidgets[i].BlitToScreen(destinationBuffer, region, new Point(childWidgets[i].X + region.X, childWidgets[i].Y + region.Y));
+                    } else if (childWidgets[i].Bounds.IntersectsWith(widgetToUpdate.ScaledBounds)) {
+                        Rectangle region = CalculateRegion(widgetToUpdate.ScaledBounds, childWidgets[i].ScaledBounds);//new Rectangle(widget.X, widget.Y, System.Math.Min((childWidgets[i].Width + childWidgets[i].X) - widget.X, widget.Width), System.Math.Min((childWidgets[i].Height + childWidgets[i].Y) - widget.Y, widget.Height));
+                        //if (childWidgets[i] is IContainer) {
+                        //    ((IContainer)childWidgets[i]).BlitToScreen(destinationBuffer, region, new Point(childWidgets[i].X + region.X, childWidgets[i].Y + region.Y));
+                        //} else {
+                        childWidgets[i].BlitToScreen(destinationBuffer, region, new Point(childWidgets[i].ScaledX + region.X, childWidgets[i].ScaledY + region.Y));
+                        //}
                     }
                 //}
             }

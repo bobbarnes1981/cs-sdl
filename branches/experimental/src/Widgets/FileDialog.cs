@@ -93,6 +93,12 @@ namespace SdlDotNet.Widgets
             }
         }
 
+        public string SelectedFilterType {
+            get {
+                return fileBrowser.SelectedFilterType;
+            }
+        }
+
         public FileDialog() {
             Initialize();
         }
@@ -106,10 +112,12 @@ namespace SdlDotNet.Widgets
             fileBrowser = new FileBrowserDialog("FileBrowser-FileDialog");
         }
 
-        public DialogResult ShowDialog() {
+        public virtual DialogResult ShowDialog() {
             
             DialogResult browserResult = fileBrowser.ShowDialog();
             this.fileName = fileBrowser.SelectedFile;
+            this.fileNames = new string[1];
+            this.fileNames[0] = fileBrowser.SelectedFile;
             return browserResult;
         }
     }

@@ -48,6 +48,8 @@ namespace SdlDotNet.Widgets
             backgroundSurface = new SdlDotNet.Graphics.Surface(Widgets.ResourceDirectory + "/Window Switcher/menubutton.png");
             loaded = true;
             base.Size = backgroundSurface.Size;
+
+            base.Paint += new EventHandler(WindowSwitcherButton_Paint);
         }
 
         #endregion Constructors
@@ -87,9 +89,8 @@ namespace SdlDotNet.Widgets
             RequestRedraw();
         }
 
-        protected override void DrawBuffer() {
+        void WindowSwitcherButton_Paint(object sender, EventArgs e) {
             if (loaded) {
-                base.DrawBuffer();
                 base.Buffer.Blit(backgroundSurface, new Point(0, 0));
                 if (!string.IsNullOrEmpty(attachedWindow.WindowSwitcherText)) {
                     CheckFont();

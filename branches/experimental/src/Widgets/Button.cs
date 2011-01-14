@@ -40,6 +40,8 @@ namespace SdlDotNet.Widgets
         bool selected;
         bool spaceDown;
         string text;
+        bool redrawHighlightSurfaceRequested;
+        bool selectedChanged;
 
         #endregion Fields
 
@@ -60,7 +62,11 @@ namespace SdlDotNet.Widgets
             base.MouseEnter += new EventHandler(Button_MouseEnter);
             base.MouseLeave += new EventHandler(Button_MouseLeave);
             base.Resized += new EventHandler(Button_Resized);
+
+            base.Paint += new EventHandler(Button_Paint);
         }
+
+
 
         #endregion Constructors
 
@@ -88,7 +94,7 @@ namespace SdlDotNet.Widgets
             set {
                 if (highlightColor != value) {
                     highlightColor = value;
-                    RedrawHighlightSurface();
+                    RequestRedrawHighlightSurface();
                     RequestRedraw();
                 }
             }
@@ -115,7 +121,7 @@ namespace SdlDotNet.Widgets
             set {
                 if (highlightType != value) {
                     highlightType = value;
-                    RedrawHighlightSurface();
+                    RequestRedrawHighlightSurface();
                 }
             }
         }
@@ -127,13 +133,9 @@ namespace SdlDotNet.Widgets
             get { return selected; }
             set {
                 if (selected != value) {
-                    if (selected) {
-                        highlightSurface.Alpha = 0;
-                    }
                     selected = value;
-                    if (selected) {
-                        highlightSurface.Alpha = 150;
-                    }
+                    selectedChanged = true;
+                    RequestRedrawHighlightSurface();
                     RequestRedraw();
                 }
             }
@@ -237,25 +239,20 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        protected override void DrawBuffer() {
-            lock (lockObject) {
-                if (!base.disposed) {
-                    CheckHighlightSurface();
-                    CheckFont();
-                    base.DrawBuffer();
-                    if (highlightType == HighlightType.Color) {
-                        base.Buffer.Blit(highlightSurface, new Point(base.BorderWidth, base.BorderWidth), new Rectangle(base.BorderWidth, base.BorderWidth, base.Width - (base.BorderWidth * 2), base.Height - (base.BorderWidth * 2)));
-                    } else if (highlightType == HighlightType.Image) {
-                        base.Buffer.Blit(highlightSurface, DrawingSupport.GetCenter(this.Size, highlightSurface.Size));
-                    }
-                    if (!string.IsNullOrEmpty(text) && font != null) {
-                        SdlDotNet.Graphics.Surface fontSurf = font.Render(text, base.ForeColor);
-                        base.Buffer.Blit(fontSurf, DrawingSupport.GetCenter(base.Buffer, fontSurf.Size));
-                        fontSurf.Close();
-                    }
-                    DrawBorder();
-                }
+        void Button_Paint(object sender, EventArgs e) {
+            CheckHighlightSurface();
+            CheckFont();
+            if (highlightType == HighlightType.Color) {
+                base.Buffer.Blit(highlightSurface, new Point(base.BorderWidth, base.BorderWidth), new Rectangle(base.BorderWidth, base.BorderWidth, base.Width - (base.BorderWidth * 2), base.Height - (base.BorderWidth * 2)));
+            } else if (highlightType == HighlightType.Image) {
+                base.Buffer.Blit(highlightSurface, DrawingSupport.GetCenter(this.Size, highlightSurface.Size));
             }
+            if (!string.IsNullOrEmpty(text) && font != null) {
+                SdlDotNet.Graphics.Surface fontSurf = font.Render(text, base.ForeColor);
+                base.Buffer.Blit(fontSurf, DrawingSupport.GetCenter(base.Buffer, fontSurf.Size));
+                fontSurf.Close();
+            }
+            DrawBorder();
         }
 
         void Button_KeyDown(object sender, SdlDotNet.Input.KeyboardEventArgs e) {
@@ -290,7 +287,7 @@ namespace SdlDotNet.Widgets
 
         void Button_Resized(object sender, EventArgs e) {
             lock (lockObject) {
-                if (highlightSurface != null) {
+                if (highlightType == SdlDotNet.Widgets.HighlightType.Color && highlightSurface != null) {
                     highlightSurface.Close();
                     highlightSurface = null;
                 }
@@ -306,12 +303,19 @@ namespace SdlDotNet.Widgets
 
         private void CheckHighlightSurface() {
             if (highlightSurface == null) {
-                highlightSurface = new SdlDotNet.Graphics.Surface(base.Size);
+                highlightSurface = new SdlDotNet.Graphics.Surface(base.UnscaledSize);
                 highlightSurface.Alpha = 0;
                 highlightSurface.AlphaBlending = true;
 
+                RequestRedrawHighlightSurface();
+            }
+            if (redrawHighlightSurfaceRequested) {
                 RedrawHighlightSurface();
             }
+        }
+
+        private void RequestRedrawHighlightSurface() {
+            redrawHighlightSurfaceRequested = true;
         }
 
         private void RedrawHighlightSurface() {
@@ -322,6 +326,15 @@ namespace SdlDotNet.Widgets
                         }
                     }
                     break;
+            }
+
+            if (selectedChanged) {
+                selectedChanged = false;
+                if (selected) {
+                    highlightSurface.Alpha = 150;
+                } else {
+                    highlightSurface.Alpha = 0;
+                }
             }
         }
 

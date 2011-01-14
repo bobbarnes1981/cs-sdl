@@ -195,6 +195,18 @@ namespace SdlDotNet.Widgets
             }
         }
 
+        public IEnumerable<Widget> EnumerateWidgets() {
+            for (int i = 0; i < widgets.Count; i++) {
+                yield return widgets[i];
+                if (widgets[i] is IContainer) {
+                    IContainer container = widgets[i] as IContainer;
+                    foreach (Widget childWidget in container.ChildWidgets.EnumerateWidgets()) {
+                        yield return childWidget;
+                    }
+                }
+            }
+        }
+
         #endregion Methods
     }
 }

@@ -52,7 +52,11 @@ namespace SdlDotNet.Widgets
 
             base.Click += new EventHandler<MouseButtonEventArgs>(ComboBox_Click);
             base.Resized += new EventHandler(ComboBox_Resized);
+
+            base.Paint += new EventHandler(ComboBox_Paint);
         }
+
+        
 
         #endregion Constructors
 
@@ -109,8 +113,7 @@ namespace SdlDotNet.Widgets
             itemListBox.SelectItem(index);
         }
 
-        protected override void DrawBuffer() {
-            base.DrawBuffer();
+        void ComboBox_Paint(object sender, EventArgs e) {
             if (itemListBox.SelectedItems.Count == 1) {
                 base.Buffer.Blit(itemListBox.SelectedItems[0].Buffer, new Point(5, 2), new Rectangle(0, 0, this.Width - 5, this.Height - 2));
             }

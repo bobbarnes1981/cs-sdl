@@ -46,6 +46,7 @@ namespace SdlDotNet.Widgets
         bool wordWrap;
         bool autoScrollSet = false;
         bool scrollToBottom;
+        bool inHover = false;
 
         #endregion Fields
 
@@ -60,7 +61,10 @@ namespace SdlDotNet.Widgets
             base.MouseEnter += new EventHandler(Label_MouseEnter);
             base.MouseLeave += new EventHandler(Label_MouseLeave);
             base.Resized += new EventHandler(Label_Resized);
+            base.Paint += new EventHandler(Label_Paint);
         }
+
+
 
         #endregion Constructors
 
@@ -140,6 +144,11 @@ namespace SdlDotNet.Widgets
             get { return base.ForeColor; }
             set {
                 if (base.ForeColor != value) {
+                    for (int i = 0; i < charRenderOptions.Count; i++) {
+                        if (charRenderOptions[i].ForeColor == base.ForeColor) {
+                            charRenderOptions[i].ForeColor = value;
+                        }
+                    }
                     base.ForeColor = value;
                     RequestRedraw();
                 }
@@ -238,6 +247,7 @@ namespace SdlDotNet.Widgets
             if (vScroll != null && vScroll.Visible) {
                 //vScroll.Value = vScroll.Maximum;
                 scrollToBottom = true;
+                RequestRedraw();
             }
         }
 
@@ -266,13 +276,10 @@ namespace SdlDotNet.Widgets
             SetText(newText);
         }
 
-        protected override void DrawBuffer() {
+        void Label_Paint(object sender, EventArgs e) {
             lock (lockObject) {
                 if (this.Updating == false) {
                     this.Updating = true;
-                    if (string.IsNullOrEmpty(text)) {
-                        base.DrawBuffer();
-                    }
                     if (!string.IsNullOrEmpty(text)) {
                         CheckFont();
 
@@ -282,7 +289,6 @@ namespace SdlDotNet.Widgets
                         //        ResizeInternal(new Size(newSize.Width + 10, newSize.Height));
                         //    }
                         //}
-                        base.DrawBuffer();
 
                         //string escapedText = System.Text.RegularExpressions.Regex.Escape(text);
                         //if (escapedText.Length != charRenderOptions.Count) {
@@ -296,9 +302,12 @@ namespace SdlDotNet.Widgets
                         if (autoScroll && autoScrollSet) {
                             int width = this.Width;
                             //Size textSize1 = TextRenderer.SizeText2(font, text, antiAlias, width);
-                            Size textSize2 = TextRenderer.SizeText2(font, text, antiAlias, width - 12);//vScroll.Width);
+                            Size textSize2 = TextRenderer.SizeText2(font, text, antiAlias, width - 12 - 5);//vScroll.Width);
                             Size goodSize = new Size();
 
+                            //if (vScroll != null & vScroll.Visible) {
+                            //    Size testSize = TextRenderer.RenderSizeData(this.font, text, charRenderOptions.ToArray(), Color.Black, false, this.Width - vScroll.Width - 5, this.Height, 0, vScroll.Value);
+                            //}
                             //if (textSize2.Height > this.Height) {
                             //    goodSize = textSize2;
                             //} else if (textSize1.Height > this.Height) {
@@ -306,13 +315,15 @@ namespace SdlDotNet.Widgets
                             //}
                             goodSize = textSize2;
 
+
+
                             if (goodSize.Height > this.Height) {
                                 CheckVScrollBar();
                                 vScroll.Location = new Point(this.Width - 12, 0);
                                 vScroll.Size = new Size(12, this.Height);
                                 vScroll.Minimum = 0;
                                 //vScroll.Value = 0;
-                                vScroll.Maximum = RoundToMultiple((goodSize.Height / font.Height), 1) - (this.Height / font.Height) + 1;
+                                vScroll.Maximum = ((goodSize.Height + font.Height) / font.Height) - (RoundToMultiple(Height, font.Height) / font.Height);//RoundToMultiple((goodSize.Height / font.LineSize), 1) - (this.Height / font.LineSize) + 1;
                                 vScroll.Visible = true;
                                 if (scrollToBottom) {
                                     vScroll.Value = vScroll.Maximum;
@@ -328,19 +339,31 @@ namespace SdlDotNet.Widgets
 
                         SdlDotNet.Graphics.Surface textSurface;
                         Color textColor;
-                        if (hoverColor != Color.Empty && IsMouseInBounds()) {
+                        if (hoverColor != Color.Empty && inHover) {
                             textColor = hoverColor;
                         } else {
                             textColor = this.ForeColor;
                         }
-                        if (vScroll != null && vScroll.Visible && hScroll != null && hScroll.Visible) {
-                            textSurface = TextRenderer.RenderTextBasic2(this.font, text, charRenderOptions.ToArray(), textColor, false, this.Width - vScroll.Width - 5, this.Height - hScroll.Height, 0, 0);
-                        } else if (vScroll != null && vScroll.Visible) {
-                            textSurface = TextRenderer.RenderTextBasic2(this.font, text, charRenderOptions.ToArray(), textColor, false, this.Width - vScroll.Width - 5, this.Height, 0, vScroll.Value);
-                        } else if (hScroll != null && hScroll.Visible) {
-                            textSurface = TextRenderer.RenderTextBasic2(this.font, text, charRenderOptions.ToArray(), textColor, false, this.Width - 5, this.Height - hScroll.Height, 0, 0);
+                        if (inHover) {
+                            if (vScroll != null && vScroll.Visible && hScroll != null && hScroll.Visible) {
+                                textSurface = TextRenderer.RenderTextBasic2(this.font, text, null, hoverColor, false, this.Width - vScroll.Width - 5, this.Height - hScroll.Height, 0, 0);
+                            } else if (vScroll != null && vScroll.Visible) {
+                                textSurface = TextRenderer.RenderTextBasic2(this.font, text, null, hoverColor, false, this.Width - vScroll.Width - 5, this.Height, 0, vScroll.Value);
+                            } else if (hScroll != null && hScroll.Visible) {
+                                textSurface = TextRenderer.RenderTextBasic2(this.font, text, null, hoverColor, false, this.Width - 5, this.Height - hScroll.Height, 0, 0);
+                            } else {
+                                textSurface = TextRenderer.RenderTextBasic2(this.font, text, null, hoverColor, false, this.Width - 5, this.Height, 0, 0);
+                            }
                         } else {
-                            textSurface = TextRenderer.RenderTextBasic2(this.font, text, charRenderOptions.ToArray(), textColor, false, this.Width - 5, this.Height, 0, 0);
+                            if (vScroll != null && vScroll.Visible && hScroll != null && hScroll.Visible) {
+                                textSurface = TextRenderer.RenderTextBasic2(this.font, text, charRenderOptions.ToArray(), textColor, false, this.Width - vScroll.Width - 5, this.Height - hScroll.Height, 0, 0);
+                            } else if (vScroll != null && vScroll.Visible) {
+                                textSurface = TextRenderer.RenderTextBasic2(this.font, text, charRenderOptions.ToArray(), textColor, false, this.Width - vScroll.Width - 5, this.Height, 0, vScroll.Value);
+                            } else if (hScroll != null && hScroll.Visible) {
+                                textSurface = TextRenderer.RenderTextBasic2(this.font, text, charRenderOptions.ToArray(), textColor, false, this.Width - 5, this.Height - hScroll.Height, 0, 0);
+                            } else {
+                                textSurface = TextRenderer.RenderTextBasic2(this.font, text, charRenderOptions.ToArray(), textColor, false, this.Width - 5, this.Height, 0, 0);
+                            }
                         }
 
                         if (textSurface != null) {
@@ -385,19 +408,21 @@ namespace SdlDotNet.Widgets
 
         void Label_MouseEnter(object sender, EventArgs e) {
             if (hoverColor != Color.Empty) {
+                inHover = true;
                 RequestRedraw();
             }
         }
 
         void Label_MouseLeave(object sender, EventArgs e) {
             if (hoverColor != Color.Empty) {
+                inHover = false;
                 RequestRedraw();
             }
         }
 
         void Label_Resized(object sender, EventArgs e) {
-            RecalculateScrollPositions();
-            RequestRedraw();
+            //RecalculateScrollPositions();
+            //RequestRedraw();
         }
 
         private void RecalculateScrollPositions() {
@@ -407,7 +432,7 @@ namespace SdlDotNet.Widgets
                 if (vScroll != null && vScroll.Visible) {
                     width -= vScroll.Width;
                 }
-                Size textSize = TextRenderer.SizeText(font, text, antiAlias, width);
+                Size textSize = TextRenderer.SizeText2(font, text, antiAlias, width);
 
                 //vScroll.Value = 0;
                 if (textSize.Height > this.Height) {
@@ -446,9 +471,9 @@ namespace SdlDotNet.Widgets
                     Size newSize = TextRenderer.SizeText2(font, text, antiAlias, maxWidth);
                     if (this.Size != newSize) {
                         //this.updatingText = true;
-                        if (!TopLevel && ParentContainer != null) {
-                            ParentContainer.ClearRegion(this.Bounds, this);
-                        }
+                        //if (!TopLevel && ParentContainer != null) {
+                        //    ParentContainer.ClearRegion(this.Bounds, this);
+                        //}
                         this.Size = new Size(newSize.Width + 10, newSize.Height);
                         //this.updatingText = false;
                         //ResizeInternal(new Size(newSize.Width + 10, newSize.Height));
@@ -459,6 +484,12 @@ namespace SdlDotNet.Widgets
                 }
                 if (autoScroll) {
                     autoScrollSet = true;
+                }
+
+                if (font != null) {
+                    if (this.Height < font.Height) {
+                        this.Height = font.Height;
+                    }
                 }
 
                 base.RequestRedraw();

@@ -28,7 +28,7 @@ namespace SdlDotNet.Widgets
     using System.Text;
 
     // TODO: Finish the ScrollableWidget
-    public class ScrollableWidget : Widget, IContainer
+    public class ScrollableWidget : Widget
     {
         #region Fields
 

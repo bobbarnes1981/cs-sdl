@@ -63,6 +63,7 @@ namespace SdlDotNet.Widgets
         #region Methods
 
         public void Add(IListBoxItem item) {
+            item.SetContainer(listBox);
             items.Add(item);
 
             listBox.ItemCountChanged();

@@ -55,7 +55,11 @@ namespace SdlDotNet.Widgets
 
             base.BeforeKeyDown += new EventHandler<BeforeKeyDownEventArgs>(TextBox_BeforeKeyDown);
             base.KeyDown += new EventHandler<Input.KeyboardEventArgs>(TextBox_KeyDown);
+
+            base.Paint += new EventHandler(TextBox_Paint);
         }
+
+
 
         #endregion Constructors
 
@@ -111,9 +115,8 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        protected override void DrawBuffer() {
+        void TextBox_Paint(object sender, EventArgs e) {
             lock (lockObject) {
-                base.DrawBuffer();
                 if (!string.IsNullOrEmpty(text) && font != null) {
                     int totalWidth = 0;
                     int startChar = -1;

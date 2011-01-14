@@ -70,6 +70,10 @@ namespace SdlDotNet.Widgets
         bool topLevel;
         bool updating;
         bool visible;
+        Rectangle cachedBounds = Rectangle.Empty;
+        bool resizeRequested;
+        bool relocateRequested;
+        Rectangle unscaledBounds = Rectangle.Empty;
 
         #endregion Fields
 
@@ -157,6 +161,13 @@ namespace SdlDotNet.Widgets
         /// Fired when this widget is resized.
         /// </summary>
         public event EventHandler Resized;
+
+        /// <summary>
+        /// Fired when the buffer is actually resized
+        /// </summary>
+        public event EventHandler BufferResized;
+
+        public event EventHandler Paint;
 
         #endregion Events
 
@@ -301,7 +312,21 @@ namespace SdlDotNet.Widgets
         /// </summary>
         /// <value>The bounding rectangle of the widget.</value>
         public Rectangle Bounds {
-            get { return bounds; }
+            get {
+                return unscaledBounds;
+            }
+        }
+
+        public Rectangle ScaledBounds {
+            get {
+                if (cachedBounds.Location == Point.Empty && cachedBounds.Size != Size.Empty) {
+                    return new Rectangle(unscaledBounds.Location, cachedBounds.Size);
+                } else if (cachedBounds.Location != Point.Empty && cachedBounds.Size == Size.Empty) {
+                    return new Rectangle(cachedBounds.Location, unscaledBounds.Size);
+                } else {
+                    return unscaledBounds;
+                }
+            }
         }
 
         /// <summary>
@@ -373,11 +398,22 @@ namespace SdlDotNet.Widgets
         /// </summary>
         /// <value>The height.</value>
         public int Height {
-            get { return this.Size.Height; }
+            get {
+                return unscaledBounds.Height;
+                //if (cachedBounds.Size == Size.Empty) {
+                //    return this.Size.Height;
+                //} else {
+                //    return cachedBounds.Size.Height;
+                //}
+            }
             set {
                 if (bounds.Height != value) {
-                    bounds.Height = value;
-                    ResizeBuffer();
+                    cachedBounds.Height = value;
+                    if (cachedBounds.Width == 0) {
+                        cachedBounds.Width = bounds.Width;
+                    }
+                    resizeRequested = true;
+                    RequestRedraw();
                 }
             }
         }
@@ -419,24 +455,60 @@ namespace SdlDotNet.Widgets
             set { keyRepeatInterval = value; }
         }
 
+        public Point ScaledLocation {
+            get {
+                if (cachedBounds.Location == Point.Empty) {
+                    return bounds.Location;
+                } else {
+                    return cachedBounds.Location;
+                }
+            }
+        }
+
         /// <summary>
         /// Gets or sets the location.
         /// </summary>
         /// <value>The location.</value>
         public Point Location {
-            get { return bounds.Location; }
-            set {
-                if (bounds.Location != value) {
-                    ClearWidget();
-                    bounds.Location = value;
-                    if (!topLevel && parentContainer != null) {
-                        RequestRedraw();
-                        //parentContainer.UpdateWidget(this);
-                    }
-                    if (LocationChanged != null)
-                        LocationChanged(this, EventArgs.Empty);
-                }
+            get {
+                return unscaledBounds.Location;
+                //if (cachedBounds.Location == Point.Empty) {
+                //    return bounds.Location;
+                //} else {
+                //    return cachedBounds.Location;
+                //}
             }
+            set {
+                unscaledBounds.Location = value;
+
+                if (SdlDotNet.Graphics.Video.UseResolutionScaling) {
+                    value = Core.Resolution.ConvertPoint(value.X, value.Y);
+                }
+
+                SetLocation(value);
+            }
+        }
+
+        private void SetLocation(Point location) {
+            if (bounds.Location != location) {
+                cachedBounds.Location = location;
+                relocateRequested = true;
+                //ClearWidget();
+                //bounds.Location = value;
+                //if (!topLevel && parentContainer != null) {
+                //    RequestRedraw();
+                //    //parentContainer.UpdateWidget(this);
+                //}
+                if (LocationChanged != null)
+                    LocationChanged(this, EventArgs.Empty);
+                RequestRedraw();
+            }
+        }
+
+        public void SetLocationUnscaled(Point location) {
+            unscaledBounds.Location = location;
+
+            SetLocation(location);
         }
 
         /// <summary>
@@ -513,27 +585,67 @@ namespace SdlDotNet.Widgets
             }
         }
 
+        public Size ScaledSize {
+            get {
+                if (cachedBounds.Size == Size.Empty) {
+                    return bounds.Size;
+                } else {
+                    return cachedBounds.Size;
+                }
+            }
+        }
+
         /// <summary>
         /// Gets or sets the size.
         /// </summary>
         /// <value>The size.</value>
         public Size Size {
-            get { return bounds.Size; }
+            get {
+                return unscaledBounds.Size;
+                //if (cachedBounds.Size == Size.Empty) {
+                //    return bounds.Size;
+                //} else {
+                //    return cachedBounds.Size;
+                //}
+            }
             set {
-                if (bounds.Size != value) {
-                    ClearWidget();
-                    //if (ParentContainer != null) {
-                    //    ParentContainer.ClearRegion(this.bounds, this);
-                    //    ParentContainer.UpdateWidget(this);
-                    //}
-                    bounds.Size = value;
-                    ResizeBuffer();
-                    if (ParentContainer != null) {
-                        //    ParentContainer.ClearRegion(this.bounds, this);
-                        //    ParentContainer.UpdateWidget(this);
-                        ParentContainer.RequestRedraw();
-                    }
+                unscaledBounds.Width = value.Width;
+                unscaledBounds.Height = value.Height;
+
+                if (SdlDotNet.Graphics.Video.UseResolutionScaling) {
+                    value = Core.Resolution.ConvertSize(value.Width, value.Height);
                 }
+
+                if (bounds.Size != value) {
+                    cachedBounds.Size = value;
+                    resizeRequested = true;
+                    //ClearWidget();
+                    ////if (ParentContainer != null) {
+                    ////    ParentContainer.ClearRegion(this.bounds, this);
+                    ////    ParentContainer.UpdateWidget(this);
+                    ////}
+                    //bounds.Size = value;
+                    //ResizeBuffer();
+                    //if (ParentContainer != null) {
+                    //    //    ParentContainer.ClearRegion(this.bounds, this);
+                    //    //    ParentContainer.UpdateWidget(this);
+                    //    ParentContainer.RequestRedraw();
+                    //}
+                    TriggerResizeEvent();
+                    RequestRedraw();
+                }
+            }
+        }
+
+        public Size UnscaledSize {
+            get {
+                return unscaledBounds.Size;
+            }
+        }
+
+        public Point UnscaledLocation {
+            get {
+                return unscaledBounds.Location;
             }
         }
 
@@ -601,12 +713,41 @@ namespace SdlDotNet.Widgets
         /// </summary>
         /// <value>The width.</value>
         public int Width {
-            get { return this.Size.Width; }
+            get {
+                return unscaledBounds.Width;
+                //if (cachedBounds.Size == Size.Empty) {
+                //    return this.Size.Width;
+                //} else {
+                //    return cachedBounds.Size.Width;
+                //}
+            }
             set {
+                unscaledBounds.Width = value;
+
+                if (Video.UseResolutionScaling) {
+                    value = Core.Resolution.ConvertWidth(value);
+                }
+
                 if (bounds.Width != value) {
-                    ClearWidget();
-                    bounds.Width = value;
-                    ResizeBuffer();
+                    cachedBounds.Width = value;
+                    if (cachedBounds.Height == 0) {
+                        cachedBounds.Height = bounds.Height;
+                    }
+                    resizeRequested = true;
+                    //ClearWidget();
+                    //bounds.Width = value;
+                    //ResizeBuffer();
+                    RequestRedraw();
+                }
+            }
+        }
+
+        public int ScaledX {
+            get {
+                if (cachedBounds.Location == Point.Empty) {
+                    return bounds.X;
+                } else {
+                    return cachedBounds.X;
                 }
             }
         }
@@ -616,7 +757,14 @@ namespace SdlDotNet.Widgets
         /// </summary>
         /// <value>The X-coordinate of this widget.</value>
         public int X {
-            get { return bounds.X; }
+            get {
+                return unscaledBounds.X;
+                //if (cachedBounds.Location == Point.Empty) {
+                //    return bounds.X;
+                //} else {
+                //    return cachedBounds.X;
+                //}
+            }
             set {
                 if (this.bounds.X != value) {
                     this.Location = new Point(value, bounds.Y);
@@ -628,12 +776,29 @@ namespace SdlDotNet.Widgets
             }
         }
 
+        public int ScaledY {
+            get {
+                if (cachedBounds.Location == Point.Empty) {
+                    return bounds.Y;
+                } else {
+                    return cachedBounds.Y;
+                }
+            }
+        }
+
         /// <summary>
         /// Gets or sets the Y-coordinate of this widget.
         /// </summary>
         /// <value>The Y-coordinate of this widget.</value>
         public int Y {
-            get { return bounds.Y; }
+            get {
+                return unscaledBounds.Y;
+                //if (cachedBounds.Location == Point.Empty) {
+                //    return bounds.Y;
+                //} else {
+                //    return cachedBounds.Y;
+                //}
+            }
             set {
                 if (this.bounds.Y != value) {
                     this.Location = new Point(bounds.X, value);
@@ -688,13 +853,41 @@ namespace SdlDotNet.Widgets
         /// <param name="sourceRectangle">The source rectangle.</param>
         /// <param name="location">The location.</param>
         public virtual void BlitToScreen(SdlDotNet.Graphics.Surface destinationSurface, Rectangle sourceRectangle, Point location) {
-            if (blitting == false) {
+            lock (this) {
                 blitting = true;
                 if (!disposed) {
+
+                    if (relocateRequested) {
+                        relocateRequested = false;
+                        if (parentContainer != null) {
+                            parentContainer.ClearRegion(bounds, this);
+                        }
+                        bounds.Location = cachedBounds.Location;
+                        cachedBounds.Location = Point.Empty;
+                        if (!topLevel && parentContainer != null) {
+                            RequestRedraw();
+                        }
+                    }
+                    if (resizeRequested) {
+                        resizeRequested = false;
+                        if (parentContainer != null) {
+                            parentContainer.ClearRegion(bounds, this);
+                        }
+                        ResizeBuffer();
+                        cachedBounds.Size = Size.Empty;
+                        if (BufferResized != null) {
+                            BufferResized(this, EventArgs.Empty);
+                        }
+                        if (ParentContainer != null) {
+                            ParentContainer.RequestRedraw();
+                        }
+                    }
+
                     if (redrawRequested) {
                         redrawRequested = false;
-                        DrawBuffer();
+                        TriggerPaint();
                     }
+
                 }
                 if (visible && !disposed) {
                     //PaintEventArgs e = new PaintEventArgs(destinationSurface, false);
@@ -718,9 +911,12 @@ namespace SdlDotNet.Widgets
                     }
                     //}
                 }
+
+                //if (sourceRectangle == Rectangle.Empty && location == Point.Empty) {
+
+                //}
+
                 blitting = false;
-            } else {
-                Console.WriteLine("break");
             }
         }
 
@@ -935,15 +1131,6 @@ namespace SdlDotNet.Widgets
         }
 
         /// <summary>
-        /// Renders this instance.
-        /// </summary>
-        /// <returns></returns>
-        public SdlDotNet.Graphics.Surface Render() {
-            DrawBuffer();
-            return buffer;
-        }
-
-        /// <summary>
         /// Requests a redraw.
         /// </summary>
         public void RequestRedraw() {
@@ -952,13 +1139,6 @@ namespace SdlDotNet.Widgets
 
         public void CancelRedrawRequest() {
             this.redrawRequested = false;
-        }
-
-        [Obsolete]
-        public void SelectiveDrawBuffer() {
-            if (topLevel || (!topLevel && parent != null)) {
-                RequestRedraw();
-            }
         }
 
         public void SetAutoHide() {
@@ -999,6 +1179,35 @@ namespace SdlDotNet.Widgets
         protected void DrawBackgroundImage() {
             if (backgroundImage != null) {
                 lock (lockObject) {
+                    Point drawPoint = new Point(0, 0);
+                    switch (backgroundImageSizeMode) {
+                        case ImageSizeMode.CenterImage: {
+                                drawPoint = DrawingSupport.GetCenter(this.Buffer, backgroundImage.Size);
+                                this.buffer.Blit(backgroundImage, drawPoint);
+                                break;
+                            }
+                        case ImageSizeMode.Normal: {
+                                lock (lockObject) {
+                                    this.buffer.Blit(backgroundImage, drawPoint, new Rectangle(0, 0, this.Width, this.Height));
+                                }
+                                break;
+                            }
+                        case ImageSizeMode.StretchImage: {
+                                lock (lockObject) {
+                                    Surface oldBackground = backgroundImage;
+                                    backgroundImage = backgroundImage.CreateStretchedSurface(this.Size);
+                                    oldBackground.Close();
+                                    this.buffer.Blit(backgroundImage, drawPoint);
+                                }
+                                break;
+                            }
+                        default: {
+                                lock (lockObject) {
+                                    this.buffer.Blit(backgroundImage, drawPoint);
+                                }
+                                break;
+                            }
+                    }
                     buffer.Blit(backgroundImage, new Point(0, 0));
                 }
             }
@@ -1053,34 +1262,7 @@ namespace SdlDotNet.Widgets
         }
 
         internal void ForceDrawBuffer() {
-            DrawBuffer();
-        }
-
-        /// <summary>
-        /// Draws the buffer.
-        /// </summary>
-        protected virtual void DrawBuffer() {
-            if (!disposed) {
-                //lock (lockObject) {
-                    buffer.Fill(this.BackColor);
-                //}
-                DrawBackgroundImage();
-            }
-        }
-
-        [Obsolete("No longer needed")]
-        protected void DrawComplete() {
-            //if (groupedWidget != null) {
-            //    groupedWidget.DrawBuffer();
-            //}
-            //lock (lockObject) {
-            //    if (!topLevel && parentContainer != null) {
-            //        parentContainer.ClearRegion(this.Bounds, this, false);
-            //        parentContainer.UpdateWidget(this);
-            //    }
-            //    if (Redraw != null)
-            //        Redraw(this, null);
-            //}
+            TriggerPaint();
         }
 
         /// <summary>
@@ -1093,21 +1275,24 @@ namespace SdlDotNet.Widgets
             this.visible = true;
             borderWidth = 1;
             ResizeBuffer();
+            //TriggerResizeEvent();
         }
 
         /// <summary>
         /// Resizes the buffer.
         /// </summary>
         protected virtual void ResizeBuffer() {
-            ResizeInternal(this.Size);
+            if (cachedBounds.Size != Size.Empty) {
+                ResizeInternal(cachedBounds.Size);
+            } else {
+                ResizeInternal(this.Size);
+            }
 
             if (backgroundImageSizeMode == ImageSizeMode.StretchImage) {
                 UpdateBackgroundImage();
             } else {
                 RequestRedraw();
             }
-            if (Resized != null)
-                Resized(this, null);
         }
 
         /// <summary>
@@ -1120,7 +1305,7 @@ namespace SdlDotNet.Widgets
                     buffer.Close();
                 }
                 bounds.Size = size;
-                buffer = new SdlDotNet.Graphics.Surface(size);
+                buffer = new SdlDotNet.Graphics.Surface(unscaledBounds.Size);
                 if (backColor.A == 0) {
                     buffer.TransparentColor = Color.Transparent;
                     buffer.Transparent = true;
@@ -1140,6 +1325,11 @@ namespace SdlDotNet.Widgets
             this.topLevel = topLevel;
         }
 
+        internal void HandleResolutionChanged() {
+            this.Size = unscaledBounds.Size;
+            this.Location = unscaledBounds.Location;
+        }
+
         /// <summary>
         /// Triggers the click event.
         /// </summary>
@@ -1148,6 +1338,14 @@ namespace SdlDotNet.Widgets
             if (Click != null) {
                 Click(this, e);
             }
+        }
+
+        /// <summary>
+        /// Triggers the resize event.
+        /// </summary>
+        protected void TriggerResizeEvent() {
+            if (Resized != null)
+                Resized(this, null);
         }
 
         /// <summary>
@@ -1197,33 +1395,18 @@ namespace SdlDotNet.Widgets
                             }
                             break;
                         }
-                    case ImageSizeMode.CenterImage: {
-                            drawPoint = DrawingSupport.GetCenter(this.Buffer, backgroundImage.Size);
-                            break;
-                        }
-                    case ImageSizeMode.Normal: {
-                            lock (lockObject) {
-                                this.Buffer.Blit(backgroundImage, drawPoint, new Rectangle(0, 0, this.Width, this.Height));
-                            }
-                            break;
-                        }
-                    case ImageSizeMode.StretchImage: {
-                            lock (lockObject) {
-                                Surface oldBackground = backgroundImage;
-                                backgroundImage = backgroundImage.CreateStretchedSurface(this.Size);
-                                oldBackground.Close();
-                                this.Buffer.Blit(backgroundImage, drawPoint);
-                            }
-                            break;
-                        }
-                    default: {
-                            lock (lockObject) {
-                                this.Buffer.Blit(backgroundImage, drawPoint);
-                            }
-                            break;
-                        }
                 }
                 RequestRedraw();
+            }
+        }
+
+        protected void TriggerPaint() {
+            if (!disposed && buffer != null) {
+                buffer.Fill(this.BackColor);
+                DrawBackgroundImage();
+                if (Paint != null) {
+                    Paint(this, EventArgs.Empty);
+                }
             }
         }
 

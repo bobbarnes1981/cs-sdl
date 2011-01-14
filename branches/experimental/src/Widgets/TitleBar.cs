@@ -70,6 +70,15 @@ namespace SdlDotNet.Widgets
             picIcon.Visible = false;
 
             this.AddWidget(picIcon);
+
+            base.Paint += new EventHandler(TitleBar_Paint);
+            base.Resized += new EventHandler(TitleBar_Resized);
+        }
+
+        void TitleBar_Resized(object sender, EventArgs e) {
+            if (btnClose != null) {
+                btnClose.Location = new Point(this.Width - btnClose.Width - 10, 0);
+            }
         }
 
         #endregion Constructors
@@ -117,18 +126,6 @@ namespace SdlDotNet.Widgets
 
         public PictureBox Icon {
             get { return picIcon; }
-        }
-
-        public new Size Size {
-            get { return base.Size; }
-            set {
-                lock (lockObject) {
-                    base.Size = value;
-                    if (btnClose != null) {
-                        btnClose.Location = new Point(this.Width - btnClose.Width - 10, 0);
-                    }
-                }
-            }
         }
 
         /// <summary>
@@ -198,7 +195,8 @@ namespace SdlDotNet.Widgets
             if (SdlDotNet.Input.Mouse.IsButtonPressed(SdlDotNet.Input.MouseButton.PrimaryButton)) {
                 if (drag) {
                     this.Location = new Point(SdlDotNet.Input.Mouse.MousePosition.X - dragStart.X, SdlDotNet.Input.Mouse.MousePosition.Y - dragStart.Y);
-                    ownerWindow.Location = this.Location;
+                    ownerWindow.SetLocationUnscaled(new Point(this.ScaledLocation.X, this.ScaledLocation.Y + base.ScaledSize.Height));
+                    ownerWindow.RecalculateFullBounds();
                 }
             } else {
                 drag = false;
@@ -209,7 +207,7 @@ namespace SdlDotNet.Widgets
             base.Buffer.Fill(region, GetTitlebarColor());
         }
 
-        protected override void DrawBuffer() {
+        void TitleBar_Paint(object sender, EventArgs e) {
             lock (lockObject) {
                 if (!disposed && ownerWindow != null) {
                     base.Buffer.Fill(GetTitlebarColor());

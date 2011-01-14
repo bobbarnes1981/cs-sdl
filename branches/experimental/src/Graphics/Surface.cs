@@ -229,6 +229,7 @@ namespace SdlDotNet.Graphics
         /// <param name="redMask">Red Mask</param>
         public Surface(int width, int height, int bitsPerPixel, int redMask, int greenMask, int blueMask, int alphaMask)
         {
+            ProcessSize(ref width, ref height);
             this.Handle =
                 Sdl.SDL_CreateRGBSurface((int)VideoModes.None, width, height, bitsPerPixel, redMask, greenMask, blueMask, alphaMask);
             if (this.Handle == IntPtr.Zero)
@@ -357,6 +358,13 @@ namespace SdlDotNet.Graphics
             destination.alpha = source.alpha;
             destination.alphaBlending = source.alphaBlending;
             destination.isVideoMode = source.isVideoMode;
+        }
+
+        private void ProcessSize(ref int width, ref int height) {
+            if (Video.UseResolutionScaling) {
+                width = Resolution.ConvertWidth(width);
+                height = Resolution.ConvertHeight(height);
+            }
         }
 
         #endregion Private Methods

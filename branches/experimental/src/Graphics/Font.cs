@@ -86,6 +86,7 @@ namespace SdlDotNet.Graphics
                 Font.InitializeFontSystem();
             }
 
+            ProcessPointSize(ref pointSize);
             this.Handle = SdlTtf.TTF_OpenFont(fileName, pointSize);
             if (this.Handle == IntPtr.Zero) {
                 throw FontException.Generate();
@@ -103,6 +104,7 @@ namespace SdlDotNet.Graphics
                 Font.InitializeFontSystem();
             }
 
+            ProcessPointSize(ref pointSize);
             this.Handle = SdlTtf.TTF_OpenFontIndex(fileName, pointSize, index);
             if (this.Handle == IntPtr.Zero) {
                 throw FontException.Generate();
@@ -122,6 +124,7 @@ namespace SdlDotNet.Graphics
                 Font.InitializeFontSystem();
             }
 
+            ProcessPointSize(ref pointSize);
             this.Handle = SdlTtf.TTF_OpenFontRW(Sdl.SDL_RWFromMem(array, array.Length), 0, pointSize);
             if (this.Handle == IntPtr.Zero) {
                 throw FontException.Generate();
@@ -142,6 +145,7 @@ namespace SdlDotNet.Graphics
                 Font.InitializeFontSystem();
             }
 
+            ProcessPointSize(ref pointSize);
             this.Handle = SdlTtf.TTF_OpenFontIndexRW(Sdl.SDL_RWFromMem(array, array.Length), 0, pointSize, index);
             if (this.Handle == IntPtr.Zero) {
                 throw FontException.Generate();
@@ -248,9 +252,6 @@ namespace SdlDotNet.Graphics
                 SdlColor.ConvertColor(textColor);
             Sdl.SDL_Color backgroundColorSdl =
                 SdlColor.ConvertColor(backgroundColor);
-            if (glyph == null) {
-                glyph = ' ';
-            }
             IntPtr handle = SdlTtf.TTF_RenderGlyph_Shaded(this.Handle, (short)glyph, textColorSdl, backgroundColorSdl);
             GC.KeepAlive(this);
             return new Surface(handle);
@@ -264,12 +265,15 @@ namespace SdlDotNet.Graphics
         /// <returns></returns>
         private Surface RenderGlyphBlended(char glyph, Color textColor) {
             Sdl.SDL_Color colorSdl = SdlColor.ConvertColor(textColor);
-            if (glyph == null) {
-                glyph = ' ';
-            }
             IntPtr handle = SdlTtf.TTF_RenderGlyph_Blended(this.Handle, (short)glyph, colorSdl);
             GC.KeepAlive(this);
             return new Surface(handle);
+        }
+
+        private void ProcessPointSize(ref int pointSize) {
+            if (Video.UseResolutionScaling) {
+                pointSize = Resolution.ConvertHeight(pointSize);
+            }
         }
 
         #endregion

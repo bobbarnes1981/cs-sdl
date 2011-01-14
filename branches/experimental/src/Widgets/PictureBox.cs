@@ -48,7 +48,11 @@ namespace SdlDotNet.Widgets
             sizeMode = ImageSizeMode.Normal;
             base.MouseEnter += new EventHandler(PictureBox_MouseEnter);
             base.MouseLeave += new EventHandler(PictureBox_MouseLeave);
+
+            base.Paint += new EventHandler(PictureBox_Paint);
         }
+
+
 
         #endregion Constructors
 
@@ -120,7 +124,7 @@ namespace SdlDotNet.Widgets
         #region Methods
 
         public void BlitToBuffer(Surface sourceSurface, Rectangle sourceRectangle) {
-            base.DrawBuffer();
+            base.TriggerPaint();
             base.Buffer.Blit(sourceSurface, new Point(0, 0), sourceRectangle);
 
             base.DrawBorder();
@@ -138,8 +142,7 @@ namespace SdlDotNet.Widgets
             }
         }
 
-        protected override void DrawBuffer() {
-            base.DrawBuffer();
+        void PictureBox_Paint(object sender, EventArgs e) {
             if (highlightImage != null && base.MouseInBounds) {
                 Point drawPoint = new Point(0, 0);
                 switch (sizeMode) {

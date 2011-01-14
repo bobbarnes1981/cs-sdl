@@ -229,10 +229,18 @@ namespace SdlDotNet.Graphics
 
         const int USE_CURRENT_BPP = 0;
         static bool isInitialized = Initialize();
+        static bool useResolutionScaling = false;
 
         #endregion
 
         #region Public Methods
+
+        public static bool UseResolutionScaling {
+            get { return useResolutionScaling; }
+            set {
+                useResolutionScaling = value;
+            }
+        }
 
         /// <summary>
         /// 

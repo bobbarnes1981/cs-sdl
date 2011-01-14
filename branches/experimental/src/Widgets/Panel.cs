@@ -32,7 +32,7 @@ namespace SdlDotNet.Widgets
 
         Object lockObject = new object();
 
-        public event EventHandler Paint;
+        public new event EventHandler Paint;
 
         #endregion Fields
 
@@ -40,20 +40,20 @@ namespace SdlDotNet.Widgets
 
         public Panel(string name)
             : base(name) {
+            base.Paint += new EventHandler(Panel_Paint);
         }
+
+
 
         #endregion Constructors
 
         #region Methods
 
-        protected override void DrawBuffer() {
-            lock (lockObject) {
-                base.DrawBuffer();
-                if (Paint != null)
-                    Paint(this, EventArgs.Empty);
-                base.UpdateBuffer(false);
-                base.DrawBorder();
-            }
+        void Panel_Paint(object sender, EventArgs e) {
+            base.UpdateBuffer(false);
+            if (Paint != null)
+                Paint(this, EventArgs.Empty);
+            base.DrawBorder();
         }
 
         #endregion Methods
